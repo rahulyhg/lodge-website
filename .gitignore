@@ -29,3 +29,7 @@ vendor/*
 !web/app/plugins/wp-all-import-pro
 !web/app/themes/Extra
 !web/app/themes/tahosa2016
+
+# Misc
+*.log
+.DS_Store
