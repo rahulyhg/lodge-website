@@ -58,7 +58,8 @@
     "wpackagist-plugin/wordpress-seo": "*",
     "wpackagist-plugin/worker": "*",
     "wpackagist-plugin/wp-redis": "*",
-    "wpackagist-plugin/wp-user-avatars": "*"
+    "wpackagist-plugin/wp-user-avatars": "*",
+    "roots/soil": "^3.7"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

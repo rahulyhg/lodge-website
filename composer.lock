@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2697471f4615bbbd7c9422dd7dad4a8",
+    "content-hash": "13dfe5f96c251c8fb85cd7f67d436ddc",
     "packages": [
         {
             "name": "composer/installers",
@@ -316,6 +316,51 @@
             "time": "2016-05-08T17:14:32+00:00"
         },
         {
+            "name": "roots/soil",
+            "version": "3.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/soil.git",
+                "reference": "5b9b9d8a878b295f44b35cba826c462b20cc1d9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/soil/zipball/5b9b9d8a878b295f44b35cba826c462b20cc1d9c",
+                "reference": "5b9b9d8a878b295f44b35cba826c462b20cc1d9c",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^2.5.1"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Scott Walkinshaw",
+                    "email": "scott.walkinshaw@gmail.com",
+                    "homepage": "https://github.com/swalkinshaw"
+                },
+                {
+                    "name": "Ben Word",
+                    "email": "ben@benword.com",
+                    "homepage": "https://github.com/retlehs"
+                }
+            ],
+            "description": "A WordPress plugin which contains a collection of modules to apply theme-agnostic front-end modifications",
+            "homepage": "https://roots.io/plugins/soil/",
+            "keywords": [
+                "wordpress"
+            ],
+            "time": "2016-08-30T18:15:45+00:00"
+        },
+        {
             "name": "roots/wp-password-bcrypt",
             "version": "1.0.0",
             "source": {
@@ -433,7 +478,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/admin-post-navigation.2.0.zip",
-                "reference": null,
+                "reference": "tags/2.0",
                 "shasum": null
             },
             "require": {
@@ -453,7 +498,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/autoptimize.2.1.0.zip",
-                "reference": null,
+                "reference": "tags/2.1.0",
                 "shasum": null
             },
             "require": {
@@ -473,7 +518,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/cache-enabler.1.2.2.zip",
-                "reference": null,
+                "reference": "tags/1.2.2",
                 "shasum": null
             },
             "require": {
@@ -493,7 +538,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/co-authors-plus.3.2.2.zip",
-                "reference": null,
+                "reference": "tags/3.2.2",
                 "shasum": null
             },
             "require": {
@@ -513,7 +558,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/disable-comments.2.6.zip",
-                "reference": null,
+                "reference": "tags/2.6",
                 "shasum": null
             },
             "require": {
@@ -533,7 +578,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/disable-real-mime-check.1.0.zip",
-                "reference": null,
+                "reference": "tags/1.0",
                 "shasum": null
             },
             "require": {
@@ -553,7 +598,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.0.6.zip",
-                "reference": null,
+                "reference": "tags/3.0.6",
                 "shasum": null
             },
             "require": {
@@ -573,7 +618,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/mailgun.1.5.8.2.zip",
-                "reference": null,
+                "reference": "tags/1.5.8.2",
                 "shasum": null
             },
             "require": {
@@ -593,7 +638,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/optimus.1.4.8.zip",
-                "reference": null,
+                "reference": "tags/1.4.8",
                 "shasum": null
             },
             "require": {
@@ -613,7 +658,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.16.zip",
-                "reference": null,
+                "reference": "tags/2.5.16",
                 "shasum": null
             },
             "require": {
@@ -633,7 +678,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/simple-page-ordering.2.2.4.zip",
-                "reference": null,
+                "reference": "tags/2.2.4",
                 "shasum": null
             },
             "require": {
@@ -653,7 +698,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/stream.3.2.0.zip",
-                "reference": null,
+                "reference": "tags/3.2.0",
                 "shasum": null
             },
             "require": {
@@ -673,7 +718,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.2.1.zip",
-                "reference": null,
+                "reference": "tags/4.5.2.1",
                 "shasum": null
             },
             "require": {
@@ -693,7 +738,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.33.zip",
-                "reference": null,
+                "reference": "tags/4.33",
                 "shasum": null
             },
             "require": {
@@ -713,7 +758,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/user-switching.1.0.9.zip",
-                "reference": null,
+                "reference": "tags/1.0.9",
                 "shasum": null
             },
             "require": {
@@ -733,7 +778,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/wordpress-seo.4.8.zip",
-                "reference": null,
+                "reference": "tags/4.8",
                 "shasum": null
             },
             "require": {
@@ -753,7 +798,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1493913732",
-                "reference": null,
+                "reference": "trunk",
                 "shasum": null
             },
             "require": {
@@ -773,7 +818,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/wp-redis.0.6.1.zip",
-                "reference": null,
+                "reference": "tags/0.6.1",
                 "shasum": null
             },
             "require": {
@@ -793,7 +838,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/wp-user-avatars.zip?timestamp=1490853871",
-                "reference": null,
+                "reference": "trunk",
                 "shasum": null
             },
             "require": {
