@@ -1,0 +1,26 @@
+.button_shortcode, #tribe-events-content a.button_shortcode, .page-home .et_pb_bg_layout_light .et_pb_promo_button, .et_pb_promo_button, .entry-content a.button_shortcode {
+	color:white !important;
+	background: $red-secondary;
+	transition: .25s all ease-in-out;
+	&:hover {
+		background:$red-primary;
+	}
+}
+
+/* =Activation Page
+-------------------------------------------------------------- */
+body.gfur-activate #content {
+  width: 60%;
+  margin: 50px auto 0 auto;
+  min-height: 600px;
+}
+
+
+/* =Calendar
+-------------------------------------------------------------- */
+.tribe-events-calendar td.tribe-events-present div[id*="tribe-events-daynum-"], .tribe-events-calendar td.tribe-events-present div[id*="tribe-events-daynum-"]>a, #tribe_events_filters_wrapper input[type=submit], .tribe-events-button, #tribe-events .tribe-events-button, .tribe-events-button.tribe-inactive, #tribe-events .tribe-events-button:hover, .tribe-events-button:hover, .tribe-events-button.tribe-active:hover {
+  background-color: $red-secondary;
+}
+.tribe-events-cal-links {
+  display:none !important;
+}

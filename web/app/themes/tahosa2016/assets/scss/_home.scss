@@ -1,0 +1,43 @@
+.home-cta, .home-event {
+  border-radius: 2px;
+  padding: 15px 10px;
+}
+
+.home-cta .et_pb_promo_button, .home-event .et_pb_promo_button {
+  background: $red-secondary;
+  transition: .25s all ease-in-out;
+  color: #fff !important;
+}
+
+.home-cta .et_pb_promo_button:hover, .home-event .et_pb_promo_button:hover {
+  background: $red-primary;
+}
+
+#home-1 {
+  padding-top: 0;
+}
+
+.et_pb_column_1_3 .et_pb_promo.just-elected {
+  padding: 27px 40px;
+}
+
+.home-event {
+  padding: 15px 10px;
+  .et_pb_promo_button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  h3 {
+    text-align: center;
+  }
+}
+#home-1 .et_pb_column_4_4 .et_pb_image {
+  margin: 0;
+}
+
+.cff-wrapper {
+  padding: 15px 15px;
+  background: #FFF;
+  border-radius: 2px;
+}

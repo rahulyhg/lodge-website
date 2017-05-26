@@ -1,0 +1,51 @@
+.percentbar_blue {
+	background-color: $red-primary !important;
+}
+
+.gform_wrapper table.gfield_list,
+.gform_wrapper table.gfield_list caption,
+.gform_wrapper table.gfield_list tbody,
+.gform_wrapper table.gfield_list td,
+.gform_wrapper table.gfield_list tfoot,
+.gform_wrapper table.gfield_list th,
+.gform_wrapper table.gfield_list thead,
+.gform_wrapper table.gfield_list tr {
+	vertical-align: top !important;
+}
+
+.gform_wrapper .gfield_list_cell textarea.medium {
+	max-height: 2em;
+	transition: none;
+
+	&:focus,
+	&:active {
+		max-height: 100%;
+	}
+}
+
+.gform_save_link {
+	color: #525252 !important;
+	font-size: 16px;
+	width: auto;
+	margin: 0 16px 0 0;
+	outline: none;
+	display: inline-block;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px 12px;
+	border: 0;
+	border-style: solid;
+	border-radius: 3px;
+	box-shadow: none;
+	font-family: inherit;
+	font-weight: 600;
+	line-height: normal;
+	text-shadow: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: 0.3s ease;
+	word-break: normal;
+
+	&:hover {
+		background: #ccc;
+	}
+}
