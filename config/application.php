@@ -82,6 +82,13 @@ $envs = [
 ];
 define('ENVIRONMENTS', serialize($envs));
 
+// S3 Uploads
+define( 'S3_UPLOADS_BUCKET', 'tahosawp' );
+define( 'S3_UPLOADS_KEY', 'AKIAIIMADUSJOGB44BCA' );
+define( 'S3_UPLOADS_SECRET', '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' );
+define( 'S3_UPLOADS_REGION', 'us-west-2' );
+define( 'S3_UPLOADS_HTTP_CACHE_CONTROL', 30 * 24 * 60 * 60 );
+
 /**
  * Bootstrap WordPress
  */
