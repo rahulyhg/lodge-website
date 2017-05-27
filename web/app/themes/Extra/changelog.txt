@@ -1,4 +1,47 @@
-version 2.0.44 ( updated 5-11-2016 )
+version 2.0.46 ( updated 5-24-2017 )
+- Fixed a bug that caused excerpt length to not save correctly in global modules in some situations. 
+- Fixed a bug that caused selective sync to not work correctly when selecting categories quickly in the post slider module.
+- Fixed a bug that prevented history states from being created when adding items from the library in some cases, which caused unwanted results when using undo/redo functionality.
+- Removed unwanted specialty section options that appeared in the normal section settings modal in some situations.
+- Fixed a bug that caused unsynced global module settings to not save properly due to an error in unsynced option comparison.
+- Fixed a bug that prevented the filterable portfolio from being re-initialized correctly in the Visual Builder after copying styles onto a module that triggered computed options ajax call.
+- Fixed a bug that prevented global modules from saving module repositioning inside of global one column rows.
+- Fixed an error that occurred sometimes after discarding category selection changes in the fullwidth portfolio module.
+- Fixed rendering issues that occurred when using the WordPress galley shortcode inside of text modules in the Visual Builder.
+- Updated the blurb "use icon font size" setting to be conditional of the "use icon" setting. 
+- Updated the blurb "image max width" setting to be conditional of the "use icon" mode being turned off.
+- Removed base module margin from the divider module when the divider line is set to hidden so that the defined height is equal to the actual space created by the module.
+- Changed the divider module back to a block element due to the inline-block style causing conflicts with custom CSS changes on some customer websites.
+- Fixed a bug that caused percentage custom widths for specialty sections not to work on the front end.
+- LocalStorage will now clear properly when adjusting certain settings in the Role Editor.
+- Fixed conditional logic in the portfolio module that caused unwanted display of overlay settings when the module was not in grid mode.
+- Fixed bug that prevented comment module button icons from updating in the Visual Builder.
+- Added sanitation to button module URL field to prevent unwanted characters from breaking URLs. 
+- Updated shop module CSS selectors due to fix WooCommerce 3.0 compatibility issues.
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+	* includes/builder/scripts/builder.js
+	* includes/builder/main-modules.php
+	* includes/builder/core.php
+	* includes/builder/functions.php
+
+version 2.0.45 ( updated 5-18-2017 )
+- Updated translations with missing translations from the options organization update.
+- Added an option to sort WooCommerce products by date and to change the order to "newest to oldest" for WooCommerce shortcodes that support the filter. 
+- The text overlay border radius setting is now conditional on the text overlay setting being enabled for slider modules. 
+- Fixed a bug that prevented the conditional image alt text setting from being triggered in the image module after having added an image from the WordPress media library interface.
+- Fixed a bug that caused conditional fullwidth slider background settings from appearing in the Divi Builder settings popup.
+- Added back missing column background settings to rows within specialty sections.
+- Fixed an error that occurred when selecting custom button fonts via the Theme Customizer.
+- Fixed a bug that caused the Right Click > Disable Global function to fail for global rows in the Visual Builder.
+	* scripts/builder.js
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+	* includes/builder/main-modules.php
+	* includes/builder/main-structure-elements.php
+	* includes/sanitization.php
+
+version 2.0.44 ( updated 5-11-2017 )
 - Improved option organization.
 - Added second tier option groups for all Divi Builder settings.
 - Added option search functionality to the Visual Builder.

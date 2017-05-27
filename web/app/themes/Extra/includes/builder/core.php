@@ -1775,6 +1775,8 @@ function et_pb_save_role_settings() {
 	}
 
 	update_option( 'et_pb_role_settings', $processed_options );
+	// set the flag to reload backbone templates and make sure all the role settings applied correctly right away
+	et_update_option( 'et_pb_clear_templates_cache', true );
 
 	die();
 }
@@ -2180,7 +2182,7 @@ function et_builder_get_unsaved_notification_modal() {
 		esc_html__( 'Your Save Has Failed', 'et_builder' ),
 		et_get_safe_localization( __( 'An error has occurred while saving your page. Various problems can cause a save to fail, such as a lack of server resources, firewall blockages, plugin conflicts or server misconfiguration. You can try saving again by clicking Try Again, or you can download a backup of your unsaved page by clicking Download Backup. Backups can be restored using the portability system while next editing your page.', 'et_builder' ) ),
 		et_get_safe_localization( __( 'Contacting your host and asking them to increase the following PHP variables may help: memory_limit, max_execution_time, upload_max_filesize, post_max_size, max_input_time, max_input_vars. In addition, auditing your firewall error log (such as ModSecurity) may reveal false positives that are preventing saves from completing.', 'et_builder' ) ),
-		et_get_safe_localization( __( 'Lastly, it is recommend that you temporarily disable all WordPress plugins and browser extensions and try to save again to determine if something is causing a conflict.', 'et_builder' ) ),
+		et_get_safe_localization( __( 'Lastly, it is recommended that you temporarily disable all WordPress plugins and browser extensions and try to save again to determine if something is causing a conflict.', 'et_builder' ) ),
 		esc_html__( 'Try Again', 'et_builder' ),
 		esc_html__( 'Download Backup', 'et_builder' )
 	);

@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ET_BUILDER_PRODUCT_VERSION' ) ) {
 	// Note, when this is updated, you must also update corresponding version in builder.js: `window.et_builder_version`
-	define( 'ET_BUILDER_PRODUCT_VERSION', '3.0.45' );
+	define( 'ET_BUILDER_PRODUCT_VERSION', '3.0.47' );
 }
 
 if ( ! defined( 'ET_BUILDER_VERSION' ) ) {
@@ -2354,7 +2354,7 @@ function et_pb_add_builder_page_js_css(){
 		'is_global_template'                       => $is_global_template,
 		'selective_sync_status'                    => $selective_sync_status,
 		'global_module_type'                       => $global_module_type,
-		'excluded_global_options'                  => isset( $excluded_global_options[0] ) ? $excluded_global_options[0] : array(),
+		'excluded_global_options'                  => isset( $excluded_global_options[0] ) ? json_decode( $excluded_global_options[0] ) : array(),
 		'template_post_id'                         => $post_id,
 		'layout_categories'                        => $layout_cat_data_json,
 		'map_pin_address_error'                    => esc_html__( 'Map Pin Address cannot be empty', 'et_builder' ),
@@ -5520,7 +5520,7 @@ function et_gallery_layout( $val, $attr ) {
 
 	$output = '';
 
-	if ( ! is_singular() && ! et_pb_is_pagebuilder_used( get_the_ID() ) ) {
+	if ( ! is_singular() && ! et_pb_is_pagebuilder_used( get_the_ID() ) && ! is_et_pb_preview() ) {
 		$attachments = et_get_gallery_attachments( $attr );
 		$gallery_output = '';
 		foreach ( $attachments as $attachment ) {
@@ -5748,7 +5748,7 @@ function et_pb_all_role_options() {
 					'default' => 'on',
 				),
 				'custom_css_settings' => array(
-					'name'    => esc_html__( 'Custom CSS', 'et_builder' ),
+					'name'    => esc_html__( 'Advanced Settings', 'et_builder' ),
 					'default' => 'on',
 				),
 			),

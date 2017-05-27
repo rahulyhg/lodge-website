@@ -2183,6 +2183,8 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 				'toggle_slug'     => 'image',
 				'affects'         => array(
 					'font_icon',
+					'max_width',
+					'use_icon_font_size',
 					'use_circle',
 					'icon_color',
 					'image',
@@ -2337,6 +2339,7 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 				'toggle_slug'     => 'width',
 				'mobile_options'  => true,
 				'validate_unit'   => true,
+				'depends_show_if' => 'off',
 			),
 			'use_icon_font_size' => array(
 				'label'           => esc_html__( 'Use Icon Font Size', 'et_builder' ),
@@ -2349,6 +2352,7 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 				'affects'     => array(
 					'icon_font_size',
 				),
+				'depends_show_if' => 'on',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'icon_settings',
 			),
@@ -3706,6 +3710,7 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				),
 				'affects'           => array(
 					'text_overlay_color',
+					'text_border_radius',
 				),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'overlay',
@@ -3850,6 +3855,7 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 					'max'  => '100',
 					'step' => '1',
 				),
+				'depends_show_if' => 'on',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'overlay',
 			),
@@ -4624,6 +4630,7 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 				),
 				'affects'           => array(
 					'text_overlay_color',
+					'text_border_radius',
 				),
 				'tab_slug'         => 'advanced',
 				'toggle_slug'      => 'overlay',
@@ -4788,6 +4795,7 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 					'max'  => '100',
 					'step' => '1',
 				),
+				'depends_show_if' => 'on',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'overlay',
 			),
@@ -6578,6 +6586,8 @@ class ET_Builder_Module_Pricing_Tables_Item extends ET_Builder_Module {
 			) );
 		}
 
+		$button_url = trim( $button_url );
+
 		if ( '' !== $button_url && '' !== $button_text ) {
 			$button_text = sprintf( '<a class="et_pb_pricing_table_button et_pb_button%4$s" href="%1$s"%3$s>%2$s</a>',
 				esc_url( $button_url ),
@@ -6918,6 +6928,8 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
+		$button_url = trim( $button_url );
+
 		$output = sprintf(
 			'<div%6$s class="et_pb_promo%4$s%7$s%8$s"%5$s>
 				<div class="et_pb_promo_description">
@@ -7154,6 +7166,8 @@ class ET_Builder_Module_Button extends ET_Builder_Module {
 		$button_alignment  = $this->shortcode_atts['button_alignment'];
 
 		// Nothing to output if neither Button Text nor Button URL defined
+		$button_url = trim( $button_url );
+
 		if ( '' === $button_text && '' === $button_url ) {
 			return;
 		}
@@ -8817,6 +8831,11 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 					'on'  => esc_html__( 'Fullwidth', 'et_builder' ),
 					'off' => esc_html__( 'Grid', 'et_builder' ),
 				),
+				'affects' => array(
+					'hover_icon',
+					'zoom_icon_color',
+					'hover_overlay_color',
+				),
 				'description'       => esc_html__( 'Choose your desired portfolio layout style.', 'et_builder' ),
 				'computed_affects' => array(
 					'__projects',
@@ -8894,6 +8913,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 				'label'             => esc_html__( 'Zoom Icon Color', 'et_builder' ),
 				'type'              => 'color',
 				'custom_color'      => true,
+				'depends_show_if'   => 'off',
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'overlay',
 			),
@@ -8901,6 +8921,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 				'label'             => esc_html__( 'Hover Overlay Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'custom_color'      => true,
+				'depends_show_if'   => 'off',
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'overlay',
 			),
@@ -8911,6 +8932,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 				'class'               => array( 'et-pb-font-icon' ),
 				'renderer'            => 'et_pb_get_font_icon_list',
 				'renderer_with_field' => true,
+				'depends_show_if'     => 'off',
 				'tab_slug'            => 'advanced',
 				'toggle_slug'         => 'overlay',
 			),
@@ -12763,8 +12785,8 @@ class ET_Builder_Module_Divider extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div%2$s class="et_pb_module et_pb_space%1$s%3$s"></div>',
-			( 'on' === $show_divider ? ' et_pb_divider' : '' ),
+			'<div%2$s class="et_pb_module et_pb_space%1$s%3$s"><div class="et_pb_divider_internal"></div></div>',
+			( 'on' === $show_divider ? ' et_pb_divider' : ' et_pb_divider_hidden' ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( ltrim( $module_class ) ) ) : '' )
 		);
@@ -14353,6 +14375,7 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 				),
 			),
 		);
+
 		$this->custom_css_options = array(
 			'product' => array(
 				'label'    => esc_html__( 'Product', 'et_builder' ),
@@ -14372,7 +14395,7 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 			),
 			'title' => array(
 				'label'    => esc_html__( 'Title', 'et_builder' ),
-				'selector' => 'li.product h3',
+				'selector' => $this->get_title_selector(),
 			),
 			'rating' => array(
 				'label'    => esc_html__( 'Rating', 'et_builder' ),
@@ -14461,7 +14484,8 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 					'menu_order'  => esc_html__( 'Default Sorting', 'et_builder' ),
 					'popularity' => esc_html__( 'Sort By Popularity', 'et_builder' ),
 					'rating' => esc_html__( 'Sort By Rating', 'et_builder' ),
-					'date' => esc_html__( 'Sort By Date', 'et_builder' ),
+					'date' => esc_html__( 'Sort By Date: Oldest To Newest', 'et_builder' ),
+					'date-desc' => esc_html__( 'Sort By Date: Newest To Oldest', 'et_builder' ),
 					'price' => esc_html__( 'Sort By Price: Low To High', 'et_builder' ),
 					'price-desc' => esc_html__( 'Sort By Price: High To Low', 'et_builder' ),
 				),
@@ -14580,7 +14604,7 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 		 * Hence customize WooCommerce' product query via modify_woocommerce_shortcode_products_query method
 		 * @see http://docs.woothemes.com/document/woocommerce-shortcodes/#section-5
 		 */
-		$modify_woocommerce_query = 'best_selling' !== $type && in_array( $orderby, array( 'menu_order', 'price', 'price-desc', 'rating', 'popularity' ) );
+		$modify_woocommerce_query = 'best_selling' !== $type && in_array( $orderby, array( 'menu_order', 'price', 'price-desc', 'date', 'date-desc', 'rating', 'popularity' ) );
 
 		if ( $modify_woocommerce_query ) {
 			add_filter( 'woocommerce_shortcode_products_query', array( $this, 'modify_woocommerce_shortcode_products_query' ), 10, 2 );
@@ -14615,7 +14639,7 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 	}
 
 	/**
-	 * Get shop HTML for shp module
+	 * Get shop HTML for shop module
 	 *
 	 * @param array   arguments that affect shop output
 	 * @param array   passed conditional tag for update process
@@ -14642,6 +14666,22 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 		do_action( 'et_pb_get_shop_html_after' );
 
 		return $output;
+	}
+
+
+	// WooCommerce changed the title tag from h3 to h2 in 3.0.0
+	function get_title_selector() {
+		$title_selector = 'li.product h3';
+
+		if ( class_exists( 'WooCommerce' ) ) {
+			global $woocommerce;
+
+			if ( version_compare( $woocommerce->version, '3.0.0', '>=' ) ) {
+				$title_selector = 'li.product h2';
+			}
+		}
+
+		return $title_selector;
 	}
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
@@ -14718,11 +14758,17 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 	function modify_woocommerce_shortcode_products_query( $args, $atts ) {
 
 		if ( function_exists( 'WC' ) ) {
-			// By default, all order is ASC except for price-desc
-			$order = 'price-desc' === $this->shortcode_atts['orderby'] ? 'DESC' : 'ASC';
+			// Default to ascending order
+			$orderby = $this->shortcode_atts['orderby'];
+			$order   = 'ASC';
+
+			// Switch to descending order if orderby is 'price-desc' or 'date-desc'
+			if ( in_array( $orderby, array( 'price-desc', 'date-desc' ) ) ) {
+				$order = 'DESC';
+			}
 
 			// Supported orderby arguments (as defined by WC_Query->get_catalog_ordering_args() ): rand | date | price | popularity | rating | title
-			$orderby = in_array( $this->shortcode_atts['orderby'], array( 'price-desc' ) ) ? 'price' : $this->shortcode_atts['orderby'];
+			$orderby = in_array( $orderby, array( 'price-desc', 'date-desc' ) ) ? str_replace( '-desc', '', $orderby ) : $orderby;
 
 			// Get arguments for the given non-native orderby
 			$query_args = WC()->query->get_catalog_ordering_args( $orderby, $order );
@@ -16820,7 +16866,7 @@ class ET_Builder_Module_Comments extends ET_Builder_Module {
 				'body' => array(
 					'label'          => esc_html__( 'Comment', 'et_builder' ),
 					'css'            => array(
-						'main' => "{$this->main_css_element} .comment-content",
+						'main' => "{$this->main_css_element} .comment-content p",
 					),
 					'line_height'    => array(
 						'default' => '1em',
@@ -19076,6 +19122,8 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 				),
 				'affects'         => array(
 					'parallax_method',
+					'background_position',
+					'background_size',
 				),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'parallax',
@@ -21796,6 +21844,7 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 				),
 				'affects'         => array(
 					'text_overlay_color',
+					'text_border_radius',
 				),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'overlay',
@@ -21950,6 +21999,7 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 					'max'  => '100',
 					'step' => '1',
 				),
+				'depends_show_if' => 'on',
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'overlay',
 			),

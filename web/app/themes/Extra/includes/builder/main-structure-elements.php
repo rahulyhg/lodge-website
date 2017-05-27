@@ -403,6 +403,8 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'type'                => 'range',
 				'option_category'     => 'layout',
 				'depends_show_if_not' => 'off',
+				'validate_unit'       => true,
+				'fixed_unit'          => 'px',
 				'range_settings'      => array(
 					'min'  => 500,
 					'max'  => 2600,
@@ -417,6 +419,8 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'type'            => 'range',
 				'option_category' => 'layout',
 				'depends_show_if' => 'off',
+				'validate_unit'   => true,
+				'fixed_unit'      => '%',
 				'range_settings'  => array(
 					'min'  => 0,
 					'max'  => 100,
@@ -425,7 +429,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'width',
 				'specialty_only'  => 'yes',
-				'validate_unit'   => false,
 			),
 			'make_equal' => array(
 				'label'             => esc_html__( 'Equalize Column Heights', 'et_builder' ),
@@ -915,7 +918,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'selector'    => '%%order_class%% > .et_pb_row',
 					'declaration' => sprintf(
 						'max-width:%1$s !important;',
-						'on' === $width_unit ? esc_attr( $custom_width_px ) : esc_attr( $custom_width_percent )
+						'on' === $width_unit ? esc_attr( sprintf( '%1$spx', intval( $custom_width_px ) ) ) : esc_attr( sprintf( '%1$s%%', intval( $custom_width_percent ) ) )
 					),
 				) );
 			}
@@ -2296,6 +2299,19 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 		);
 
 		$this->options_toggles = array(
+			'general' => array(
+				'toggles' => array(
+					'background'     => array(
+						'title'       => esc_html__( 'Background', 'et_builder' ),
+						'sub_toggles' => array(
+							'main'     => '',
+							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
+							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
+							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
+						),
+					),
+				),
+			),
 			'advanced' => array(
 				'toggles' => array(
 					'parallax'        => array(
