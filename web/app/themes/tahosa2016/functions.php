@@ -10,6 +10,7 @@ class TahosaLodgeTheme {
 		add_filter( 'body_class',   array( $this, 'add_slug_body_class' ) );
 		add_filter( 'gform_column_input_content_18_14_4', array( $this, 'vigil_position_notes_field' ), 10, 6 );
 		add_filter( 'gform_column_input_18_14_1', array( $this, 'vigil_position_type' ), 10, 6 );
+		add_filter( 'the_seo_framework_indicator', '__return_false' );
 
 		add_action( 'send_headers', array( $this, 'custom_headers' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'typekit' ) );

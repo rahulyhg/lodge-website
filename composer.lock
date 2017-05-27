@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "610b3e19eea840915404088b0b5728a8",
+    "content-hash": "e4351ea794c485b7652ceeecd9781868",
     "packages": [
         {
             "name": "composer/installers",
@@ -666,6 +666,26 @@
             "homepage": "https://wordpress.org/plugins/admin-post-navigation/"
         },
         {
+            "name": "wpackagist-plugin/autodescription",
+            "version": "2.9.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/autodescription/",
+                "reference": "tags/2.9.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/autodescription.2.9.2.zip",
+                "reference": "tags/2.9.2",
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/autodescription/"
+        },
+        {
             "name": "wpackagist-plugin/autoptimize",
             "version": "2.1.0",
             "source": {
@@ -784,6 +804,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/enable-media-replace/"
+        },
+        {
+            "name": "wpackagist-plugin/google-sitemap-generator",
+            "version": "4.0.8",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-sitemap-generator/",
+                "reference": "tags/4.0.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-sitemap-generator.4.0.8.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/google-sitemap-generator/"
         },
         {
             "name": "wpackagist-plugin/mailgun",
@@ -944,26 +984,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/user-switching/"
-        },
-        {
-            "name": "wpackagist-plugin/wordpress-seo",
-            "version": "4.8",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/4.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.4.8.zip",
-                "reference": "tags/4.8",
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-seo/"
         },
         {
             "name": "wpackagist-plugin/worker",
