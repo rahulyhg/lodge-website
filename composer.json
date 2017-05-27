@@ -107,7 +107,8 @@
     "roots/soil": "^3.7",
     "deliciousbrains/wp-migrate-db-pro": "*",
     "deliciousbrains/wp-migrate-db-pro-media-files": "*",
-    "deliciousbrains/wp-migrate-db-pro-cli": "*"
+    "deliciousbrains/wp-migrate-db-pro-cli": "*",
+    "roots/wp-stage-switcher": "^2.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

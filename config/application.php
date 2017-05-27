@@ -75,6 +75,13 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 define('DISALLOW_FILE_EDIT', true);
 
+$envs = [
+  'development' => 'https://tahosalodge.dev',
+  'staging'     => 'https://staging.tahosalodge.org',
+  'production'  => 'https://tahosalodge.org'
+];
+define('ENVIRONMENTS', serialize($envs));
+
 /**
  * Bootstrap WordPress
  */
