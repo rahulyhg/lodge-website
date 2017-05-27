@@ -30,6 +30,51 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+    "type": "package",
+    "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro",
+        "type": "wordpress-plugin",
+        "version": "1.4.6",
+        "dist": {
+            "type": "zip",
+            "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+        },
+        "require": {
+            "composer/installers": "*"
+        }
+    }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "deliciousbrains/wp-migrate-db-pro-media-files",
+            "type": "wordpress-plugin",
+            "version": "1.3.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-media-files-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+            },
+            "require": {
+                "composer/installers": "*"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "deliciousbrains/wp-migrate-db-pro-cli",
+            "type": "wordpress-plugin",
+            "version": "1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-cli-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+            },
+            "require": {
+                "composer/installers": "*"
+            }
+        }
     }
   ],
   "require": {
@@ -59,7 +104,10 @@
     "wpackagist-plugin/worker": "*",
     "wpackagist-plugin/wp-redis": "*",
     "wpackagist-plugin/wp-user-avatars": "*",
-    "roots/soil": "^3.7"
+    "roots/soil": "^3.7",
+    "deliciousbrains/wp-migrate-db-pro": "*",
+    "deliciousbrains/wp-migrate-db-pro-media-files": "*",
+    "deliciousbrains/wp-migrate-db-pro-cli": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
