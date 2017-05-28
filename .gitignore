@@ -28,6 +28,7 @@ vendor/*
 !web/app/plugins/gravityforms
 !web/app/plugins/oa-tools
 !web/app/plugins/wp-all-import-pro
+!web/app/plugins/woocommerce-box-office
 !web/app/themes/Extra
 !web/app/themes/tahosa2016
 
