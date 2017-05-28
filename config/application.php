@@ -83,12 +83,23 @@ $envs = [
 define('ENVIRONMENTS', serialize($envs));
 
 // S3 Uploads
-define( 'S3_UPLOADS_BUCKET', 'tahosawp' );
-define( 'S3_UPLOADS_KEY', 'AKIAIIMADUSJOGB44BCA' );
-define( 'S3_UPLOADS_SECRET', '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' );
-define( 'S3_UPLOADS_REGION', 'us-west-2' );
+define( 'S3_UPLOADS_BUCKET', env('S3_UPLOADS_BUCKET') ?: false );
+define( 'S3_UPLOADS_KEY', env('S3_UPLOADS_KEY') ?: false );
+define( 'S3_UPLOADS_SECRET', env('S3_UPLOADS_SECRET') ?: false );
+define( 'S3_UPLOADS_REGION', env('S3_UPLOADS_REGION') ?: false );
 define( 'S3_UPLOADS_HTTP_CACHE_CONTROL', 30 * 24 * 60 * 60 );
 
+// Redis
+define( 'REDIS_HOST', env('REDIS_HOST') ?: false );
+define( 'REDIS_PORT', env('REDIS_PORT') ?: false );
+define( 'WP_CACHE_KEY_SALT', env('CACHE_KEY_SALT') ?: false );
+
+if ( REDIS_HOST && REDIS_PORT ) {
+    $redis_server = [
+    	'host' => REDIS_HOST,
+    	'port' => REDIS_PORT,
+    ];
+}
 /**
  * Bootstrap WordPress
  */
