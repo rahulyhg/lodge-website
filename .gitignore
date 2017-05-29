@@ -29,6 +29,7 @@ vendor/*
 !web/app/plugins/oa-tools
 !web/app/plugins/wp-all-import-pro
 !web/app/plugins/woocommerce-box-office
+!web/app/plugins/cuboree-registration
 !web/app/themes/Extra
 !web/app/themes/tahosa2016
 

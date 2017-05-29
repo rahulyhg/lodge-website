@@ -1,0 +1,25 @@
+/*!
+Theme Name: Tahosa Lodge 2.0
+Author: Kevin McKernan
+Description: Custom child theme of Extra
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Template: Extra
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import "../Extra/style.css";
+@import "mixins";
+@import "modules/grid";
+@import "variables";
+@import "global";
+@import "typography";
+@import "templates/home";
+@import "modules/header";
+@import "modules/footer";
+@import "modules/flashback-custom";
+@import "modules/forms";
+@import "modules/woocommerce";
