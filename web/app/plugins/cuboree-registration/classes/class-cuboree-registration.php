@@ -36,6 +36,7 @@ class Cuboree_Registration {
 	 */
 	public function hooks() {
 		add_action( 'woocommerce_check_cart_items', [ $this, 'cart_validation' ] );
+		add_action( 'woocommerce_after_order_notes', [ $this, 'custom_checkout_fields' ] );
 	}
 
 	public function cart_validation() {
@@ -60,5 +61,50 @@ class Cuboree_Registration {
 				wc_add_notice( '<strong>You must register at least one adult with a youth.</strong> <a class="button" href="' . get_permalink( $this->adult_product_id ) . '">Register Adult</a>', 'error' );
 			}
 		}
+	}
+
+	public function custom_checkout_fields( $checkout ) {
+
+		global $woocommerce, $product;
+		$cuboree_registration = false;
+		foreach ( $woocommerce->cart->cart_contents as $product ) {
+			if ( has_term( 'cuboree', 'product_cat', $product['product_id'] ) ) {
+				$cuboree_registration = true;
+				break;
+			}
+		}
+
+		if ( ! $cuboree_registration ) {
+			return;
+		}
+
+	    echo '<div id="cuboree_registration_details" class="custom-registration-fields"><h2>' . __('Registration Details') . '</h2>';
+
+	    woocommerce_form_field( 'unit_number', [
+	        'type'          => 'text',
+	        'class'         => array('my-field-class form-row-wide'),
+	        'label'         => __('Unit Number'),
+			'required' => true,
+        ], $checkout->get_value( 'unit_number' ));
+
+		woocommerce_form_field( 'district', [
+	        'type'  		=> 'select',
+	        'class' 		=> array('my-field-class form-row-wide'),
+	        'label' 		=> __('District'),
+			'required'    	=> true,
+			'options'     	=> [
+				'' => '---',
+				'Arapahoe',
+				'Centennial',
+				'Frontier',
+				'Gateway',
+				'Pioneer Trails',
+				'Timberline',
+				'Valley',
+			]
+        ], $checkout->get_value( 'district' ));
+
+	    echo '</div>';
+
 	}
 }

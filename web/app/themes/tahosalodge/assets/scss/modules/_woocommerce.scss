@@ -18,7 +18,7 @@
         form.cart {
             width: 100%;
             display: flex;
-            flex-flow: column;
+            flex-flow: row-wrap;
             align-items: flex-start;
 
             div.quantity {
@@ -127,7 +127,16 @@
             }
         }
     }
-}
+
+    .custom-registration-fields,
+    #order_review_heading {
+        margin-top: 2em;
+    }
+
+    .apple-pay-button-checkout-separator {
+        margin-bottom: 2em;
+    }
+} // .woocommerce
 
 #add_payment_method table.cart td.actions .coupon .input-text,
 .woocommerce-cart table.cart td.actions .coupon .input-text,
