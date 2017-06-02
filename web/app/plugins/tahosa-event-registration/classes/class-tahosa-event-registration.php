@@ -29,6 +29,7 @@ class Tahosa_Event_Registration {
 	 */
 	public function hooks() {
 		add_filter( 'body_class', [ $this, 'ticket_body_class' ] );
+		add_filter( 'woocommerce_placeholder_img_src', [ $this, 'custom_woocommerce_placeholder' ] );
 	}
 
 	static public function is_ticket( $id = null ) {
@@ -49,5 +50,13 @@ class Tahosa_Event_Registration {
 			$classes[] = 'woocommerce-ticket';
 		}
 		return $classes;
+	}
+
+	/**
+	 * Function to return new placeholder image URL.
+	 */
+	public function custom_woocommerce_placeholder( $image_url ) {
+	  $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
+	  return $image_url;
 	}
 }
