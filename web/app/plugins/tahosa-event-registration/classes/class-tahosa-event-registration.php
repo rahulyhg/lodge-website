@@ -30,6 +30,9 @@ class Tahosa_Event_Registration {
 	public function hooks() {
 		add_filter( 'body_class', [ $this, 'ticket_body_class' ] );
 		add_filter( 'woocommerce_placeholder_img_src', [ $this, 'custom_woocommerce_placeholder' ] );
+		add_filter( 'woocommerce_sale_flash', [ $this, 'custom_sale_text' ] );
+		add_filter( 'wocommerce_box_office_input_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
+		add_filter( 'wocommerce_box_office_option_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
 	}
 
 	static public function is_ticket( $id = null ) {
@@ -58,5 +61,19 @@ class Tahosa_Event_Registration {
 	public function custom_woocommerce_placeholder( $image_url ) {
 	  $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
 	  return $image_url;
+	}
+
+	public function custom_sale_text( $html ) {
+		global $post;
+		if ( $this->is_ticket( $post->ID ) ) {
+			return str_replace( __( 'Sale!', 'woocommerce' ), __( 'Early Discount!', 'woocommerce' ), $html );
+		}
+		return $html;
+	}
+
+	public function class_to_ticket_fields( $vars ) {
+		$slug = sanitize_title( $vars['label'] );
+		$vars['before_field'] = "<p class='form-row ${slug}'>";
+		return $vars;
 	}
 }
