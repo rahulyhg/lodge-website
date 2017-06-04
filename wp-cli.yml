@@ -1,1 +1,10 @@
 path: web/wp
+@staging:
+	ssh: tahosalodge@tahosa.co
+	user: kmckernan
+	path: /srv/users/tahosalodge/apps/tahosalodge-staging/web/wp
+
+@prod:
+	ssh: tahosalodge@tahosa.co
+	user: kmckernan
+	path: /srv/users/tahosalodge/apps/tahosalodge/web/wp
