@@ -927,16 +927,16 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.5.2.1",
+            "version": "4.5.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.5.2.1"
+                "reference": "tags/4.5.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.2.1.zip",
-                "reference": "tags/4.5.2.1",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.4.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -947,16 +947,16 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.33",
+            "version": "4.34",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.33"
+                "reference": "tags/4.34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.33.zip",
-                "reference": "tags/4.33",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.34.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -987,16 +987,16 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.0.7",
+            "version": "3.0.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.0.7"
+                "reference": "tags/3.0.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.0.7.zip",
-                "reference": "tags/3.0.7",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.0.8.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -1047,16 +1047,16 @@
         },
         {
             "name": "wpackagist-plugin/wp-redis",
-            "version": "0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-redis/",
-                "reference": "tags/0.6.1"
+                "reference": "tags/0.6.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-redis.0.6.1.zip",
-                "reference": "tags/0.6.1",
+                "url": "https://downloads.wordpress.org/plugin/wp-redis.0.6.2.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
