@@ -33,6 +33,13 @@ class Tahosa_Event_Registration {
 		add_filter( 'woocommerce_sale_flash', [ $this, 'custom_sale_text' ] );
 		add_filter( 'wocommerce_box_office_input_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
 		add_filter( 'wocommerce_box_office_option_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
+		add_action( 'wp_print_scripts', function() {
+			if ( wp_script_is( 'wc-password-strength-meter', 'enqueued' ) ) {
+				wp_dequeue_script( 'wc-password-strength-meter' );
+			}
+		});
+
+
 	}
 
 	static public function is_ticket( $id = null ) {
