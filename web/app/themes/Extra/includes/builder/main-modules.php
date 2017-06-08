@@ -215,7 +215,7 @@ class ET_Builder_Module_Image extends ET_Builder_Module {
 			),
 			'overlay_icon_color' => array(
 				'label'             => esc_html__( 'Overlay Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'on',
 				'tab_slug'          => 'advanced',
@@ -788,7 +788,7 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 			),
 			'zoom_icon_color' => array(
 				'label'             => esc_html__( 'Zoom Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'off',
 				'tab_slug'          => 'advanced',
@@ -1149,7 +1149,7 @@ class ET_Builder_Module_Video extends ET_Builder_Module {
 			),
 			'play_icon_color' => array(
 				'label'             => esc_html__( 'Play Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'play_icon',
@@ -1197,11 +1197,18 @@ class ET_Builder_Module_Video extends ET_Builder_Module {
 					'src',
 					'src_webm',
 				),
+				'computed_minimum' => array(
+					'src',
+					'src_webm',
+				),
 			),
 			'__video_cover_src' => array(
 				'type'                => 'computed',
 				'computed_callback'   => array( 'ET_Builder_Module_Video', 'get_video_cover_src' ),
 				'computed_depends_on' => array(
+					'image_src',
+				),
+				'computed_minimum' => array(
 					'image_src',
 				),
 			),
@@ -1417,7 +1424,7 @@ class ET_Builder_Module_Video_Slider extends ET_Builder_Module {
 			),
 			'play_icon_color' => array(
 				'label'             => esc_html__( 'Play Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'colors',
@@ -1650,6 +1657,9 @@ class ET_Builder_Module_Video_Slider_Item extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'image_src',
 				),
+				'computed_minimum' => array(
+					'image_src',
+				),
 			),
 			'__is_oembed' => array(
 				'type' => 'computed',
@@ -1657,11 +1667,17 @@ class ET_Builder_Module_Video_Slider_Item extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'src',
 				),
+				'computed_minimum' => array(
+					'src',
+				),
 			),
 			'__get_oembed' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Module_Video_Slider_Item', 'get_oembed' ),
 				'computed_depends_on' => array(
+					'src',
+				),
+				'computed_minimum' => array(
 					'src',
 				),
 			),
@@ -1986,16 +2002,27 @@ class ET_Builder_Module_Text extends ET_Builder_Module {
 			$text_orientation = 'right';
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_text%2$s%4$s">
-				%1$s
+			'<div%3$s class="et_pb_text%2$s%4$s%5$s%7$s">
+				%8$s
+				%6$s
+				<div class="et_pb_text_inner">
+					%1$s
+				</div>
 			</div> <!-- .et_pb_text -->',
 			$this->shortcode_content,
 			esc_attr( $class ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -2230,7 +2257,7 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 			),
 			'circle_color' => array(
 				'label'           => esc_html__( 'Circle Color', 'et_builder' ),
-				'type'            => 'color',
+				'type'            => 'color-alpha',
 				'description'     => esc_html__( 'Here you can define a custom color for the icon circle.', 'et_builder' ),
 				'depends_default' => true,
 				'tab_slug'        => 'advanced',
@@ -2254,7 +2281,7 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 			),
 			'circle_border_color' => array(
 				'label'           => esc_html__( 'Circle Border Color', 'et_builder' ),
-				'type'            => 'color',
+				'type'            => 'color-alpha',
 				'description'     => esc_html__( 'Here you can define a custom color for the icon circle border.', 'et_builder' ),
 				'depends_default' => true,
 				'tab_slug'        => 'advanced',
@@ -2558,10 +2585,15 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 			)
 		) : '';
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
 		$output = sprintf(
-			'<div%5$s class="et_pb_blurb%4$s%6$s%7$s">
+			'<div%5$s class="et_pb_blurb%4$s%6$s%7$s%8$s%10$s">
+				%11$s
+				%9$s
 				<div class="et_pb_blurb_content">
 					%2$s
 					<div class="et_pb_blurb_container">
@@ -2576,7 +2608,11 @@ class ET_Builder_Module_Blurb extends ET_Builder_Module {
 			esc_attr( $class ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			sprintf( ' et_pb_blurb_position_%1$s', esc_attr( $icon_placement ) )
+			sprintf( ' et_pb_blurb_position_%1$s', esc_attr( $icon_placement ) ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -2751,10 +2787,15 @@ class ET_Builder_Module_Tabs extends ET_Builder_Module {
 			}
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$et_pb_tab_titles = $et_pb_tab_classes = array();
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_tabs%4$s">
+			'<div%3$s class="et_pb_module et_pb_tabs%4$s%5$s%7$s">
+				%8$s
+				%6$s
 				<ul class="et_pb_tabs_controls clearfix">
 					%1$s
 				</ul>
@@ -2765,7 +2806,12 @@ class ET_Builder_Module_Tabs extends ET_Builder_Module {
 			$tabs,
 			$all_tabs_content,
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
+
 		);
 
 		return $output;
@@ -2875,18 +2921,29 @@ class ET_Builder_Module_Tabs_Item extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( '', $function_name );
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$i = 0;
 
 		$et_pb_tab_titles[]  = '' !== $title ? $title : esc_html__( 'Tab', 'et_builder' );
 		$et_pb_tab_classes[] = $module_class;
 
 		$output = sprintf(
-			'<div class="et_pb_tab clearfix%2$s%3$s">
-				%1$s
+			'<div class="et_pb_tab clearfix%2$s%3$s%4$s%6$s">
+				%7$s
+				%5$s
+				<div class="et_pb_tab_content">
+					%1$s
+				</div><!-- .et_pb_tab_content" -->
 			</div> <!-- .et_pb_tab -->',
 			$this->shortcode_content,
 			( 1 === count( $et_pb_tab_titles ) ? ' et_pb_active_content' : '' ),
-			esc_attr( $module_class )
+			esc_attr( $module_class ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -2938,8 +2995,8 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 			'parallax'                => array( 'off' ),
 			'parallax_method'         => array( 'off' ),
 			'remove_inner_shadow'     => array( 'off' ),
-			'background_position'     => array( 'default' ),
-			'background_size'         => array( 'default' ),
+			'background_position'     => array( 'center' ),
+			'background_size'         => array( 'cover' ),
 			'hide_content_on_mobile'  => array( 'off' ),
 			'hide_cta_on_mobile'      => array( 'off' ),
 			'show_image_video_mobile' => array( 'off' ),
@@ -2957,7 +3014,6 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'layout'     => esc_html__( 'Layout', 'et_builder' ),
-					'parallax'   => esc_html__( 'Parallax', 'et_builder' ),
 					'padding'  => array(
 						'title'       => esc_html__( 'Spacing', 'et_builder' ),
 						'priority'   => 70,
@@ -3116,8 +3172,8 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 					'background_position',
 					'background_size',
 				),
-				'tab_slug'           => 'advanced',
-				'toggle_slug'        => 'parallax',
+				'tab_slug'           => 'general',
+				'toggle_slug'        => 'background',
 				'description'        => esc_html__( 'Enabling this option will give your background images a fixed position as you scroll.', 'et_builder' ),
 			),
 			'parallax_method' => array(
@@ -3128,8 +3184,8 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 					'off' => esc_html__( 'CSS', 'et_builder' ),
 					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
 				),
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'depends_show_if'   => 'on',
 				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
 			),
@@ -3149,16 +3205,17 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options' => array(
-					'default'       => esc_html__( 'Default', 'et_builder' ),
 					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
 					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
 					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
-					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
 					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
+					'center'        => esc_html__( 'Center', 'et_builder' ),
+					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
 					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
 					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
 					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
 				),
+				'default'           => 'center',
 				'depends_show_if'   => 'off',
 				'toggle_slug'       => 'background',
 			),
@@ -3167,10 +3224,11 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options'         => array(
-					'default' => esc_html__( 'Default', 'et_builder' ),
+					'cover'   => esc_html__( 'Cover', 'et_builder' ),
 					'contain' => esc_html__( 'Fit', 'et_builder' ),
 					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
 				),
+				'default'           => 'cover',
 				'depends_show_if'   => 'off',
 				'toggle_slug'       => 'background',
 			),
@@ -3386,7 +3444,7 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 			) );
 		}
 
-		if ( 'default' !== $background_position && 'off' === $parallax ) {
+		if ( '' !== $background_position && 'default' !== $background_position  && 'off' === $parallax ) {
 			$processed_position = str_replace( '_', ' ', $background_position );
 
 			ET_Builder_Module::set_style( $function_name, array(
@@ -3398,7 +3456,8 @@ class ET_Builder_Module_Slider extends ET_Builder_Module {
 			) );
 		}
 
-		if ( 'default' !== $background_size && 'off' === $parallax ) {
+		// Handle slider's previous background size default value ("default") as well
+		if ( '' !== $background_size && 'default' !== $background_size && 'off' === $parallax ) {
 			ET_Builder_Module::set_style( $function_name, array(
 				'selector'    => '%%order_class%% .et_pb_slide',
 				'declaration' => sprintf(
@@ -3456,8 +3515,12 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			'button_text',
 			'button_link',
 			'background_image',
-			'background_position',
+			'parallax',
+			'parallax_method',
 			'background_size',
+			'background_position',
+			'background_repeat',
+			'background_blend',
 			'background_color',
 			'image',
 			'alignment',
@@ -3481,8 +3544,8 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 
 		$this->fields_defaults = array(
 			'button_link'         => array( '#' ),
-			'background_position' => array( 'default' ),
-			'background_size'     => array( 'default' ),
+			'background_position' => array( 'center' ),
+			'background_size'     => array( 'cover' ),
 			'background_color'    => array( '#ffffff', 'only_default_setting' ),
 			'alignment'           => array( 'center' ),
 			'background_layout'   => array( 'dark' ),
@@ -3567,6 +3630,12 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 					),
 				),
 			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => false,
+				'use_background_color_gradient' => true,
+				'use_background_video'          => false,
+			),
 		);
 
 		$this->custom_css_options = array(
@@ -3627,22 +3696,56 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'description'        => esc_html__( 'If defined, this image will be used as the background for this module. To remove a background image, simply delete the URL from the settings field.', 'et_builder' ),
 				'toggle_slug'        => 'background',
 			),
+			'parallax' => array(
+				'label'           => esc_html__( 'Use Parallax effect', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects'           => array(
+					'parallax_method',
+					'background_size',
+					'background_position',
+					'background_repeat',
+					'background_blend',
+				),
+				'default'            => 'off',
+				'tab_slug'           => 'general',
+				'toggle_slug'        => 'background',
+				'description'        => esc_html__( 'Enabling this option will give your background images a fixed position as you scroll.', 'et_builder' ),
+			),
+			'parallax_method' => array(
+				'label'           => esc_html__( 'Parallax method', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'CSS', 'et_builder' ),
+					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
+				),
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
+				'depends_show_if'   => 'on',
+				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
+			),
 			'background_position' => array(
 				'label'           => esc_html__( 'Background Image Position', 'et_builder' ),
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options'         => array(
-					'default'       => esc_html__( 'Default', 'et_builder' ),
-					'center'        => esc_html__( 'Center', 'et_builder' ),
 					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
 					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
 					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
 					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
+					'center'        => esc_html__( 'Center', 'et_builder' ),
 					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
 					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
 					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
 					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
 				),
+				'default'           => 'center',
+				'depends_show_if'   => 'off',
 				'toggle_slug'       => 'background',
 			),
 			'background_size' => array(
@@ -3650,11 +3753,55 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options'         => array(
-					'default' => esc_html__( 'Default', 'et_builder' ),
 					'cover'   => esc_html__( 'Cover', 'et_builder' ),
 					'contain' => esc_html__( 'Fit', 'et_builder' ),
 					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
 				),
+				'default'           => 'cover',
+				'shortcode_default' => 'cover',
+				'depends_show_if'   => 'off',
+				'toggle_slug'       => 'background',
+			),
+			'background_repeat' => array(
+				'label'           => esc_html__( 'Background Image Repeat', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'repeat'      => esc_html__( 'Repeat', 'et_builder' ),
+					'repeat-x'    => esc_html__( 'Repeat X (horizontal)', 'et_builder' ),
+					'repeat-y'    => esc_html__( 'Repeat Y (vertical)', 'et_builder' ),
+					'space'       => esc_html__( 'Space', 'et_builder' ),
+					'round'       => esc_html__( 'Round', 'et_builder' ),
+					'no-repeat'   => esc_html__( 'No Repeat', 'et_builder' ),
+				),
+				'default'         => 'no-repeat',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
+			),
+			'background_blend' => array(
+				'label'           => esc_html__( 'Background Image Blend', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'normal'      => esc_html__( 'Normal', 'et_builder' ),
+					'multiply'    => esc_html__( 'Multiply', 'et_builder' ),
+					'screen'      => esc_html__( 'Screen', 'et_builder' ),
+					'overlay'     => esc_html__( 'Overlay', 'et_builder' ),
+					'darken'      => esc_html__( 'Darken', 'et_builder' ),
+					'lighten'     => esc_html__( 'Lighten', 'et_builder' ),
+					'color-dodge' => esc_html__( 'Color Dodge', 'et_builder' ),
+					'color-burn'  => esc_html__( 'Color Burn', 'et_builder' ),
+					'hard-light'  => esc_html__( 'Hard Light', 'et_builder' ),
+					'soft-light'  => esc_html__( 'Soft Light', 'et_builder' ),
+					'difference'  => esc_html__( 'Difference', 'et_builder' ),
+					'exclusion'   => esc_html__( 'Exclusion', 'et_builder' ),
+					'hue'         => esc_html__( 'Hue', 'et_builder' ),
+					'saturation'  => esc_html__( 'Saturation', 'et_builder' ),
+					'color'       => esc_html__( 'Color', 'et_builder' ),
+					'luminosity'  => esc_html__( 'Luminosity', 'et_builder' ),
+				),
+				'default'         => 'normal',
+				'depends_show_if' => 'off',
 				'toggle_slug'     => 'background',
 			),
 			'background_color' => array(
@@ -3781,6 +3928,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'update_text'        => esc_attr__( 'Set As Background Video', 'et_builder' ),
 				'description'        => et_get_safe_localization( __( 'All videos should be uploaded in both .MP4 .WEBM formats to ensure maximum compatibility in all browsers. Upload the .MP4 version here. <b>Important Note: Video backgrounds are disabled from mobile devices. Instead, your background image will be used. For this reason, you should define both a background image and a background video to ensure best results.</b>', 'et_builder' ) ),
 				'toggle_slug'        => 'background',
+				'computed_affects' => array(
+					'__video_background',
+				),
 			),
 			'video_bg_webm' => array(
 				'label'              => esc_html__( 'Background Video Webm', 'et_builder' ),
@@ -3792,6 +3942,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'update_text'        => esc_attr__( 'Set As Background Video', 'et_builder' ),
 				'description'        => et_get_safe_localization( __( 'All videos should be uploaded in both .MP4 .WEBM formats to ensure maximum compatibility in all browsers. Upload the .WEBM version here. <b>Important Note: Video backgrounds are disabled from mobile devices. Instead, your background image will be used. For this reason, you should define both a background image and a background video to ensure best results.</b>', 'et_builder' ) ),
 				'toggle_slug'        => 'background',
+				'computed_affects' => array(
+					'__video_background',
+				),
 			),
 			'video_bg_width' => array(
 				'label'           => esc_html__( 'Background Video Width', 'et_builder' ),
@@ -3799,6 +3952,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'toggle_slug'     => 'background',
 				'description'     => esc_html__( 'In order for videos to be sized correctly, you must input the exact width (in pixels) of your video here.' ,'et_builder' ),
+				'computed_affects' => array(
+					'__video_background',
+				),
 			),
 			'video_bg_height' => array(
 				'label'           => esc_html__( 'Background Video Height', 'et_builder' ),
@@ -3806,6 +3962,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'option_category' => 'basic_option',
 				'toggle_slug'     => 'background',
 				'description'     => esc_html__( 'In order for videos to be sized correctly, you must input the exact height (in pixels) of your video here.' ,'et_builder' ),
+				'computed_affects' => array(
+					'__video_background',
+				),
 			),
 			'allow_player_pause' => array(
 				'label'           => esc_html__( 'Pause Video', 'et_builder' ),
@@ -3827,14 +3986,14 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			),
 			'arrows_custom_color' => array(
 				'label'        => esc_html__( 'Arrows Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
 			),
 			'dot_nav_custom_color' => array(
 				'label'        => esc_html__( 'Dot Nav Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
@@ -3865,8 +4024,27 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'video_url',
 				),
+				'computed_minimum' => array(
+					'video_url',
+				),
+			),
+			'__video_background' => array(
+				'type' => 'computed',
+				'computed_callback' => array( 'ET_Builder_Module_Slider_Item', 'get_slide_video_background' ),
+				'computed_depends_on' => array(
+					'video_bg_mp4',
+					'video_bg_webm',
+					'video_bg_width',
+					'video_bg_height',
+					'background_image',
+				),
+				'computed_minimum' => array(
+					'video_bg_mp4',
+					'video_bg_webm',
+				),
 			),
 		);
+
 		return $fields;
 	}
 
@@ -3892,6 +4070,34 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 		return $video_embed;
 	}
 
+	static function get_slide_video_background( $args = array() ) {
+		$defaults = array(
+			'video_bg_mp4'    => '',
+			'video_bg_webm'   => '',
+			'video_bg_width'  => '',
+			'video_bg_height' => '',
+			'background_image'=> '',
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( '' === $args['video_bg_mp4'] && '' === $args['video_bg_webm'] ) {
+			return '';
+		}
+
+		return do_shortcode( sprintf( '
+			<video loop="loop"%3$s%4$s%5$s>
+				%1$s
+				%2$s
+			</video>',
+			( '' !== $args['video_bg_mp4'] ? sprintf( '<source type="video/mp4" src="%s" />', esc_url( $args['video_bg_mp4'] ) ) : '' ),
+			( '' !== $args['video_bg_webm'] ? sprintf( '<source type="video/webm" src="%s" />', esc_url( $args['video_bg_webm'] ) ) : '' ),
+			( '' !== $args['video_bg_width'] ? sprintf( ' width="%s"', esc_attr( intval( $args['video_bg_width'] ) ) ) : '' ),
+			( '' !== $args['video_bg_height'] ? sprintf( ' height="%s"', esc_attr( intval( $args['video_bg_height'] ) ) ) : '' ),
+			( '' !== $args['background_image'] ? sprintf( ' poster="%s"', esc_attr( intval( $args['background_image'] ) ) ) : '' )
+		) );
+	}
+
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		$alignment            = $this->shortcode_atts['alignment'];
 		$heading              = $this->shortcode_atts['heading'];
@@ -3912,13 +4118,25 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 		$arrows_custom_color  = $this->shortcode_atts['arrows_custom_color'];
 		$custom_icon          = $this->shortcode_atts['button_icon'];
 		$button_custom        = $this->shortcode_atts['custom_button'];
+		$parallax             = $this->shortcode_atts['parallax'];
 		$background_position  = $this->shortcode_atts['background_position'];
 		$background_size      = $this->shortcode_atts['background_size'];
+		$background_repeat    = $this->shortcode_atts['background_repeat'];
+		$background_blend     = $this->shortcode_atts['background_blend'];
 		$use_bg_overlay       = $this->shortcode_atts['use_bg_overlay'];
 		$bg_overlay_color     = $this->shortcode_atts['bg_overlay_color'];
 		$use_text_overlay     = $this->shortcode_atts['use_text_overlay'];
 		$text_overlay_color   = $this->shortcode_atts['text_overlay_color'];
 		$text_border_radius   = $this->shortcode_atts['text_border_radius'];
+		$use_background_color_gradient              = $this->shortcode_atts['use_background_color_gradient'];
+		$background_color_gradient_type             = $this->shortcode_atts['background_color_gradient_type'];
+		$background_color_gradient_direction        = $this->shortcode_atts['background_color_gradient_direction'];
+		$background_color_gradient_direction_radial = $this->shortcode_atts['background_color_gradient_direction_radial'];
+		$background_color_gradient_start            = $this->shortcode_atts['background_color_gradient_start'];
+		$background_color_gradient_end              = $this->shortcode_atts['background_color_gradient_end'];
+		$background_color_gradient_start_position   = $this->shortcode_atts['background_color_gradient_start_position'];
+		$background_color_gradient_end_position     = $this->shortcode_atts['background_color_gradient_end_position'];
+		$background_images  = array();
 
 		global $et_pb_slider_has_video, $et_pb_slider_parallax, $et_pb_slider_parallax_method, $et_pb_slider_hide_mobile, $et_pb_slider_custom_icon, $et_pb_slider_item_num;
 
@@ -3940,16 +4158,12 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 				'<div class="et_pb_section_video_bg%2$s%3$s">
 					%1$s
 				</div>',
-				do_shortcode( sprintf( '
-					<video loop="loop" %3$s%4$s>
-						%1$s
-						%2$s
-					</video>',
-					( '' !== $video_bg_mp4 ? sprintf( '<source type="video/mp4" src="%s" />', esc_url( $video_bg_mp4 ) ) : '' ),
-					( '' !== $video_bg_webm ? sprintf( '<source type="video/webm" src="%s" />', esc_url( $video_bg_webm ) ) : '' ),
-					( '' !== $video_bg_width ? sprintf( ' width="%s"', esc_attr( intval( $video_bg_width ) ) ) : '' ),
-					( '' !== $video_bg_height ? sprintf( ' height="%s"', esc_attr( intval( $video_bg_height ) ) ) : '' ),
-					( '' !== $background_image ? sprintf( ' poster="%s"', esc_url( $background_image ) ) : '' )
+				self::get_slide_video_background( array(
+					'video_bg_mp4'     => $video_bg_mp4,
+					'video_bg_webm'    => $video_bg_webm,
+					'video_bg_width'   => $video_bg_width,
+					'video_bg_height'  => $video_bg_height,
+					'background_image' => $background_image,
 				) ),
 				( $first_video ? ' et_pb_first_video' : '' ),
 				( 'on' === $allow_player_pause ? ' et_pb_allow_player_pause' : '' )
@@ -3960,6 +4174,8 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			wp_enqueue_style( 'wp-mediaelement' );
 			wp_enqueue_script( 'wp-mediaelement' );
 		}
+
+		$parallax_image_background = $this->get_parallax_image_background();
 
 		if ( '' !== $heading ) {
 			if ( '#' !== $button_link ) {
@@ -3994,9 +4210,81 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			);
 		}
 
-		if ( '' !== $background_image && 'on' !== $et_pb_slider_parallax ) {
-			$style .= sprintf( 'background-image:url(%s);',
+		if ( 'on' === $use_background_color_gradient ) {
+			$background_images[] = $this->get_gradient( array(
+				'type'             => $background_color_gradient_type,
+				'direction'        => $background_color_gradient_direction,
+				'radial_direction' => $background_color_gradient_direction_radial,
+				'color_start'      => $background_color_gradient_start,
+				'color_end'        => $background_color_gradient_end,
+				'start_position'   => $background_color_gradient_start_position,
+				'end_position'     => $background_color_gradient_end_position,
+			) );
+		}
+
+		if ( '' !== $background_image && ( 'on' !== $et_pb_slider_parallax && 'on' !== $parallax ) ) {
+			$background_images[] = sprintf( 'url(%s)',
 				esc_attr( $background_image )
+			);
+
+			if ( '' !== $background_position && 'default' !== $background_position ) {
+				$processed_position = str_replace( '_', ' ', $background_position );
+
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '.et_pb_slider %%order_class%%.et_pb_slide',
+					'declaration' => sprintf(
+						'background-position: %1$s;',
+						esc_html( $processed_position )
+					),
+				) );
+			}
+
+			if ( '' !== $background_size && 'default' !== $background_size ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '.et_pb_slider .et_pb_slides %%order_class%%',
+					'declaration' => sprintf(
+						'-moz-background-size: %1$s;
+						-webkit-background-size: %1$s;
+						background-size: %1$s;',
+						esc_html( $background_size )
+					),
+				) );
+
+				if ( 'initial' === $background_size ) {
+					ET_Builder_Module::set_style( $function_name, array(
+						'selector'    => 'body.ie %%order_class%%.et_pb_slide',
+						'declaration' => '-moz-background-size: auto; -webkit-background-size: auto; background-size: auto;',
+					) );
+				}
+			}
+
+			if ( '' !== $background_repeat ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '.et_pb_slider .et_pb_slides %%order_class%%',
+					'declaration' => sprintf(
+						'background-repeat: %1$s;',
+						esc_html( $background_repeat )
+					),
+				) );
+			}
+
+			if ( '' !== $background_blend ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '.et_pb_slider .et_pb_slides %%order_class%%',
+					'declaration' => sprintf(
+						'background-blend-mode: %1$s;',
+						esc_html( $background_blend )
+					),
+				) );
+			}
+		}
+
+		if ( ! empty( $background_images ) ) {
+			$background_images = array_reverse( $background_images );
+
+			$style .= sprintf(
+				'background-image: %1$s;',
+				esc_html( join( ', ', $background_images ) )
 			);
 		}
 
@@ -4088,42 +4376,6 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			? sprintf( ' data-arrows_color="%1$s"', esc_attr( $arrows_custom_color ) )
 			: '';
 
-		if ( 'default' !== $background_position && 'off' === $et_pb_slider_parallax ) {
-			$processed_position = str_replace( '_', ' ', $background_position );
-
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '.et_pb_slider %%order_class%%.et_pb_slide',
-				'declaration' => sprintf(
-					'background-position: %1$s;',
-					esc_html( $processed_position )
-				),
-			) );
-		}
-
-		if ( 'default' !== $background_size && 'off' === $et_pb_slider_parallax ) {
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '.et_pb_slider .et_pb_slides %%order_class%%',
-				'declaration' => sprintf(
-					'-moz-background-size: %1$s;
-					-webkit-background-size: %1$s;
-					background-size: %1$s;',
-					esc_html( $background_size )
-				),
-			) );
-
-			if ( 'initial' === $background_size ) {
-				ET_Builder_Module::set_style( $function_name, array(
-					'selector'    => 'body.ie %%order_class%%.et_pb_slide',
-					'declaration' => sprintf(
-						'-moz-background-size: %1$s;
-						-webkit-background-size: %1$s;
-						background-size: %1$s;',
-						'auto'
-					),
-				) );
-			}
-		}
-
 		$class = ET_Builder_Element::add_module_order_class( $class, $function_name );
 
 		if ( 1 === $et_pb_slider_item_num ) {
@@ -4131,8 +4383,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div class="et_pb_slide%6$s"%4$s%10$s%11$s>
+			'<div class="et_pb_slide%6$s%13$s"%4$s%10$s%11$s>
 				%8$s
+				%14$s
 				%12$s
 				<div class="et_pb_container clearfix">
 					<div class="et_pb_slider_container_inner">
@@ -4158,7 +4411,9 @@ class ET_Builder_Module_Slider_Item extends ET_Builder_Module {
 			( 'on' === $et_pb_slider_hide_mobile['hide_content_on_mobile'] ? esc_attr( " {$hide_on_mobile_class}" ) : '' ),
 			$data_dot_nav_custom_color,
 			$data_arrows_custom_color,
-			'on' === $use_bg_overlay ? '<div class="et_pb_slide_overlay_container"></div>' : ''
+			'on' === $use_bg_overlay ? '<div class="et_pb_slide_overlay_container"></div>' : '',
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -4232,8 +4487,8 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 			'parallax'                => array( 'off' ),
 			'parallax_method'         => array( 'off' ),
 			'remove_inner_shadow'     => array( 'off' ),
-			'background_position'     => array( 'default' ),
-			'background_size'         => array( 'default' ),
+			'background_position'     => array( 'center' ),
+			'background_size'         => array( 'cover' ),
 			'hide_content_on_mobile'  => array( 'off' ),
 			'hide_cta_on_mobile'      => array( 'off' ),
 			'show_image_video_mobile' => array( 'off' ),
@@ -4264,7 +4519,6 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 				'toggles' => array(
 					'layout'     => esc_html__( 'Layout', 'et_builder' ),
 					'overlay'    => esc_html__( 'Overlay', 'et_builder' ),
-					'parallax'   => esc_html__( 'Parallax', 'et_builder' ),
 					'navigation' => esc_html__( 'Navigation', 'et_builder' ),
 					'text'       => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
@@ -4329,7 +4583,14 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 					),
 				),
 			),
+			'background' => array(
+				'use_background_color'          => true,
+				'use_background_color_gradient' => true,
+				'use_background_image'          => true,
+				'use_background_video'          => true,
+			),
 		);
+
 		$this->custom_css_options = array(
 			'slide_description' => array(
 				'label'    => esc_html__( 'Slide Description', 'et_builder' ),
@@ -4504,23 +4765,6 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 				'toggle_slug'     => 'elements',
 				'description'     => esc_html__( 'This setting will turn on and off the meta section.', 'et_builder' ),
 			),
-			'background_color' => array(
-				'label'        => esc_html__( 'Background Color', 'et_builder' ),
-				'type'         => 'color-alpha',
-				'custom_color' => true,
-				'toggle_slug'  => 'background',
-				'description'  => esc_html__( 'Use the color picker to choose a background color for this module.', 'et_builder' ),
-			),
-			'background_image' => array(
-				'label'              => esc_html__( 'Background Image', 'et_builder' ),
-				'type'               => 'upload',
-				'option_category'    => 'basic_option',
-				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
-				'choose_text'        => esc_attr__( 'Choose a Background', 'et_builder' ),
-				'update_text'        => esc_attr__( 'Set As Background', 'et_builder' ),
-				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to use as the background for the slider.', 'et_builder' ),
-				'toggle_slug'        => 'background',
-			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
 				'type'            => 'select',
@@ -4559,42 +4803,8 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 					'bottom'     => esc_html__( 'Bottom', 'et_builder' ),
 				),
 				'depends_show_if'   => 'on',
-				'affects' => array(
-					'parallax',
-				),
 				'toggle_slug'       => 'featured_image',
 				'description'       => esc_html__( 'Select how you would like to display the featured image in slides', 'et_builder' ),
-			),
-			'parallax' => array(
-				'label'           => esc_html__( 'Use Parallax effect', 'et_builder' ),
-				'type'            => 'yes_no_button',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off' => esc_html__( 'No', 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'affects'           => array(
-					'parallax_method',
-					'background_position',
-					'background_size',
-				),
-				'depends_show_if'    => 'background',
-				'tab_slug'           => 'advanced',
-				'toggle_slug'        => 'parallax',
-				'description'        => esc_html__( 'Enabling this option will give your background images a fixed position as you scroll.', 'et_builder' ),
-			),
-			'parallax_method' => array(
-				'label'           => esc_html__( 'Parallax method', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off' => esc_html__( 'CSS', 'et_builder' ),
-					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
-				),
-				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
-				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
 			),
 			'use_bg_overlay'      => array(
 				'label'           => esc_html__( 'Use Background Overlay', 'et_builder' ),
@@ -4655,36 +4865,6 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 				),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'layout',
-			),
-			'background_position' => array(
-				'label'           => esc_html__( 'Background Image Position', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'layout',
-				'options' => array(
-					'default'       => esc_html__( 'Default', 'et_builder' ),
-					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
-					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
-					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
-					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
-					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
-					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
-					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
-					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
-				),
-				'depends_show_if'   => 'off',
-				'toggle_slug'       => 'background',
-			),
-			'background_size' => array(
-				'label'           => esc_html__( 'Background Image Size', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'layout',
-				'options'         => array(
-					'default' => esc_html__( 'Default', 'et_builder' ),
-					'contain' => esc_html__( 'Fit', 'et_builder' ),
-					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
-				),
-				'depends_show_if' => 'off',
-				'toggle_slug'     => 'background',
 			),
 			'auto' => array(
 				'label'           => esc_html__( 'Automatic Animation', 'et_builder' ),
@@ -4801,14 +4981,14 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 			),
 			'arrows_custom_color' => array(
 				'label'        => esc_html__( 'Arrows Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
 			),
 			'dot_nav_custom_color' => array(
 				'label'        => esc_html__( 'Dot Nav Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
@@ -4879,6 +5059,9 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 					'content_source',
 					'use_manual_excerpt',
 					'excerpt_length',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 		);
@@ -5041,6 +5224,8 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 		$show_image_video_mobile = $this->shortcode_atts['show_image_video_mobile'];
 		$background_position     = $this->shortcode_atts['background_position'];
 		$background_size         = $this->shortcode_atts['background_size'];
+		$background_repeat       = $this->shortcode_atts['background_repeat'];
+		$background_blend        = $this->shortcode_atts['background_blend'];
 		$posts_number            = $this->shortcode_atts['posts_number'];
 		$include_categories      = $this->shortcode_atts['include_categories'];
 		$show_more_button        = $this->shortcode_atts['show_more_button'];
@@ -5108,60 +5293,68 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 			) );
 		}
 
-		if ( 'default' !== $background_position && 'off' === $parallax ) {
-			$processed_position = str_replace( '_', ' ', $background_position );
-
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .et_pb_slide',
-				'declaration' => sprintf(
-					'background-position: %1$s;',
-					esc_html( $processed_position )
-				),
-			) );
-		}
-
-		if ( 'default' !== $background_size && 'off' === $parallax ) {
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .et_pb_slide',
-				'declaration' => sprintf(
-					'-moz-background-size: %1$s;
-					-webkit-background-size: %1$s;
-					background-size: %1$s;',
-					esc_html( $background_size )
-				),
-			) );
-
-			if ( 'initial' === $background_size ) {
+		// Applying backround-related style to slide item since advanced_option only targets module wrapper
+		if ( 'on' === $this->shortcode_atts['show_image'] && 'background' === $this->shortcode_atts['image_placement'] && 'off' === $parallax ) {
+			if ('' !== $background_color) {
 				ET_Builder_Module::set_style( $function_name, array(
-					'selector'    => 'body.ie %%order_class%% .et_pb_slide',
+					'selector'    => '%%order_class%% .et_pb_slide:not(.et_pb_slide_with_no_image)',
+					'declaration' => sprintf(
+						'background-color: %1$s;',
+						esc_html( $background_color )
+					),
+				) );
+			}
+
+			if ( '' !== $background_size && 'default' !== $background_size ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
 					'declaration' => sprintf(
 						'-moz-background-size: %1$s;
 						-webkit-background-size: %1$s;
 						background-size: %1$s;',
-						'auto'
+						esc_html( $background_size )
+					),
+				) );
+
+				if ( 'initial' === $background_size ) {
+					ET_Builder_Module::set_style( $function_name, array(
+						'selector'    => 'body.ie %%order_class%% .et_pb_slide',
+						'declaration' => '-moz-background-size: auto; -webkit-background-size: auto; background-size: auto;',
+					) );
+				}
+			}
+
+			if ( '' !== $background_position && 'default' !== $background_position ) {
+				$processed_position = str_replace( '_', ' ', $background_position );
+
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-position: %1$s;',
+						esc_html( $processed_position )
 					),
 				) );
 			}
-		}
 
-		if ( '' !== $background_color ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%.et_pb_post_slider',
-				'declaration' => sprintf(
-					'background-color: %1$s;',
-					esc_html( $background_color )
-				),
-			) );
-		}
+			if ( '' !== $background_repeat ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-repeat: %1$s;',
+						esc_html( $background_repeat )
+					),
+				) );
+			}
 
-		if ( '' !== $background_image ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%, %%order_class%%.et_pb_bg_layout_dark, %%order_class%%.et_pb_bg_layout_light',
-				'declaration' => sprintf(
-					'background-image: url(%1$s);',
-					esc_html( $background_image )
-				),
-			) );
+			if ( '' !== $background_blend ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-blend-mode: %1$s;',
+						esc_html( $background_blend )
+					),
+				) );
+			}
 		}
 
 		if ( 'on' === $use_bg_overlay && '' !== $bg_overlay_color ) {
@@ -5234,6 +5427,9 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 		$data_arrows_custom_color = '' !== $arrows_custom_color
 			? sprintf( ' data-arrows_color="%1$s"', esc_attr( $arrows_custom_color ) )
 			: '';
+
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
 
 		ob_start();
 
@@ -5322,7 +5518,9 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 		ob_end_clean();
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_slider et_pb_post_slider%1$s%4$s">
+			'<div%3$s class="et_pb_module et_pb_slider et_pb_post_slider%1$s%4$s%5$s%7$s">
+				%8$s
+				%6$s
 				<div class="et_pb_slides">
 					%2$s
 				</div> <!-- .et_pb_slides -->
@@ -5331,7 +5529,11 @@ class ET_Builder_Module_Post_Slider extends ET_Builder_Module {
 			$class,
 			$content,
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -5362,6 +5564,7 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 			'module_id',
 			'module_class',
 			'quote_icon_color',
+			'quote_icon_background_color',
 			'portrait_border_radius',
 			'portrait_width',
 			'portrait_height',
@@ -5409,8 +5612,9 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 				),
 			),
 			'background' => array(
-				'use_background_color' => false,
-				'settings' => array(
+				'use_background_color'          => false,
+				'use_background_color_gradient' => true,
+				'settings'                      => array(
 					'color' => 'alpha',
 				),
 			),
@@ -5504,6 +5708,13 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 				'description'     => esc_html__( 'Choose whether or not the quote icon should be visible.', 'et_builder' ),
 				'toggle_slug'     => 'elements',
 			),
+			'background_color' => array(
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'description'       => esc_html__( 'Here you can define a custom background color for your CTA.', 'et_builder' ),
+				'depends_default'   => true,
+				'toggle_slug'       => 'background',
+			),
 			'use_background_color' => array(
 				'label'           => esc_html__( 'Use Background Color', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -5517,13 +5728,6 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 				),
 				'toggle_slug'     => 'background',
 				'description'     => esc_html__( 'Here you can choose whether background color setting below should be used or not.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'description'       => esc_html__( 'Here you can define a custom background color for your CTA.', 'et_builder' ),
-				'depends_default'   => true,
-				'toggle_slug'       => 'background',
 			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
@@ -5555,10 +5759,19 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 			),
 			'quote_icon_color' => array(
 				'label'             => esc_html__( 'Quote Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
+			),
+			'quote_icon_background_color' => array(
+				'label'             => esc_html__( 'Quote Icon Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'custom_color'      => true,
+				'tab_slug'          => 'advanced',
+				'toggle_slug'       => 'icon',
+				'default'           => '#f5f5f5',
+				'shortcode_default' => '#f5f5f5',
 			),
 			'portrait_border_radius' => array(
 				'label'           => esc_html__( 'Portrait Border Radius', 'et_builder' ),
@@ -5628,6 +5841,7 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 				'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
+
 		return $fields;
 	}
 
@@ -5646,6 +5860,7 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 		$background_layout      = $this->shortcode_atts['background_layout'];
 		$text_orientation       = $this->shortcode_atts['text_orientation'];
 		$quote_icon_color       = $this->shortcode_atts['quote_icon_color'];
+		$quote_icon_background_color = $this->shortcode_atts['quote_icon_background_color'];
 		$portrait_border_radius = $this->shortcode_atts['portrait_border_radius'];
 		$portrait_width         = $this->shortcode_atts['portrait_width'];
 		$portrait_height        = $this->shortcode_atts['portrait_height'];
@@ -5708,11 +5923,24 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 			) );
 		}
 
+		if ( '' !== $quote_icon_background_color ) {
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%%.et_pb_testimonial:before',
+				'declaration' => sprintf(
+					'background-color: %1$s;',
+					esc_html( $quote_icon_background_color )
+				),
+			) );
+		}
+
 		if ( is_rtl() && 'left' === $text_orientation ) {
 			$text_orientation = 'right';
 		}
 
 		$portrait_image = '';
+
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
 
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
@@ -5743,7 +5971,9 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_testimonial%4$s%5$s%9$s%10$s%12$s clearfix"%11$s>
+			'<div%3$s class="et_pb_testimonial%4$s%5$s%9$s%10$s%12$s%13$s clearfix%15$s"%11$s>
+				%16$s
+				%14$s
 				%8$s
 				<div class="et_pb_testimonial_description">
 					<div class="et_pb_testimonial_description_inner">
@@ -5773,7 +6003,12 @@ class ET_Builder_Module_Testimonial extends ET_Builder_Module {
 				? sprintf( ' style="background-color: %1$s;"', esc_attr( $background_color ) )
 				: ''
 			),
-			( 'off' === $use_background_color ? ' et_pb_testimonial_no_bg' : '' )
+			( 'off' === $use_background_color ? ' et_pb_testimonial_no_bg' : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
+
 		);
 
 		return $output;
@@ -5946,8 +6181,8 @@ class ET_Builder_Module_Pricing_Tables extends ET_Builder_Module {
 				),
 			),
 			'background' => array(
-				'use_background_image' => false,
-				'css' => array(
+				'use_background_image' => true,
+				'css'  => array(
 					'main' => "{$this->main_css_element} .et_pb_pricing_table",
 				),
 				'settings' => array(
@@ -6259,16 +6494,27 @@ class ET_Builder_Module_Pricing_Tables extends ET_Builder_Module {
 			) );
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$content = $this->shortcode_content;
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_pricing clearfix%2$s%4$s">
-				%1$s
+			'<div%3$s class="et_pb_module et_pb_pricing clearfix%2$s%4$s%5$s%7$s">
+				%8$s
+				%6$s
+				<div class="et_pb_pricing_table_wrap">
+					%1$s
+				</div>
 			</div>',
 			$content,
 			esc_attr( " et_pb_pricing_{$et_pb_pricing_tables_num}" ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( ltrim( $module_class ) ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( ltrim( $module_class ) ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -6400,7 +6646,7 @@ class ET_Builder_Module_Pricing_Tables_Item extends ET_Builder_Module {
 
 			),
 			'background' => array(
-				'use_background_image' => false,
+				'use_background_image' => true,
 				'css' => array(
 					'main' => "{$this->main_css_element}.et_pb_pricing_table",
 				),
@@ -6600,8 +6846,13 @@ class ET_Builder_Module_Pricing_Tables_Item extends ET_Builder_Module {
 			);
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$output = sprintf(
-			'<div class="et_pb_pricing_table%1$s%9$s">
+			'<div class="et_pb_pricing_table%1$s%9$s%10$s%12$s">
+				%13$s
+				%11$s
 				<div class="et_pb_pricing_heading">
 					%2$s
 					%3$s
@@ -6624,7 +6875,11 @@ class ET_Builder_Module_Pricing_Tables_Item extends ET_Builder_Module {
 			( '' !== $currency ? sprintf( '<span class="et_pb_dollar_sign">%1$s</span>', esc_html( $currency ) ) : '' ),
 			( '' !== $sum ? sprintf( '<span class="et_pb_sum">%1$s</span>', esc_html( $sum ) ) : '' ),
 			( '' !== $per ? sprintf( '<span class="et_pb_frequency">/%1$s</span>', esc_html( $per ) ) : '' ),
-			esc_attr( $module_class )
+			esc_attr( $module_class ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -6706,7 +6961,8 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 				),
 			),
 			'background' => array(
-				'use_background_color' => false,
+				'use_background_color'          => false,
+				'use_background_color_gradient' => true,
 			),
 			'border' => array(),
 			'custom_margin_padding' => array(
@@ -6774,6 +7030,13 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 				'description'     => esc_html__( 'Input your desired button text, or leave blank for no button.', 'et_builder' ),
 				'toggle_slug'     => 'main_content',
 			),
+			'background_color' => array(
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'depends_default'   => true,
+				'toggle_slug'       => 'background',
+				'description'       => esc_html__( 'Here you can define a custom background color for your CTA.', 'et_builder' ),
+			),
 			'use_background_color' => array(
 				'label'           => esc_html__( 'Use Background Color', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -6786,14 +7049,7 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 					'background_color',
 				),
 				'toggle_slug'     => 'background',
-				'description'     => esc_html__( 'Here you can choose whether background color setting below should be used or not.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'depends_default'   => true,
-				'toggle_slug'       => 'background',
-				'description'       => esc_html__( 'Here you can define a custom background color for your CTA.', 'et_builder' ),
+				'description'     => esc_html__( 'Here you can choose whether background color setting above should be used or not.', 'et_builder' ),
 			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
@@ -6928,10 +7184,14 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
 		$button_url = trim( $button_url );
 
 		$output = sprintf(
-			'<div%6$s class="et_pb_promo%4$s%7$s%8$s"%5$s>
+			'<div%6$s class="et_pb_promo%4$s%7$s%8$s%9$s%11$s"%5$s>
+				%12$s
+				%10$s
 				<div class="et_pb_promo_description">
 					%1$s
 					%2$s
@@ -6961,7 +7221,11 @@ class ET_Builder_Module_CTA extends ET_Builder_Module {
 			),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			( 'on' !== $use_background_color ? ' et_pb_no_bg' : '' )
+			( 'on' !== $use_background_color ? ' et_pb_no_bg' : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -7434,6 +7698,9 @@ class ET_Builder_Module_Audio extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'audio',
 				),
+				'computed_minimum' => array(
+					'audio',
+				),
 			),
 		);
 		return $fields;
@@ -7501,6 +7768,8 @@ class ET_Builder_Module_Audio extends ET_Builder_Module {
 				esc_attr( $image_url )
 			);
 		}
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
 
 		// some themes do not include these styles/scripts so we need to enqueue them in this module
 		wp_enqueue_style( 'wp-mediaelement' );
@@ -7511,8 +7780,12 @@ class ET_Builder_Module_Audio extends ET_Builder_Module {
 		remove_all_filters( 'wp_audio_shortcode' );
 		remove_all_filters( 'wp_audio_shortcode_class');
 
+		$video_background = $this->video_background();
+
 		$output = sprintf(
-			'<div%8$s class="et_pb_audio_module clearfix%4$s%7$s%9$s"%5$s>
+			'<div%8$s class="et_pb_audio_module clearfix%4$s%7$s%9$s%10$s%12$s"%5$s>
+				%13$s
+				%11$s
 				%6$s
 
 				<div class="et_pb_audio_module_content et_audio_container">
@@ -7531,7 +7804,11 @@ class ET_Builder_Module_Audio extends ET_Builder_Module {
 			$cover_art,
 			( '' === $image_url ? ' et_pb_audio_no_image' : '' ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -7637,6 +7914,11 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 						'plugin_main' => "{$this->main_css_element} .et_pb_newsletter_button.et_pb_button",
 					),
 				),
+			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
 			),
 		);
 		$this->custom_css_options = array(
@@ -7825,6 +8107,13 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 				'description'       => esc_html__( 'Here you can change the text used for the signup button.', 'et_builder' ),
 				'toggle_slug'       => 'main_content',
 			),
+			'background_color' => array(
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'description'       => esc_html__( 'Define a custom background color for your module, or leave blank to use the default color.', 'et_builder' ),
+				'depends_default'   => true,
+				'toggle_slug'       => 'background',
+			),
 			'use_background_color' => array(
 				'label'             => esc_html__( 'Use Background Color', 'et_builder' ),
 				'type'              => 'yes_no_button',
@@ -7838,13 +8127,6 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 				),
 				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Here you can choose whether background color setting below should be used or not.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'description'       => esc_html__( 'Define a custom background color for your module, or leave blank to use the default color.', 'et_builder' ),
-				'depends_default'   => true,
-				'toggle_slug'       => 'background',
 			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
@@ -7883,7 +8165,7 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 			),
 			'form_field_text_color' => array(
 				'label'             => esc_html__( 'Form Field Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'fields',
@@ -7897,7 +8179,7 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 			),
 			'focus_text_color' => array(
 				'label'             => esc_html__( 'Focus Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'fields',
@@ -7918,7 +8200,7 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 			),
 			'focus_border_color' => array(
 				'label'             => esc_html__( 'Focus Border Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_default'   => true,
 				'tab_slug'          => 'advanced',
@@ -7961,6 +8243,7 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 				'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
+
 		return $fields;
 	}
 
@@ -8111,6 +8394,9 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 			$text_orientation = 'right';
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
 		$form = '';
@@ -8235,7 +8521,9 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div%6$s class="et_pb_newsletter et_pb_subscribe clearfix%4$s%7$s%8$s"%5$s>
+			'<div%6$s class="et_pb_newsletter et_pb_subscribe clearfix%4$s%7$s%8$s%9$s%11$s"%5$s>
+				%12$s
+				%10$s
 				<div class="et_pb_newsletter_description">
 					%1$s
 					%2$s
@@ -8252,7 +8540,11 @@ class ET_Builder_Module_Signup extends ET_Builder_Module {
 			),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			( 'on' !== $use_background_color ? ' et_pb_no_bg' : '' )
+			( 'on' !== $use_background_color ? ' et_pb_no_bg' : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -8346,6 +8638,11 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 					),
 				),
 			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
+			),
 		);
 		$this->custom_css_options = array(
 			'newsletter_description' => array(
@@ -8388,6 +8685,13 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 				'toggle_slug'     => 'redirect',
 				'description'     => esc_html__( 'Here you can choose whether the user should be redirected to the current page.', 'et_builder' ),
 			),
+			'background_color' => array(
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'description'       => esc_html__( 'Define a custom background color for your module, or leave blank to use the default color.', 'et_builder' ),
+				'depends_default'   => true,
+				'toggle_slug'       => 'background',
+			),
 			'use_background_color' => array(
 				'label'           => esc_html__( 'Use Background Color', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -8401,13 +8705,6 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 				),
 				'toggle_slug'     => 'background',
 				'description'     => esc_html__( 'Here you can choose whether background color setting below should be used or not.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'description'       => esc_html__( 'Define a custom background color for your module, or leave blank to use the default color.', 'et_builder' ),
-				'depends_default'   => true,
-				'toggle_slug'       => 'background',
 			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
@@ -8446,7 +8743,7 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 			),
 			'form_field_text_color' => array(
 				'label'             => esc_html__( 'Form Field Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'fields',
@@ -8460,7 +8757,7 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 			),
 			'focus_text_color' => array(
 				'label'             => esc_html__( 'Focus Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'fields',
@@ -8481,7 +8778,7 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 			),
 			'focus_border_color' => array(
 				'label'             => esc_html__( 'Focus Border Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_default'   => true,
 				'tab_slug'          => 'advanced',
@@ -8524,6 +8821,7 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 				'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
+
 		return $fields;
 	}
 
@@ -8650,6 +8948,9 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 			);
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
 		$form = '';
@@ -8697,7 +8998,9 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div%6$s class="et_pb_newsletter et_pb_login clearfix%4$s%7$s%8$s"%5$s>
+			'<div%6$s class="et_pb_newsletter et_pb_login clearfix%4$s%7$s%8$s%9$s%11$s"%5$s>
+				%12$s
+				%10$s
 				<div class="et_pb_newsletter_description">
 					%1$s
 					%2$s
@@ -8714,7 +9017,11 @@ class ET_Builder_Module_Login extends ET_Builder_Module {
 			),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
-			is_customize_preview() || is_et_pb_preview() ? ' et_pb_in_customizer' : ''
+			is_customize_preview() || is_et_pb_preview() ? ' et_pb_in_customizer' : '',
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -8911,7 +9218,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 			),
 			'zoom_icon_color' => array(
 				'label'             => esc_html__( 'Zoom Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'off',
 				'tab_slug'          => 'advanced',
@@ -8979,6 +9286,9 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 					'posts_number',
 					'include_categories',
 					'fullwidth',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 		);
@@ -9237,7 +9547,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 
 			if ( 'on' === $show_pagination && ! is_search() ) {
 				if ( function_exists( 'wp_pagenavi' ) ) {
-					wp_pagenavi( array( 'query' => $portfolio ) );
+					$pagination = wp_pagenavi( array( 'query' => $portfolio, 'echo' => false ) );
 				} else {
 					$next_posts_link_html = $prev_posts_link_html = '';
 
@@ -9261,7 +9571,7 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 						);
 					}
 
-					printf(
+					$pagination = sprintf(
 						'<div class="pagination clearfix">
 							%1$s
 							%2$s
@@ -9286,18 +9596,34 @@ class ET_Builder_Module_Portfolio extends ET_Builder_Module {
 
 		ob_end_clean();
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout}";
+		$fullwidth = 'on' === $fullwidth;
 
 		$output = sprintf(
-			'<div%5$s class="%1$s%3$s%6$s">
-				%2$s
+			'<div%5$s class="%1$s%3$s%6$s%7$s%9$s">
+				%10$s
+				%8$s
+				%11$s
+					%2$s
+				%12$s
+				%13$s
 			%4$s',
-			( 'on' === $fullwidth ? 'et_pb_portfolio' : 'et_pb_portfolio_grid clearfix' ),
+			$fullwidth ? 'et_pb_portfolio' : 'et_pb_portfolio_grid clearfix',
 			$posts,
 			esc_attr( $class ),
 			( ! $container_is_closed ? '</div> <!-- .et_pb_portfolio -->' : '' ),
-			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), //#5
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background, //#10
+			$fullwidth ? '' : '<div class="et_pb_portfolio_grid_items">',
+			$fullwidth ? '' : '</div>',
+			isset( $pagination ) ? $pagination : '' //#13
 		);
 
 		return $output;
@@ -9537,7 +9863,7 @@ class ET_Builder_Module_Filterable_Portfolio extends ET_Builder_Module {
 			),
 			'zoom_icon_color' => array(
 				'label'             => esc_html__( 'Zoom Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'off',
 				'tab_slug'          => 'advanced',
@@ -9566,6 +9892,9 @@ class ET_Builder_Module_Filterable_Portfolio extends ET_Builder_Module {
 					'posts_number',
 					'include_categories',
 					'fullwidth',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 			'disabled_on' => array(
@@ -9880,10 +10209,15 @@ class ET_Builder_Module_Filterable_Portfolio extends ET_Builder_Module {
 		}
 		$category_filters .= '</ul>';
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout}";
 
 		$output = sprintf(
-			'<div%5$s class="et_pb_filterable_portfolio et_pb_portfolio %1$s%4$s%6$s" data-posts-number="%7$d"%10$s>
+			'<div%5$s class="et_pb_filterable_portfolio et_pb_portfolio %1$s%4$s%6$s%11$s%13$s" data-posts-number="%7$d"%10$s>
+				%14$s
+				%12$s
 				<div class="et_pb_portfolio_filters clearfix">%2$s</div><!-- .et_pb_portfolio_filters -->
 
 				<div class="et_pb_portfolio_items_wrapper %8$s">
@@ -9900,7 +10234,11 @@ class ET_Builder_Module_Filterable_Portfolio extends ET_Builder_Module {
 			esc_attr( $posts_number),
 			('on' === $show_pagination ? '' : 'no_pagination' ),
 			('on' === $show_pagination ? '<div class="et_pb_portofolio_pagination"></div>' : '' ),
-			is_rtl() ? ' data-rtl="true"' : ''
+			is_rtl() ? ' data-rtl="true"' : '',
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -9990,6 +10328,14 @@ class ET_Builder_Module_Bar_Counters extends ET_Builder_Module {
 				),
 				'settings' => array(
 					'color' => 'alpha',
+				),
+			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
+				'css' => array(
+					'main' => "{$this->main_css_element} .et_pb_counter_container",
 				),
 			),
 		);
@@ -10145,6 +10491,14 @@ class ET_Builder_Module_Bar_Counters extends ET_Builder_Module {
 		global $et_pb_counters_settings;
 
 		$background_color          = $this->shortcode_atts['background_color'];
+		$background_image          = $this->shortcode_atts['background_image'];
+		$parallax                  = $this->shortcode_atts['parallax'];
+		$parallax_method           = $this->shortcode_atts['parallax_method'];
+		$background_video_mp4      = $this->shortcode_atts['background_video_mp4'];
+		$background_video_webm     = $this->shortcode_atts['background_video_webm'];
+		$background_video_width    = $this->shortcode_atts['background_video_width'];
+		$background_video_height   = $this->shortcode_atts['background_video_height'];
+		$allow_player_pause        = $this->shortcode_atts['allow_player_pause'];
 		$bar_bg_color              = $this->shortcode_atts['bar_bg_color'];
 		$use_percentages           = $this->shortcode_atts['use_percentages'];
 		$bar_top_padding           = $this->shortcode_atts['bar_top_padding'];
@@ -10159,6 +10513,14 @@ class ET_Builder_Module_Bar_Counters extends ET_Builder_Module {
 
 		$et_pb_counters_settings = array(
 			'background_color'          => $background_color,
+			'background_image'          => $background_image,
+			'parallax'                  => $parallax,
+			'parallax_method'           => $parallax_method,
+			'background_video_mp4'      => $background_video_mp4,
+			'background_video_webm'     => $background_video_webm,
+			'background_video_width'    => $background_video_width,
+			'background_video_height'   => $background_video_height,
+			'allow_player_pause'        => $allow_player_pause,
 			'bar_bg_color'              => $bar_bg_color,
 			'use_percentages'           => $use_percentages,
 			'bar_top_padding'           => $bar_top_padding,
@@ -10180,16 +10542,19 @@ class ET_Builder_Module_Bar_Counters extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
+		$video_background = $this->video_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout}";
 
 		$output = sprintf(
-			'<ul%3$s class="et_pb_counters et-waypoint%2$s%4$s">
+			'<ul%3$s class="et_pb_counters et-waypoint%2$s%4$s%5$s">
 				%1$s
 			</ul> <!-- .et_pb_counters -->',
 			$this->shortcode_content,
 			esc_attr( $class ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : ''
 		);
 
 		return $output;
@@ -10220,8 +10585,20 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 
 		$this->advanced_setting_title_text = esc_html__( 'New Bar Counter', 'et_builder' );
 		$this->settings_text               = esc_html__( 'Bar Counter Settings', 'et_builder' );
+		$this->main_css_element            = '%%order_class%%';
 		$this->defaults                    = array(
 			'border_radius' => '0',
+		);
+
+		$this->advanced_options = array(
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
+				'css' => array(
+					'main' => ".et_pb_counters {$this->main_css_element} .et_pb_counter_container",
+				),
+			),
 		);
 
 		$this->options_toggles = array(
@@ -10298,17 +10675,93 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 				'toggle_slug'  => 'percentage',
 			),
 		);
+
 		return $fields;
+	}
+
+	function get_parallax_image_background() {
+		global $et_pb_counters_settings;
+
+		// Parallax setting is only derived from parent if bar counter item has no background
+		$use_counter_value   = '' !== $this->shortcode_atts['background_color'] || 'on' === $this->shortcode_atts['use_background_color_gradient'] || '' !== $this->shortcode_atts['background_image'] || '' !== $this->shortcode_atts['background_video_mp4'] || '' !== $this->shortcode_atts['background_video_webm'];
+		$background_image    = $use_counter_value ? $this->shortcode_atts['background_image'] : $et_pb_counters_settings['background_image'];
+		$parallax            = $use_counter_value ? $this->shortcode_atts['parallax'] : $et_pb_counters_settings['parallax'];
+		$parallax_method     = $use_counter_value ? $this->shortcode_atts['parallax_method'] : $et_pb_counters_settings['parallax_method'];
+		$parallax_background = '';
+
+		if ( '' !== $background_image && 'on' == $parallax ) {
+			$parallax_classname = array(
+				'et_parallax_bg'
+			);
+
+			if ( 'off' === $parallax_method ) {
+				$parallax_classname[] = 'et_pb_parallax_css';
+			}
+
+			$parallax_background = sprintf( '<div
+					class="%1$s"
+					style="background-image: url(%2$s);"
+					></div>',
+				esc_attr( implode( ' ', $parallax_classname ) ),
+				esc_attr( $background_image )
+			);
+		}
+
+		return $parallax_background;
+	}
+
+	function video_background( $args = array() ) {
+		global $et_pb_counters_settings;
+
+		$use_counter_value       = '' !== $this->shortcode_atts['background_color'] || 'on' === $this->shortcode_atts['use_background_color_gradient'] || '' !== $this->shortcode_atts['background_image'] || '' !== $this->shortcode_atts['background_video_mp4'] || '' !== $this->shortcode_atts['background_video_webm'];
+		$background_video_mp4    = $use_counter_value ? $this->shortcode_atts['background_video_mp4'] : $et_pb_counters_settings['background_video_mp4'];
+		$background_video_webm   = $use_counter_value ? $this->shortcode_atts['background_video_webm'] : $et_pb_counters_settings['background_video_webm'];
+		$background_video_width  = $use_counter_value ? $this->shortcode_atts['background_video_width'] : $et_pb_counters_settings['background_video_width'];
+		$background_video_height = $use_counter_value ? $this->shortcode_atts['background_video_height'] : $et_pb_counters_settings['background_video_height'];
+
+		if ( ! empty( $args ) ) {
+			$background_video = self::get_video_background( $args );
+
+			$allow_player_pause = isset( $args['allow_player_pause' ] ) ? $args['allow_player_pause' ] : 'off';
+		} else {
+			$background_video = self::get_video_background( array(
+				'background_video_mp4'    => $background_video_mp4,
+				'background_video_webm'   => $background_video_webm,
+				'background_video_width'  => $background_video_width,
+				'background_video_height' => $background_video_height,
+			) );
+
+			$allow_player_pause = $use_counter_value ? $this->shortcode_atts['allow_player_pause'] : $et_pb_counters_settings['allow_player_pause'];
+		}
+
+		$video_background = '';
+
+		if ( $background_video ) {
+			$video_background = sprintf(
+				'<div class="et_pb_section_video_bg%2$s">
+					%1$s
+				</div>',
+				$background_video,
+				( 'on' === $allow_player_pause ? ' et_pb_allow_player_pause' : '' )
+			);
+
+			wp_enqueue_style( 'wp-mediaelement' );
+			wp_enqueue_script( 'wp-mediaelement' );
+		}
+
+		return $video_background;
 	}
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
 		global $et_pb_counters_settings;
 
-		$percent              = $this->shortcode_atts['percent'];
-		$background_color     = $this->shortcode_atts['background_color'];
-		$bar_background_color = $this->shortcode_atts['bar_background_color'];
-		$label_color          = $this->shortcode_atts['label_color'];
-		$percentage_color     = $this->shortcode_atts['percentage_color'];
+		$percent                       = $this->shortcode_atts['percent'];
+		$background_color              = $this->shortcode_atts['background_color'];
+		$bar_background_color          = $this->shortcode_atts['bar_background_color'];
+		$background_image              = $this->shortcode_atts['background_image'];
+		$use_background_color_gradient = $this->shortcode_atts['use_background_color_gradient'];
+		$label_color                   = $this->shortcode_atts['label_color'];
+		$percentage_color              = $this->shortcode_atts['percentage_color'];
 
 		$module_class = ET_Builder_Element::add_module_order_class( '', $function_name );
 
@@ -10321,6 +10774,15 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 
 		if ( '' === $background_color && isset( $et_pb_counters_settings['background_color'] ) && '' !== $et_pb_counters_settings['background_color'] ) {
 			$background_color_style = sprintf( ' style="background-color: %1$s;"', esc_attr( $et_pb_counters_settings['background_color'] ) );
+		}
+
+		if ( '' !== $background_color ) {
+			if ( empty( $background_image ) && 'on' !== $use_background_color_gradient ) {
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '.et_pb_counters %%order_class%% .et_pb_counter_container',
+					'declaration' => 'background-image: none;',
+				) );
+			}
 		}
 
 		if ( '' === $bar_background_color && isset( $et_pb_counters_settings['bar_bg_color'] ) && '' !== $et_pb_counters_settings['bar_bg_color'] ) {
@@ -10336,7 +10798,6 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 				),
 			) );
 		}
-
 
 		if ( ( isset( $et_pb_counters_settings['bar_top_padding'] ) && '' !== $et_pb_counters_settings['bar_top_padding'] ) || ( isset( $et_pb_counters_settings['bar_top_padding_tablet'] ) && '' !== $et_pb_counters_settings['bar_top_padding_tablet'] ) || ( isset( $et_pb_counters_settings['bar_top_padding_phone'] ) && '' !== $et_pb_counters_settings['bar_top_padding_phone'] ) ) {
 			$bar_top_padding_responsive_active = et_pb_get_responsive_status( $et_pb_counters_settings['bar_top_padding_last_edited'] );
@@ -10402,10 +10863,15 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 			) );
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$output = sprintf(
-			'<li class="%6$s">
+			'<li class="%6$s%7$s%9$s">
 				<span class="et_pb_counter_title">%1$s</span>
 				<span class="et_pb_counter_container"%4$s>
+					%10$s
+					%8$s
 					<span class="et_pb_counter_amount" style="%5$s" data-width="%3$s"><span class="et_pb_counter_amount_number">%2$s</span></span>
 				</span>
 			</li>',
@@ -10414,7 +10880,11 @@ class ET_Builder_Module_Bar_Counters_Item extends ET_Builder_Module {
 			esc_attr( $percent ),
 			$background_color_style,
 			$bar_bg_color_style,
-			esc_attr( ltrim( $module_class ) )
+			esc_attr( ltrim( $module_class ) ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -10554,7 +11024,7 @@ class ET_Builder_Module_Circle_Counter extends ET_Builder_Module {
 			),
 			'circle_color' => array(
 				'label'             => esc_html__( 'Circle Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'circle',
@@ -10862,10 +11332,15 @@ class ET_Builder_Module_Number_Counter extends ET_Builder_Module {
 		$separator = strpos( $number, ',' ) ? ',' : '';
 		$number = str_ireplace( array( '%', ',' ), '', $number );
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout}";
 
 		$output = sprintf(
-			'<div%1$s class="et_pb_number_counter%2$s%3$s" data-number-value="%4$s" data-number-separator="%8$s">
+			'<div%1$s class="et_pb_number_counter%2$s%3$s%9$s%11$s" data-number-value="%4$s" data-number-separator="%8$s">
+				%12$s
+				%10$s
 				<div class="percent"%5$s><p><span class="percent-value"></span>%6$s</p></div>
 				%7$s
 			</div><!-- .et_pb_number_counter -->',
@@ -10876,7 +11351,11 @@ class ET_Builder_Module_Number_Counter extends ET_Builder_Module {
 			( '' !== $counter_color ? sprintf( ' style="color:%s"', esc_attr( $counter_color ) ) : '' ),
 			( 'on' == $percent_sign ? '%' : ''),
 			( '' !== $title ? '<h3>' . esc_html( $title ) . '</h3>' : '' ),
-			esc_attr( $separator )
+			esc_attr( $separator ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		 );
 
 		return $output;
@@ -10935,7 +11414,10 @@ class ET_Builder_Module_Accordion extends ET_Builder_Module {
 				),
 			),
 			'background' => array(
-				'use_background_color' => false,
+				'use_background_color'          => false,
+				'use_background_color_gradient' => false,
+				'use_background_image'          => false,
+				'use_background_video'          => false,
 				'css' => array(
 					'main' => "{$this->main_css_element} .et_pb_toggle_content",
 				),
@@ -10987,7 +11469,7 @@ class ET_Builder_Module_Accordion extends ET_Builder_Module {
 			),
 			'open_toggle_text_color' => array(
 				'label'             => esc_html__( 'Open Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
@@ -11000,14 +11482,14 @@ class ET_Builder_Module_Accordion extends ET_Builder_Module {
 			),
 			'closed_toggle_text_color' => array(
 				'label'             => esc_html__( 'Closed Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
 			),
 			'icon_color' => array(
 				'label'             => esc_html__( 'Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
@@ -11173,8 +11655,11 @@ class ET_Builder_Module_Accordion_Item extends ET_Builder_Module {
 		);
 
 		$this->advanced_options      = array(
-			'background'            => array(
-				'use_background_color' => false,
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_color_gradient' => false,
+				'use_background_image'          => false,
+				'use_background_video'          => false,
 			),
 			'custom_margin_padding' => array(
 				'use_margin' => false,
@@ -11232,7 +11717,7 @@ class ET_Builder_Module_Accordion_Item extends ET_Builder_Module {
 			),
 			'open_toggle_text_color' => array(
 				'label'             => esc_html__( 'Open Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
@@ -11245,14 +11730,14 @@ class ET_Builder_Module_Accordion_Item extends ET_Builder_Module {
 			),
 			'closed_toggle_text_color' => array(
 				'label'             => esc_html__( 'Closed Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
 			),
 			'icon_color' => array(
 				'label'             => esc_html__( 'Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
@@ -11395,7 +11880,7 @@ class ET_Builder_Module_Toggle extends ET_Builder_Module {
 			),
 			'open_toggle_text_color' => array(
 				'label'             => esc_html__( 'Open Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
@@ -11408,14 +11893,14 @@ class ET_Builder_Module_Toggle extends ET_Builder_Module {
 			),
 			'closed_toggle_text_color' => array(
 				'label'             => esc_html__( 'Closed Toggle Text Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'text',
 			),
 			'icon_color' => array(
 				'label'             => esc_html__( 'Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
@@ -11537,8 +12022,13 @@ class ET_Builder_Module_Toggle extends ET_Builder_Module {
 			$module_class .= " et_pb_toggle_item";
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$output = sprintf(
-			'<div%4$s class="et_pb_module et_pb_toggle %2$s%5$s">
+			'<div%4$s class="et_pb_module et_pb_toggle %2$s%5$s%6$s%8$s">
+				%9$s
+				%7$s
 				<h5 class="et_pb_toggle_title">%1$s</h5>
 				<div class="et_pb_toggle_content clearfix">
 					%3$s
@@ -11548,7 +12038,11 @@ class ET_Builder_Module_Toggle extends ET_Builder_Module {
 			( 'on' === $open ? 'et_pb_toggle_open' : 'et_pb_toggle_close' ),
 			$this->shortcode_content,
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -11573,6 +12067,7 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 			'module_class',
 			'form_background_color',
 			'input_border_radius',
+			'submit_button_text',
 			'custom_message',
 			'use_redirect',
 			'redirect_url',
@@ -11614,6 +12109,8 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 							"{$this->main_css_element} .input::-webkit-input-placeholder",
 							"{$this->main_css_element} .input::-moz-placeholder",
 							"{$this->main_css_element} .input:-ms-input-placeholder",
+							"{$this->main_css_element} .input[type=checkbox] + label",
+							"{$this->main_css_element} .input[type=radio] + label",
 						),
 						'important' => 'plugin_only',
 					),
@@ -11621,7 +12118,12 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 			),
 			'border' => array(
 				'css'      => array(
-					'main' => "{$this->main_css_element} .input",
+					'main' => sprintf(
+						'%1$s .input,
+						%1$s .input[type="checkbox"] + label i,
+						%1$s .input[type="radio"] + label i',
+						$this->main_css_element
+					),
 					'important' => 'plugin_only',
 				),
 				'settings' => array(
@@ -11733,6 +12235,13 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 				'description'     => esc_html__( 'Type the message you want to display after successful form submission. Leave blank for default', 'et_builder' ),
 				'toggle_slug'     => 'main_content',
 			),
+			'submit_button_text' => array(
+				'label'           => esc_html__( 'Submit Button Text', 'et_builder' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Define the text of the form submit button.', 'et_builder' ),
+				'toggle_slug'     => 'main_content',
+			),
 			'form_background_color' => array(
 				'label'             => esc_html__( 'Form Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -11809,10 +12318,12 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 		$captcha               = $this->shortcode_atts['captcha'];
 		$email                 = $this->shortcode_atts['email'];
 		$title                 = $this->shortcode_atts['title'];
+		$form_field_text_color = $this->shortcode_atts['form_field_text_color'];
 		$form_background_color = $this->shortcode_atts['form_background_color'];
 		$input_border_radius   = $this->shortcode_atts['input_border_radius'];
 		$button_custom         = $this->shortcode_atts['custom_button'];
 		$custom_icon           = $this->shortcode_atts['button_icon'];
+		$submit_button_text    = $this->shortcode_atts['submit_button_text'];
 		$custom_message        = $this->shortcode_atts['custom_message'];
 		$use_redirect          = $this->shortcode_atts['use_redirect'];
 		$redirect_url          = $this->shortcode_atts['redirect_url'];
@@ -11822,9 +12333,29 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
+		if ( '' !== $form_field_text_color ) {
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%% .input[type="checkbox"]:checked + label i:before',
+				'declaration' => sprintf(
+					'color: %1$s%2$s;',
+					esc_html( $form_field_text_color ),
+					et_is_builder_plugin_active() ? ' !important' : ''
+				),
+			) );
+
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%% .input[type="radio"]:checked + label i:before',
+				'declaration' => sprintf(
+					'background-color: %1$s%2$s;',
+					esc_html( $form_field_text_color ),
+					et_is_builder_plugin_active() ? ' !important' : ''
+				),
+			) );
+		}
+
 		if ( '' !== $form_background_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .input',
+				'selector'    => '%%order_class%% .input, %%order_class%% .input[type="checkbox"] + label i, %%order_class%% .input[type="radio"] + label i',
 				'declaration' => sprintf(
 					'background-color: %1$s%2$s;',
 					esc_html( $form_background_color ),
@@ -11835,7 +12366,7 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 
 		if ( ! in_array( $input_border_radius, array( '', '0' ) ) ) {
 			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .input',
+				'selector'    => '%%order_class%% .input, %%order_class%% .input[type="checkbox"] + label i',
 				'declaration' => sprintf(
 					'-moz-border-radius: %1$s%2$s; -webkit-border-radius: %1$s%2$s; border-radius: %1$s%2$s;',
 					esc_html( et_builder_process_range_value( $input_border_radius ) ),
@@ -11987,6 +12518,15 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 		}
 
 		if ( $et_contact_error ) {
+			// Make sure submit button text is not just a space
+			$submit_button_text = trim( $submit_button_text );
+
+			// We can't use `empty( trim() )` because that throws
+			// an error on old(er) PHP versions
+			if ( empty( $submit_button_text ) ) {
+				$submit_button_text = __( 'Submit', 'et_builder' );
+			}
+
 			$form = sprintf( '
 				<div class="et_pb_contact">
 					<form class="et_pb_contact_form clearfix" method="post" action="%1$s">
@@ -12002,7 +12542,7 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 				</div> <!-- .et_pb_contact -->',
 				esc_url( get_permalink( get_the_ID() ) ),
 				(  'on' === $captcha ? $et_pb_captcha : '' ),
-				esc_html__( 'Submit', 'et_builder' ),
+				esc_html( $submit_button_text ),
 				wp_nonce_field( 'et-pb-contact-form-submit', '_wpnonce-et-pb-contact-form-submitted', true, false ),
 				'' !== $custom_icon && 'on' === $button_custom ? sprintf(
 					' data-icon="%1$s"',
@@ -12054,14 +12594,29 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			'fullwidth_field',
 			'input_border_radius',
 			'field_background_color',
+			'checkbox_checked',
+			'radio_options',
+			'select_options',
+			'conditional_logic',
+			'conditional_logic_relation',
+			'conditional_logic_rules',
+			'min_length',
+			'max_length',
+			'allowed_symbols',
 		);
 
 		$this->fields_defaults = array(
-			'field_title'     => array( esc_html__( 'New Field', 'et_builder' ) ),
-			'field_type'      => array( 'input' ),
-			'field_id'        => array( '' ),
-			'fullwidth_field' => array( 'off' ),
-			'required_mark'   => array( 'on' ),
+			'field_title'                => array( esc_html__( 'New Field', 'et_builder' ) ),
+			'field_type'                 => array( 'input' ),
+			'field_id'                   => array( '' ),
+			'fullwidth_field'            => array( 'off' ),
+			'required_mark'              => array( 'on' ),
+			'checkbox_checked'           => array( 'off' ),
+			'conditional_logic'          => array( 'off' ),
+			'conditional_logic_relation' => array( 'off' ),
+			'min_length'                 => array( '0' ),
+			'max_length'                 => array( '0' ),
+			'allowed_symbols'            => array( 'all' ),
 		);
 
 		$this->advanced_setting_title_text = esc_html__( 'New Field', 'et_builder' );
@@ -12071,9 +12626,10 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 		$this->options_toggles = array(
 			'general'  => array(
 				'toggles' => array(
-					'main_content'  => esc_html__( 'Text', 'et_builder' ),
-					'field_options' => esc_html__( 'Field Options', 'et_builder' ),
-					'background'    => esc_html__( 'Background', 'et_builder' ),
+					'main_content'      => esc_html__( 'Text', 'et_builder' ),
+					'field_options'     => esc_html__( 'Field Options', 'et_builder' ),
+					'conditional_logic' => esc_html__( 'Conditional Logic', 'et_builder' ),
+					'background'        => esc_html__( 'Background', 'et_builder' ),
 				),
 			),
 			'advanced' => array(
@@ -12093,6 +12649,8 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 							"{$this->main_css_element}::-webkit-input-placeholder",
 							"{$this->main_css_element}::-moz-placeholder",
 							"{$this->main_css_element}:-ms-input-placeholder",
+							"{$this->main_css_element}[type=checkbox] + label",
+							"{$this->main_css_element}[type=radio] + label",
 						),
 						'important' => 'plugin_only',
 					),
@@ -12100,7 +12658,12 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			),
 			'border' => array(
 				'css'      => array(
-					'main' => "{$this->main_css_element}",
+					'main' => sprintf(
+						'%1$s,
+						%1$s[type="checkbox"] + label i,
+						%1$s[type="radio"] + label i',
+						$this->main_css_element
+					),
 					'important' => 'plugin_only',
 				),
 				'settings' => array(
@@ -12127,14 +12690,97 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			'field_type' => array(
 				'label'       => esc_html__( 'Type', 'et_builder' ),
 				'type'        => 'select',
+				'default'     => 'input',
 				'option_category' => 'basic_option',
 				'options'         => array(
-					'input' => esc_html__( 'Input Field', 'et_builder' ),
-					'email' => esc_html__( 'Email Field', 'et_builder' ),
-					'text'  => esc_html__( 'Textarea', 'et_builder' ),
+					'input'    => esc_html__( 'Input Field', 'et_builder' ),
+					'email'    => esc_html__( 'Email Field', 'et_builder' ),
+					'text'     => esc_html__( 'Textarea', 'et_builder' ),
+					'checkbox' => esc_html__( 'Checkbox', 'et_builder' ),
+					'radio'    => esc_html__( 'Radio Buttons', 'et_builder' ),
+					'select'   => esc_html__( 'Select Dropdown', 'et_builder' ),
 				),
 				'description' => esc_html__( 'Choose the type of field', 'et_builder' ),
+				'affects'     => array(
+					'checkbox_checked',
+					'radio_options',
+					'select_options',
+					'min_length',
+					'max_length',
+					'allowed_symbols',
+				),
 				'toggle_slug' => 'field_options',
+			),
+			'checkbox_checked' => array(
+				'label'           => esc_html__( 'Checked By Default', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'layout',
+				'default'         => 'off',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'depends_show_if' => 'checkbox',
+				'toggle_slug'     => 'field_options',
+			),
+			'radio_options' => array(
+				'label'           => esc_html__( 'Options', 'et_builder' ),
+				'type'            => 'options_list',
+				'radio'           => true,
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'radio',
+				'toggle_slug'     => 'field_options',
+			),
+			'select_options' => array(
+				'label'           => esc_html__( 'Options', 'et_builder' ),
+				'type'            => 'options_list',
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'select',
+				'toggle_slug'     => 'field_options',
+			),
+			'min_length'   => array(
+				'label'          => esc_html__( 'Minimum Length', 'et_builder' ),
+				'description'    => esc_html__( 'Leave at 0 to remove restriction', 'et_builder' ),
+				'type'           => 'range',
+				'default'        => '0',
+				'fixed_unit'     => null,
+				'range_settings' => array(
+					'min'  => '0',
+					'max'  => '255',
+					'step' => '1',
+				),
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'input',
+				'toggle_slug'     => 'field_options',
+			),
+			'max_length'   => array(
+				'label'          => esc_html__( 'Maximum Length', 'et_builder' ),
+				'description'    => esc_html__( 'Leave at 0 to remove restriction', 'et_builder' ),
+				'type'           => 'range',
+				'default'        => '0',
+				'fixed_unit'     => null,
+				'range_settings' => array(
+					'min'  => '0',
+					'max'  => '255',
+					'step' => '1',
+				),
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'input',
+				'toggle_slug'     => 'field_options',
+			),
+			'allowed_symbols' => array(
+				'label'       => esc_html__( 'Allowed Symbols', 'et_builder' ),
+				'type'        => 'select',
+				'default'     => 'all',
+				'options'     => array(
+					'all'          => esc_html__( 'All', 'et_builder' ),
+					'letters'      => esc_html__( 'Letters Only (A-Z)', 'et_builder' ),
+					'numbers'      => esc_html__( 'Numbers Only (0-9)', 'et_builder' ),
+					'alphanumeric' => esc_html__( 'Alphanumeric Only (A-Z, 0-9)', 'et_builder' ),
+				),
+				'option_category' => 'basic_option',
+				'depends_show_if' => 'input',
+				'toggle_slug'     => 'field_options',
 			),
 			'required_mark' => array(
 				'label'           => esc_html__( 'Required Field', 'et_builder' ),
@@ -12160,6 +12806,45 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 				'toggle_slug'     => 'layout',
 				'description'     => esc_html__( 'If enabled, the field will take 100% of the width of the content area, otherwise it will take 50%', 'et_builder' ),
 			),
+			'conditional_logic' => array(
+				'label'           => esc_html__( 'Enable', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'layout',
+				'default'         => 'off',
+				'options'         => array(
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+					'off' => esc_html__( 'No', 'et_builder' ),
+				),
+				'affects'         => array(
+					'conditional_logic_rules',
+					'conditional_logic_relation',
+				),
+				'description' => et_get_safe_localization( __( "Enabling conditional logic makes this field only visible when any or all of the rules below are fulfilled<br><strong>Note:</strong> Only fields with an unique and non-empty field ID can be used", 'et_builder' ) ),
+				'toggle_slug' => 'conditional_logic',
+			),
+			'conditional_logic_relation' => array(
+				'label'             => esc_html__( 'Relation', 'et_builder' ),
+				'type'              => 'yes_no_button',
+				'option_category'   => 'layout',
+				'options'           => array(
+					'on'  => esc_html__( 'All', 'et_builder' ),
+					'off' => esc_html__( 'Any', 'et_builder' ),
+				),
+				'default'           => 'off',
+				'button_options'    => array(
+					'button_type' => 'equal',
+				),
+				'depends_show_if' => 'on',
+				'description' => esc_html__( 'Choose whether any or all of the rules should be fulfilled', 'et_builder' ),
+				'toggle_slug' => 'conditional_logic',
+			),
+			'conditional_logic_rules' => array(
+				'label'           => esc_html__( 'Rules', 'et_builder' ),
+				'type'            => 'conditional_logic',
+				'option_category' => 'layout',
+				'depends_show_if' => 'on',
+				'toggle_slug'     => 'conditional_logic',
+			),
 			'field_background_color' => array(
 				'label'             => esc_html__( 'Background Color', 'et_builder' ),
 				'type'              => 'color-alpha',
@@ -12184,13 +12869,23 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 	}
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
-		$field_title            = $this->shortcode_atts['field_title'];
-		$field_type             = $this->shortcode_atts['field_type'];
-		$field_id               = $this->shortcode_atts['field_id'];
-		$required_mark          = $this->shortcode_atts['required_mark'];
-		$fullwidth_field        = $this->shortcode_atts['fullwidth_field'];
-		$field_background_color = $this->shortcode_atts['field_background_color'];
-		$input_border_radius    = $this->shortcode_atts['input_border_radius'];
+		$field_title                = $this->shortcode_atts['field_title'];
+		$field_type                 = $this->shortcode_atts['field_type'];
+		$field_id                   = $this->shortcode_atts['field_id'];
+		$required_mark              = $this->shortcode_atts['required_mark'];
+		$fullwidth_field            = $this->shortcode_atts['fullwidth_field'];
+		$form_field_text_color      = $this->shortcode_atts['form_field_text_color'];
+		$field_background_color     = $this->shortcode_atts['field_background_color'];
+		$input_border_radius        = $this->shortcode_atts['input_border_radius'];
+		$checkbox_checked           = $this->shortcode_atts['checkbox_checked'];
+		$radio_options              = $this->shortcode_atts['radio_options'];
+		$select_options             = $this->shortcode_atts['select_options'];
+		$min_length                 = $this->shortcode_atts['min_length'];
+		$max_length                 = $this->shortcode_atts['max_length'];
+		$conditional_logic          = $this->shortcode_atts['conditional_logic'];
+		$conditional_logic_relation = $this->shortcode_atts['conditional_logic_relation'];
+		$conditional_logic_rules    = $this->shortcode_atts['conditional_logic_rules'];
+		$allowed_symbols            = $this->shortcode_atts['allowed_symbols'];
 
 		global $et_pb_contact_form_num;
 
@@ -12216,9 +12911,45 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 
 		$input_field = '';
 
+		if ( '' !== $form_field_text_color ) {
+			if ( 'checkbox' === $field_type ) {
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .input + label, %%order_class%% .input + label i:before',
+					'declaration' => sprintf(
+						'color: %1$s !important;',
+						esc_html( $form_field_text_color )
+					),
+				) );
+			}
+
+			if ( 'radio' === $field_type ) {
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .input + label',
+					'declaration' => sprintf(
+						'color: %1$s !important;',
+						esc_html( $form_field_text_color )
+					),
+				) );
+
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .input + label i:before',
+					'declaration' => sprintf(
+						'background-color: %1$s !important;',
+						esc_html( $form_field_text_color )
+					),
+				) );
+			}
+		}
+
 		if ( '' !== $field_background_color ) {
+			$input_selector = '%%order_class%% .input';
+
+			if ( in_array( $field_type, array( 'checkbox', 'radio' ) ) ) {
+				$input_selector = '%%order_class%% .input + label i';
+			}
+
 			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .input',
+				'selector'    => $input_selector,
 				'declaration' => sprintf(
 					'background-color: %1$s !important;',
 					esc_html( $field_background_color )
@@ -12228,13 +12959,121 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 
 		if ( ! in_array( $input_border_radius, array( '', '0' ) ) ) {
 			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%% input.input',
+				'selector'    => '%%order_class%% input.input, %%order_class%% input.input[type="checkbox"] + label i',
 				'declaration' => sprintf(
 					'-moz-border-radius: %1$s%2$s; -webkit-border-radius: %1$s%2$s; border-radius: %1$s%2$s;',
 					esc_html( et_builder_process_range_value( $input_border_radius ) ),
 					et_is_builder_plugin_active() ? ' !important' : ''
 				),
 			) );
+		}
+
+		$pattern         = '';
+		$title           = '';
+		$min_length      = intval( $min_length );
+		$max_length      = intval( $max_length );
+		$max_length_attr = '';
+		$symbols_pattern = '.';
+		$length_pattern  = '*';
+
+		if ( in_array( $allowed_symbols, array( 'letters', 'numbers', 'alphanumeric' ) ) ) {
+			switch ( $allowed_symbols ) {
+				case 'letters':
+					$symbols_pattern = '[A-Z|a-z]';
+					$title           = __( 'Only letters allowed.', 'et_builder' );
+					break;
+				case 'numbers':
+					$symbols_pattern = '[0-9]';
+					$title           = __( 'Only numbers allowed.', 'et_builder' );
+					break;
+				case 'alphanumeric':
+					$symbols_pattern = '[A-Z|a-z|0-9]';
+					$title           = __( 'Only letters and numbers allowed.', 'et_builder' );
+					break;
+			}
+		}
+
+		if ( 0 !== $min_length && 0 !== $max_length ) {
+			$max_length = max( $min_length, $max_length );
+			$min_length = min( $min_length, $max_length );
+
+			if ( $max_length > 0 ) {
+				$max_length_attr = sprintf(
+					' maxlength="%1$d"',
+					$max_length
+				);
+			}
+		}
+
+		if ( 0 !== $min_length || 0 !== $max_length ) {
+			$length_pattern = '{';
+
+			if ( 0 !== $min_length ) {
+				$length_pattern .= $min_length;
+				$title   .= sprintf( __( 'Minimum length: %1$d characters. ', 'et_builder' ), $min_length );
+			}
+
+			if ( 0 === $max_length ) {
+				$length_pattern .= ',';
+			}
+
+			if ( 0 === $min_length ) {
+				$length_pattern .= '0';
+			}
+
+			if ( 0 !== $max_length ) {
+				$length_pattern .= ",{$max_length}";
+				$title   .= sprintf( __( 'Maximum length: %1$d characters.', 'et_builder' ), $max_length );
+			}
+
+
+			$length_pattern .= '}';
+		}
+
+		if ( '.' !== $symbols_pattern || '*' !== $length_pattern ) {
+			$pattern = sprintf(
+				' pattern="%1$s%2$s"',
+				esc_attr( $symbols_pattern ),
+				esc_attr( $length_pattern )
+			);
+		}
+
+		if ( '' !== $title ) {
+			$title = sprintf(
+				' title="%1$s"',
+				esc_attr( $title )
+			);
+		}
+
+		$conditional_logic_attr = '';
+
+		if ( 'on' === $conditional_logic && ! empty( $conditional_logic_rules ) ) {
+			$option_search           = array( '&#91;', '&#93;' );
+			$option_replace          = array( '[', ']' );
+			$conditional_logic_rules = str_replace( $option_search, $option_replace, $conditional_logic_rules );
+			$condition_rows          = json_decode( $conditional_logic_rules );
+			$ruleset                 = array();
+
+			foreach ( $condition_rows as $condition_row ) {
+				$condition_value = isset( $condition_row->value ) ? $condition_row->value : '';
+
+				$ruleset[] = array(
+					$condition_row->field,
+					$condition_row->condition,
+					$condition_value,
+				);
+			}
+
+			if ( ! empty( $ruleset ) ) {
+				$json     = json_encode( $ruleset );
+				$relation = $conditional_logic_relation === 'off' ? 'any' : 'all';
+
+				$conditional_logic_attr = sprintf(
+					' data-conditional-logic="%1$s" data-conditional-relation="%2$s"',
+					esc_attr( $json ),
+					$relation
+				);
+			}
 		}
 
 		switch( $field_type ) {
@@ -12251,20 +13090,119 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 				break;
 			case 'input' :
 			case 'email' :
+				if ( 'email' === $field_type ) {
+					$pattern = '';
+				}
+
 				$input_field = sprintf(
-					'<input type="text" id="et_pb_contact_%3$s_%2$s" class="input" value="%1$s" name="et_pb_contact_%3$s_%2$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s" placeholder="%5$s">',
+					'<input type="text" id="et_pb_contact_%3$s_%2$s" class="input" value="%1$s" name="et_pb_contact_%3$s_%2$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s" placeholder="%5$s"%7$s%8$s%9$s>',
 					( isset( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ? esc_attr( sanitize_text_field( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ) : '' ),
 					esc_attr( $current_module_num ),
 					esc_attr( $field_id ),
 					esc_attr( $field_type ),
 					esc_attr( $field_title ),
-					'off' === $required_mark ? 'not_required' : 'required'
+					'off' === $required_mark ? 'not_required' : 'required',
+					$pattern,
+					$title,
+					$max_length_attr
+				);
+				break;
+			case 'checkbox' :
+				$input_field = sprintf(
+					'<input type="checkbox" id="et_pb_contact_%3$s_%2$s_checkbox" class="input" value="%8$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s"%9$s>
+					<label for="et_pb_contact_%3$s_%2$s_checkbox"><i></i>%5$s</label>
+					<input id="et_pb_contact_%3$s_%2$s" name="et_pb_contact_%3$s_%2$s" type="text" value="%8$s" data-checked="%7$s" data-unchecked="%8$s">',
+					( isset( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ? esc_attr( sanitize_text_field( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ) : '' ),
+					esc_attr( $current_module_num ),
+					esc_attr( $field_id ),
+					esc_attr( $field_type ),
+					esc_attr( $field_title ),
+					'off' === $required_mark ? 'not_required' : 'required',
+					esc_attr__( 'checked', 'et_builder' ),
+					esc_attr__( 'not checked', 'et_builder' ),
+					'on' === $checkbox_checked ? 'checked="checked"' : ''
+				);
+				break;
+			case 'radio' :
+				$input_field = '';
+
+				if ( $radio_options ) {
+					$option_search  = array( '&#91;', '&#93;' );
+					$option_replace = array( '[', ']' );
+					$radio_options  = str_replace( $option_search, $option_replace, $radio_options );
+					$radio_options  = json_decode( $radio_options );
+
+					foreach ( $radio_options as $index => $option ) {
+						$is_checked = 1 === $option->checked ? true : false;
+
+						$input_field .= sprintf(
+							'<span class="et_pb_contact_field_radio">
+								<input type="radio" id="et_pb_contact_%3$s_%2$s_%7$s" class="input" value="%8$s" name="et_pb_contact_%3$s_%2$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s" %9$s>
+								<label for="et_pb_contact_%3$s_%2$s_%7$s"><i></i>%8$s</label>
+							</span>',
+							( isset( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ? esc_attr( sanitize_text_field( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ) : '' ),
+							esc_attr( $current_module_num ),
+							esc_attr( $field_id ),
+							esc_attr( $field_type ),
+							esc_attr( $field_title ),
+							'off' === $required_mark ? 'not_required' : 'required',
+							esc_attr( $index ),
+							wp_strip_all_tags( $option->value ),
+							checked( $is_checked, true, false )
+						);
+					}
+				} else {
+					$input_field .= esc_html__( 'No options added.', 'et_builder' );
+				}
+
+				$input_field = sprintf(
+					'<span class="et_pb_contact_field_radio_wrapper">
+						<span class="et_pb_contact_field_radio_title">%1$s</span>
+						<span class="et_pb_contact_field_radio_list">%2$s</span>
+					</span>',
+					esc_html( $field_title ),
+					$input_field
+				);
+
+				break;
+			case 'select' :
+				$options = sprintf(
+					'<option value="">-- %1$s --</option>',
+					esc_attr( $field_title )
+				);
+
+				if ( $select_options ) {
+					$option_search  = array( '&#91;', '&#93;' );
+					$option_replace = array( '[', ']' );
+					$select_options = str_replace( $option_search, $option_replace, $select_options );
+					$select_options = json_decode( $select_options );
+
+					foreach ( $select_options as $option ) {
+						$options .= sprintf(
+							'<option value="%1$s">%2$s</option>',
+							esc_attr( wp_strip_all_tags( $option->value ) ),
+							wp_strip_all_tags( $option->value )
+						);
+					}
+				}
+
+				$input_field = sprintf(
+					'<select id="et_pb_contact_%3$s_%2$s" class="et_pb_contact_select input" name="et_pb_contact_%3$s_%2$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s">
+						%7$s
+					</select>',
+					( isset( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ? esc_attr( sanitize_text_field( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ) : '' ),
+					esc_attr( $current_module_num ),
+					esc_attr( $field_id ),
+					esc_attr( $field_type ),
+					esc_attr( $field_title ),
+					'off' === $required_mark ? 'not_required' : 'required',
+					$options
 				);
 				break;
 		}
 
 		$output = sprintf(
-			'<p class="et_pb_contact_field%5$s%6$s%7$s">
+			'<p class="et_pb_contact_field%5$s%6$s%7$s"%8$s data-id="%3$s" data-type="%9$s">
 				<label for="et_pb_contact_%3$s_%2$s" class="et_pb_contact_form_label">%1$s</label>
 				%4$s
 			</p>',
@@ -12274,7 +13212,9 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			$input_field,
 			esc_attr( $module_class ),
 			'off' === $fullwidth_field ? ' et_pb_contact_field_half' : '',
-			0 === $this->half_width_counter % 2 ? ' et_pb_contact_field_last' : ''
+			0 === $this->half_width_counter % 2 ? ' et_pb_contact_field_last' : '',
+			$conditional_logic_attr,
+			$field_type
 		);
 
 		return $output;
@@ -12613,11 +13553,12 @@ class ET_Builder_Module_Divider extends ET_Builder_Module {
 	function get_fields() {
 		$fields = array(
 			'color' => array(
-				'label'       => esc_html__( 'Color', 'et_builder' ),
-				'type'        => 'color-alpha',
-				'tab_slug'    => 'advanced',
-				'description' => esc_html__( 'This will adjust the color of the 1px divider line.', 'et_builder' ),
-				'toggle_slug' => 'color',
+				'label'           => esc_html__( 'Color', 'et_builder' ),
+				'type'            => 'color-alpha',
+				'tab_slug'        => 'advanced',
+				'description'     => esc_html__( 'This will adjust the color of the 1px divider line.', 'et_builder' ),
+				'depends_show_if' => 'on',
+				'toggle_slug'     => 'color',
 			),
 			'show_divider' => array(
 				'label'             => esc_html__( 'Visibility', 'et_builder' ),
@@ -12628,6 +13569,7 @@ class ET_Builder_Module_Divider extends ET_Builder_Module {
 					'divider_style',
 					'divider_position',
 					'divider_weight',
+					'color',
 				),
 				'toggle_slug'       => 'main_content',
 				'description'       => esc_html__( 'This settings turns on and off the 1px divider line, but does not affect the divider height.', 'et_builder' ),
@@ -12996,14 +13938,14 @@ class ET_Builder_Module_Team_Member extends ET_Builder_Module {
 			),
 			'icon_color' => array(
 				'label'             => esc_html__( 'Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
 			),
 			'icon_hover_color' => array(
 				'label'             => esc_html__( 'Icon Hover Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'icon',
@@ -13134,8 +14076,13 @@ class ET_Builder_Module_Team_Member extends ET_Builder_Module {
 			);
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_team_member%4$s%9$s et_pb_bg_layout_%8$s clearfix">
+			'<div%3$s class="et_pb_module et_pb_team_member%4$s%9$s%10$s%12$s et_pb_bg_layout_%8$s clearfix">
+				%13$s
+				%11$s
 				%2$s
 				<div class="et_pb_team_member_description">
 					%5$s
@@ -13152,7 +14099,11 @@ class ET_Builder_Module_Team_Member extends ET_Builder_Module {
 			( '' !== $position ? sprintf( '<p class="et_pb_member_position">%1$s</p>', esc_html( $position ) ) : '' ),
 			$social_links,
 			$background_layout,
-			( '' === $image ? ' et_pb_team_member_no_image' : '' )
+			( '' === $image ? ' et_pb_team_member_no_image' : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -13494,7 +14445,7 @@ class ET_Builder_Module_Blog extends ET_Builder_Module {
 			),
 			'overlay_icon_color' => array(
 				'label'             => esc_html__( 'Overlay Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'on',
 				'tab_slug'          => 'advanced',
@@ -13618,6 +14569,9 @@ class ET_Builder_Module_Blog extends ET_Builder_Module {
 					'offset_number',
 					'use_overlay',
 					'hover_icon',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 		);
@@ -14497,14 +15451,14 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 			),
 			'sale_badge_color' => array(
 				'label'             => esc_html__( 'Sale Badge Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'badge',
 			),
 			'icon_hover_color' => array(
 				'label'             => esc_html__( 'Icon Hover Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'overlay',
@@ -14571,6 +15525,9 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 					'posts_number',
 					'orderby',
 					'columns_number',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 		);
@@ -14867,7 +15824,8 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 				),
 			),
 			'background' => array(
-				'use_background_color' => false,
+				'use_background_color'          => false,
+				'use_background_color_gradient' => true,
 			),
 			'custom_margin_padding' => array(
 				'css' => array(
@@ -14919,6 +15877,13 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 				'toggle_slug'     => 'text',
 				'description'     => esc_html__( 'Here you can choose whether your text should be light or dark. If you are working with a dark background, then your text should be light. If your background is light, then your text should be set to dark.', 'et_builder' ),
 			),
+			'background_color' => array(
+				'label'             => esc_html__( 'Background Color', 'et_builder' ),
+				'type'              => 'color-alpha',
+				'depends_default'   => true,
+				'toggle_slug'       => 'background',
+				'description'       => esc_html__( 'Here you can define a custom background color for your countdown timer.', 'et_builder' ),
+			),
 			'use_background_color' => array(
 				'label'           => esc_html__( 'Use Background Color', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -14932,13 +15897,6 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 				),
 				'toggle_slug'    => 'background',
 				'description'    => esc_html__( 'Here you can choose whether background color setting below should be used or not.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'depends_default'   => true,
-				'toggle_slug'       => 'background',
-				'description'       => esc_html__( 'Here you can define a custom background color for your countdown timer.', 'et_builder' ),
 			),
 			'disabled_on' => array(
 				'label'           => esc_html__( 'Disable on', 'et_builder' ),
@@ -14977,6 +15935,7 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 				'option_class'    => 'et_pb_custom_css_regular',
 			),
 		);
+
 		return $fields;
 	}
 
@@ -15007,13 +15966,18 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 			$title = sprintf( '<h4 class="title">%s</h4>', esc_html( $title ) );
 		}
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$background_color_style = '';
 		if ( ! empty( $background_color ) && 'on' == $use_background_color ) {
 			$background_color_style = sprintf( ' style="background-color: %1$s;"', esc_attr( $background_color ) );
 		}
 
 		$output = sprintf(
-			'<div%1$s class="et_pb_module et_pb_countdown_timer%2$s%3$s"%4$s data-end-timestamp="%5$s">
+			'<div%1$s class="et_pb_module et_pb_countdown_timer%2$s%3$s%15$s%17$s%19$s"%4$s data-end-timestamp="%5$s">
+				%18$s
+				%16$s
 				<div class="et_pb_countdown_timer_container clearfix">
 					%6$s
 					<div class="days section values" data-short="%14$s" data-full="%7$s">
@@ -15050,7 +16014,12 @@ class ET_Builder_Module_Countdown_Timer extends ET_Builder_Module {
 			esc_attr__( 'Min', 'et_builder' ),
 			esc_html__( 'Second(s)', 'et_builder' ),
 			esc_attr__( 'Sec', 'et_builder' ),
-			esc_attr__( 'Day', 'et_builder' )
+			esc_attr__( 'Day', 'et_builder' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background,
+			( 'on' !== $use_background_color ? ' et_pb_no_bg' : '' )
 		);
 
 		return $output;
@@ -15903,6 +16872,10 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 			'featured_placement',
 			'parallax_effect',
 			'parallax_method',
+			'background_size',
+			'background_position',
+			'background_repeat',
+			'background_blend',
 			'text_orientation',
 			'text_color',
 			'text_background',
@@ -15942,7 +16915,6 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'parallax' => esc_html__( 'Parallax', 'et_builder' ),
 					'text'     => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -15978,6 +16950,11 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 						'plugin_main' => "{$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container, {$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container a, {$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container span",
 					),
 				),
+			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => false,
+				'use_background_color_gradient' => true,
 			),
 		);
 		$this->custom_css_options = array(
@@ -16126,9 +17103,13 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 				'depends_show_if'   => 'background',
 				'affects'           => array(
 					'parallax_method',
+					'background_size',
+					'background_position',
+					'background_repeat',
+					'background_blend',
 				),
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Here you can choose whether or not use parallax effect for the featured image', 'et_builder' ),
 			),
 			'parallax_method' => array(
@@ -16140,9 +17121,83 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 					'off' => esc_html__( 'True Parallax', 'et_builder' ),
 				),
 				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Here you can choose which parallax method to use for the featured image', 'et_builder' ),
+			),
+			'background_size' => array(
+				'label'           => esc_html__( 'Background Image Size', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options'         => array(
+					'cover'   => esc_html__( 'Cover', 'et_builder' ),
+					'contain' => esc_html__( 'Fit', 'et_builder' ),
+					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
+				),
+				'default'         => 'cover',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
+			),
+			'background_position' => array(
+				'label'           => esc_html__( 'Background Image Position', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
+					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
+					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
+					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
+					'center'        => esc_html__( 'Center', 'et_builder' ),
+					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
+					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
+					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
+					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
+				),
+				'default'           => 'center',
+				'depends_show_if'   => 'off',
+				'toggle_slug'       => 'background',
+			),
+			'background_repeat' => array(
+				'label'           => esc_html__( 'Background Image Repeat', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'repeat'      => esc_html__( 'Repeat', 'et_builder' ),
+					'repeat-x'    => esc_html__( 'Repeat X (horizontal)', 'et_builder' ),
+					'repeat-y'    => esc_html__( 'Repeat Y (vertical)', 'et_builder' ),
+					'space'       => esc_html__( 'Space', 'et_builder' ),
+					'round'       => esc_html__( 'Round', 'et_builder' ),
+					'no-repeat'   => esc_html__( 'No Repeat', 'et_builder' ),
+				),
+				'default'         => 'no-repeat',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
+			),
+			'background_blend' => array(
+				'label'           => esc_html__( 'Background Image Blend', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'normal'      => esc_html__( 'Normal', 'et_builder' ),
+					'multiply'    => esc_html__( 'Multiply', 'et_builder' ),
+					'screen'      => esc_html__( 'Screen', 'et_builder' ),
+					'overlay'     => esc_html__( 'Overlay', 'et_builder' ),
+					'darken'      => esc_html__( 'Darken', 'et_builder' ),
+					'lighten'     => esc_html__( 'Lighten', 'et_builder' ),
+					'color-dodge' => esc_html__( 'Color Dodge', 'et_builder' ),
+					'color-burn'  => esc_html__( 'Color Burn', 'et_builder' ),
+					'hard-light'  => esc_html__( 'Hard Light', 'et_builder' ),
+					'soft-light'  => esc_html__( 'Soft Light', 'et_builder' ),
+					'difference'  => esc_html__( 'Difference', 'et_builder' ),
+					'exclusion'   => esc_html__( 'Exclusion', 'et_builder' ),
+					'hue'         => esc_html__( 'Hue', 'et_builder' ),
+					'saturation'  => esc_html__( 'Saturation', 'et_builder' ),
+					'color'       => esc_html__( 'Color', 'et_builder' ),
+					'luminosity'  => esc_html__( 'Luminosity', 'et_builder' ),
+				),
+				'default'         => 'normal',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
 			),
 			'text_orientation' => array(
 				'label'             => esc_html__( 'Text Orientation', 'et_builder' ),
@@ -16252,11 +17307,24 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 		$featured_placement = $this->shortcode_atts['featured_placement'];
 		$parallax_effect    = $this->shortcode_atts['parallax_effect'];
 		$parallax_method    = $this->shortcode_atts['parallax_method'];
+		$background_size    = $this->shortcode_atts['background_size'];
+		$background_position = $this->shortcode_atts['background_position'];
+		$background_repeat  = $this->shortcode_atts['background_repeat'];
+		$background_blend   = $this->shortcode_atts['background_blend'];
 		$text_orientation   = $this->shortcode_atts['text_orientation'];
 		$text_color         = $this->shortcode_atts['text_color'];
 		$text_background    = $this->shortcode_atts['text_background'];
 		$text_bg_color      = $this->shortcode_atts['text_bg_color'];
 		$module_bg_color    = $this->shortcode_atts['module_bg_color'];
+		$use_background_color_gradient              = $this->shortcode_atts['use_background_color_gradient'];
+		$background_color_gradient_type             = $this->shortcode_atts['background_color_gradient_type'];
+		$background_color_gradient_direction        = $this->shortcode_atts['background_color_gradient_direction'];
+		$background_color_gradient_direction_radial = $this->shortcode_atts['background_color_gradient_direction_radial'];
+		$background_color_gradient_start            = $this->shortcode_atts['background_color_gradient_start'];
+		$background_color_gradient_end              = $this->shortcode_atts['background_color_gradient_end'];
+		$background_color_gradient_start_position   = $this->shortcode_atts['background_color_gradient_start_position'];
+		$background_color_gradient_end_position     = $this->shortcode_atts['background_color_gradient_end_position'];
+		$background_images  = array();
 
 		// display the shortcode only on singlular pages
 		if ( ! is_singular() ) {
@@ -16301,25 +17369,97 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 			);
 		}
 
+		if ( 'on' === $use_background_color_gradient ) {
+			$has_background_gradient = true;
+
+			$background_images[] = $this->get_gradient( array(
+				'type'             => $background_color_gradient_type,
+				'direction'        => $background_color_gradient_direction,
+				'radial_direction' => $background_color_gradient_direction_radial,
+				'color_start'      => $background_color_gradient_start,
+				'color_end'        => $background_color_gradient_end,
+				'start_position'   => $background_color_gradient_start_position,
+				'end_position'     => $background_color_gradient_end_position,
+			) );
+		}
+
 		if ( 'on' === $featured_image && 'background' === $featured_placement ) {
 			$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
-
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => sprintf(
-					'%%order_class%% %1$s',
-					( 'on' === $parallax_effect ? '.et_parallax_bg' : '' )
-				),
-				'declaration' => sprintf(
-					'background-image: url("%1$s");',
-					esc_url( $featured_image_src[0] )
-				),
-			) );
 
 			if ( 'on' === $parallax_effect ) {
 				$parallax_background_contaier = sprintf( '<div class="et_parallax_bg%1$s"></div>',
 					'on' === $parallax_method ? ' et_pb_parallax_css' : ''
 				);
+
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '%%order_class%%.et_pb_featured_bg .et_parallax_bg',
+					'declaration' => sprintf(
+						'background-image: url("%1$s");',
+						esc_url( $featured_image_src[0] )
+					),
+				) );
+			} else {
+				$has_background_image = true;
+
+				$background_images[] = sprintf(
+					'url(%1$s)',
+					esc_url( $featured_image_src[0] )
+				);
+
+				if ( '' !== $background_size ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-size: %1$s;',
+							esc_html( $background_size )
+						),
+					) );
+				}
+
+				if ( '' !== $background_position ) {
+					$processed_position = str_replace( '_', ' ', $background_position );
+
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-position: %1$s;',
+							esc_html( $processed_position )
+						),
+					) );
+				}
+
+				if ( '' !== $background_repeat ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-repeat: %1$s;',
+							esc_html( $background_repeat )
+						),
+					) );
+				}
+
+				if ( '' !== $background_blend ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-blend-mode: %1$s;',
+							esc_html( $background_blend )
+						),
+					) );
+				}
 			}
+		}
+
+		if ( ! empty( $background_images ) ) {
+			$background_images = array_reverse( $background_images );
+
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => 'background' === $featured_placement ? '%%order_class%%.et_pb_featured_bg' : '%%order_class%%',
+				'declaration' => sprintf(
+					'background-image: %1$s;',
+					esc_html( join( ', ', $background_images ) )
+				),
+			) );
 		}
 
 		if ( 'on' === $text_background ) {
@@ -16340,20 +17480,31 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 			),
 		) );
 
+		$video_background = $this->video_background();
+
 		$background_layout = 'dark' === $text_color ? 'light' : 'dark';
 		$module_class .= ' et_pb_bg_layout_' . $background_layout;
 
-		ET_Builder_Element::set_style( $function_name, array(
-			'selector'    => '%%order_class%%',
-			'declaration' => sprintf(
-				'background-color: %1$s;',
-				esc_html( $module_bg_color )
-			),
-		) );
+		if ( ! isset ( $has_background_image, $has_background_gradient ) ) {
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%%',
+				'declaration' => sprintf(
+					'background-color: %1$s;',
+					esc_html( $module_bg_color )
+				),
+			) );
+		} else {
+			// Force background-color: initial
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%%',
+				'declaration' => 'background-color: initial;',
+			) );
+		}
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_post_title %2$s%4$s">
+			'<div%3$s class="et_pb_module et_pb_post_title %2$s%4$s%8$s">
 				%5$s
+				%9$s
 				%6$s
 				<div class="et_pb_title_container">
 					%1$s
@@ -16366,7 +17517,10 @@ class ET_Builder_Module_Post_Title extends ET_Builder_Module {
 			'on' === $featured_image && 'background' === $featured_placement ? ' et_pb_featured_bg' : '',
 			$parallax_background_contaier,
 			'on' === $featured_image && 'above' === $featured_placement ? $featured_image_output : '',
-			'on' === $featured_image && 'below' === $featured_placement ? $featured_image_output : ''
+			'on' === $featured_image && 'below' === $featured_placement ? $featured_image_output : '',
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background
+
 		);
 
 		return $output;
@@ -17622,11 +18776,15 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 			'button_one_url',
 			'button_two_text',
 			'button_two_url',
-			'background_url',
+			'background_image',
 			'background_color',
 			'background_overlay_color',
 			'parallax',
 			'parallax_method',
+			'background_size',
+			'background_position',
+			'background_repeat',
+			'background_blend',
 			'logo_image_url',
 			'logo_title',
 			'logo_alt_text',
@@ -17663,7 +18821,6 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'layout'      => esc_html__( 'Layout', 'et_builder' ),
-					'parallax'    => esc_html__( 'Parallax', 'et_builder' ),
 					'scroll_down' => esc_html__( 'Scroll Down Icon', 'et_builder' ),
 					'image'       => esc_html__( 'Image', 'et_builder' ),
 					'text'        => array(
@@ -17734,6 +18891,14 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 					'css'      => array(
 						'main' => "{$this->main_css_element} .et_pb_button_one.et_pb_button",
 					),
+				),
+			),
+			'background' => array(
+				'use_background_color'          => true,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
+				'css'                           => array(
+					'main' => '.et_pb_fullwidth_header%%order_class%%',
 				),
 			),
 		);
@@ -17886,21 +19051,21 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 			),
 			'title_font_color' => array(
 				'label'             => esc_html__( 'Title Font Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'title',
 			),
 			'subhead_font_color' => array(
 				'label'             => esc_html__( 'Subhead Font Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'subhead',
 			),
 			'content_font_color' => array(
 				'label'             => esc_html__( 'Content Font Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'content',
@@ -17957,53 +19122,10 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 				'description'     => esc_html__( 'Enter the URL for the Button.', 'et_builder' ),
 				'toggle_slug'     => 'links',
 			),
-			'background_url' => array(
-				'label'              => esc_html__( 'Background Image URL', 'et_builder' ),
-				'type'               => 'upload',
-				'option_category'    => 'basic_option',
-				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
-				'choose_text'        => esc_attr__( 'Choose an Image', 'et_builder' ),
-				'update_text'        => esc_attr__( 'Set As Image', 'et_builder' ),
-				'toggle_slug'        => 'background',
-				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to display.', 'et_builder' ),
-			),
-			'background_color' => array(
-				'label'             => esc_html__( 'Background Color', 'et_builder' ),
-				'type'              => 'color-alpha',
-				'toggle_slug'       => 'background',
-			),
 			'background_overlay_color' => array(
 				'label'             => esc_html__( 'Background Overlay Color', 'et_builder' ),
 				'type'              => 'color-alpha',
 				'toggle_slug'       => 'background',
-			),
-			'parallax' => array(
-				'label'           => esc_html__( 'Use Parallax effect', 'et_builder' ),
-				'type'            => 'yes_no_button',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off'  => esc_html__( 'No', 'et_builder' ),
-					'on' => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'affects'         => array(
-					'parallax_method',
-				),
-				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'parallax',
-				'description'     => esc_html__( 'If enabled, your background images will have a fixed position as your scroll, creating a fun parallax-like effect.', 'et_builder' ),
-			),
-			'parallax_method' => array(
-				'label'           => esc_html__( 'Parallax method', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off' => esc_html__( 'CSS', 'et_builder' ),
-					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
-				),
-				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
-				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
 			),
 			'logo_image_url' => array(
 				'label'              => esc_html__( 'Logo Image URL', 'et_builder' ),
@@ -18149,8 +19271,7 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 		$scroll_down_icon_size_tablet = $this->shortcode_atts['scroll_down_icon_size_tablet'];
 		$scroll_down_icon_size_phone  = $this->shortcode_atts['scroll_down_icon_size_phone'];
 		$scroll_down_icon_size_last_edited = $this->shortcode_atts['scroll_down_icon_size_last_edited'];
-		$background_url               = $this->shortcode_atts['background_url'];
-		$background_color             = $this->shortcode_atts['background_color'];
+		$background_image             = $this->shortcode_atts['background_image'];
 		$background_overlay_color     = $this->shortcode_atts['background_overlay_color'];
 		$parallax                     = $this->shortcode_atts['parallax'];
 		$parallax_method              = $this->shortcode_atts['parallax_method'];
@@ -18241,32 +19362,12 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 			et_pb_generate_responsive_css( $icon_size_values, '%%order_class%%.et_pb_fullwidth_header .et_pb_fullwidth_header_scroll a .et-pb-icon', 'font-size', $function_name );
 		}
 
-		if ( '' !== $background_color ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%.et_pb_fullwidth_header',
-				'declaration' => sprintf(
-					'background-color: %1$s;',
-					esc_html( $background_color )
-				),
-			) );
-		}
-
 		if ( '' !== $background_overlay_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
 				'selector'    => '%%order_class%%.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay',
 				'declaration' => sprintf(
 					'background-color: %1$s;',
 					esc_html( $background_overlay_color )
-				),
-			) );
-		}
-
-		if ( '' !== $background_url && 'off' === $parallax ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%.et_pb_fullwidth_header',
-				'declaration' => sprintf(
-					'background-image: url(%1$s);',
-					esc_url( $background_url )
 				),
 			) );
 		}
@@ -18297,6 +19398,8 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 				'' !== $custom_icon_2 && 'on' === $button_custom_2 ? ' et_pb_custom_button_icon' : ''
 			);
 		}
+
+		$video_background = $this->video_background();
 
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation}";
 
@@ -18355,8 +19458,9 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<section%9$s class="et_pb_fullwidth_header%1$s%7$s%8$s%10$s">
+			'<section%9$s class="et_pb_fullwidth_header%1$s%7$s%8$s%10$s%11$s">
 				%6$s
+				%12$s
 				<div class="et_pb_fullwidth_header_container%5$s">
 					%2$s
 					%3$s
@@ -18369,18 +19473,20 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 			( '' !== $header_image ? $header_image : '' ),
 			( 'off' !== $header_scroll_down ? $scroll_down_output : '' ),
 			( '' !== $text_orientation ? sprintf( ' %1$s', esc_attr( $text_orientation ) ) : '' ),
-			( '' !== $background_url && 'on' === $parallax
+			( '' !== $background_image && 'on' === $parallax
 				? sprintf(
 					'<div class="et_parallax_bg%2$s" style="background-image: url(%1$s);"></div>',
-					esc_attr( $background_url ),
+					esc_attr( $background_image ),
 					( 'off' === $parallax_method ? ' et_pb_parallax_css' : '' )
 				)
 				: ''
 			),
-			( '' !== $background_url && 'on' === $parallax ? ' et_pb_section_parallax' : '' ),
+			( '' !== $background_image && 'on' === $parallax ? ' et_pb_section_parallax' : '' ),
 			esc_attr( $class ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background
 		);
 
 		return $output;
@@ -18467,6 +19573,11 @@ class ET_Builder_Module_Fullwidth_Menu extends ET_Builder_Module {
 						),
 					),
 				),
+			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
 			),
 		);
 
@@ -18666,6 +19777,7 @@ class ET_Builder_Module_Fullwidth_Menu extends ET_Builder_Module {
 				),
 			),
 		);
+
 		return $fields;
 	}
 
@@ -18799,6 +19911,9 @@ class ET_Builder_Module_Fullwidth_Menu extends ET_Builder_Module {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout} et_pb_text_align_{$text_orientation} et_dropdown_animation_{$dropdown_menu_animation}{$fullwidth_menu}";
 
 		$menu = self::get_fullwidth_menu( array(
@@ -18880,7 +19995,9 @@ class ET_Builder_Module_Fullwidth_Menu extends ET_Builder_Module {
 		}
 
 		$output = sprintf(
-			'<div%4$s class="et_pb_fullwidth_menu%3$s%5$s"%2$s>
+			'<div%4$s class="et_pb_fullwidth_menu%3$s%5$s%6$s%8$s"%2$s>
+				%9$s
+				%7$s
 				<div class="et_pb_row clearfix">
 					%1$s
 					<div class="et_mobile_nav_menu">
@@ -18894,7 +20011,11 @@ class ET_Builder_Module_Fullwidth_Menu extends ET_Builder_Module {
 			$style,
 			esc_attr( $class ),
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -18948,8 +20069,8 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 			'parallax'                => array( 'off' ),
 			'parallax_method'         => array( 'off' ),
 			'remove_inner_shadow'     => array( 'off' ),
-			'background_position'     => array( 'default' ),
-			'background_size'         => array( 'default' ),
+			'background_position'     => array( 'center' ),
+			'background_size'         => array( 'cover' ),
 			'hide_content_on_mobile'  => array( 'off' ),
 			'hide_cta_on_mobile'      => array( 'off' ),
 			'show_image_video_mobile' => array( 'off' ),
@@ -18967,7 +20088,6 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'layout'    => esc_html__( 'Layout', 'et_builder' ),
-					'parallax'  => esc_html__( 'Parallax', 'et_builder' ),
 					'padding'  => array(
 						'title'    => esc_html__( 'Spacing', 'et_builder' ),
 						'priority' => 70,
@@ -19125,8 +20245,8 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 					'background_position',
 					'background_size',
 				),
-				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'parallax',
+				'tab_slug'        => 'general',
+				'toggle_slug'     => 'background',
 				'description'     => esc_html__( 'If enabled, your background images will have a fixed position as your scroll, creating a fun parallax-like effect.', 'et_builder' ),
 			),
 			'parallax_method' => array(
@@ -19138,8 +20258,8 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
 				),
 				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
 			),
 			'remove_inner_shadow' => array(
@@ -19158,16 +20278,17 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options'         => array(
-					'default'       => esc_html__( 'Default', 'et_builder' ),
 					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
 					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
 					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
-					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
 					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
+					'center'        => esc_html__( 'Center', 'et_builder' ),
+					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
 					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
 					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
 					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
 				),
+				'default'           => 'center',
 				'depends_show_if'   => 'off',
 				'toggle_slug'       => 'background',
 			),
@@ -19176,10 +20297,11 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 				'type'            => 'select',
 				'option_category' => 'layout',
 				'options'         => array(
-					'default' => esc_html__( 'Default', 'et_builder' ),
+					'cover'   => esc_html__( 'Cover', 'et_builder' ),
 					'contain' => esc_html__( 'Fit', 'et_builder' ),
 					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
 				),
+				'default'         => 'cover',
 				'depends_show_if' => 'off',
 				'toggle_slug'     => 'background',
 			),
@@ -19385,7 +20507,7 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 			et_pb_generate_responsive_css( $padding_values, '%%order_class%% .et_pb_slide_description', 'padding-bottom', $function_name );
 		}
 
-		if ( 'default' !== $background_position && 'off' === $parallax ) {
+		if ( '' !== $background_position && 'default' !== $background_position && 'off' === $parallax ) {
 			$processed_position = str_replace( '_', ' ', $background_position );
 
 			ET_Builder_Module::set_style( $function_name, array(
@@ -19397,7 +20519,7 @@ class ET_Builder_Module_Fullwidth_Slider extends ET_Builder_Module {
 			) );
 		}
 
-		if ( 'default' !== $background_size && 'off' === $parallax ) {
+		if ( '' !== $background_size && 'default' !== $background_size && 'off' === $parallax ) {
 			ET_Builder_Module::set_style( $function_name, array(
 				'selector'    => '%%order_class%% .et_pb_slide',
 				'declaration' => sprintf(
@@ -19669,7 +20791,7 @@ class ET_Builder_Module_Fullwidth_Portfolio extends ET_Builder_Module {
 			),
 			'zoom_icon_color' => array(
 				'label'             => esc_html__( 'Zoom Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'tab_slug'          => 'advanced',
 				'toggle_slug'       => 'overlay',
@@ -19733,6 +20855,9 @@ class ET_Builder_Module_Fullwidth_Portfolio extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'posts_number',
 					'include_categories',
+				),
+				'computed_minimum' => array(
+					'posts_number',
 				),
 			),
 		);
@@ -19933,10 +21058,15 @@ class ET_Builder_Module_Fullwidth_Portfolio extends ET_Builder_Module {
 
 		$posts = ob_get_clean();
 
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
+
 		$class = " et_pb_module et_pb_bg_layout_{$background_layout}";
 
 		$output = sprintf(
-			'<div%4$s class="et_pb_fullwidth_portfolio %1$s%3$s%5$s" data-auto-rotate="%6$s" data-auto-rotate-speed="%7$s">
+			'<div%4$s class="et_pb_fullwidth_portfolio %1$s%3$s%5$s%9$s%11$s" data-auto-rotate="%6$s" data-auto-rotate-speed="%7$s">
+				%12$s
+				%10$s
 				%8$s
 				<div class="et_pb_portfolio_items clearfix" data-portfolio-columns="">
 					%2$s
@@ -19949,7 +21079,11 @@ class ET_Builder_Module_Fullwidth_Portfolio extends ET_Builder_Module {
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 			( '' !== $auto && in_array( $auto, array('on', 'off') ) ? esc_attr( $auto ) : 'off' ),
 			( '' !== $auto_speed && is_numeric( $auto_speed ) ? esc_attr( $auto_speed ) : '7000' ),
-			( '' !== $title ? sprintf( '<h2>%s</h2>', esc_html( $title ) ) : '' )
+			( '' !== $title ? sprintf( '<h2>%s</h2>', esc_html( $title ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		return $output;
@@ -20586,7 +21720,7 @@ class ET_Builder_Module_Fullwidth_Image extends ET_Builder_Module {
 			),
 			'overlay_icon_color' => array(
 				'label'             => esc_html__( 'Overlay Icon Color', 'et_builder' ),
-				'type'              => 'color',
+				'type'              => 'color-alpha',
 				'custom_color'      => true,
 				'depends_show_if'   => 'on',
 				'tab_slug'          => 'advanced',
@@ -20785,6 +21919,10 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 			'featured_placement',
 			'parallax_effect',
 			'parallax_method',
+			'background_size',
+			'background_position',
+			'background_repeat',
+			'background_blend',
 			'text_orientation',
 			'text_color',
 			'text_background',
@@ -20824,7 +21962,6 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'parallax'   => esc_html__( 'Parallax', 'et_builder' ),
 					'text'       => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
 						'priority' => 49,
@@ -20860,6 +21997,11 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 						'plugin_main' => "{$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container, {$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container a, {$this->main_css_element} .et_pb_title_container .et_pb_title_meta_container span",
 					),
 				),
+			),
+			'background' => array(
+				'use_background_color'          => false,
+				'use_background_color_gradient' => true,
+				'use_background_image'          => false,
 			),
 		);
 	}
@@ -20994,9 +22136,13 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 				'depends_show_if'   => 'background',
 				'affects'           => array(
 					'parallax_method',
+					'background_size',
+					'background_position',
+					'background_repeat',
+					'background_blend',
 				),
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Here you can choose whether or not use parallax effect for the featured image', 'et_builder' ),
 			),
 			'parallax_method' => array(
@@ -21008,9 +22154,83 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 					'off' => esc_html__( 'True Parallax', 'et_builder' ),
 				),
 				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
+				'tab_slug'          => 'general',
+				'toggle_slug'       => 'background',
 				'description'       => esc_html__( 'Here you can choose which parallax method to use for the featured image', 'et_builder' ),
+			),
+			'background_size' => array(
+				'label'           => esc_html__( 'Background Image Size', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options'         => array(
+					'cover'   => esc_html__( 'Cover', 'et_builder' ),
+					'contain' => esc_html__( 'Fit', 'et_builder' ),
+					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
+				),
+				'default'           => 'cover',
+				'depends_show_if'   => 'off',
+				'toggle_slug'       => 'background',
+			),
+			'background_position' => array(
+				'label'           => esc_html__( 'Background Image Position', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
+					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
+					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
+					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
+					'center'        => esc_html__( 'Center', 'et_builder' ),
+					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
+					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
+					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
+					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
+				),
+				'default'           => 'center',
+				'depends_show_if'   => 'off',
+				'toggle_slug'       => 'background',
+			),
+			'background_repeat' => array(
+				'label'           => esc_html__( 'Background Image Repeat', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'repeat'      => esc_html__( 'Repeat', 'et_builder' ),
+					'repeat-x'    => esc_html__( 'Repeat X (horizontal)', 'et_builder' ),
+					'repeat-y'    => esc_html__( 'Repeat Y (vertical)', 'et_builder' ),
+					'space'       => esc_html__( 'Space', 'et_builder' ),
+					'round'       => esc_html__( 'Round', 'et_builder' ),
+					'no-repeat'   => esc_html__( 'No Repeat', 'et_builder' ),
+				),
+				'default'         => 'no-repeat',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
+			),
+			'background_blend' => array(
+				'label'           => esc_html__( 'Background Image Blend', 'et_builder' ),
+				'type'            => 'select',
+				'option_category' => 'layout',
+				'options' => array(
+					'normal'      => esc_html__( 'Normal', 'et_builder' ),
+					'multiply'    => esc_html__( 'Multiply', 'et_builder' ),
+					'screen'      => esc_html__( 'Screen', 'et_builder' ),
+					'overlay'     => esc_html__( 'Overlay', 'et_builder' ),
+					'darken'      => esc_html__( 'Darken', 'et_builder' ),
+					'lighten'     => esc_html__( 'Lighten', 'et_builder' ),
+					'color-dodge' => esc_html__( 'Color Dodge', 'et_builder' ),
+					'color-burn'  => esc_html__( 'Color Burn', 'et_builder' ),
+					'hard-light'  => esc_html__( 'Hard Light', 'et_builder' ),
+					'soft-light'  => esc_html__( 'Soft Light', 'et_builder' ),
+					'difference'  => esc_html__( 'Difference', 'et_builder' ),
+					'exclusion'   => esc_html__( 'Exclusion', 'et_builder' ),
+					'hue'         => esc_html__( 'Hue', 'et_builder' ),
+					'saturation'  => esc_html__( 'Saturation', 'et_builder' ),
+					'color'       => esc_html__( 'Color', 'et_builder' ),
+					'luminosity'  => esc_html__( 'Luminosity', 'et_builder' ),
+				),
+				'default'         => 'normal',
+				'depends_show_if' => 'off',
+				'toggle_slug'     => 'background',
 			),
 			'text_orientation' => array(
 				'label'             => esc_html__( 'Text Orientation', 'et_builder' ),
@@ -21120,11 +22340,24 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 		$featured_placement = $this->shortcode_atts['featured_placement'];
 		$parallax_effect    = $this->shortcode_atts['parallax_effect'];
 		$parallax_method    = $this->shortcode_atts['parallax_method'];
+		$background_size    = $this->shortcode_atts['background_size'];
+		$background_position = $this->shortcode_atts['background_position'];
+		$background_repeat  = $this->shortcode_atts['background_repeat'];
+		$background_blend   = $this->shortcode_atts['background_blend'];
 		$text_orientation   = $this->shortcode_atts['text_orientation'];
 		$text_color         = $this->shortcode_atts['text_color'];
 		$text_background    = $this->shortcode_atts['text_background'];
 		$text_bg_color      = $this->shortcode_atts['text_bg_color'];
 		$module_bg_color    = $this->shortcode_atts['module_bg_color'];
+		$use_background_color_gradient              = $this->shortcode_atts['use_background_color_gradient'];
+		$background_color_gradient_type             = $this->shortcode_atts['background_color_gradient_type'];
+		$background_color_gradient_direction        = $this->shortcode_atts['background_color_gradient_direction'];
+		$background_color_gradient_direction_radial = $this->shortcode_atts['background_color_gradient_direction_radial'];
+		$background_color_gradient_start            = $this->shortcode_atts['background_color_gradient_start'];
+		$background_color_gradient_end              = $this->shortcode_atts['background_color_gradient_end'];
+		$background_color_gradient_start_position   = $this->shortcode_atts['background_color_gradient_start_position'];
+		$background_color_gradient_end_position     = $this->shortcode_atts['background_color_gradient_end_position'];
+		$background_images  = array();
 
 		// display the shortcode only on singlular pages
 		if ( ! is_singular() ) {
@@ -21168,25 +22401,97 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 			);
 		}
 
+		if ( 'on' === $use_background_color_gradient ) {
+			$has_background_gradient = true;
+
+			$background_images[] = $this->get_gradient( array(
+				'type'             => $background_color_gradient_type,
+				'direction'        => $background_color_gradient_direction,
+				'radial_direction' => $background_color_gradient_direction_radial,
+				'color_start'      => $background_color_gradient_start,
+				'color_end'        => $background_color_gradient_end,
+				'start_position'   => $background_color_gradient_start_position,
+				'end_position'     => $background_color_gradient_end_position,
+			) );
+		}
+
 		if ( 'on' === $featured_image && 'background' === $featured_placement ) {
 			$featured_image_src = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
-
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => sprintf(
-					'%%order_class%% %1$s',
-					( 'on' === $parallax_effect ? '.et_parallax_bg' : '' )
-				),
-				'declaration' => sprintf(
-					'background-image: url("%1$s");',
-					esc_url( $featured_image_src[0] )
-				),
-			) );
 
 			if ( 'on' === $parallax_effect ) {
 				$parallax_background_contaier = sprintf( '<div class="et_parallax_bg%1$s"></div>',
 					'on' === $parallax_method ? ' et_pb_parallax_css' : ''
 				);
+
+				ET_Builder_Element::set_style( $function_name, array(
+					'selector'    => '%%order_class%%.et_pb_featured_bg .et_parallax_bg',
+					'declaration' => sprintf(
+						'background-image: url("%1$s");',
+						esc_url( $featured_image_src[0] )
+					),
+				) );
+			} else {
+				$has_background_image = true;
+
+				$background_images[] = sprintf(
+					'url(%1$s)',
+					esc_url( $featured_image_src[0] )
+				);
+
+				if ( '' !== $background_size ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-size: %1$s;',
+							esc_html( $background_size )
+						),
+					) );
+				}
+
+				if ( '' !== $background_position && 'default' !== $background_position ) {
+					$processed_position = str_replace( '_', ' ', $background_position );
+
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-position: %1$s;',
+							esc_html( $processed_position )
+						),
+					) );
+				}
+
+				if ( '' !== $background_repeat ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-repeat: %1$s;',
+							esc_html( $background_repeat )
+						),
+					) );
+				}
+
+				if ( '' !== $background_blend ) {
+					ET_Builder_Element::set_style( $function_name, array(
+						'selector'    => '%%order_class%%.et_pb_featured_bg',
+						'declaration' => sprintf(
+							'background-blend-mode: %1$s;',
+							esc_html( $background_blend )
+						),
+					) );
+				}
 			}
+		}
+
+		if ( ! empty( $background_images ) ) {
+			$background_images = array_reverse( $background_images );
+
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => 'background' === $featured_placement ? '%%order_class%%.et_pb_featured_bg' : '%%order_class%%',
+				'declaration' => sprintf(
+					'background-image: %1$s;',
+					esc_html( join( ', ', $background_images ) )
+				),
+			) );
 		}
 
 		if ( 'on' === $text_background ) {
@@ -21207,23 +22512,35 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 			),
 		) );
 
+		$video_background = $this->video_background();
+
 		$background_layout = 'dark' === $text_color ? 'light' : 'dark';
 		$module_class .= ' et_pb_bg_layout_' . $background_layout;
 
 		$module_class .= 'above' === $featured_placement ? ' et_pb_image_above' : '';
 		$module_class .= 'below' === $featured_placement ? ' et_pb_image_below' : '';
 
-		ET_Builder_Element::set_style( $function_name, array(
-			'selector'    => '%%order_class%%',
-			'declaration' => sprintf(
-				'background-color: %1$s;',
-				esc_html( $module_bg_color )
-			),
-		) );
+		if ( ! isset ( $has_background_gradient, $has_background_image ) ) {
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%%',
+				'declaration' => sprintf(
+					'background-color: %1$s;',
+					esc_html( $module_bg_color )
+				),
+			) );
+		} else {
+			// Force background-color: initial
+			ET_Builder_Element::set_style( $function_name, array(
+				'selector'    => '%%order_class%%',
+				'declaration' => 'background-color: initial;',
+			) );
+		}
+
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_post_title %2$s%4$s">
+			'<div%3$s class="et_pb_module et_pb_post_title %2$s%4$s%8$s">
 				%5$s
+				%9$s
 				%6$s
 				<div class="et_pb_title_container">
 					%1$s
@@ -21236,7 +22553,9 @@ class ET_Builder_Module_Fullwidth_Post_Title extends ET_Builder_Module {
 			'on' === $featured_image && 'background' === $featured_placement ? ' et_pb_featured_bg' : '',
 			$parallax_background_contaier,
 			'on' === $featured_image && 'above' === $featured_placement ? $featured_image_output : '',
-			'on' === $featured_image && 'below' === $featured_placement ? $featured_image_output : ''
+			'on' === $featured_image && 'below' === $featured_placement ? $featured_image_output : '',
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background
 		);
 
 		return $output;
@@ -21311,8 +22630,8 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 			'parallax'                => array( 'off' ),
 			'parallax_method'         => array( 'off' ),
 			'remove_inner_shadow'     => array( 'off' ),
-			'background_position'     => array( 'default' ),
-			'background_size'         => array( 'default' ),
+			'background_position'     => array( 'center' ),
+			'background_size'         => array( 'cover' ),
 			'hide_content_on_mobile'  => array( 'off' ),
 			'hide_cta_on_mobile'      => array( 'off' ),
 			'show_image_video_mobile' => array( 'off' ),
@@ -21343,7 +22662,6 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 				'toggles' => array(
 					'layout'     => esc_html__( 'Layout', 'et_builder' ),
 					'overlay'    => esc_html__( 'Overlay', 'et_builder' ),
-					'parallax'   => esc_html__( 'Parallax', 'et_builder' ),
 					'navigation' => esc_html__( 'Navigation', 'et_builder' ),
 					'text'       => array(
 						'title'    => esc_html__( 'Text', 'et_builder' ),
@@ -21406,6 +22724,14 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 					'css' => array(
 						'plugin_main' => "{$this->main_css_element} .et_pb_more_button.et_pb_button",
 					),
+				),
+			),
+			'background' => array(
+				'use_background_color'          => true,
+				'use_background_image'          => true,
+				'use_background_color_gradient' => true,
+				'css' => array(
+					'main' => '%%order_class%%, %%order_class%%.et_pb_bg_layout_dark, %%order_class%%.et_pb_bg_layout_light',
 				),
 			),
 		);
@@ -21718,23 +23044,6 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 				'toggle_slug'     => 'elements',
 				'description'     => esc_html__( 'This setting will turn on and off the meta section.', 'et_builder' ),
 			),
-			'background_color' => array(
-				'label'        => esc_html__( 'Background Color', 'et_builder' ),
-				'type'         => 'color-alpha',
-				'custom_color' => true,
-				'toggle_slug'  => 'background',
-				'description'  => esc_html__( 'Use the color picker to choose a background color for this module.', 'et_builder' ),
-			),
-			'background_image' => array(
-				'label'              => esc_html__( 'Background Image', 'et_builder' ),
-				'type'               => 'upload',
-				'option_category'    => 'basic_option',
-				'upload_button_text' => esc_attr__( 'Upload an image', 'et_builder' ),
-				'choose_text'        => esc_attr__( 'Choose a Background', 'et_builder' ),
-				'update_text'        => esc_attr__( 'Set As Background', 'et_builder' ),
-				'toggle_slug'        => 'background',
-				'description'        => esc_html__( 'Upload your desired image, or type in the URL to the image you would like to use as the background for the slider.', 'et_builder' ),
-			),
 			'background_layout' => array(
 				'label'           => esc_html__( 'Text Color', 'et_builder' ),
 				'type'            => 'select',
@@ -21773,42 +23082,8 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 					'bottom'     => esc_html__( 'Bottom', 'et_builder' ),
 				),
 				'depends_show_if'   => 'on',
-				'affects' => array(
-					'parallax',
-				),
 				'toggle_slug'       => 'featured_image',
 				'description'       => esc_html__( 'Select how you would like to display the featured image in slides', 'et_builder' ),
-			),
-			'parallax' => array(
-				'label'           => esc_html__( 'Use Parallax effect', 'et_builder' ),
-				'type'            => 'yes_no_button',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off' => esc_html__( 'No', 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'affects'           => array(
-					'parallax_method',
-					'background_position',
-					'background_size',
-				),
-				'depends_show_if'    => 'background',
-				'tab_slug'           => 'advanced',
-				'toggle_slug'        => 'parallax',
-				'description'        => esc_html__( 'Enabling this option will give your background images a fixed position as you scroll.', 'et_builder' ),
-			),
-			'parallax_method' => array(
-				'label'           => esc_html__( 'Parallax method', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'configuration',
-				'options'         => array(
-					'off' => esc_html__( 'CSS', 'et_builder' ),
-					'on'  => esc_html__( 'True Parallax', 'et_builder' ),
-				),
-				'depends_show_if'   => 'on',
-				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'parallax',
-				'description'       => esc_html__( 'Define the method, used for the parallax effect.', 'et_builder' ),
 			),
 			'use_bg_overlay'      => array(
 				'label'           => esc_html__( 'Use Background Overlay', 'et_builder' ),
@@ -21869,36 +23144,6 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 				),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'layout',
-			),
-			'background_position' => array(
-				'label'           => esc_html__( 'Background Image Position', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'layout',
-				'options' => array(
-					'default'       => esc_html__( 'Default', 'et_builder' ),
-					'top_left'      => esc_html__( 'Top Left', 'et_builder' ),
-					'top_center'    => esc_html__( 'Top Center', 'et_builder' ),
-					'top_right'     => esc_html__( 'Top Right', 'et_builder' ),
-					'center_right'  => esc_html__( 'Center Right', 'et_builder' ),
-					'center_left'   => esc_html__( 'Center Left', 'et_builder' ),
-					'bottom_left'   => esc_html__( 'Bottom Left', 'et_builder' ),
-					'bottom_center' => esc_html__( 'Bottom Center', 'et_builder' ),
-					'bottom_right'  => esc_html__( 'Bottom Right', 'et_builder' ),
-				),
-				'depends_show_if'   => 'off',
-				'toggle_slug'       => 'background',
-			),
-			'background_size' => array(
-				'label'           => esc_html__( 'Background Image Size', 'et_builder' ),
-				'type'            => 'select',
-				'option_category' => 'layout',
-				'options'         => array(
-					'default' => esc_html__( 'Default', 'et_builder' ),
-					'contain' => esc_html__( 'Fit', 'et_builder' ),
-					'initial' => esc_html__( 'Actual Size', 'et_builder' ),
-				),
-				'depends_show_if' => 'off',
-				'toggle_slug'     => 'background',
 			),
 			'auto' => array(
 				'label'           => esc_html__( 'Automatic Animation', 'et_builder' ),
@@ -22005,14 +23250,14 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 			),
 			'arrows_custom_color' => array(
 				'label'        => esc_html__( 'Arrows Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
 			),
 			'dot_nav_custom_color' => array(
 				'label'        => esc_html__( 'Dot Nav Custom Color', 'et_builder' ),
-				'type'         => 'color',
+				'type'         => 'color-alpha',
 				'custom_color' => true,
 				'tab_slug'     => 'advanced',
 				'toggle_slug'  => 'navigation',
@@ -22094,6 +23339,9 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 					'use_manual_excerpt',
 					'excerpt_length',
 				),
+				'computed_minimum' => array(
+					'posts_number',
+				),
 			),
 		);
 
@@ -22137,6 +23385,8 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 		$image_placement         = $this->shortcode_atts['image_placement'];
 		$background_image        = $this->shortcode_atts['background_image'];
 		$background_layout       = $this->shortcode_atts['background_layout'];
+		$background_repeat       = $this->shortcode_atts['background_repeat'];
+		$background_blend        = $this->shortcode_atts['background_blend'];
 		$use_bg_overlay          = $this->shortcode_atts['use_bg_overlay'];
 		$bg_overlay_color        = $this->shortcode_atts['bg_overlay_color'];
 		$use_text_overlay        = $this->shortcode_atts['use_text_overlay'];
@@ -22194,61 +23444,68 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 			) );
 		}
 
-		if ( 'default' !== $background_position && 'off' === $parallax ) {
-			$processed_position = str_replace( '_', ' ', $background_position );
-
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .et_pb_slide',
-				'declaration' => sprintf(
-					'background-position: %1$s;',
-					esc_html( $processed_position )
-				),
-			) );
-		}
-
-		if ( 'default' !== $background_size && 'off' === $parallax ) {
-			ET_Builder_Module::set_style( $function_name, array(
-				'selector'    => '%%order_class%% .et_pb_slide',
-				'declaration' => sprintf(
-					'-moz-background-size: %1$s;
-					-webkit-background-size: %1$s;
-					background-size: %1$s;',
-					esc_html( $background_size )
-				),
-			) );
-
-
-			if ( 'initial' === $background_size ) {
+		// Applying backround-related style to slide item since advanced_option only targets module wrapper
+		if ( 'on' === $this->shortcode_atts['show_image'] && 'background' === $this->shortcode_atts['image_placement'] && 'off' === $parallax ) {
+			if ('' !== $background_color) {
 				ET_Builder_Module::set_style( $function_name, array(
-					'selector'    => 'body.ie %%order_class%% .et_pb_slide',
+					'selector'    => '%%order_class%% .et_pb_slide:not(.et_pb_slide_with_no_image)',
+					'declaration' => sprintf(
+						'background-color: %1$s;',
+						esc_html( $background_color )
+					),
+				) );
+			}
+
+			if ( '' !== $background_size && 'default' !== $background_size ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
 					'declaration' => sprintf(
 						'-moz-background-size: %1$s;
 						-webkit-background-size: %1$s;
 						background-size: %1$s;',
-						'auto'
+						esc_html( $background_size )
+					),
+				) );
+
+				if ( 'initial' === $background_size ) {
+					ET_Builder_Module::set_style( $function_name, array(
+						'selector'    => 'body.ie %%order_class%% .et_pb_slide',
+						'declaration' => '-moz-background-size: auto; -webkit-background-size: auto; background-size: auto;',
+					) );
+				}
+			}
+
+			if ( '' !== $background_position && 'default' !== $background_position ) {
+				$processed_position = str_replace( '_', ' ', $background_position );
+
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-position: %1$s;',
+						esc_html( $processed_position )
 					),
 				) );
 			}
-		}
 
-		if ( '' !== $background_color ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%.et_pb_post_slider',
-				'declaration' => sprintf(
-					'background-color: %1$s;',
-					esc_html( $background_color )
-				),
-			) );
-		}
+			if ( '' !== $background_repeat ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-repeat: %1$s;',
+						esc_html( $background_repeat )
+					),
+				) );
+			}
 
-		if ( '' !== $background_image ) {
-			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%, %%order_class%%.et_pb_bg_layout_dark, %%order_class%%.et_pb_bg_layout_light',
-				'declaration' => sprintf(
-					'background-image: url(%1$s);',
-					esc_url( $background_image )
-				),
-			) );
+			if ( '' !== $background_blend ) {
+				ET_Builder_Module::set_style( $function_name, array(
+					'selector'    => '%%order_class%% .et_pb_slide',
+					'declaration' => sprintf(
+						'background-blend-mode: %1$s;',
+						esc_html( $background_blend )
+					),
+				) );
+			}
 		}
 
 		if ( 'on' === $use_bg_overlay && '' !== $bg_overlay_color ) {
@@ -22313,6 +23570,9 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 		$class .= ' et_pb_post_slider_image_' . $image_placement;
 		$class .= 'on' === $use_bg_overlay ? ' et_pb_slider_with_overlay' : '';
 		$class .= 'on' === $use_text_overlay ? ' et_pb_slider_with_text_overlay' : '';
+
+		$video_background = $this->video_background();
+		$parallax_image_background = $this->get_parallax_image_background();
 
 		$data_dot_nav_custom_color = '' !== $dot_nav_custom_color
 			? sprintf( ' data-dots_color="%1$s"', esc_attr( $dot_nav_custom_color ) )
@@ -22409,7 +23669,9 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 		ob_end_clean();
 
 		$output = sprintf(
-			'<div%3$s class="et_pb_module et_pb_slider et_pb_post_slider%1$s%4$s">
+			'<div%3$s class="et_pb_module et_pb_slider et_pb_post_slider%1$s%4$s%5$s%7$s">
+				%8$s
+				%6$s
 				<div class="et_pb_slides">
 					%2$s
 				</div> <!-- .et_pb_slides -->
@@ -22418,7 +23680,11 @@ class ET_Builder_Module_Fullwidth_Post_Slider extends ET_Builder_Module {
 			$class,
 			$content,
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' )
+			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
+			$video_background,
+			'' !== $parallax_image_background ? ' et_pb_section_parallax' : '',
+			$parallax_image_background
 		);
 
 		// Restore $wp_filter

@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ET_BUILDER_PRODUCT_VERSION' ) ) {
 	// Note, when this is updated, you must also update corresponding version in builder.js: `window.et_builder_version`
-	define( 'ET_BUILDER_PRODUCT_VERSION', '3.0.47' );
+	define( 'ET_BUILDER_PRODUCT_VERSION', '3.0.51' );
 }
 
 if ( ! defined( 'ET_BUILDER_VERSION' ) ) {
@@ -988,10 +988,11 @@ function et_fb_ajax_save() {
 	if ( $update ) {
 		// Get saved post, verify its content against the one that is being sent
 		$saved_post = get_post( $update );
+		$saved_verification = $saved_post->post_content === stripslashes( et_fb_process_to_shortcode( $shortcode_data, $_POST['options'], $layout_type ) );
 
 		wp_send_json_success( array(
 			'status'            => get_post_status( $update ),
-			'save_verification' => $saved_post->post_content === stripslashes( et_fb_process_to_shortcode( $shortcode_data, $_POST['options'], $layout_type ) ),
+			'save_verification' => apply_filters( 'et_fb_ajax_save_verification_result', $saved_verification ),
 		) );
 	} else {
 		wp_send_json_error();
@@ -1700,8 +1701,18 @@ function et_builder_maybe_ensure_heartbeat_script() {
 		wp_enqueue_script( 'autosave', $autosave_src, array( 'heartbeat' ), false, true );
 	}
 }
+
+// Enqueue dashicons in front-end if they are not enqueued (that happens when not logged in as admin)
+function et_builder_maybe_enqueue_dashicons() {
+	if ( wp_style_is( 'dashicons' ) ) {
+		return;
+	}
+
+	wp_enqueue_style( 'dashicons' );
+}
 add_action( 'admin_print_scripts-post-new.php', 'et_builder_maybe_ensure_heartbeat_script', 9 );
 add_action( 'admin_print_scripts-post.php', 'et_builder_maybe_ensure_heartbeat_script', 9 );
+add_action( 'wp_enqueue_scripts', 'et_builder_maybe_enqueue_dashicons', 19 );
 add_action( 'wp_footer', 'et_builder_maybe_ensure_heartbeat_script', 19 );
 
 function et_builder_set_post_type( $post_type = '' ) {
@@ -2197,23 +2208,24 @@ if ( ! function_exists( 'et_pb_add_builder_page_js_css' ) ) :
 function et_pb_add_builder_page_js_css(){
 	global $typenow, $post;
 
-	if ( et_is_yoast_seo_plugin_active() ) {
-		// Get list of shortcodes that causes issue if being triggered in admin
-		$conflicting_shortcodes = et_pb_admin_excluded_shortcodes();
 
-		if ( ! empty( $conflicting_shortcodes ) ) {
-			foreach ( $conflicting_shortcodes as $shortcode ) {
-				remove_shortcode( $shortcode );
-			}
+	// BEGIN Process shortcodes (for module settings migrations and Yoast SEO compatibility)
+	// Get list of shortcodes that causes issue if being triggered in admin
+	$conflicting_shortcodes = et_pb_admin_excluded_shortcodes();
+
+	if ( ! empty( $conflicting_shortcodes ) ) {
+		foreach ( $conflicting_shortcodes as $shortcode ) {
+			remove_shortcode( $shortcode );
 		}
-
-		// save the original content of $post variable
-		$post_original = $post;
-		// get the content for yoast
-		$post_content_processed = do_shortcode( $post->post_content );
-		// set the $post to the original content to make sure it wasn't changed by do_shortcode()
-		$post = $post_original;
 	}
+
+	// save the original content of $post variable
+	$post_original = $post;
+	// get the content for yoast
+	$post_content_processed = do_shortcode( $post->post_content );
+	// set the $post to the original content to make sure it wasn't changed by do_shortcode()
+	$post = $post_original;
+	// END Process shortcodes
 
 	$is_global_template = '';
 	$post_id = '';
@@ -2388,6 +2400,7 @@ function et_pb_add_builder_page_js_css(){
 		'et_builder_email_fetch_lists_nonce'       => wp_create_nonce( 'et_builder_email_fetch_lists_nonce' ),
 		'et_builder_email_add_account_nonce'       => wp_create_nonce( 'et_builder_email_add_account_nonce' ),
 		'et_builder_email_remove_account_nonce'    => wp_create_nonce( 'et_builder_email_remove_account_nonce' ),
+		'et_pb_module_settings_migrations'         => ET_Builder_Module_Settings_Migration::$migrated,
 	), et_pb_history_localization() ) ) );
 
 	wp_localize_script( 'et_pb_admin_js', 'et_pb_ab_js_options', apply_filters( 'et_pb_ab_js_options', array(
@@ -2791,6 +2804,18 @@ if ( ! function_exists( 'et_pb_extract_shortcode_content' ) ) {
 			$content = substr( $content, $start, $end - $start );
 		} else {
 			$content = (bool) false;
+		}
+
+		return $content;
+	}
+}
+
+if ( ! function_exists( 'et_pb_remove_shortcode_content' ) ) {
+	function et_pb_remove_shortcode_content( $content, $shortcode_name ) {
+		$shortcode_content = et_pb_extract_shortcode_content( $content, $shortcode_name );
+
+		if ( $shortcode_content ) {
+			return str_replace( $shortcode_content, '', $content );
 		}
 
 		return $content;
@@ -7179,5 +7204,84 @@ function et_pb_get_value_unit( $value ) {
 	}
 
 	return 'px';
+}
+endif;
+
+/**
+ * Sanitized value and its unit
+ * @param mixed
+ * @param string
+ * @param string|bool
+ *
+ * @return string sanitized input and its unit
+ */
+if ( ! function_exists( 'et_sanitize_input_unit' ) ) :
+function et_sanitize_input_unit( $value = '', $auto_important = false, $default_unit = false ) {
+	$value                   = (string) $value;
+	$valid_one_char_units    = array( '%' );
+	$valid_two_chars_units   = array( 'em', 'px', 'cm', 'mm', 'in', 'pt', 'pc', 'ex', 'vh', 'vw' );
+	$valid_three_chars_units = array( 'deg' );
+	$important               = '!important';
+	$important_length        = strlen( $important );
+	$has_important           = false;
+	$value_length            = strlen( $value );
+	$unit_value;
+
+	// Check for important
+	if ( substr( $value, ( 0 - $important_length ), $important_length ) === $important ) {
+		$has_important = true;
+		$value_length = $value_length - $important_length;
+		$value = trim( substr( $value, 0, $value_length ) );
+	}
+
+	if ( in_array( substr( $value, -1, 1 ), $valid_one_char_units ) ) {
+		$unit_value = floatval( $value ) . '%';
+
+		// Re-add !important tag
+		if ( $has_important && ! $auto_important ) {
+			$unit_value = $unit_value . ' ' . $important;
+		}
+
+		return $unit_value;
+	}
+
+	if ( in_array( substr( $value, -2, 2 ), $valid_two_chars_units ) ) {
+		$unit_value = floatval( $value ) . substr( $value, -2, 2 );
+
+		// Re-add !important tag
+		if ( $has_important && ! $auto_important ) {
+			$unit_value = $unit_value . ' ' . $important;
+		}
+
+		return $unit_value;
+	}
+
+	if ( in_array( substr( $value, -3, 3 ), $valid_three_chars_units ) ) {
+		$unit_value = floatval( $value ) . substr( $value, -3, 3 );
+
+		// Re-add !important tag
+		if ( $has_important && ! $auto_important ) {
+			$unit_value = $unit_value . ' ' . $important;
+		}
+
+		return $unit_value;
+	}
+
+	$result = floatval( $value );
+
+	if ( 'no_default_unit' === $default_unit ) {
+		return $result;
+	}
+
+	if ( $default_unit ) {
+		return $result . $default_unit;
+	}
+
+	if ( ! $default_unit ) {
+		$result .= 'px';
+	}
+
+	// Return and automatically append px (default value)
+	return $result;
 }
 endif;

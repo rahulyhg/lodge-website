@@ -1,3 +1,66 @@
+version 2.0.50 ( updated 6-7-2017 )
+- Introduced the new contact form module. 
+- Added new field types to the contact form module, including checkboxes, radio buttons and select dropdowns. 
+- Add field validation rules to the contact form module inputs. 
+- Added a comprehensive conditional logic system to the contact form module. 
+- Added the ability to customize the contact form module submit button text. 
+- Fixed a bug with fullwidth slider background repeat value migration.
+- Fixed a compatibility issue with the WP Ofload S3 plugin.
+- Fixed a bug that prevented the deletion or duplication of modules within global sections in some situations. 
+- Added background options to inner rows within specialty sections.
+	* includes/builder/scripts/builder.js
+	* includes/builder/main-modules.php
+	* includes/builder/styles/frontend-builder-style.css
+	* includes/builder/functions.php
+	* includes/builder/main-structure-elements.php
+	* includes/builder/plugin-compat/amazon-s3-and-cloudfront-pro.php
+	* includes/builder/plugin-compat/amazon-s3-and-cloudfront.php
+	* includes/builder/class-et-builder-element.php
+	* includes/builder/frontend-builder/helpers.php
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+
+version 2.0.49 ( updated 6-2-2017 )
+- Fixed a browser compatibility issue with IE 11 and the new background options UI.
+- Fixed a bug that prevented hover-ability in the Visual Builder after having just activated draggable padding on a row or section.
+- Fixed a bug that caused the background image preview in the new background UI to not update after applying a new background image for the fullwidth header module in the backend builder.
+- Added back missing divider module color option and made the option conditional on the "show divider" option being enabled.
+	* includes/builder/scripts/builder.js
+	* includes/builder/main-modules.php
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+
+version 2.0.48 ( updated 5-31-2017 )
+- Improved compatibility with PHP 5.2 and below and fixed a fatal error the occurred on these old systems.
+- Fixed a bug that caused the countdown timer module title element to render in the Visual Builder even when the field was left blank.
+- Updated TinyMCE to the latest version which resolved some JavaScript errors in IE 11.
+- Fixed a bug that caused some dropdown menus to not be clickable in IE 11 in the Visual Builder.
+	* includes/builder/class-et-builder-element.php
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+
+version 2.0.47 ( updated 5-31-2017 )
+- Added new Background Options Interface to the Divi Builder. 
+- Added Gradient Background options to supported modules, sections and rows. 
+- Added new background image options for background size, background repeat and background position. 
+- Updated the color picker in the Visual Builder.
+- Added options migration system that will allow us to add new default options and change default options for Divi Builder modules without causing changes in legacy layouts.
+	* includes/builder/class-et-builder-element.php
+	* includes/builder/class-et-global-settings.php
+	* includes/builder/functions.php
+	* includes/builder/main-modules.php
+	* includes/builder/main-structure-elements.php
+	* includes/builder/module/settings/Migration.php
+	* includes/builder/module/settings/migration/BackgroundUI.php
+	* includes/builder/scripts/builder.js
+	* includes/builder/scripts/ext/wp-color-picker-alpha.js
+	* includes/builder/scripts/ext/wp-color-picker-alpha.min.js
+	* includes/builder/scripts/frontend-builder-scripts.js
+	* includes/builder/styles/frontend-builder-style.css
+	* includes/builder/styles/style.css
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/styl
+
 version 2.0.46 ( updated 5-24-2017 )
 - Fixed a bug that caused excerpt length to not save correctly in global modules in some situations. 
 - Fixed a bug that caused selective sync to not work correctly when selecting categories quickly in the post slider module.

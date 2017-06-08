@@ -33,7 +33,7 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-	<div id="page-container">
+	<div id="page-container" class="page-container">
 		<?php $header_vars = extra_get_header_vars(); ?>
 		<!-- Header -->
 		<header class="header <?php echo $header_vars['header_classes']; ?>">

@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra 2.0.46\n"
+"Project-Id-Version: Extra 2.0.50\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/style\n"
-"POT-Creation-Date: 2017-05-25 00:47:54+00:00\n"
+"POT-Creation-Date: 2017-06-07 16:12:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -577,11 +577,11 @@ msgstr ""
 msgid "Sample Post Title"
 msgstr ""
 
-#: includes/admin/admin.php:26 includes/core.php:1292
+#: includes/admin/admin.php:26 includes/core.php:1293
 msgid "Theme Customizer"
 msgstr ""
 
-#: includes/admin/admin.php:30 includes/core.php:1305
+#: includes/admin/admin.php:30 includes/core.php:1306
 msgid "Module Customizer"
 msgstr ""
 
@@ -1640,151 +1640,151 @@ msgstr ""
 msgid "Callback function: \"%s\" doesnt exist"
 msgstr ""
 
-#: includes/core.php:832 includes/core.php:844 includes/core.php:862
+#: includes/core.php:833 includes/core.php:845 includes/core.php:863
 #: includes/customizer.php:387 includes/customizer.php:393
 #: includes/customizer.php:399
 msgid "Footer Sidebar Left"
 msgstr ""
 
-#: includes/core.php:833 includes/customizer.php:400
+#: includes/core.php:834 includes/customizer.php:400
 msgid "Footer Sidebar Middle Left"
 msgstr ""
 
-#: includes/core.php:834 includes/customizer.php:401
+#: includes/core.php:835 includes/customizer.php:401
 msgid "Footer Sidebar Middle Right"
 msgstr ""
 
-#: includes/core.php:835 includes/core.php:847 includes/core.php:865
+#: includes/core.php:836 includes/core.php:848 includes/core.php:866
 #: includes/customizer.php:390 includes/customizer.php:396
 #: includes/customizer.php:402
 msgid "Footer Sidebar Right"
 msgstr ""
 
-#: includes/core.php:845 includes/customizer.php:394
+#: includes/core.php:846 includes/customizer.php:394
 msgid "Footer Sidebar Middle"
 msgstr ""
 
-#: includes/core.php:846 includes/core.php:854 includes/core.php:855
-#: includes/core.php:856 includes/core.php:863 includes/core.php:864
+#: includes/core.php:847 includes/core.php:855 includes/core.php:856
+#: includes/core.php:857 includes/core.php:864 includes/core.php:865
 #: includes/customizer.php:382 includes/customizer.php:383
 #: includes/customizer.php:384 includes/customizer.php:388
 #: includes/customizer.php:389 includes/customizer.php:395
 msgid "Inactive Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:853 includes/customizer.php:381
+#: includes/core.php:854 includes/customizer.php:381
 msgid "Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:872
+#: includes/core.php:873
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/core.php:875
+#: includes/core.php:876
 msgid "Project Sidebar"
 msgstr ""
 
-#: includes/core.php:967 includes/et-social-followers.php:213
+#: includes/core.php:968 includes/et-social-followers.php:213
 #: includes/et-social-share.php:56
 msgid "Facebook"
 msgstr ""
 
-#: includes/core.php:968 includes/et-social-followers.php:509
+#: includes/core.php:969 includes/et-social-followers.php:509
 #: includes/et-social-share.php:67
 msgid "Twitter"
 msgstr ""
 
-#: includes/core.php:969 includes/et-social-followers.php:321
+#: includes/core.php:970 includes/et-social-followers.php:321
 msgid "Google+"
 msgstr ""
 
-#: includes/core.php:970 includes/et-social-followers.php:567
+#: includes/core.php:971 includes/et-social-followers.php:567
 #: includes/et-social-share.php:100
 msgid "Pinterest"
 msgstr ""
 
-#: includes/core.php:971 includes/et-social-followers.php:447
+#: includes/core.php:972 includes/et-social-followers.php:447
 #: includes/et-social-share.php:89
 msgid "Tumblr"
 msgstr ""
 
-#: includes/core.php:972 includes/et-social-share.php:133
+#: includes/core.php:973 includes/et-social-share.php:133
 msgid "Stumbleupon"
 msgstr ""
 
-#: includes/core.php:973
+#: includes/core.php:974
 msgid "WordPress"
 msgstr ""
 
-#: includes/core.php:974 includes/et-social-followers.php:597
+#: includes/core.php:975 includes/et-social-followers.php:597
 msgid "Instagram"
 msgstr ""
 
-#: includes/core.php:975
+#: includes/core.php:976
 msgid "Dribbble"
 msgstr ""
 
-#: includes/core.php:976 includes/et-social-followers.php:410
+#: includes/core.php:977 includes/et-social-followers.php:410
 msgid "Vimeo"
 msgstr ""
 
-#: includes/core.php:977 includes/et-social-share.php:111
+#: includes/core.php:978 includes/et-social-share.php:111
 msgid "LinkedIn"
 msgstr ""
 
-#: includes/core.php:978
+#: includes/core.php:979
 msgid "RSS"
 msgstr ""
 
-#: includes/core.php:979
+#: includes/core.php:980
 msgid "Deviantart"
 msgstr ""
 
-#: includes/core.php:980
+#: includes/core.php:981
 msgid "MySpace"
 msgstr ""
 
-#: includes/core.php:981
+#: includes/core.php:982
 msgid "Skype"
 msgstr ""
 
-#: includes/core.php:982 includes/et-social-followers.php:366
+#: includes/core.php:983 includes/et-social-followers.php:366
 msgid "Youtube"
 msgstr ""
 
-#: includes/core.php:983
+#: includes/core.php:984
 msgid "Picassa"
 msgstr ""
 
-#: includes/core.php:984
+#: includes/core.php:985
 msgid "Flickr"
 msgstr ""
 
-#: includes/core.php:985
+#: includes/core.php:986
 msgid "Blogger"
 msgstr ""
 
-#: includes/core.php:986
+#: includes/core.php:987
 msgid "Spotify"
 msgstr ""
 
-#: includes/core.php:987
+#: includes/core.php:988
 msgid "Delicious"
 msgstr ""
 
-#: includes/core.php:1067 includes/core.php:1148
+#: includes/core.php:1068 includes/core.php:1149
 msgid "Featured"
 msgstr ""
 
-#: includes/core.php:1079
+#: includes/core.php:1080
 msgid "Recent"
 msgstr ""
 
-#: includes/core.php:1205
+#: includes/core.php:1206
 msgid "Select Page"
 msgstr ""
 
-#: includes/core.php:1259
+#: includes/core.php:1260
 msgid ""
 "Welcome to Extra! Before diving in to your new theme, please visit the <a "
 "style=\"color: #fff; font-weight: bold;\" href=\"%1$s\" "
@@ -1792,7 +1792,7 @@ msgid ""
 "in-depth tutorials."
 msgstr ""
 
-#: includes/core.php:1343
+#: includes/core.php:1344
 msgid "Extra Customizer Settings"
 msgstr ""
 

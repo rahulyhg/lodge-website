@@ -567,6 +567,7 @@ function extra_classes( $classes = array(), $selector = '', $return_array = true
 }
 
 function extra_get_dynamic_selectors() {
+	$page_container    = et_fb_is_enabled() ? '.page-container' : '#page-container';
 	$dynamic_selectors = array(
 		'main_column_with_sidebar'      => '.with_sidebar .et_pb_extra_column_main',
 		'sidebar_column'                => '.with_sidebar .et_pb_extra_column_sidebar',
@@ -633,12 +634,12 @@ function extra_get_dynamic_selectors() {
 			'.search h1',
 		),
 		'buttons'                       => array(
-			'#page-container .button',
-			'#page-container button',
-			'#page-container button[type="submit"]',
-			'#page-container input[type="submit"]',
-			'#page-container input[type="reset"]',
-			'#page-container input[type="button"]',
+			$page_container . ' .button',
+			$page_container . ' button',
+			$page_container . ' button[type="submit"]',
+			$page_container . ' input[type="submit"]',
+			$page_container . ' input[type="reset"]',
+			$page_container . ' input[type="button"]',
 			'.read-more-button',
 			'.comment-body .comment_area .comment-content .reply-container .comment-reply-link',
 			'.widget_tag_cloud a',
