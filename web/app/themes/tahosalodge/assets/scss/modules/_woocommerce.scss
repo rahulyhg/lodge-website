@@ -29,6 +29,7 @@
                         content: "How many tickets?";
                         margin-right: 1em;
                     }
+
                     margin-bottom: 1em;
                     float: none;
                 }
@@ -170,6 +171,18 @@
             }
         }
     }
+
+    form {
+
+        .form-row-first,
+        .form-row-last {
+
+            @include bp(phone) {
+                width: 100%;
+            }
+        }
+    }
+
 } // .woocommerce
 
 #add_payment_method table.cart td.actions .coupon .input-text,

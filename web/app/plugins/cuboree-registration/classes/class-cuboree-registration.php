@@ -81,7 +81,7 @@ class Cuboree_Registration {
 	    echo '<div id="cuboree_registration_details" class="custom-registration-fields"><h2>' . __('Registration Details') . '</h2>';
 
 	    woocommerce_form_field( 'unit_number', [
-	        'type'          => 'text',
+	        'type'          => 'number',
 	        'class'         => array('my-field-class form-row-wide'),
 	        'label'         => __('Unit Number'),
 			'required' => true,
@@ -90,7 +90,7 @@ class Cuboree_Registration {
 		woocommerce_form_field( 'district', [
 	        'type'  		=> 'select',
 	        'class' 		=> array('my-field-class form-row-wide'),
-	        'label' 		=> __('District'),
+	        'label' 		=> 'District <em>(Not sure? <a href="http://www.denverboyscouts.org/geography/49937" target="_blank">Click here</a>)</em>',
 			'required'    	=> true,
 			'options'     	=> [
 				'' => '---',

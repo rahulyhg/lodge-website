@@ -33,6 +33,7 @@ class Tahosa_Event_Registration {
 		add_filter( 'woocommerce_sale_flash', [ $this, 'custom_sale_text' ] );
 		add_filter( 'wocommerce_box_office_input_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
 		add_filter( 'wocommerce_box_office_option_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
+		add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );
 		add_action( 'wp_print_scripts', function() {
 			if ( wp_script_is( 'wc-password-strength-meter', 'enqueued' ) ) {
 				wp_dequeue_script( 'wc-password-strength-meter' );
@@ -66,8 +67,12 @@ class Tahosa_Event_Registration {
 	 * Function to return new placeholder image URL.
 	 */
 	public function custom_woocommerce_placeholder( $image_url ) {
-	  $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
-	  return $image_url;
+		global $product;
+		if ( in_array( 107, $product->get_category_ids() ) ) {
+			return 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/cuboree-product.png';
+		}
+	    $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
+	    return $image_url;
 	}
 
 	public function custom_sale_text( $html ) {
@@ -82,5 +87,11 @@ class Tahosa_Event_Registration {
 		$slug = sanitize_title( $vars['label'] );
 		$vars['before_field'] = "<p class='form-row ${slug}'>";
 		return $vars;
+	}
+
+	public function checkout_fields( $fields ) {
+		unset( $fields['billing']['billing_company'] );
+		unset( $fields['shipping']['billing_company'] );
+		return $fields;
 	}
 }
