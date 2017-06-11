@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ea59fd6f4bffef399693559f1c15214",
+    "content-hash": "f04fe9484459dcd4f85364988c440857",
     "packages": [
         {
             "name": "composer/installers",
@@ -244,21 +244,21 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.7.5",
+            "version": "4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "381ef55a27e1dcc1c4bbe8b0c6a7ba2d45623819"
+                "reference": "24edf4daca6bc15ad3b78c5927468df487d47a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/381ef55a27e1dcc1c4bbe8b0c6a7ba2d45623819",
-                "reference": "381ef55a27e1dcc1c4bbe8b0c6a7ba2d45623819",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/24edf4daca6bc15ad3b78c5927468df487d47a37",
+                "reference": "24edf4daca6bc15ad3b78c5927468df487d47a37",
                 "shasum": ""
             },
             "require": {
-                "johnpbloch/wordpress-core": "4.7.5",
-                "johnpbloch/wordpress-core-installer": "~0.2",
+                "johnpbloch/wordpress-core": "4.8.0",
+                "johnpbloch/wordpress-core-installer": "^1.0",
                 "php": ">=5.3.2"
             },
             "type": "package",
@@ -279,20 +279,20 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-05-16T22:48:14+00:00"
+            "time": "2017-06-08T15:12:19+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "4.7.5",
+            "version": "4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "9a88a4b4c65f689d78789ef6ff77a7ca0239ec02"
+                "reference": "58f209dfd66f61c4398a47cf53e90d378abc25d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/9a88a4b4c65f689d78789ef6ff77a7ca0239ec02",
-                "reference": "9a88a4b4c65f689d78789ef6ff77a7ca0239ec02",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/58f209dfd66f61c4398a47cf53e90d378abc25d7",
+                "reference": "58f209dfd66f61c4398a47cf53e90d378abc25d7",
                 "shasum": ""
             },
             "require": {
@@ -316,20 +316,20 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-05-16T22:48:08+00:00"
+            "time": "2017-06-08T15:12:14+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
-            "version": "0.2.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core-installer.git",
-                "reference": "a04c2c383ef13aae077f36799ed2eafdebd618d2"
+                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core-installer/zipball/a04c2c383ef13aae077f36799ed2eafdebd618d2",
-                "reference": "a04c2c383ef13aae077f36799ed2eafdebd618d2",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core-installer/zipball/e9e767f2d9f994f358c34b41def2c410ad8717f2",
+                "reference": "e9e767f2d9f994f358c34b41def2c410ad8717f2",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,8 @@
                 "composer/installers": "<1.0.6"
             },
             "require-dev": {
-                "composer/composer": "1.0.*@dev"
+                "composer/composer": "^1.0",
+                "phpunit/phpunit": ">=4.8.35"
             },
             "type": "composer-plugin",
             "extra": {
@@ -364,7 +365,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2015-06-11T15:15:30+00:00"
+            "time": "2017-05-31T18:42:33+00:00"
         },
         {
             "name": "jwage/purl",
@@ -867,16 +868,16 @@
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
-            "version": "2.5.16",
+            "version": "2.5.17",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/really-simple-ssl/",
-                "reference": "tags/2.5.16"
+                "reference": "tags/2.5.17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.16.zip",
-                "reference": "tags/2.5.16",
+                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.17.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -947,15 +948,15 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.34",
+            "version": "4.35",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.34"
+                "reference": "tags/4.35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.34.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.35.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1027,7 +1028,7 @@
         },
         {
             "name": "wpackagist-plugin/worker",
-            "version": "4.2.18",
+            "version": "4.2.19",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/worker/",
@@ -1035,8 +1036,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1493913732",
-                "reference": "trunk",
+                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1496939745",
+                "reference": null,
                 "shasum": null
             },
             "require": {
