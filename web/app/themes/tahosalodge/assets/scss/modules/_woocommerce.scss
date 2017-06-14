@@ -191,3 +191,31 @@
     padding: 10px 12px;
     border: 0;
 }
+
+.et_pb_section.cuboree-guide {
+    background-color: $cubbie-blue;
+    color: white;
+    font-size: 16px;
+    padding: 1em 0;
+
+    .et_pb_extra_row {
+        margin: 0 1em;
+    }
+
+    span {
+        margin-right: 16px;
+    }
+
+    .sep {
+        font-size: 30px;
+        line-height: 16px;
+    }
+
+    a {
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

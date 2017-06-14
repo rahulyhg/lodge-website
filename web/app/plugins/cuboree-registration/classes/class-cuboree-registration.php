@@ -37,6 +37,7 @@ class Cuboree_Registration {
 	public function hooks() {
 		add_action( 'woocommerce_check_cart_items', [ $this, 'cart_validation' ] );
 		add_action( 'woocommerce_after_order_notes', [ $this, 'custom_checkout_fields' ] );
+		add_action( 'th_before_body', [ $this, 'breadcrumbs' ] );
 	}
 
 	public function cart_validation() {
@@ -105,6 +106,9 @@ class Cuboree_Registration {
         ], $checkout->get_value( 'district' ));
 
 	    echo '</div>';
+	}
 
+	public function breadcrumbs() {
+		include( plugin_dir_path( __DIR__ ) . '/templates/breadcrumbs.php' );
 	}
 }

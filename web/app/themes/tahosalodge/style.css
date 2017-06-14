@@ -116,6 +116,7 @@ body.gfur-activate #content {
 
 #main-content {
   font-size: 18px;
+  min-height: 60vh;
 }
 
 body {
@@ -423,4 +424,32 @@ h6 {
 .woocommerce-checkout table.cart td.actions .coupon .input-text {
   padding: 10px 12px;
   border: 0;
+}
+
+.et_pb_section.cuboree-guide {
+  background-color: #1e5491;
+  color: white;
+  font-size: 16px;
+  padding: 1em 0;
+}
+
+.et_pb_section.cuboree-guide .et_pb_extra_row {
+  margin: 0 1em;
+}
+
+.et_pb_section.cuboree-guide span {
+  margin-right: 16px;
+}
+
+.et_pb_section.cuboree-guide .sep {
+  font-size: 30px;
+  line-height: 16px;
+}
+
+.et_pb_section.cuboree-guide a {
+  color: white;
+}
+
+.et_pb_section.cuboree-guide a:hover {
+  text-decoration: underline;
 }
