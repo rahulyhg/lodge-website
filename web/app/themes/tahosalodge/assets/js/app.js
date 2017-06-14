@@ -19,5 +19,4 @@ jQuery(document).ready( function($) {
         }
     });
 
-    require('js-cookie');
 });
