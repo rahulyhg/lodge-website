@@ -6,20 +6,20 @@ const mix = require('laravel-mix');
  |--------------------------------------------------------------------------
  */
 
- mix.autoload({
-    jquery: ['$', 'window.jQuery']
- });
+mix.autoload({
+  jQuery: ['$', 'window.jQuery'],
+});
 mix.js('assets/js/app.js', 'dist/');
 mix.sass('assets/scss/style.scss', './');
 mix.options({
-  processCssUrls: false
+  processCssUrls: false,
 });
 mix.disableNotifications();
 mix.browserSync('https://tahosalodge.dev');
 mix.webpackConfig({
   externals: {
-    jquery: 'window.jQuery'
-  }
+    jQuery: 'window.jQuery',
+  },
 });
 
 
@@ -33,7 +33,7 @@ mix.webpackConfig({
 // mix.stylus(src, output);
 // mix.browserSync('my-site.dev');
 // mix.combine(files, destination);
-// mix.babel(files, destination); <-- Identical to mix.combine(), but also includes Babel compilation.
+// mix.babel(files, destination); <-- mix.combine(), but also includes Babel compilation.
 // mix.copy(from, to);
 // mix.copyDirectory(fromDir, toDir);
 // mix.minify(file);

@@ -72,7 +72,7 @@ class TahosaLodge {
 		wp_enqueue_script( 'tahosa_typekit', 'https://use.typekit.net/' . $kit_id . '.js' );
 		wp_add_inline_script( 'tahosa_typekit', 'try{Typekit.load({ async: true });}catch(e){}' );
 		wp_add_inline_script( 'tahosa_typekit', '!function(e,t,n,a,c,l,m,o,d,f,h,i){c[l]&&(d=e.createElement(t),d[n]=c[l],e[a]("head")[0].appendChild(d),e.documentElement.className+=" wf-cached"),function s(){for(d=e[a](t),f="",h=0;h<d.length;h++)i=d[h][n],i.match(m)&&(f+=i);f&&(c[l]="/**/"+f),setTimeout(s,o+=o)}()}(document,"style","innerHTML","getElementsByTagName",localStorage,"tk",/^@font|^\.tk-/,100);', 'before' );
-		wp_enqueue_script( 'tahosalodge_scripts', get_theme_file_uri( '/assets/dist/app.js' ) );
+		wp_enqueue_script( 'tahosalodge_scripts', get_stylesheet_directory_uri() . '/dist/app.js' );
 		wp_enqueue_style( 'extra-style', get_template_directory_uri() .'/style.css' );
 		wp_enqueue_style( 'tahosalodge-style', get_stylesheet_uri() );
 	}
