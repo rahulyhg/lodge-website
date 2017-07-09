@@ -7,8 +7,8 @@
  * @package		OA Tools
  */
 
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mailgun-api/vendor/autoload.php';
-use Mailgun\Mailgun;
+// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/mailgun-api/vendor/autoload.php';
+// use Mailgun\Mailgun;
 
 define( 'MAILGUN_API_KEY', get_theme_mod( 'oaldr_mailgun_api_key' ) );
 

@@ -453,16 +453,16 @@
         },
         {
             "name": "roots/soil",
-            "version": "3.7.1",
+            "version": "3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/soil.git",
-                "reference": "5b9b9d8a878b295f44b35cba826c462b20cc1d9c"
+                "reference": "09368d6db8c40daa9cc94054b0d1a16e6113e3e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roots/soil/zipball/5b9b9d8a878b295f44b35cba826c462b20cc1d9c",
-                "reference": "5b9b9d8a878b295f44b35cba826c462b20cc1d9c",
+                "url": "https://api.github.com/repos/roots/soil/zipball/09368d6db8c40daa9cc94054b0d1a16e6113e3e5",
+                "reference": "09368d6db8c40daa9cc94054b0d1a16e6113e3e5",
                 "shasum": ""
             },
             "require": {
@@ -494,7 +494,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2016-08-30T18:15:45+00:00"
+            "time": "2017-06-12T01:25:19+00:00"
         },
         {
             "name": "roots/wp-password-bcrypt",
@@ -688,16 +688,16 @@
         },
         {
             "name": "wpackagist-plugin/autoptimize",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/autoptimize/",
-                "reference": "tags/2.1.0"
+                "reference": "tags/2.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.1.0.zip",
-                "reference": "tags/2.1.0",
+                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.1.1.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -928,15 +928,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.5.4",
+            "version": "4.5.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.5.4"
+                "reference": "tags/4.5.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.5.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1008,15 +1008,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce-gateway-stripe",
-            "version": "3.1.9",
+            "version": "3.2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce-gateway-stripe/",
-                "reference": "tags/3.1.9"
+                "reference": "tags/3.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.1.9.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.2.0.zip",
                 "reference": null,
                 "shasum": null
             },
