@@ -68,7 +68,7 @@ class Tahosa_Event_Registration {
 	 */
 	public function custom_woocommerce_placeholder( $image_url ) {
 		global $product;
-		if ( in_array( 107, $product->get_category_ids() ) ) {
+		if ( is_object( $product ) &&  in_array( 107, $product->get_category_ids() ) ) {
 			return 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/cuboree-product.png';
 		}
 	    $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
