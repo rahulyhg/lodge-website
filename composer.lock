@@ -668,16 +668,16 @@
         },
         {
             "name": "wpackagist-plugin/autodescription",
-            "version": "2.9.2",
+            "version": "2.9.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/autodescription/",
-                "reference": "tags/2.9.2"
+                "reference": "tags/2.9.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autodescription.2.9.2.zip",
-                "reference": "tags/2.9.2",
+                "url": "https://downloads.wordpress.org/plugin/autodescription.2.9.3.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -688,15 +688,15 @@
         },
         {
             "name": "wpackagist-plugin/autoptimize",
-            "version": "2.1.1",
+            "version": "2.2.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/autoptimize/",
-                "reference": "tags/2.1.1"
+                "reference": "tags/2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.1.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.2.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -828,16 +828,16 @@
         },
         {
             "name": "wpackagist-plugin/mailgun",
-            "version": "1.5.8.2",
+            "version": "1.5.8.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/mailgun/",
-                "reference": "tags/1.5.8.2"
+                "reference": "tags/1.5.8.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/mailgun.1.5.8.2.zip",
-                "reference": "tags/1.5.8.2",
+                "url": "https://downloads.wordpress.org/plugin/mailgun.1.5.8.4.zip",
+                "reference": null,
                 "shasum": null
             },
             "require": {
@@ -868,15 +868,15 @@
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
-            "version": "2.5.17",
+            "version": "2.5.19",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/really-simple-ssl/",
-                "reference": "tags/2.5.17"
+                "reference": "tags/2.5.19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.17.zip",
+                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.19.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -928,15 +928,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.5.5",
+            "version": "4.5.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.5.5"
+                "reference": "tags/4.5.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -948,15 +948,15 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.35",
+            "version": "4.35.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.35"
+                "reference": "tags/4.35.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.35.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.35.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -988,15 +988,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.0.8",
+            "version": "3.1.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.0.8"
+                "reference": "tags/3.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.0.8.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.1.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1008,15 +1008,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce-gateway-stripe",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce-gateway-stripe/",
-                "reference": "tags/3.2.0"
+                "reference": "tags/3.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.2.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.2.1.zip",
                 "reference": null,
                 "shasum": null
             },
