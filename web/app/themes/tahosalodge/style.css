@@ -443,6 +443,11 @@ h6 {
   color: white;
   font-size: 16px;
   padding: 1em 0;
+  display: none;
+}
+
+.et_pb_section.cuboree-guide.show {
+  display: block;
 }
 
 .et_pb_section.cuboree-guide .et_pb_extra_row {
@@ -464,4 +469,21 @@ h6 {
 
 .et_pb_section.cuboree-guide a:hover {
   text-decoration: underline;
+}
+
+.et_pb_section.cuboree-guide .container {
+  position: static;
+  max-width: 80%;
+}
+
+.et_pb_section.cuboree-guide .close {
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  margin: 0;
+  line-height: 10px;
+  font-size: 18px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  cursor: pointer;
 }

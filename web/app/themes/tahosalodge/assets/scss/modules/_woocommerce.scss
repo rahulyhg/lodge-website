@@ -201,6 +201,11 @@
     color: white;
     font-size: 16px;
     padding: 1em 0;
+    display: none;
+
+    &.show {
+        display: block;
+    }
 
     .et_pb_extra_row {
         margin: 0 1em;
@@ -221,5 +226,21 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    .container {
+        position: static;
+        max-width: 80%;
+    }
+
+    .close {
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        margin: 0;
+        line-height: 10px;
+        font-size: 18px;
+        transform: translateY(-50%);
+        cursor: pointer;
     }
 }

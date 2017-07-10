@@ -109,8 +109,6 @@ class Cuboree_Registration {
 	}
 
 	public function breadcrumbs() {
-		if ( is_page( 'cuboree' ) || is_page( 'cart' ) || is_page( 'checkout' ) ) {
-			include( plugin_dir_path( __DIR__ ) . '/templates/breadcrumbs.php' );
-		}
+		include( plugin_dir_path( __DIR__ ) . '/templates/breadcrumbs.php' );
 	}
 }

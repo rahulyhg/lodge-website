@@ -15,7 +15,16 @@ mix.options({
   processCssUrls: false,
 });
 mix.disableNotifications();
-mix.browserSync('https://tahosalodge.dev');
+mix.browserSync({
+  proxy: 'https://tahosalodge.dev',
+  open: false,
+  files: [
+    '**/*.php',
+    'style.css',
+    'dist/app.js',
+  ],
+  notify: false,
+});
 mix.webpackConfig({
   externals: {
     jQuery: 'window.jQuery',
