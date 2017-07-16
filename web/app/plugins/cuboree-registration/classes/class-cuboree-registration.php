@@ -17,6 +17,13 @@ class Cuboree_Registration {
 	protected $adult_product_id = 8980;
 
 	/**
+	 * Product ID for staff registration
+	 *
+	 * @var int Product ID
+	 */
+	protected $staff_product_id = 9058;
+
+	/**
 	 * Returns the running object
 	 *
 	 * @return Cuboree_Registration_Admin
@@ -45,9 +52,15 @@ class Cuboree_Registration {
 			global $woocommerce, $product;
 			$youth_in_cart = false;
 			$adult_in_cart = false;
+			$staff_in_cart = false;
 			foreach ( $woocommerce->cart->cart_contents as $product ) {
 				if ( $this->adult_product_id === $product['product_id'] ) {
 					$adult_in_cart = true;
+					break;
+				}
+
+				if ( $this->staff_product_id === $product['product_id'] ) {
+					$staff_in_cart = true;
 					break;
 				}
 
