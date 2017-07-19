@@ -1,3 +1,32 @@
+version 2.0.63 ( updated 7-19-2017 )
+- Added the new Divi Builder product tour system.
+- Implemented an introductory product tour that is run once when a new user launches the Visual Builder for the first time.
+- Fixed a bug that caused certain icons to render incorrectly.
+- Improved the way that line breaks are rendered in the Visual Builder to better match line break behavior in the standard WordPress editor.
+- It's now possible to add global modules inside of global rows and sections. Upon adding global items inside of global items, the child items are transformed into non-global items.
+- Improved scroll mechanism used for modals in the Visual Builder.
+- Fixed a bug in the Role Editor that caused incorrect rendering in the standard Divi Builder.
+- Fullwidth header background image overlays will now render correctly in the Visual Builder.
+- Improved the title display of contact form fields with no title or ID.
+- Fixed a bug in the Role Editor that prevented page option permissions from working on other post types.
+- Fixed a bug that caused contact form conditional logic to break due to trailing spaces in the item ID.
+- Increased the size of thumbnail images when used on fullwidth post title modules on posts that are set to fullwidth to accommodate modern resolutions.
+- Fixed an error that occurred when adding any empty column to the page and then attempting to discard non-existent changes.
+	* functions.php
+	* epanel/custom_functions.php
+	* includes/builder/class-et-builder-element.php
+	* includes/builder/main-modules.php
+	* includes/builder/functions.php
+	* includes/builder/layouts.php
+	* includes/builder/framework.php
+	* includes/builder/core.php
+	* includes/builder/class-et-builder-settings.php
+	* includes/builder/scripts/builder.js
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/frontend-builder/assets/css/style.css
+	* includes/builder/frontend-builder/helpers.php
+	* includes/builder/main-modules.php
+
 version 2.0.62 ( updated 7-14-2017 )
 - Fixed a bug that caused CSS styles to break for pages in some case after exiting the Visual Builder without saving.
 - Fixed a bug that caused Custom CSS styles to be absent from the Visual Builder in some cases.

@@ -659,7 +659,7 @@ class ET_Builder_Element {
 				foreach( $this->shortcode_atts as $single_attr => $value ) {
 					if ( isset( $global_atts[$single_attr] ) && ! in_array( $single_attr, $unsynced_options ) ) {
 						// replace %22 with double quotes in options to make sure it's rendered correctly
-						$this->shortcode_atts[$single_attr] = is_string( $global_atts[$single_attr] ) && ! in_array( $single_attr, $this->dbl_quote_exception_options ) ? str_replace( '%22', '"', $global_atts[$single_attr] ) : $global_atts[$single_attr];
+						$this->shortcode_atts[$single_attr] = is_string( $global_atts[$single_attr] ) && ! array_intersect( array( "et_pb_{$single_attr}", $single_attr ), $this->dbl_quote_exception_options ) ? str_replace( '%22', '"', $global_atts[$single_attr] ) : $global_atts[$single_attr];
 					}
 				}
 			}
@@ -875,7 +875,7 @@ class ET_Builder_Element {
 					if ( isset( $global_atts[$single_attr] ) && ! in_array( $single_attr, $unsynced_options ) ) {
 						// replace %22 with double quotes in options to make sure it's rendered correctly
 						if ( ! $is_global_template ) {
-							$this->shortcode_atts[$single_attr] = is_string( $global_atts[$single_attr] ) && ! in_array( $single_attr, $this->dbl_quote_exception_options ) ? str_replace( '%22', '"', $global_atts[$single_attr] ) : $global_atts[$single_attr];
+							$this->shortcode_atts[$single_attr] = is_string( $global_atts[$single_attr] ) && ! array_intersect( array( "et_pb_{$single_attr}", $single_attr ), $this->dbl_quote_exception_options ) ? str_replace( '%22', '"', $global_atts[$single_attr] ) : $global_atts[$single_attr];
 						}
 					} else if ( ! $use_updated_global_sync_method ) {
 						// prepare array of unsynced options to migrate the legacy modules to new system
@@ -3946,6 +3946,12 @@ class ET_Builder_Element {
 		}
 
 		foreach ( $tabs_output as $tab_slug => $tab_settings ) {
+
+			// Add only tabs allowed for current user
+			if ( ! et_pb_is_allowed( $tab_slug . '_settings' ) ) {
+				continue;
+			}
+
 			$tab_output        = '';
 			$this->used_tabs[] = $tab_slug;
 			$i = 0;

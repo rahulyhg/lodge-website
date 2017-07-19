@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra 2.0.62\n"
+"Project-Id-Version: Extra 2.0.63\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/style\n"
-"POT-Creation-Date: 2017-07-15 06:51:41+00:00\n"
+"POT-Creation-Date: 2017-07-19 15:28:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4745,15 +4745,15 @@ msgstr ""
 
 #: page-template-authors.php:24 page-template-contact.php:22
 #: page-template-member.php:22 page-template-sitemap.php:22 page.php:19
-#: single-post.php:47 single-project.php:55 single.php:16
+#: single-post.php:73 single-project.php:81 single.php:42
 msgid "Pages:"
 msgstr ""
 
 #: page-template-authors.php:81 page-template-blog-feed.php:101
 #: page-template-contact.php:75 page-template-member.php:44
 #: page-template-portfolio.php:86 page-template-sitemap.php:47
-#: page-template-timeline.php:59 page.php:31 single-post.php:185
-#: single-project.php:64 single.php:27
+#: page-template-timeline.php:59 page.php:31 single-post.php:211
+#: single-project.php:90 single.php:53
 msgid "Post not found"
 msgstr ""
 
@@ -4785,35 +4785,35 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: single-post.php:66 single-post.php:85
+#: single-post.php:92 single-post.php:111
 msgid "%d%%"
 msgstr ""
 
-#: single-post.php:97
+#: single-post.php:123
 msgid "Share:"
 msgstr ""
 
-#: single-post.php:124
+#: single-post.php:150
 msgid "<span class=\"button\">Previous</span><span class=\"title\">%title</span>"
 msgstr ""
 
-#: single-post.php:127
+#: single-post.php:153
 msgid "<span class=\"button\">Next</span><span class=\"title\">%title</span>"
 msgstr ""
 
-#: single-post.php:135
+#: single-post.php:161
 msgid "About The Author"
 msgstr ""
 
-#: single-post.php:142
+#: single-post.php:168
 msgid "View all posts by %s"
 msgstr ""
 
-#: single-post.php:160
+#: single-post.php:186
 msgid "Related Posts"
 msgstr ""
 
-#: single-project.php:72 single-project.php:75
+#: single-project.php:98 single-project.php:101
 msgid "<span class=\"button\" title=\"%title\"></span>"
 msgstr ""
 

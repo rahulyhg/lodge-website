@@ -1406,3 +1406,30 @@ function et_register_updates_component() {
 	et_core_enable_automatic_updates( get_template_directory_uri(), ET_CORE_VERSION );
 }
 add_action( 'admin_init', 'et_register_updates_component' );
+
+
+/**
+ * Always load Fullwidth Page template for the Product Tour
+ */
+function et_load_product_tour_template( $template ) {
+	if ( ! et_fb_is_enabled() ) {
+		return $template;
+	}
+
+	// load fullwidth page in Product Tour mode
+	$product_tour_status = 'off';
+
+	$current_user = wp_get_current_user();
+	$product_tour_settings = et_get_option( 'product_tour_status', array() );
+	$product_tour_status = 'on' === et_get_option( 'et_pb_product_tour_global', 'on' ) && ( ! isset( $product_tour_settings[$current_user->ID] ) || 'off' !== $product_tour_settings[$current_user->ID] ) ? 'on' : 'off';
+
+	if ( 'on' === $product_tour_status  ) {
+		$new_template = locate_template( array( 'page-template-fullwidth.php' ) );
+		if ( '' != $new_template ) {
+			return $new_template;
+		}
+	}
+
+	return $template;
+}
+add_filter( 'template_include', 'et_load_product_tour_template', 99 );

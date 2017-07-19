@@ -25,6 +25,7 @@ if ( wp_doing_ajax() && ! is_customize_preview() ) {
 		'et_fb_process_imported_content',
 		'et_fb_get_saved_templates',
 		'et_fb_retrieve_builder_data',
+		'et_fb_disable_product_tour',
 		'et_builder_email_add_account',     // email opt-in module
 		'et_builder_email_remove_account',  // email opt-in module
 		'et_builder_email_get_lists',       // email opt-in module
