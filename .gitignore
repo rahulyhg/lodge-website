@@ -31,6 +31,8 @@ vendor/*
 !web/app/plugins/woocommerce-box-office
 !web/app/plugins/cuboree-registration
 !web/app/plugins/tahosa-event-registration
+!web/app/plugins/wp-migrate-db-pro
+!web/app/plugins/wp-migrate-db-pro-media-files
 !web/app/themes/Extra
 !web/app/themes/tahosa2016
 
