@@ -200,11 +200,16 @@ class WC_Box_Office_Ticket_Create_Admin {
 	 * @return int Order item ID
 	 */
 	private function _maybe_create_order_item() {
+		$product = $this->_current_variation_id
+			? wc_get_product( $this->_current_variation_id )
+			: $this->_current_product;
+
 		if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
-			$total = $this->_current_product->get_price_including_tax( $this->_clean_data['quantity'] );
+			$total = $product->get_display_price( '', $this->_clean_data['quantity'] );
 		} else {
-			$total = wc_get_price_including_tax( $this->_current_product, array( 'qty' => $this->_clean_data['quantity'] ) );
+			$total = wc_get_price_to_display( $product, array( 'qty' => $this->_clean_data['quantity'] ) );
 		}
+
 		switch ( $this->_clean_data['create_order_method'] ) {
 			case 'new':
 				$order_id = $this->_create_order( $this->_clean_data['customer_id'], $total );
@@ -220,7 +225,7 @@ class WC_Box_Office_Ticket_Create_Admin {
 		$item_id = 0;
 		if ( $order_id ) {
 			$item_id = $this->_current_order->add_product(
-				$this->_current_variation_id ? wc_get_product( $this->_current_variation_id ) : $this->_current_product,
+				$product,
 				$this->_clean_data['quantity'],
 				array(
 					'variation' => $this->_current_variation,
@@ -234,6 +239,9 @@ class WC_Box_Office_Ticket_Create_Admin {
 			if ( ! $item_id ) {
 				throw new Exception( __( 'Error: could not create order item', 'woocommerce-box-office' ) );
 			}
+
+			$this->_current_order->calculate_taxes();
+			$this->_current_order->calculate_totals( false );
 		}
 
 		return $item_id;
@@ -242,22 +250,27 @@ class WC_Box_Office_Ticket_Create_Admin {
 	/**
 	 * Create order from given customer and total.
 	 *
-	 * @param int    $customer_id Customer ID
-	 * @param string $total       Total for the order
+	 * @param int    $customer_id Customer ID.
+	 * @param string $total       Total for the order.
 	 *
-	 * @return int Order ID
+	 * @return int Order ID.
 	 */
 	private function _create_order( $customer_id, $total ) {
+		$is_pre_wc_30 = version_compare( WC_VERSION, '3.0', '<' );
+
 		$order = wc_create_order( array(
 			'customer_id' => $customer_id,
 		) );
 
 		$order->set_total( $total );
+		if ( ! $is_pre_wc_30 ) {
+			$order->save();
+		}
 
 		// Cache order.
 		$this->_current_order = $order;
 
-		return version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
+		return $is_pre_wc_30 ? $order->id : $order->get_id();
 	}
 
 	/**

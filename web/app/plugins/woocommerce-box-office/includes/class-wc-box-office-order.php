@@ -127,6 +127,64 @@ class WC_Box_Office_Order {
 		}
 	}
 
+	/**
+	 * Update order item meta with ticket info specified by `$ticket_id`.
+	 *
+	 * The order item meta contains ticket fields information which is stored
+	 * as raw HTML string. The meta key contains HTML string too but with ticket
+	 * ID. When ticket is updated either via admin or front-end, updated info
+	 * should be propagated to order item meta too.
+	 *
+	 * @since 1.1.4
+	 * @version 1.1.4
+	 *
+	 * @see https://github.com/woocommerce/woocommerce-box-office/issues/180.
+	 *
+	 * @param int $ticket_id Ticket ID.
+	 *
+	 * @return bool True if updated successfully.
+	 */
+	public function update_item_meta_from_ticket( $ticket_id ) {
+		if ( 'event_ticket' !== get_post_type( $ticket_id ) ) {
+			return false;
+		}
+
+		$order_id = get_post_meta( $ticket_id, '_order', true );
+		$order    = wc_get_order( $order_id );
+		if ( ! $order ) {
+			return false;
+		}
+
+		$product_id = get_post_meta( $ticket_id, '_product_id', true );
+		if ( ! $product_id ) {
+			return false;
+		}
+
+		$updated = false;
+
+		$is_pre_wc_30 = version_compare( WC_VERSION, '3.0', '<' );
+		foreach ( $order->get_items() as $item_id => $item ) {
+			$item_product_id = $is_pre_wc_30 ? $item['product_id'] : $item->get_product_id();
+			if ( (int) $product_id !== (int) $item_product_id ) {
+				continue;
+			}
+
+			$meta_data = $is_pre_wc_30 ? $item['item_meta'] : $item->get_meta_data();
+			foreach ( $meta_data as $key => $meta_value ) {
+				$meta_key = $is_pre_wc_30 ? $key : $meta_value->key;
+				if ( strpos( $meta_key, 'order-item-meta-ticket ticket-id-' . $ticket_id ) !== false ) {
+					$updated = wc_update_order_item_meta(
+						$item_id,
+						$meta_key,
+						wc_box_office_get_ticket_description( $ticket_id, 'list' )
+					);
+				}
+			}
+		}
+
+		return $updated;
+	}
+
 	public function filter_order_item_meta_ticket( $label, $name ) {
 		if ( strpos( $name, 'class="order-item-meta-ticket' ) !== false ) {
 			return $name;

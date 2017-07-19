@@ -22,6 +22,9 @@ class WC_Box_Office_Ticket_Admin {
 		add_action( 'add_meta_boxes_event_ticket_email', array( $this, 'event_ticket_email_meta_box' ), 10, 1 );
 		add_action( 'save_post', array( $this, 'event_ticket_meta_box_save' ), 10, 1 );
 
+		// Update order item meta for this ticket when ticket is updated.
+		add_action( 'save_post', array( $this, 'update_order_item_meta' ), 9, 3 );
+
 		// Manage admin columns for tickets.
 		add_filter( 'manage_event_ticket_posts_columns', array( $this, 'manage_ticket_columns' ), 11, 1 );
 		add_action( 'manage_event_ticket_posts_custom_column', array( $this, 'display_ticket_columns' ), 10, 2 );
@@ -225,6 +228,30 @@ class WC_Box_Office_Ticket_Admin {
 		} catch ( Exception $e ) {
 			WC_Admin_Meta_Boxes::add_error( $e->getMessage() );
 		}
+	}
+
+	/**
+	 * Update order item meta when ticket is updated.
+	 *
+	 * @since 1.1.4
+	 * @version 1.1.4
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated or not.
+	 */
+	public function update_order_item_meta( $post_id, $post, $update ) {
+		if ( ! $post_id || ! is_admin() ) {
+			return;
+		}
+
+		// Ignore if this is created initially since it's generated already by
+		// order handler when an order is created.
+		if ( ! $update ) {
+			return;
+		}
+
+		WCBO()->components->order->update_item_meta_from_ticket( $post_id );
 	}
 
 	/**

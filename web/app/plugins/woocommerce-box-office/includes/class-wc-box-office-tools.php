@@ -269,6 +269,9 @@ class WC_Box_Office_Tools {
 				if ( is_array( $ticket_fields ) ) {
 					foreach ( $ticket_fields as $field_key => $field ) {
 						$ticket_meta        = get_post_meta( $ticket_id, $field_key, true );
+						if ( is_array( $ticket_meta ) ) {
+							$ticket_meta = implode( ',', $ticket_meta );
+						}
 						$data[ $field_key ] = $ticket_meta;
 					}
 				}

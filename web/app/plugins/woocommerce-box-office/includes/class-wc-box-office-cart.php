@@ -114,8 +114,9 @@ class WC_Box_Office_Cart {
 		$variations   = array();
 
 		if ( $variation_id ) {
-			$variation  = wc_get_product( $variation_id );
-			$attributes = $product->get_attributes();
+			$variation            = wc_get_product( $variation_id );
+			$attributes           = $product->get_attributes();
+			$variation_attributes = $variation->get_variation_attributes();
 
 			foreach ( $attributes as $attribute ) {
 				if ( ! $attribute['is_variation'] ) {
@@ -133,7 +134,7 @@ class WC_Box_Office_Cart {
 					}
 
 					// Get valid value from variation.
-					$valid_value = isset( $variation->variation_data[ $taxonomy ] ) ? $variation->variation_data[ $taxonomy ] : '';
+					$valid_value = isset( $variation_attributes[ $taxonomy ] ) ? $variation_attributes[ $taxonomy ] : '';
 
 					// Allow if valid.
 					if ( '' === $valid_value || $valid_value === $value ) {

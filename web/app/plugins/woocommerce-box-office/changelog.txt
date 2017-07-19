@@ -1,5 +1,13 @@
 *** WooCommerce Box Office Changelog ***
 
+2017-06-02 - version 1.1.4
+* Fix - Issue where exported data displayed as 'Array' for a check box field.
+* Fix - Issue where order item meta is not updated when ticket is updated.
+* Fix - Added tax item into order items and recalculate tax in the order total.
+* Fix - Issue where variation price is not used when creating order ticket manually.
+* Fix - Issue where My Tickets page is missing from My Accounts page.
+* Fix - Notice of product properties should not be accessed directly (deprecation that's added in WC 3.0+).
+
 2017-04-03 - version 1.1.3
 * Fix - Update for WooCommerce 3.0 compatibility.
 

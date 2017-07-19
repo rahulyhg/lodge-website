@@ -78,6 +78,9 @@ class WC_Box_Office_Ticket_Frontend {
 
 			$ticket->update( $ticket_form->get_clean_data() );
 
+			// Update order item meta for this ticket when ticket is updated.
+			WCBO()->components->order->update_item_meta_from_ticket( $ticket->id );
+
 			$new_email_fields = $ticket->get_ticket_fields_by_type( 'email' );
 
 			$send_to = array();
