@@ -129,9 +129,11 @@ function extra_get_layouts( $args = array() ) {
 
 function extra_home_layout() {
 	global $et_builder_post_type;
-
 	$et_builder_post_type = EXTRA_LAYOUT_POST_TYPE;
+
+	extra_processing_category_layout( true );
 	echo do_shortcode( et_pb_fix_shortcodes( extra_get_home_layout() ) );
+	extra_processing_category_layout( false );
 }
 
 function _et_extra_get_home_layout() {
@@ -231,7 +233,9 @@ function extra_tax_layout() {
 	if ( !empty( $layout ) ) {
 		// add filter to define the correct page id in Page Builder Settings
 		add_filter( 'et_pb_page_id_custom_css', 'et_pb_set_tax_page_id' );
+		extra_processing_category_layout( true );
 		echo do_shortcode( et_pb_fix_shortcodes( $layout ) );
+		extra_processing_category_layout( false );
 	} else {
 		require locate_template( 'index-content.php' );
 	}
@@ -260,7 +264,7 @@ function _et_extra_get_tax_layout() {
 				'include_children' => false,
 			),
 		);
-	} elseif ( is_tax() ) {
+	} else if ( is_tag() ) {
 		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'tag',
@@ -366,5 +370,45 @@ function extra_hide_use_default_editor_button() {
 		wp_add_inline_style( 'et_pb_admin_css', '#et_pb_toggle_builder { display: none !important; }' );
 	}
 }
-
 add_action( 'admin_enqueue_scripts', 'extra_hide_use_default_editor_button', 11 );
+
+if ( ! function_exists( 'extra_filter_et_core_is_builder_used_on_current_request' ) ):
+function extra_filter_et_core_is_builder_used_on_current_request( $is_builder_used ) {
+	return $is_builder_used || extra_layout_used();
+}
+add_filter( 'et_core_is_builder_used_on_current_request', 'extra_filter_et_core_is_builder_used_on_current_request' );
+endif;
+
+if ( ! function_exists( 'extra_filter_et_core_page_resource_current_post_id' ) ):
+function extra_filter_et_core_page_resource_current_post_id( $post_id ) {
+	$page_resource_post_id = null;
+
+	if ( is_home() && et_extra_show_home_layout() ) {
+		$page_resource_post_id = extra_get_home_layout_id();
+	} else if ( ( is_category() || is_tag() ) && extra_get_tax_layout_id() ) {
+		$page_resource_post_id = extra_get_tax_layout_id();
+	}
+
+	return null !== $page_resource_post_id ? $page_resource_post_id : $post_id;
+}
+add_filter( 'et_core_page_resource_current_post_id', 'extra_filter_et_core_page_resource_current_post_id' );
+endif;
+
+if ( ! function_exists( 'extra_filter_et_core_page_resource_is_singular' ) ):
+function extra_filter_et_core_page_resource_is_singular( $is_singular ) {
+	return $is_singular || extra_layout_used();
+}
+add_filter( 'et_core_page_resource_is_singular', 'extra_filter_et_core_page_resource_is_singular' );
+endif;
+
+if ( ! function_exists( 'extra_processing_category_layout' ) ):
+function extra_processing_category_layout( $is_processing ) {
+	global $extra_processing_category_layout;
+
+	if ( $is_processing ) {
+		$extra_processing_category_layout = apply_filters( 'extra_processing_category_layout', $is_processing );
+	} else {
+		$extra_processing_category_layout = $is_processing;
+	}
+}
+endif;

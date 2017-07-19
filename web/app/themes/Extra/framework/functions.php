@@ -124,12 +124,18 @@ endif;
 if ( ! function_exists( 'et_truncate_post' ) ):
 
 	function et_truncate_post( $amount, $echo = true, $post = '' ) {
-		global $shortname;
+		global $shortname, $extra_processing_category_layout;
 
 		if ( '' == $post ) global $post;
 
-		$post_excerpt = '';
-		$post_excerpt = apply_filters( 'the_excerpt', $post->post_excerpt );
+		$post_excerpt = $post && $post->post_excerpt ? $post->post_excerpt : '';
+
+		if ( $extra_processing_category_layout ) {
+			// We don't want builder modules in the content to generate CSS styles unnecessarily.
+			$post_excerpt = et_strip_shortcodes( $post_excerpt );
+		}
+
+		$post_excerpt = apply_filters( 'the_excerpt', $post_excerpt );
 
 		if ( 'on' == et_get_option( $shortname . '_use_excerpt' ) && '' != $post_excerpt ) {
 			if ( $echo ) echo $post_excerpt;
@@ -140,6 +146,11 @@ if ( ! function_exists( 'et_truncate_post' ) ):
 
 			// remove caption shortcode from the post content
 			$truncate = preg_replace( '@\[caption[^\]]*?\].*?\[\/caption]@si', '', $truncate );
+
+			if ( $extra_processing_category_layout ) {
+				// We don't want builder modules in the content to generate CSS styles unnecessarily.
+				$truncate = et_strip_shortcodes( $truncate );
+			}
 
 			// apply content filters
 			$truncate = apply_filters( 'the_content', $truncate );

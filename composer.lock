@@ -928,15 +928,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.5.7",
+            "version": "4.5.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.5.7"
+                "reference": "tags/4.5.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.7.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.5.8.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -988,15 +988,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.1.0"
+                "reference": "tags/3.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.1.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.1.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1008,15 +1008,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce-gateway-stripe",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce-gateway-stripe/",
-                "reference": "tags/3.2.1"
+                "reference": "tags/3.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.2.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.3.2.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1028,7 +1028,7 @@
         },
         {
             "name": "wpackagist-plugin/worker",
-            "version": "4.2.19",
+            "version": "4.2.20",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/worker/",
@@ -1036,7 +1036,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1496939745",
+                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1499793884",
                 "reference": null,
                 "shasum": null
             },

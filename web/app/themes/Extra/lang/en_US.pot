@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra 2.0.50\n"
+"Project-Id-Version: Extra 2.0.62\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/style\n"
-"POT-Creation-Date: 2017-06-07 16:12:17+00:00\n"
+"POT-Creation-Date: 2017-07-15 06:51:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "1 Comment"
 msgstr ""
 
-#: comments.php:13 epanel/core_functions.php:554
+#: comments.php:13 epanel/core_functions.php:594
 msgid "Comments"
 msgstr ""
 
@@ -68,85 +68,48 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: epanel/core_functions.php:121
+#: epanel/core_functions.php:122
 msgid "Options"
 msgstr ""
 
-#: epanel/core_functions.php:121 includes/admin/admin.php:22
+#: epanel/core_functions.php:122 includes/admin/admin.php:22
 msgid "Theme Options"
 msgstr ""
 
-#: epanel/core_functions.php:140
+#: epanel/core_functions.php:196
 msgid "settings saved."
 msgstr ""
 
-#: epanel/core_functions.php:143
+#: epanel/core_functions.php:199
 msgid "settings reset."
 msgstr ""
 
-#: epanel/core_functions.php:152 epanel/core_functions.php:502
+#: epanel/core_functions.php:208 epanel/core_functions.php:542
 msgid "Save Changes"
 msgstr ""
 
-#: epanel/core_functions.php:161 epanel/core_functions.php:814
+#: epanel/core_functions.php:217 epanel/core_functions.php:871
 msgid "%s Theme Options"
 msgstr ""
 
-#: epanel/core_functions.php:168
+#: epanel/core_functions.php:218
 msgid "Reset to Defaults"
 msgstr ""
 
-#: epanel/core_functions.php:173 options_extra.php:69 options_extra.php:1270
-msgid "General"
-msgstr ""
-
-#: epanel/core_functions.php:176 includes/modules.php:1944
-msgid "Navigation"
-msgstr ""
-
-#: epanel/core_functions.php:179 includes/customizer.php:4224
-#: includes/modules.php:257 includes/modules.php:943 includes/modules.php:2854
-msgid "Layout"
-msgstr ""
-
-#: epanel/core_functions.php:182 includes/modules.php:2834
-msgid "Ads"
-msgstr ""
-
-#: epanel/core_functions.php:185
-msgid "Colorization"
-msgstr ""
-
-#: epanel/core_functions.php:188
-msgid "SEO"
-msgstr ""
-
-#: epanel/core_functions.php:191
-msgid "Integration"
-msgstr ""
-
-#: epanel/core_functions.php:194
-msgid "Support"
-msgstr ""
-
-#: epanel/core_functions.php:197
-msgid "Updates"
-msgstr ""
-
-#: epanel/core_functions.php:300 epanel/core_functions.php:511
+#: epanel/core_functions.php:337 epanel/core_functions.php:551
 #: framework/admin/admin.php:196
 msgid "Reset"
 msgstr ""
 
-#: epanel/core_functions.php:301 framework/admin/admin.php:197
+#: epanel/core_functions.php:338 framework/admin/admin.php:197
 msgid "Upload"
 msgstr ""
 
-#: epanel/core_functions.php:328
+#: epanel/core_functions.php:365
 msgid "You don't have pages"
 msgstr ""
 
-#: epanel/core_functions.php:516 includes/admin/admin.php:970
+#: epanel/core_functions.php:556 includes/admin/admin.php:970
 #: includes/admin/admin.php:996 includes/choices.php:96 includes/layouts.php:95
 #: includes/modules.php:298 includes/modules.php:310 includes/modules.php:384
 #: includes/modules.php:396 includes/modules.php:408 includes/modules.php:420
@@ -164,7 +127,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: epanel/core_functions.php:519 includes/admin/admin.php:969
+#: epanel/core_functions.php:559 includes/admin/admin.php:969
 #: includes/admin/admin.php:995 includes/choices.php:97 includes/layouts.php:94
 #: includes/modules.php:297 includes/modules.php:309 includes/modules.php:385
 #: includes/modules.php:397 includes/modules.php:409 includes/modules.php:421
@@ -182,71 +145,71 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: epanel/core_functions.php:533
+#: epanel/core_functions.php:573
 msgid "Enabled"
 msgstr ""
 
-#: epanel/core_functions.php:535
+#: epanel/core_functions.php:575
 msgid "Disabled"
 msgstr ""
 
-#: epanel/core_functions.php:542
+#: epanel/core_functions.php:582
 msgid "Author"
 msgstr ""
 
-#: epanel/core_functions.php:546
+#: epanel/core_functions.php:586
 msgid "Date"
 msgstr ""
 
-#: epanel/core_functions.php:550 includes/admin/admin.php:778
+#: epanel/core_functions.php:590 includes/admin/admin.php:778
 #: includes/admin/admin.php:1013 includes/modules.php:282
 #: includes/template-tags.php:1130 options_extra.php:523
 msgid "Categories"
 msgstr ""
 
-#: epanel/core_functions.php:558
+#: epanel/core_functions.php:598
 msgid "Ratings"
 msgstr ""
 
-#: epanel/core_functions.php:772 includes/modules.php:3224
+#: epanel/core_functions.php:829 includes/modules.php:3224
 msgid "Choose an Image"
 msgstr ""
 
-#: epanel/custom_functions.php:287 framework/functions.php:184
-#: framework/functions.php:1125
+#: epanel/custom_functions.php:343 framework/functions.php:195
+#: framework/functions.php:1136
 msgid "&hellip;"
 msgstr ""
 
-#: epanel/custom_functions.php:626 header.php:192
+#: epanel/custom_functions.php:682 header.php:192
 msgid "Home"
 msgstr ""
 
-#: epanel/custom_functions.php:923 includes/admin/admin.php:1016
+#: epanel/custom_functions.php:979 includes/admin/admin.php:1016
 #: includes/template-tags.php:1133
 msgid "Archives"
 msgstr ""
 
-#: epanel/custom_functions.php:925
+#: epanel/custom_functions.php:981
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: epanel/custom_functions.php:927
+#: epanel/custom_functions.php:983
 msgid "404 Not Found"
 msgstr ""
 
-#: epanel/custom_functions.php:997
+#: epanel/custom_functions.php:1053
 msgid "Currently viewing archives from %1$s"
 msgstr ""
 
-#: epanel/custom_functions.php:1010 index.php:8
+#: epanel/custom_functions.php:1066 index.php:8
 msgid "Search Results for: %s"
 msgstr ""
 
-#: epanel/custom_functions.php:1251
+#: epanel/custom_functions.php:1307
 msgid "Image doesn't exist"
 msgstr ""
 
-#: epanel/custom_functions.php:1416
+#: epanel/custom_functions.php:1472
 msgid ""
 "<div class=\"updated\"><p>This is a fresh installation of %1$s theme. Don't "
 "forget to go to <a href=\"%2$s\">ePanel</a> to set it up. This message will "
@@ -490,30 +453,30 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: framework/functions.php:990 includes/admin/admin.php:1569
+#: framework/functions.php:1001 includes/admin/admin.php:1569
 msgid "Default"
 msgstr ""
 
-#: framework/functions.php:1029 includes/admin/admin.php:470
+#: framework/functions.php:1040 includes/admin/admin.php:470
 #: includes/admin/admin.php:1951 includes/admin/category.php:155
 msgid "Hex Value"
 msgstr ""
 
-#: framework/functions.php:1057
+#: framework/functions.php:1068
 msgid "&laquo; Previous"
 msgstr ""
 
-#: framework/functions.php:1058
+#: framework/functions.php:1069
 msgid "Next &raquo;"
 msgstr ""
 
-#: framework/functions.php:1182 includes/core.php:319
+#: framework/functions.php:1193 includes/core.php:325
 msgid "%d Item in Cart"
 msgid_plural "%d Items in Cart"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/functions.php:1183 includes/core.php:321
+#: framework/functions.php:1194 includes/core.php:327
 msgid "%d Item"
 msgid_plural "%d Items"
 msgstr[0] ""
@@ -577,11 +540,11 @@ msgstr ""
 msgid "Sample Post Title"
 msgstr ""
 
-#: includes/admin/admin.php:26 includes/core.php:1293
+#: includes/admin/admin.php:26 includes/core.php:1331
 msgid "Theme Customizer"
 msgstr ""
 
-#: includes/admin/admin.php:30 includes/core.php:1306
+#: includes/admin/admin.php:30 includes/core.php:1344
 msgid "Module Customizer"
 msgstr ""
 
@@ -1284,11 +1247,11 @@ msgstr ""
 msgid "Search Projects"
 msgstr ""
 
-#: includes/builder-integrations.php:33 includes/core.php:201
+#: includes/builder-integrations.php:33 includes/core.php:207
 msgid "Nothing found"
 msgstr ""
 
-#: includes/builder-integrations.php:34 includes/core.php:202
+#: includes/builder-integrations.php:34 includes/core.php:208
 msgid "Nothing found in Trash"
 msgstr ""
 
@@ -1572,219 +1535,219 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: includes/core.php:45
+#: includes/core.php:51
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/core.php:46
+#: includes/core.php:52
 msgid "Secondary Menu"
 msgstr ""
 
-#: includes/core.php:47
+#: includes/core.php:53
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/core.php:195
+#: includes/core.php:201
 msgid "Add New Category Layout"
 msgstr ""
 
-#: includes/core.php:196
+#: includes/core.php:202
 msgid "Edit Category Layout"
 msgstr ""
 
-#: includes/core.php:197
+#: includes/core.php:203
 msgid "New Category Layout"
 msgstr ""
 
-#: includes/core.php:198
+#: includes/core.php:204
 msgid "All Category Layouts"
 msgstr ""
 
-#: includes/core.php:199
+#: includes/core.php:205
 msgid "View Category Layout"
 msgstr ""
 
-#: includes/core.php:200
+#: includes/core.php:206
 msgid "Search Layouts"
 msgstr ""
 
-#: includes/core.php:318 includes/template-tags.php:314
+#: includes/core.php:324 includes/template-tags.php:314
 msgid "Your Rating:"
 msgstr ""
 
-#: includes/core.php:320
+#: includes/core.php:326
 msgid "%d Items in Cart"
 msgstr ""
 
-#: includes/core.php:322
+#: includes/core.php:328
 msgid "%d Items"
 msgstr ""
 
-#: includes/core.php:326 includes/template-tags.php:1333
+#: includes/core.php:332 includes/template-tags.php:1333
 msgid "There was a problem, please try again."
 msgstr ""
 
-#: includes/core.php:327 includes/template-tags.php:1276
+#: includes/core.php:333 includes/template-tags.php:1276
 msgid "Name field cannot be empty."
 msgstr ""
 
-#: includes/core.php:328 includes/template-tags.php:1284
+#: includes/core.php:334 includes/template-tags.php:1284
 msgid "Email field cannot be empty."
 msgstr ""
 
-#: includes/core.php:329 includes/template-tags.php:1292
+#: includes/core.php:335 includes/template-tags.php:1292
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/core.php:463 includes/core.php:491
+#: includes/core.php:507 includes/core.php:534
 msgid "Callback function: \"%s\" doesnt exist"
 msgstr ""
 
-#: includes/core.php:833 includes/core.php:845 includes/core.php:863
+#: includes/core.php:871 includes/core.php:883 includes/core.php:901
 #: includes/customizer.php:387 includes/customizer.php:393
 #: includes/customizer.php:399
 msgid "Footer Sidebar Left"
 msgstr ""
 
-#: includes/core.php:834 includes/customizer.php:400
+#: includes/core.php:872 includes/customizer.php:400
 msgid "Footer Sidebar Middle Left"
 msgstr ""
 
-#: includes/core.php:835 includes/customizer.php:401
+#: includes/core.php:873 includes/customizer.php:401
 msgid "Footer Sidebar Middle Right"
 msgstr ""
 
-#: includes/core.php:836 includes/core.php:848 includes/core.php:866
+#: includes/core.php:874 includes/core.php:886 includes/core.php:904
 #: includes/customizer.php:390 includes/customizer.php:396
 #: includes/customizer.php:402
 msgid "Footer Sidebar Right"
 msgstr ""
 
-#: includes/core.php:846 includes/customizer.php:394
+#: includes/core.php:884 includes/customizer.php:394
 msgid "Footer Sidebar Middle"
 msgstr ""
 
-#: includes/core.php:847 includes/core.php:855 includes/core.php:856
-#: includes/core.php:857 includes/core.php:864 includes/core.php:865
+#: includes/core.php:885 includes/core.php:893 includes/core.php:894
+#: includes/core.php:895 includes/core.php:902 includes/core.php:903
 #: includes/customizer.php:382 includes/customizer.php:383
 #: includes/customizer.php:384 includes/customizer.php:388
 #: includes/customizer.php:389 includes/customizer.php:395
 msgid "Inactive Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:854 includes/customizer.php:381
+#: includes/core.php:892 includes/customizer.php:381
 msgid "Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:873
+#: includes/core.php:911
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/core.php:876
+#: includes/core.php:914
 msgid "Project Sidebar"
 msgstr ""
 
-#: includes/core.php:968 includes/et-social-followers.php:213
+#: includes/core.php:1006 includes/et-social-followers.php:213
 #: includes/et-social-share.php:56
 msgid "Facebook"
 msgstr ""
 
-#: includes/core.php:969 includes/et-social-followers.php:509
+#: includes/core.php:1007 includes/et-social-followers.php:509
 #: includes/et-social-share.php:67
 msgid "Twitter"
 msgstr ""
 
-#: includes/core.php:970 includes/et-social-followers.php:321
+#: includes/core.php:1008 includes/et-social-followers.php:321
 msgid "Google+"
 msgstr ""
 
-#: includes/core.php:971 includes/et-social-followers.php:567
+#: includes/core.php:1009 includes/et-social-followers.php:567
 #: includes/et-social-share.php:100
 msgid "Pinterest"
 msgstr ""
 
-#: includes/core.php:972 includes/et-social-followers.php:447
+#: includes/core.php:1010 includes/et-social-followers.php:447
 #: includes/et-social-share.php:89
 msgid "Tumblr"
 msgstr ""
 
-#: includes/core.php:973 includes/et-social-share.php:133
+#: includes/core.php:1011 includes/et-social-share.php:133
 msgid "Stumbleupon"
 msgstr ""
 
-#: includes/core.php:974
+#: includes/core.php:1012
 msgid "WordPress"
 msgstr ""
 
-#: includes/core.php:975 includes/et-social-followers.php:597
+#: includes/core.php:1013 includes/et-social-followers.php:597
 msgid "Instagram"
 msgstr ""
 
-#: includes/core.php:976
+#: includes/core.php:1014
 msgid "Dribbble"
 msgstr ""
 
-#: includes/core.php:977 includes/et-social-followers.php:410
+#: includes/core.php:1015 includes/et-social-followers.php:410
 msgid "Vimeo"
 msgstr ""
 
-#: includes/core.php:978 includes/et-social-share.php:111
+#: includes/core.php:1016 includes/et-social-share.php:111
 msgid "LinkedIn"
 msgstr ""
 
-#: includes/core.php:979
+#: includes/core.php:1017
 msgid "RSS"
 msgstr ""
 
-#: includes/core.php:980
+#: includes/core.php:1018
 msgid "Deviantart"
 msgstr ""
 
-#: includes/core.php:981
+#: includes/core.php:1019
 msgid "MySpace"
 msgstr ""
 
-#: includes/core.php:982
+#: includes/core.php:1020
 msgid "Skype"
 msgstr ""
 
-#: includes/core.php:983 includes/et-social-followers.php:366
+#: includes/core.php:1021 includes/et-social-followers.php:366
 msgid "Youtube"
 msgstr ""
 
-#: includes/core.php:984
+#: includes/core.php:1022
 msgid "Picassa"
 msgstr ""
 
-#: includes/core.php:985
+#: includes/core.php:1023
 msgid "Flickr"
 msgstr ""
 
-#: includes/core.php:986
+#: includes/core.php:1024
 msgid "Blogger"
 msgstr ""
 
-#: includes/core.php:987
+#: includes/core.php:1025
 msgid "Spotify"
 msgstr ""
 
-#: includes/core.php:988
+#: includes/core.php:1026
 msgid "Delicious"
 msgstr ""
 
-#: includes/core.php:1068 includes/core.php:1149
+#: includes/core.php:1106 includes/core.php:1187
 msgid "Featured"
 msgstr ""
 
-#: includes/core.php:1080
+#: includes/core.php:1118
 msgid "Recent"
 msgstr ""
 
-#: includes/core.php:1206
+#: includes/core.php:1244
 msgid "Select Page"
 msgstr ""
 
-#: includes/core.php:1260
+#: includes/core.php:1298
 msgid ""
 "Welcome to Extra! Before diving in to your new theme, please visit the <a "
 "style=\"color: #fff; font-weight: bold;\" href=\"%1$s\" "
@@ -1792,7 +1755,7 @@ msgid ""
 "in-depth tutorials."
 msgstr ""
 
-#: includes/core.php:1344
+#: includes/core.php:1382
 msgid "Extra Customizer Settings"
 msgstr ""
 
@@ -2406,6 +2369,11 @@ msgstr ""
 msgid "Footer Settings"
 msgstr ""
 
+#: includes/customizer.php:4224 includes/modules.php:257
+#: includes/modules.php:943 includes/modules.php:2854
+msgid "Layout"
+msgstr ""
+
 #: includes/customizer.php:4227
 msgid "Typography"
 msgstr ""
@@ -2677,15 +2645,15 @@ msgstr ""
 msgid "This will add a border to the top side of the module."
 msgstr ""
 
-#: includes/layouts.php:307
+#: includes/layouts.php:311
 msgid "Edit Layout"
 msgstr ""
 
-#: includes/layouts.php:325 includes/layouts.php:326
+#: includes/layouts.php:329 includes/layouts.php:330
 msgid "Edit Home Layout"
 msgstr ""
 
-#: includes/layouts.php:335 includes/layouts.php:336
+#: includes/layouts.php:339 includes/layouts.php:340
 msgid "Edit Default Layout"
 msgstr ""
 
@@ -3099,6 +3067,10 @@ msgstr ""
 msgid "Nav Arrow Background Color"
 msgstr ""
 
+#: includes/modules.php:1944
+msgid "Navigation"
+msgstr ""
+
 #: includes/modules.php:1946
 msgid "Autoplay"
 msgstr ""
@@ -3259,6 +3231,10 @@ msgstr ""
 
 #: includes/modules.php:2737
 msgid "Post Background Color"
+msgstr ""
+
+#: includes/modules.php:2834
+msgid "Ads"
 msgstr ""
 
 #: includes/modules.php:2856
@@ -3680,6 +3656,10 @@ msgstr ""
 
 #: module-tabbed-posts.php:18
 msgid "Next Tab"
+msgstr ""
+
+#: options_extra.php:69 options_extra.php:1270
+msgid "General"
 msgstr ""
 
 #: options_extra.php:80
@@ -4842,6 +4822,56 @@ msgctxt "noun"
 msgid "COMMENT"
 msgstr ""
 
+#: epanel/core_functions.php:142
+msgctxt "site ads placement areas"
+msgid "Ads"
+msgstr ""
+
+#: epanel/core_functions.php:143
+msgctxt "site color scheme"
+msgid "Colorization"
+msgstr ""
+
+#: epanel/core_functions.php:144
+msgctxt "general options"
+msgid "General"
+msgstr ""
+
+#: epanel/core_functions.php:145
+msgctxt "integrate third-party code"
+msgid "Integration"
+msgstr ""
+
+#: epanel/core_functions.php:146
+msgctxt "page/post"
+msgid "Layout"
+msgstr ""
+
+#: epanel/core_functions.php:147
+msgctxt "navigation menu"
+msgid "Navigation"
+msgstr ""
+
+#: epanel/core_functions.php:148
+msgctxt "search engine optimization"
+msgid "SEO"
+msgstr ""
+
+#: epanel/core_functions.php:149
+msgctxt "documentation links"
+msgid "Support"
+msgstr ""
+
+#: epanel/core_functions.php:150
+msgctxt "theme updates"
+msgid "Updates"
+msgstr ""
+
+#: epanel/core_functions.php:494
+msgctxt "clear static resources"
+msgid "Clear"
+msgstr ""
+
 #: includes/builder-integrations.php:24
 msgctxt "project type general name"
 msgid "Projects"
@@ -4867,22 +4897,22 @@ msgctxt "Project skill singular name"
 msgid "Project Skill"
 msgstr ""
 
-#: includes/core.php:192
+#: includes/core.php:198
 msgctxt "layout type general name"
 msgid "Category Layouts"
 msgstr ""
 
-#: includes/core.php:193
+#: includes/core.php:199
 msgctxt "layout type singular name"
 msgid "Category Layout"
 msgstr ""
 
-#: includes/core.php:194
+#: includes/core.php:200
 msgctxt "layout item"
 msgid "Add New"
 msgstr ""
 
-#: includes/core.php:239
+#: includes/core.php:245
 #. Translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.

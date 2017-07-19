@@ -32,6 +32,12 @@ function et_setup_theme() {
 
 	et_core_setup( get_template_directory_uri() );
 
+	if ( '3.0.61' === ET_CORE_VERSION ) {
+		require_once $template_directory . '/core/functions.php';
+		require_once $template_directory . '/core/components/init.php';
+		et_core_patch_core_3061();
+	}
+
 	load_theme_textdomain( 'extra', $template_directory . '/lang' );
 
 	// deactivate page templates and custom import functions
@@ -377,6 +383,48 @@ function extra_dynamic_styles( $option = "" ) {
 function extra_print_dynamic_styles() {
 	$shared_paramless_callbacks = array();
 
+	if ( is_admin() && ! is_customize_preview() ) {
+		return;
+	}
+
+	$post_id     = et_core_page_resource_get_the_ID();
+	$is_preview  = is_preview() || isset( $_GET['et_pb_preview_nonce'] );
+	$is_singular = et_core_page_resource_is_singular();
+
+	$disabled_global = 'off' === et_get_option( 'et_pb_static_css_file', 'on' );
+	$disabled_post   = $disabled_global || ( $is_singular && 'off' === get_post_meta( $post_id, '_et_pb_static_css_file', true ) );
+
+	$forced_inline     = $is_preview || $disabled_global || $disabled_post;
+	$builder_in_footer = 'on' === et_get_option( 'et_pb_css_in_footer', 'off' );
+
+	$unified_styles = $is_singular && ! $forced_inline && ! $builder_in_footer && et_core_is_builder_used_on_current_request();
+	$resource_owner = $unified_styles ? 'core' : 'extra';
+	$resource_slug  = $unified_styles ? 'unified' : 'customizer';
+
+	if ( $is_preview ) {
+		// Don't let previews cause existing saved static css files to be modified.
+		$resource_slug .= '-preview';
+	}
+
+	if ( function_exists( 'et_fb_is_enabled' ) && et_fb_is_enabled() ) {
+		$resource_slug .= '-vb';
+	}
+
+	if ( ! $unified_styles ) {
+		$post_id = 'global';
+	}
+
+	$styles_manager = et_core_page_resource_get( $resource_owner, $resource_slug, $post_id );
+
+	$styles_manager->forced_inline = $forced_inline;
+
+	if ( ! $styles_manager->forced_inline && $styles_manager->has_file() ) {
+		// Static resource has already been created. No need to continue here.
+		return;
+	}
+
+	$css_output = '';
+
 	foreach ( extra_dynamic_styles() as $option_name => $option_properties ) {
 
 		$option_properties['default'] = isset( $option_properties['default'] ) ? $option_properties['default'] : '';
@@ -392,8 +440,6 @@ function extra_print_dynamic_styles() {
 		}
 
 		$style_id = 'extra-dynamic-styles-' . esc_attr( $option_name );
-
-		$output = "\n".'<style id="' . $style_id . '" type="text/css">' . "\n";
 
 		$value_bind = $option_properties['value_bind'];
 		$value_bind_style = $value_bind['style'];
@@ -411,8 +457,7 @@ function extra_print_dynamic_styles() {
 
 				$css = extra_dynamic_selector_css( $property_selectors, $value, $property );
 
-				$css = apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
-				echo extra_set_dynamic_style_el( $prop_style_id, $css );
+				$css_output .= apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
 			}
 		} else if ( 'dynamic_selectors_value_format' === $value_bind_style ) {
 			foreach ( $value_bind_property_selectors as $property_options ) {
@@ -438,8 +483,7 @@ function extra_print_dynamic_styles() {
 					$css = extra_dynamic_selector_css( $property_selectors, $formatted_value, $property );
 				}
 
-				$css = apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
-				echo extra_set_dynamic_style_el( $prop_style_id, $css );
+				$css_output .= apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
 			}
 		} else if ( 'dynamic_selectors_value_format_callback' === $value_bind_style ) {
 			foreach ( $value_bind_property_selectors as $property => $property_selectors ) {
@@ -472,8 +516,7 @@ function extra_print_dynamic_styles() {
 					$css = extra_dynamic_selector_css( $property_selectors, $formatted_value, $property );
 				}
 
-				$css = apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
-				echo extra_set_dynamic_style_el( $prop_style_id, $css );
+				$css_output .= apply_filters( 'extra_print_dynamic_styles-' . $prop_style_id . '-css_output', $css, $option_properties, $value );
 			}
 		} else if ( 'dynamic_selectors_shared_paramless_callback' === $value_bind_style ) {
 			// Paramless callbacks should be printed once only
@@ -492,19 +535,14 @@ function extra_print_dynamic_styles() {
 			continue;
 		}
 
-		$css = apply_filters( 'extra_print_dynamic_styles-' . $shared_paramless_callback . '-css_output', $css );
-		echo extra_set_dynamic_style_el( 'extra-dynamic-styles-' . $shared_paramless_callback, $css );
+		$css_output .= apply_filters( 'extra_print_dynamic_styles-' . $shared_paramless_callback . '-css_output', $css );
 	}
+
+	$styles_manager->set_data( $css_output );
 }
 
-add_action( 'wp_head', 'extra_print_dynamic_styles' );
+add_action( 'wp', 'extra_print_dynamic_styles' );
 add_action( 'customize_controls_print_styles', 'extra_print_dynamic_styles' );
-
-function extra_set_dynamic_style_el( $style_id, $css ) {
-	if ( !empty( $css ) ) {
-		return "\n" . '<style type="text/css" id="' . esc_attr( $style_id ) . '">' . "\n" . $css  .'</style>' . "\n";
-	}
-}
 
 function extra_dynamic_selector_css( $property_selectors, $value, $css_property = '' ) {
 	if ( empty( $value ) ) {
