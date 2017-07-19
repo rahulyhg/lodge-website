@@ -41,7 +41,7 @@ class acf_pro {
 		
 		
 		// actions
-		add_action('acf/init',									array($this, 'register_assets'));
+		add_action('init',										array($this, 'register_assets'));
 		add_action('acf/include_field_types',					array($this, 'include_field_types'), 5);
 		add_action('acf/input/admin_enqueue_scripts',			array($this, 'input_admin_enqueue_scripts'));
 		add_action('acf/field_group/admin_enqueue_scripts',		array($this, 'field_group_admin_enqueue_scripts'));
@@ -119,11 +119,7 @@ class acf_pro {
 	
 	function input_admin_enqueue_scripts() {
 		
-		// scripts
 		wp_enqueue_script('acf-pro-input');
-	
-	
-		// styles
 		wp_enqueue_style('acf-pro-input');
 		
 	}
@@ -144,11 +140,7 @@ class acf_pro {
 	
 	function field_group_admin_enqueue_scripts() {
 		
-		// scripts
 		wp_enqueue_script('acf-pro-field-group');
-	
-	
-		// styles
 		wp_enqueue_style('acf-pro-field-group');
 		
 	}
