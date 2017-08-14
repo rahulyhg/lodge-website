@@ -871,6 +871,9 @@ class ET_Builder_Element {
 					$global_atts = shortcode_parse_atts( $global_content_processed );
 				}
 
+				// Run et_pb_module_shortcode_attributes filter to apply migration system on attributes of global module
+				$global_atts = apply_filters( 'et_pb_module_shortcode_attributes', $global_atts, $atts, $this->slug, $this->_get_current_shortcode_address() );
+
 				foreach( $this->shortcode_atts as $single_attr => $value ) {
 					if ( isset( $global_atts[$single_attr] ) && ! in_array( $single_attr, $unsynced_options ) ) {
 						// replace %22 with double quotes in options to make sure it's rendered correctly
@@ -1060,21 +1063,24 @@ class ET_Builder_Element {
 
 		// Build object.
 		$object = array(
-			'_i'                => $_i,
-			'_order'            => $_i,
+			'_i'                          => $_i,
+			'_order'                      => $_i,
 			// TODO make address be _address, its conflicting with 'address' prop in map module... (not sure how though, they are in diffent places...)
-			'address'           => $address,
-			'child_slug'        => $this->child_slug,
-			'fb_support'        => $this->fb_support,
-			'parent_address'    => $parent_address,
-			'shortcode_index'   => $shortcode_index,
-			'type'              => $function_name,
-			'component_path'    => $component_path,
-			'main_css_element'  => $this->main_css_element,
-			'attrs'             => $attrs,
-			'content'           => $prepared_content,
-			'is_module_child'   => 'child' === $module_type,
-			'prepared_styles'   => ! $this->fb_support ? ET_Builder_Element::get_style() : '',
+			'address'                     => $address,
+			'child_slug'                  => $this->child_slug,
+			'fb_support'                  => $this->fb_support,
+			'parent_address'              => $parent_address,
+			'shortcode_index'             => $shortcode_index,
+			'type'                        => $function_name,
+			'component_path'              => $component_path,
+			'main_css_element'            => $this->main_css_element,
+			'attrs'                       => $attrs,
+			'content'                     => $prepared_content,
+			'is_module_child'             => 'child' === $module_type,
+			'prepared_styles'             => ! $this->fb_support ? ET_Builder_Element::get_style() : '',
+			'child_title_var'             => isset( $this->child_title_var ) ? $this->child_title_var : '',
+			'child_title_fallback_var'    => isset( $this->child_title_fallback_var ) ? $this->child_title_fallback_var : '',
+			'advanced_setting_title_text' => isset( $this->advanced_setting_title_text ) ? $this->advanced_setting_title_text : '',
 		);
 
 		if ( ! empty( $unsynced_global_attributes ) ) {
@@ -3196,6 +3202,11 @@ class ET_Builder_Element {
 					$radio_check = '';
 					$row_class   = 'et_options_list_row';
 
+					if ( isset( $field['checkbox'] ) && true === $field['checkbox'] ) {
+						$radio_check = '<a href="#" class="et_options_list_check"></a>';
+						$row_class   .= ' et_options_list_row_checkbox';
+					}
+
 					if ( isset( $field['radio'] ) && true === $field['radio'] ) {
 						$radio_check = '<a href="#" class="et_options_list_check"></a>';
 						$row_class   .= ' et_options_list_row_radio';
@@ -5006,7 +5017,9 @@ class ET_Builder_Element {
 					$button_border_radius_hover_processed .= '' !== $button_border_radius_hover_processed ? ' !important' : '';
 				}
 
-				$main_element_styles_padding_important = 'no' === et_builder_option( 'all_buttons_icon' ) && 'off' !== $button_use_icon;
+				$global_use_icon_value = et_builder_option( 'all_buttons_icon' );
+
+				$main_element_styles_padding_important = 'no' === $global_use_icon_value && 'off' !== $button_use_icon;
 
 				$main_element_styles = sprintf(
 					'%1$s
@@ -5040,6 +5053,15 @@ class ET_Builder_Element {
 					'declaration' => rtrim( $main_element_styles ),
 				) );
 
+				// if button disabled globally and not enabled in module then no padding css should be generated.
+				$on_hover_padding = 'default' === $button_use_icon && 'no' === $global_use_icon_value
+					? ''
+					: sprintf( 'padding-left:%1$s%3$s; padding-right: %2$s%3$s;',
+						'left' === $button_icon_placement ? '2em' : '0.7em',
+						'left' === $button_icon_placement ? '0.7em' : '2em',
+						$main_element_styles_padding_important ? ' !important' : ''
+					);
+
 				$main_element_styles_hover = sprintf(
 					'%1$s
 					%2$s
@@ -5052,14 +5074,7 @@ class ET_Builder_Element {
 					'' !== $button_border_color_hover ? sprintf( 'border-color:%1$s !important;', $button_border_color_hover ) : '',
 					'' !== $button_border_radius_hover_processed ? sprintf( 'border-radius:%1$s;', $button_border_radius_hover_processed ) : '',
 					'' !== $button_letter_spacing_hover && 'px' !== $button_letter_spacing_hover ? sprintf( 'letter-spacing:%1$s;', et_builder_process_range_value( $button_letter_spacing_hover ) ) : '',
-					'off' === $button_on_hover ?
-						''
-						:
-						sprintf( 'padding-left:%1$s%3$s; padding-right: %2$s%3$s;',
-							'left' === $button_icon_placement ? '2em' : '0.7em',
-							'left' === $button_icon_placement ? '0.7em' : '2em',
-							$main_element_styles_padding_important ? ' !important' : ''
-						)
+					'off' === $button_on_hover ? '' : $on_hover_padding
 				);
 
 				self::set_style( $function_name, array(
@@ -5135,26 +5150,29 @@ class ET_Builder_Element {
 						) );
 					}
 
-					$hover_after_styles = sprintf(
-						'%1$s
-						%2$s
-						%3$s',
-						'' !== $button_icon_code ?
-							sprintf( 'margin-left:%1$s;', '35' !== $button_icon_code ? '.3em' : '0' )
-							: '',
+					// if button disabled globally and not enabled in module then no :after:hover css should be generated.
+					if ( 'default' !== $button_use_icon || 'no' !== $global_use_icon_value ) {
+						$hover_after_styles = sprintf(
+							'%1$s
+							%2$s
+							%3$s',
 							'' !== $button_icon_code ?
-								sprintf( '%1$s: auto; margin-left: %2$s;',
-									'left' === $button_icon_placement ? 'right' : 'left',
-									'left' === $button_icon_placement ? '-1.3em' : '.3em'
-								)
-							: '',
-						'off' !== $button_on_hover ? 'opacity: 1;' : ''
-					);
+								sprintf( 'margin-left:%1$s;', '35' !== $button_icon_code ? '.3em' : '0' )
+								: '',
+								'' !== $button_icon_code ?
+									sprintf( '%1$s: auto; margin-left: %2$s;',
+										'left' === $button_icon_placement ? 'right' : 'left',
+										'left' === $button_icon_placement ? '-1.3em' : '.3em'
+									)
+								: '',
+							'off' !== $button_on_hover ? 'opacity: 1;' : ''
+						);
 
-					self::set_style( $function_name, array(
-						'selector'    => $css_element_processed . ':hover' . $button_icon_pseudo_selector,
-						'declaration' => rtrim( $hover_after_styles ),
-					) );
+						self::set_style( $function_name, array(
+							'selector'    => $css_element_processed . ':hover' . $button_icon_pseudo_selector,
+							'declaration' => rtrim( $hover_after_styles ),
+						) );
+					}
 
 					if ( '' === $button_icon ) {
 						$default_icons_size = $int_font_size * 1.6 . 'px';
@@ -5653,6 +5671,15 @@ class ET_Builder_Element {
 			}
 
 			$module_fields_defaults[ $_module_slug ] = isset( $_module->fields_defaults ) ? $_module->fields_defaults : array();
+			$module_fields_defaults[ $_module_slug ]['defaultProps'] = array();
+
+			$child_items_default_fields = array( 'advanced_setting_title_text', 'child_title_fallback_var', 'child_title_var' ); 
+
+			foreach( $child_items_default_fields as $single_field ) {
+				if ( isset( $_module->$single_field ) ) {
+					$module_fields_defaults[ $_module_slug ]['defaultProps'][ $single_field ] = $_module->$single_field ;
+				}
+			}
 		}
 
 		return $module_fields_defaults;

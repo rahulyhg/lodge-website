@@ -54,6 +54,10 @@ $shortname 	= esc_html( $shortname );
 $pages_ids 	= array_map( 'intval', $pages_ids );
 $cats_ids 	= array_map( 'intval', $cats_ids );
 
+// Remove option-based filter output on theme options loading
+remove_filter( 'et_load_unminified_scripts', 'et_extra_load_unminified_scripts' );
+remove_filter( 'et_load_unminified_styles', 'et_extra_load_unminified_styles' );
+
 $options = array(
 
 	array(
@@ -479,6 +483,26 @@ $options = array(
 		"type" => "checkbox2",
 		"std"  => "false",
 		"desc" => esc_html__( "Enable this option to get the smooth scrolling effect with mouse wheel", $themename ),
+	),
+
+	array(
+		"name"                  => esc_html__( "Minify And Combine Javascript Files", $themename ),
+		"id"                    => $shortname . "_minify_combine_scripts",
+		"type"                  => "checkbox",
+		"std"                   => "on",
+		"desc"                  => esc_html__( "Use combined and minified javascript file to speed up your site's page load.", $themename ),
+		"hide_option"           => et_load_unminified_scripts(),
+		"hidden_option_message" => esc_html__( 'Extra uses uncombined and unminified javascript files because "SCRIPT_DEBUG" constant on wp-config.php has been set to "true". Other plugin can enforce Extra to use uncombined and unminified javascript files by filtering "et_load_unminified_scripts" filter as well.', $themename ),
+	),
+
+	array(
+		"name"                  => esc_html__( "Minify And Combine CSS Files", $themename ),
+		"id"                    => $shortname . "_minify_combine_styles",
+		"type"                  => "checkbox",
+		"std"                   => "on",
+		"desc"                  => esc_html__( "Use combined and minified CSS file to speed up your site's page load.", $themename ),
+		"hide_option"           => et_load_unminified_styles(),
+		"hidden_option_message" => esc_html__( 'Extra uses uncombined and unminified CSS files because "SCRIPT_DEBUG" constant on wp-config.php has been set to "true". Other plugin can enforce Extra to use uncombined and unminified CSS files by filtering "et_load_unminified_styles" filter as well.', $themename ),
 	),
 
 	array( "type" => "clearfix"),
@@ -1642,3 +1666,7 @@ $options = array(
 				//-------------------------------------------------------------------------------------//
 
 );
+
+// Re-add option-based filter output on theme options loading
+add_filter( 'et_load_unminified_scripts', 'et_extra_load_unminified_scripts' );
+add_filter( 'et_load_unminified_styles', 'et_extra_load_unminified_styles' );

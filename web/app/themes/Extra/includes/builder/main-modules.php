@@ -518,6 +518,7 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 			'src',
 			'gallery_ids',
 			'gallery_orderby',
+			'gallery_captions',
 			'fullwidth',
 			'posts_number',
 			'show_title_and_caption',
@@ -645,6 +646,7 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 				'overwrite'       => array(
 					'ids'         => 'gallery_ids',
 					'orderby'     => 'gallery_orderby',
+					'captions'    => 'gallery_captions',
 				),
 				'toggle_slug'     => 'main_content',
 			),
@@ -663,6 +665,13 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 					'__gallery',
 				),
 				'toggle_slug' => 'main_content',
+			),
+			'gallery_captions' => array(
+				'type'  => 'hidden',
+				'class' => array( 'et-pb-gallery-captions-field' ),
+				'computed_affects'   => array(
+					'__gallery',
+				),
 			),
 			'fullwidth' => array(
 				'label'             => esc_html__( 'Layout', 'et_builder' ),
@@ -854,6 +863,7 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 				'computed_depends_on' => array(
 					'gallery_ids',
 					'gallery_orderby',
+					'gallery_captions',
 					'fullwidth',
 					'orientation',
 				),
@@ -883,10 +893,11 @@ class ET_Builder_Module_Gallery extends ET_Builder_Module {
 		$attachments = array();
 
 		$defaults = array(
-			'gallery_ids'     => array(),
-			'gallery_orderby' => '',
-			'fullwidth'       => 'off',
-			'orientation'     => 'landscape',
+			'gallery_ids'      => array(),
+			'gallery_orderby'  => '',
+			'gallery_captions' => array(),
+			'fullwidth'        => 'off',
+			'orientation'      => 'landscape',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -11575,6 +11586,7 @@ class ET_Builder_Module_Accordion extends ET_Builder_Module {
 		if ( '' !== $icon_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
 				'selector'    => '%%order_class%% .et_pb_toggle_title:before',
+				'priority'    => ET_Builder_Element::DEFAULT_PRIORITY,
 				'declaration' => sprintf(
 					'color: %1$s;',
 					esc_html( $icon_color )
@@ -11979,6 +11991,7 @@ class ET_Builder_Module_Toggle extends ET_Builder_Module {
 		if ( '' !== $icon_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
 				'selector'    => '%%order_class%% .et_pb_toggle_title:before',
+				'priority'    => ET_Builder_Element::DEFAULT_PRIORITY + 1,
 				'declaration' => sprintf(
 					'color: %1$s;',
 					esc_html( $icon_color )
@@ -12382,6 +12395,7 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 		$et_error_message = '';
 		$et_contact_error = false;
 		$current_form_fields = isset( $_POST['et_pb_contact_email_fields_' . $et_pb_contact_form_num] ) ? $_POST['et_pb_contact_email_fields_' . $et_pb_contact_form_num] : '';
+		$hidden_form_fields = isset( $_POST['et_pb_contact_email_hidden_fields_' . $et_pb_contact_form_num] ) ? $_POST['et_pb_contact_email_hidden_fields_' . $et_pb_contact_form_num] : false;
 		$contact_email = '';
 		$processed_fields_values = array();
 
@@ -12456,6 +12470,17 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 				foreach ( $processed_fields_values as $key => $value ) {
 					$message_pattern = str_ireplace( "%%{$key}%%", $value['value'], $message_pattern );
 				}
+
+				if ( false !== $hidden_form_fields ) {
+					$hidden_form_fields = str_replace( '\\', '' ,  $hidden_form_fields );
+					$hidden_form_fields = json_decode( $hidden_form_fields );
+
+					if ( is_array( $hidden_form_fields ) ) {
+						foreach ( $hidden_form_fields as $hidden_field_label ) {
+							$message_pattern = str_ireplace( "%%{$hidden_field_label}%%", '', $message_pattern );
+						}
+					}
+				}
 			} else {
 				// use default message pattern if custom pattern is not defined
 				$message_pattern = isset( $processed_fields_values['message']['value'] ) ? $processed_fields_values['message']['value'] : '';
@@ -12485,8 +12510,8 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module {
 			wp_mail( apply_filters( 'et_contact_page_email_to', $et_email_to ),
 				et_get_safe_localization( sprintf(
 					__( 'New Message From %1$s%2$s', 'et_builder' ),
-					sanitize_text_field( html_entity_decode( $et_site_name ) ),
-					( '' !== $title ? sprintf( _x( ' - %s', 'contact form title separator', 'et_builder' ), sanitize_text_field( html_entity_decode( $title ) ) ) : '' )
+					sanitize_text_field( html_entity_decode( $et_site_name, ENT_QUOTES, 'UTF-8' ) ),
+					( '' !== $title ? sprintf( _x( ' - %s', 'contact form title separator', 'et_builder' ), sanitize_text_field( html_entity_decode( $title, ENT_QUOTES, 'UTF-8' ) ) ) : '' )
 				) ),
 				! empty( $email_message ) ? $email_message : ' ',
 				apply_filters( 'et_contact_page_headers', $headers, $contact_name, $contact_email )
@@ -12593,6 +12618,7 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			'input_border_radius',
 			'field_background_color',
 			'checkbox_checked',
+			'checkbox_options',
 			'radio_options',
 			'select_options',
 			'conditional_logic',
@@ -12694,13 +12720,13 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 					'input'    => esc_html__( 'Input Field', 'et_builder' ),
 					'email'    => esc_html__( 'Email Field', 'et_builder' ),
 					'text'     => esc_html__( 'Textarea', 'et_builder' ),
-					'checkbox' => esc_html__( 'Checkbox', 'et_builder' ),
+					'checkbox' => esc_html__( 'Checkboxes', 'et_builder' ),
 					'radio'    => esc_html__( 'Radio Buttons', 'et_builder' ),
 					'select'   => esc_html__( 'Select Dropdown', 'et_builder' ),
 				),
 				'description' => esc_html__( 'Choose the type of field', 'et_builder' ),
 				'affects'     => array(
-					'checkbox_checked',
+					'checkbox_options',
 					'radio_options',
 					'select_options',
 					'min_length',
@@ -12711,13 +12737,17 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 			),
 			'checkbox_checked' => array(
 				'label'           => esc_html__( 'Checked By Default', 'et_builder' ),
-				'type'            => 'yes_no_button',
+				'type'            => 'hidden',
 				'option_category' => 'layout',
 				'default'         => 'off',
-				'options'         => array(
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-					'off' => esc_html__( 'No', 'et_builder' ),
-				),
+				'depends_show_if' => 'checkbox',
+				'toggle_slug'     => 'field_options',
+			),
+			'checkbox_options' => array(
+				'label'           => esc_html__( 'Options', 'et_builder' ),
+				'type'            => 'options_list',
+				'checkbox'        => true,
+				'option_category' => 'basic_option',
 				'depends_show_if' => 'checkbox',
 				'toggle_slug'     => 'field_options',
 			),
@@ -12876,6 +12906,7 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 		$field_background_color     = $this->shortcode_atts['field_background_color'];
 		$input_border_radius        = $this->shortcode_atts['input_border_radius'];
 		$checkbox_checked           = $this->shortcode_atts['checkbox_checked'];
+		$checkbox_options           = $this->shortcode_atts['checkbox_options'];
 		$radio_options              = $this->shortcode_atts['radio_options'];
 		$select_options             = $this->shortcode_atts['select_options'];
 		$min_length                 = $this->shortcode_atts['min_length'];
@@ -13107,20 +13138,53 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 				);
 				break;
 			case 'checkbox' :
+				$input_field = '';
+
+				if ( ! $checkbox_options ) {
+					$is_checked       = ! empty( $checkbox_checked ) && 'on' === $checkbox_checked;
+					$checkbox_options = sprintf(
+						'[{"value":"%1$s","checked":%2$s}]',
+						esc_attr( $field_title ),
+						$is_checked ? 1 : 0
+					);
+					$field_title = '';
+				}
+
+				$option_search    = array( '&#91;', '&#93;' );
+				$option_replace   = array( '[', ']' );
+				$checkbox_options = str_replace( $option_search, $option_replace, $checkbox_options );
+				$checkbox_options = json_decode( $checkbox_options );
+
+				foreach ( $checkbox_options as $index => $option ) {
+					$is_checked   = 1 === $option->checked ? true : false;
+					$option_value = wp_strip_all_tags( $option->value );
+
+					$input_field .= sprintf(
+						'<span class="et_pb_contact_field_checkbox">
+							<input type="checkbox" id="et_pb_contact_%1$s_%3$s" class="input" value="%2$s"%4$s>
+							<label for="et_pb_contact_%1$s_%3$s"><i></i>%2$s</label>
+						</span>',
+						esc_attr( $field_id ),
+						esc_attr( $option_value ),
+						esc_attr( $index ),
+						$is_checked ? ' checked="checked"' : ''
+					);
+				}
+
 				$input_field = sprintf(
-					'<input type="checkbox" id="et_pb_contact_%3$s_%2$s_checkbox" class="input" value="%8$s" data-required_mark="%6$s" data-field_type="%4$s" data-original_id="%3$s"%9$s>
-					<label for="et_pb_contact_%3$s_%2$s_checkbox"><i></i>%5$s</label>
-					<input id="et_pb_contact_%3$s_%2$s" name="et_pb_contact_%3$s_%2$s" type="text" value="%8$s" data-checked="%7$s" data-unchecked="%8$s">',
-					( isset( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ? esc_attr( sanitize_text_field( $_POST['et_pb_contact_' . $field_id . '_' . $current_module_num] ) ) : '' ),
-					esc_attr( $current_module_num ),
+					'<input class="et_pb_checkbox_handle" type="hidden" name="et_pb_contact_%1$s_%4$s" data-required_mark="%3$s" data-field_type="%2$s" data-original_id="%1$s">
+					<span class="et_pb_contact_field_options_wrapper">
+						<span class="et_pb_contact_field_options_title">%5$s</span>
+						<span class="et_pb_contact_field_options_list">%6$s</span>
+					</span>',
 					esc_attr( $field_id ),
 					esc_attr( $field_type ),
-					esc_attr( $field_title ),
 					'off' === $required_mark ? 'not_required' : 'required',
-					esc_attr__( 'checked', 'et_builder' ),
-					esc_attr__( 'not checked', 'et_builder' ),
-					'on' === $checkbox_checked ? 'checked="checked"' : ''
+					esc_attr( $current_module_num ),
+					esc_html( $field_title ),
+					$input_field
 				);
+
 				break;
 			case 'radio' :
 				$input_field = '';
@@ -13155,9 +13219,9 @@ class ET_Builder_Module_Contact_Form_Item extends ET_Builder_Module {
 				}
 
 				$input_field = sprintf(
-					'<span class="et_pb_contact_field_radio_wrapper">
-						<span class="et_pb_contact_field_radio_title">%1$s</span>
-						<span class="et_pb_contact_field_radio_list">%2$s</span>
+					'<span class="et_pb_contact_field_options_wrapper">
+						<span class="et_pb_contact_field_options_title">%1$s</span>
+						<span class="et_pb_contact_field_options_list">%2$s</span>
 					</span>',
 					esc_html( $field_title ),
 					$input_field
@@ -14220,11 +14284,11 @@ class ET_Builder_Module_Blog extends ET_Builder_Module {
 		$this->custom_css_options = array(
 			'title' => array(
 				'label'    => esc_html__( 'Title', 'et_builder' ),
-				'selector' => '.et_pb_post .entry-title',
+				'selector' => '.entry-title',
 			),
 			'post_meta' => array(
 				'label'    => esc_html__( 'Post Meta', 'et_builder' ),
-				'selector' => '.et_pb_post .post-meta',
+				'selector' => '.post-meta',
 			),
 			'pagenavi' => array(
 				'label'    => esc_html__( 'Pagenavi', 'et_builder' ),
@@ -14236,7 +14300,7 @@ class ET_Builder_Module_Blog extends ET_Builder_Module {
 			),
 			'read_more' => array(
 				'label'    => esc_html__( 'Read More Button', 'et_builder' ),
-				'selector' => '.et_pb_post .more-link',
+				'selector' => '.more-link',
 			),
 		);
 	}
@@ -15379,6 +15443,9 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 					'top_rated' => esc_html__( 'Top Rated Products', 'et_builder' ),
 					'product_category' => esc_html__( 'Product Category', 'et_builder' ),
 				),
+				'affects'        => array(
+					'include_categories',
+				),
 				'description'      => esc_html__( 'Choose which type of products you would like to display.', 'et_builder' ),
 				'toggle_slug'      => 'main_content',
 				'computed_affects' => array(
@@ -15403,6 +15470,7 @@ class ET_Builder_Module_Shop extends ET_Builder_Module {
 					'use_terms'    => true,
 					'term_name'    => 'product_cat',
 				),
+				'depends_show_if'  => 'product_category',
 				'description'      => esc_html__( 'Choose which categories you would like to include.', 'et_builder' ),
 				'taxonomy_name'    => 'product_category',
 				'toggle_slug'      => 'main_content',
@@ -18854,30 +18922,42 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 					'font_size' => array(
 						'default'      => '30px',
 					),
-					'hide_line_height'    => true,
+					'line_height'    => array(
+						'default' => '1em',
+					),
+					'letter_spacing' => array(
+						'default' => '0px',
+					),
 					'hide_text_color'     => true,
-					'hide_letter_spacing' => true,
 				),
 				'content' => array(
 					'label'    => esc_html__( 'Content', 'et_builder' ),
 					'css'      => array(
-						'main' => "%%order_class%%.et_pb_fullwidth_header p",
+						'main' => "%%order_class%%.et_pb_fullwidth_header .et_pb_header_content_wrapper",
 					),
 					'font_size' => array(
 						'default'      => '14px',
 					),
-					'hide_line_height'    => true,
+					'line_height'    => array(
+						'default' => '1em',
+					),
+					'letter_spacing' => array(
+						'default' => '0px',
+					),
 					'hide_text_color'     => true,
-					'hide_letter_spacing' => true,
 				),
 				'subhead' => array(
 					'label'    => esc_html__( 'Subhead', 'et_builder' ),
 					'css'      => array(
 						'main' => "%%order_class%%.et_pb_fullwidth_header .et_pb_fullwidth_header_subhead",
 					),
-					'hide_line_height'    => true,
+					'line_height'    => array(
+						'default' => '1em',
+					),
+					'letter_spacing' => array(
+						'default' => '0px',
+					),
 					'hide_text_color'     => true,
-					'hide_letter_spacing' => true,
 				),
 			),
 			'button' => array(
@@ -19333,7 +19413,7 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 
 		if ( '' !== $content_font_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
-				'selector'    => '%%order_class%%.et_pb_fullwidth_header p',
+				'selector'    => '%%order_class%%.et_pb_fullwidth_header .et_pb_header_content_wrapper',
 				'declaration' => sprintf(
 					'color: %1$s !important;',
 					esc_html( $content_font_color )
@@ -19428,7 +19508,7 @@ class ET_Builder_Module_Fullwidth_Header extends ET_Builder_Module {
 				( $title ? sprintf( '<h1>%1$s</h1>', $title ) : '' ),
 				( $subhead ? sprintf( '<span class="et_pb_fullwidth_header_subhead">%1$s</span>', $subhead ) : '' ),
 				$logo_image,
-				$this->shortcode_content,
+				sprintf( '<div class="et_pb_header_content_wrapper">%1$s</div>', $this->shortcode_content ),
 				( '' !== $button_output ? $button_output : '' ),
 				( '' !== $content_orientation ? sprintf( ' %1$s', $content_orientation ) : '' )
 			);
@@ -21111,12 +21191,16 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 			'admin_label',
 			'module_id',
 			'module_class',
+			'use_grayscale_filter',
+			'grayscale_filter_amount',
 		);
 
 		$this->fields_defaults = array(
 			'zoom_level'  => array( '18', 'only_default_setting' ),
 			'mouse_wheel' => array( 'on' ),
 			'mobile_dragging' => array( 'on' ),
+			'use_grayscale_filter'    => array( 'off' ),
+			'grayscale_filter_amount' => array( '0' ),
 		);
 
 		$this->options_toggles = array(
@@ -21128,6 +21212,7 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 			'advanced' => array(
 				'toggles' => array(
 					'controls' => esc_html__( 'Controls', 'et_builder' ),
+					'filter'   => esc_html__( 'Filter', 'et_builder' ),
 				),
 			),
 		);
@@ -21218,6 +21303,30 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 				'toggle_slug'     => 'controls',
 				'description'     => esc_html__( 'Here you can choose whether or not the map will be draggable on mobile devices.', 'et_builder' ),
 			),
+			'use_grayscale_filter' => array(
+				'label'           => esc_html__( 'Use Grayscale Filter', 'et_builder' ),
+				'type'            => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options'         => array(
+					'off' => esc_html__( 'No', 'et_builder' ),
+					'on'  => esc_html__( 'Yes', 'et_builder' ),
+				),
+				'affects'         => array(
+					'grayscale_filter_amount',
+				),
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'filter',
+			),
+			'grayscale_filter_amount' => array(
+				'label'           => esc_html__( 'Grayscale Filter Amount (%)', 'et_builder' ),
+				'type'            => 'range',
+				'default'         => '0',
+				'option_category' => 'configuration',
+				'tab_slug'        => 'advanced',
+				'toggle_slug'     => 'filter',
+				'depends_show_if' => 'on',
+				'validate_unit'   => false,
+			),
 			'disabled_on' => array(
 				'label'           => esc_html__( 'Disable on', 'et_builder' ),
 				'type'            => 'multiple_checkboxes',
@@ -21259,13 +21368,15 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 	}
 
 	function shortcode_callback( $atts, $content = null, $function_name ) {
-		$module_id    = $this->shortcode_atts['module_id'];
-		$module_class = $this->shortcode_atts['module_class'];
-		$address_lat  = $this->shortcode_atts['address_lat'];
-		$address_lng  = $this->shortcode_atts['address_lng'];
-		$zoom_level   = $this->shortcode_atts['zoom_level'];
-		$mouse_wheel  = $this->shortcode_atts['mouse_wheel'];
-		$mobile_dragging = $this->shortcode_atts['mobile_dragging'];
+		$module_id               = $this->shortcode_atts['module_id'];
+		$module_class            = $this->shortcode_atts['module_class'];
+		$address_lat             = $this->shortcode_atts['address_lat'];
+		$address_lng             = $this->shortcode_atts['address_lng'];
+		$zoom_level              = $this->shortcode_atts['zoom_level'];
+		$mouse_wheel             = $this->shortcode_atts['mouse_wheel'];
+		$mobile_dragging         = $this->shortcode_atts['mobile_dragging'];
+		$use_grayscale_filter    = $this->shortcode_atts['use_grayscale_filter'];
+		$grayscale_filter_amount = $this->shortcode_atts['grayscale_filter_amount'];
 
 		if ( et_pb_enqueue_google_maps_script() ) {
 			wp_enqueue_script( 'google-maps-api' );
@@ -21275,8 +21386,13 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 
 		$all_pins_content = $this->shortcode_content;
 
+		$grayscale_filter_data = '';
+		if ( 'on' === $use_grayscale_filter && '' !== $grayscale_filter_amount ) {
+			$grayscale_filter_data = sprintf( ' data-grayscale="%1$s"', esc_attr( $grayscale_filter_amount ) );
+		}
+
 		$output = sprintf(
-			'<div%5$s class="et_pb_module et_pb_map_container%6$s">
+			'<div%5$s class="et_pb_module et_pb_map_container%6$s"%9$s>
 				<div class="et_pb_map" data-center-lat="%1$s" data-center-lng="%2$s" data-zoom="%3$d" data-mouse-wheel="%7$s" data-mobile-dragging="%8$s"></div>
 				%4$s
 			</div>',
@@ -21287,7 +21403,8 @@ class ET_Builder_Module_Fullwidth_Map extends ET_Builder_Module {
 			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
 			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
 			esc_attr( $mouse_wheel ),
-			esc_attr( $mobile_dragging )
+			esc_attr( $mobile_dragging ),
+			$grayscale_filter_data
 		);
 
 		return $output;

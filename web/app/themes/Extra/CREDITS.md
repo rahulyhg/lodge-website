@@ -137,7 +137,7 @@ SOFTWARE.
 jQuery Waypoints
 ----------------
 
-/scripts/ext/jquery.waypoints.js
+/scripts/ext/jquery.waypoints.min.js
 
 ```text
 Copyright (c) 2011-2013 Caleb Troughton

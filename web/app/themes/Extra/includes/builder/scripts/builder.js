@@ -5,7 +5,7 @@ window.wp = window.wp || {};
 /**
  * The builder version and product name will be updated by grunt release task. Do not edit!
  */
-window.et_builder_version = '3.0.64';
+window.et_builder_version = '3.0.69';
 window.et_builder_product_name = 'Divi';
 
 ( function($) {
@@ -300,7 +300,8 @@ window.et_builder_product_name = 'Divi';
 				is_global : 'false',
 				layout_type : '',
 				module_type : '',
-				categories : []
+				categories : [],
+				unsynced_options : []
 			}
 
 		} );
@@ -878,6 +879,7 @@ window.et_builder_product_name = 'Divi';
 					global_id          = 'global' === this.model.get( 'is_global' ) ? this.model.get( 'ID' ) : '',
 					specialty_row      = typeof $( '.et-pb-saved-modules-switcher' ).data( 'specialty_columns' ) !== 'undefined' ? 'on' : 'off',
 					shortcode          = this.model.get( 'shortcode' ),
+					unsynced_options   = this.model.get( 'unsynced_options' ),
 					update_global      = false,
 					global_holder_id   = 'row' === this.model.get( 'layout_type' ) ? current_row : parent_id,
 					global_holder_view = ET_PageBuilder_Layout.getView( global_holder_id ),
@@ -906,7 +908,7 @@ window.et_builder_product_name = 'Divi';
 					shortcode = et_pb_fix_shortcodes( window.switchEditors.wpautop( shortcode ) );
 				}
 
-				ET_PageBuilder_App.createLayoutFromContent( shortcode , parent_id, '', { ignore_template_tag : 'ignore_template', current_row_cid : current_row, global_id : global_id, after_section : parent_id, is_reinit : 'reinit' } );
+				ET_PageBuilder_App.createLayoutFromContent( shortcode , parent_id, '', { ignore_template_tag : 'ignore_template', current_row_cid : current_row, global_id : global_id, after_section : parent_id, is_reinit : 'reinit', 'unsynced_options' : unsynced_options } );
 				et_reinitialize_builder_layout();
 
 				if ( true === update_global ) {
@@ -4036,6 +4038,9 @@ window.et_builder_product_name = 'Divi';
 
 						function et_pb_icon_font_init() {
 							if ( current_symbol_val !== '' ) {
+								current_symbol_val = current_symbol_val.replace('[', '%91');
+								current_symbol_val = current_symbol_val.replace(']', '%93');
+
 								// font icon index is used now in the following format: %%index_number%%
 								if ( current_symbol_val.search( /^%%/ ) !== -1 ) {
 									icon_index_number = parseInt( current_symbol_val.replace( /%/g, '' ) );
@@ -6335,7 +6340,7 @@ window.et_builder_product_name = 'Divi';
 
 				// add default Admin Label if not defined
 				if ( _.isUndefined( view.admin_label ) ) {
-					view.admin_label = ET_PageBuilder_Layout.getDefaultAdminLabel( view.module_type );
+					view.admin_label = ! _.isUndefined( view.module_type ) ? ET_PageBuilder_Layout.getDefaultAdminLabel( view.module_type ) : '';
 				}
 
 				// Add view to collections
@@ -7425,48 +7430,59 @@ window.et_builder_product_name = 'Divi';
 
 						global_module_id = typeof shortcode_attributes['named']['global_module'] !== 'undefined' && '' === global_module_id ? shortcode_attributes['named']['global_module'] : global_module_id;
 
-						// BEGIN Settings Migrations
-						if ( name_changes &&  ! _.isUndefined( name_changes[shortcode_name] ) ) {
-							_.forEach( name_changes[shortcode_name], function( new_name, old_name ) {
-								if ( ! _.isUndefined( shortcode_attributes['named'][old_name] ) && _.isUndefined( shortcode_attributes['named'][new_name] ) ) {
-									shortcode_attributes['named'][new_name] = shortcode_attributes['named'][old_name];
-								}
-							} );
-						}
+						// settings migration should not be performed on reinit. It should only be performed on initial content loading
+						if ( 'reinit' !== additional_options_received.is_reinit ) {
+							// BEGIN Settings Migrations
+							if ( name_changes &&  ! _.isUndefined( name_changes[shortcode_name] ) ) {
+								_.forEach( name_changes[shortcode_name], function( new_name, old_name ) {
+									if ( ! _.isUndefined( shortcode_attributes['named'][old_name] ) && _.isUndefined( shortcode_attributes['named'][new_name] ) ) {
+										shortcode_attributes['named'][new_name] = shortcode_attributes['named'][old_name];
+									}
+								} );
+							}
 
-						if ( value_changes &&  ! _.isUndefined( value_changes[module_settings._address] ) ) {
-							_.forEach( value_changes[module_settings._address], function( new_value, setting_name ) {
-								shortcode_attributes['named'][setting_name] = new_value;
-							} );
+							if ( value_changes &&  ! _.isUndefined( value_changes[module_settings._address] ) ) {
+								_.forEach( value_changes[module_settings._address], function( new_value, setting_name ) {
+									shortcode_attributes['named'][setting_name] = new_value;
+								} );
+							}
+							// END Settings Migrations
 						}
-						// END Settings Migrations
 
 						for ( var key in shortcode_attributes['named'] ) {
 							if ( typeof additional_options_received.ignore_template_tag === 'undefined' || '' === additional_options_received.ignore_template_tag || ( 'ignore_template' === additional_options_received.ignore_template_tag && 'template_type' !== key ) ) {
-								var prefixed_key = key !== 'admin_label' && key !== 'specialty_columns' ? 'et_pb_' + key : key;
+								var prefixed_key = key !== 'admin_label' && key !== 'specialty_columns' ? 'et_pb_' + key : key,
+									skip_setting = false;
 
 								// fill the array of legacy global synced options for module
 								if ( fill_legacy_global_options ) {
 									et_pb_all_legacy_synced_options[ et_pb_options.template_post_id ].push( key );
 								}
 
-								if ( ( shortcode_name === 'column' || shortcode_name === 'column_inner' ) && prefixed_key === 'et_pb_type' )
+								if ( ( shortcode_name === 'column' || shortcode_name === 'column_inner' ) && prefixed_key === 'et_pb_type' ) {
 									prefixed_key = 'layout';
+								}
 
-								prefixed_attributes[prefixed_key] = shortcode_attributes['named'][key];
+								// skip unsynced options for global modules if isset
+								if ( ! _.isEmpty( additional_options_received.unsynced_options ) && -1 !== _.indexOf( additional_options_received.unsynced_options, key ) ) {
+									skip_setting = true;
+								}
+
+								if ( ! skip_setting ) {
+									prefixed_attributes[prefixed_key] = shortcode_attributes['named'][key];
+								}
 							}
 						}
 
 						module_settings = _.extend( module_settings, prefixed_attributes );
-
 					}
 
 					if ( typeof module_settings['specialty_columns'] !== 'undefined' ) {
 						module_settings['layout_specialty'] = '1';
 						module_settings['specialty_columns'] = parseInt( module_settings['specialty_columns'] );
 					}
-
-					if ( ! found_inner_shortcodes ) {
+					// Skip content if it's not synced for global modules.
+					if ( ! found_inner_shortcodes && ( _.isUndefined( additional_options_received.unsynced_options ) || _.isEmpty( additional_options_received.unsynced_options ) || -1 === _.indexOf( additional_options_received.unsynced_options, 'et_pb_content_field' ) ) ) {
 						if ( $.inArray( shortcode_name, et_pb_raw_shortcodes ) > -1 ) {
 							module_settings['et_pb_raw_content'] = _.unescape( shortcode_content );
 							// replace line-break placeholders with real line-breaks
@@ -7947,6 +7963,7 @@ window.et_builder_product_name = 'Divi';
 						return model.get('cid') == module_cid;
 					} ),
 					module_type = typeof module !== 'undefined' ? module.get( 'module_type' ) : 'undefined',
+					is_synced_global_module = false,
 					module_settings,
 					shortcode,
 					template_module_type,
@@ -7961,6 +7978,8 @@ window.et_builder_product_name = 'Divi';
 				}
 
 				module_settings = module.attributes;
+
+				is_synced_global_module = ( 'module' === et_pb_options.layout_type && 'global' === et_pb_options.is_global_template ) || ( is_saving_global && is_module_type && !_.isUndefined( module_settings['et_pb_global_module'] ) );
 
 				// save only synced options for the global modules
 				if ( is_saving_global && is_module_type && typeof module_settings['et_pb_global_module'] !== 'undefined' ) {
@@ -8006,14 +8025,15 @@ window.et_builder_product_name = 'Divi';
 									content = "\n\n" + content + "\n\n";
 								}
 
-							} else if ( setting_value !== '' ) {
+							} else if ( setting_value !== '' || is_synced_global_module ) {
 								// check if there is a default value for a setting
 								if ( typeof module_settings['module_defaults'] !== 'undefined' && typeof module_settings['module_defaults'][ setting_name ] !== 'undefined' ) {
 									var module_setting_default = module_settings['module_defaults'][ setting_name ],
 										string_setting_value = setting_value + ''; // cast setting value to string to properly compare it with the module_setting_default
 
 									// don't add an attribute to a shortcode, if default value is equal to the current value
-									if ( module_setting_default === string_setting_value ) {
+									// Exception: Global Modules. We should save default values to make sure it synced with all modules correctly.
+									if ( module_setting_default === string_setting_value && ! is_synced_global_module ) {
 										delete module.attributes[ setting_name ];
 										continue;
 									}
@@ -12310,14 +12330,43 @@ window.et_builder_product_name = 'Divi';
 				$current_wrapper.on( 'click', '.et_options_list_check', function( event ) {
 					event.preventDefault();
 
-					var $check = $(this);
+					var $check  = $(this);
+					var isRadio = $check.parent().hasClass('et_options_list_row_radio');
 
-					$current_wrapper.find( '.et_options_list_check' ).not( $check ).removeClass( 'et_options_list_checked' );
+					if ( isRadio ) {
+						$current_wrapper.find( '.et_options_list_check' ).not( $check ).removeClass( 'et_options_list_checked' );
+					}
 
 					$check.toggleClass( 'et_options_list_checked' );
 
 					update_options_list( $current_wrapper, $options_list );
 				} );
+
+				if ( ! options_value ) {
+					var current_cid  = parseInt( $current_wrapper.parents('[data-parent-cid]').attr('data-parent-cid') );
+					var current_data = ET_PageBuilder_Modules.findWhere( { cid : current_cid } );
+
+					// This is for backwards compatibility with the old implementation where
+					// there was an option for checking the checkbox by default
+					var is_checked = ! _.isUndefined( current_data.attributes.et_pb_checkbox_checked ) && 'on' === current_data.attributes.et_pb_checkbox_checked;
+
+					// This helps with migrating the old checkboxes to the new functionality
+					// by adding the existing title as the first checkbox in the list
+					var default_title = ! _.isUndefined( current_data.attributes.et_pb_field_title ) ? current_data.attributes.et_pb_field_title : '';
+
+					options_value = JSON.stringify([{
+						value   : default_title,
+						checked : true === is_checked ? 1 : 0
+					}]);
+
+					$options_list.val(options_value);
+
+					if ( 'checkbox' === current_data.attributes.et_pb_field_type && $current_wrapper.find('.et_options_list_row_checkbox').length > 0 ) {
+						setTimeout(function() {
+							$('#et_pb_field_title').val('');
+						}, 0);
+					}
+				}
 
 				init_options_list( $current_wrapper, $options_list, options_value );
 
@@ -12618,9 +12667,22 @@ window.et_builder_product_name = 'Divi';
 				var $value = null;
 
 				switch( fieldType ) {
+					case 'checkbox':
 					case 'radio':
 					case 'select':
-						var optionsString = 'radio' === fieldType ? fieldData.et_pb_radio_options : fieldData.et_pb_select_options;
+						var optionsString;
+
+						switch( fieldType ) {
+							case 'checkbox':
+								optionsString = fieldData.et_pb_checkbox_options;
+								break;
+							case 'radio':
+								optionsString = fieldData.et_pb_radio_options;
+								break;
+							case 'select':
+								optionsString = fieldData.et_pb_select_options;
+								break;
+						}
 
 						options = et_pb_jsonify( optionsString );
 
@@ -12636,22 +12698,6 @@ window.et_builder_product_name = 'Divi';
 
 							$value.val( fieldValue );
 						});
-
-						break;
-					case 'checkbox':
-						$value        = $('<select></select>');
-
-						var checked   = $wrapper.data('checked');
-						var unchecked = $wrapper.data('unchecked');
-
-						$value.append( '<option value="checked">' + checked + '</option>' );
-						$value.append( '<option value="not checked">' + unchecked + '</option>' );
-
-						if ( ! _.includes(['checked', 'not checked'], fieldValue) ) {
-							fieldValue = 'checked';
-						}
-
-						$value.val( fieldValue );
 
 						break;
 					default:
@@ -14711,6 +14757,11 @@ window.et_builder_product_name = 'Divi';
 			}
 
 			var tinymce_advanced_noautop = tinyMCEPreInit.mceInit.et_pb_content_new.tadv_noautop; // get the noautop option from tinyMCE advanced plugin
+			
+			// do not apply autop, if such option is enabled in TinyMCE Advanced Plugin
+			if ( typeof tinymce_advanced_noautop !== 'undefined' && tinymce_advanced_noautop === true ) {
+				return;
+			}
 
 			_.each( ET_PageBuilder_App.collection.models, function( model ) {
 				var model_content = model.get( 'et_pb_content_new' );
@@ -14719,11 +14770,6 @@ window.et_builder_product_name = 'Divi';
 					if ( editor_mode === 'tinymce' ) {
 						model_content = window.switchEditors.wpautop( model_content.replace( /<p> <\/p>/g, "<p>&nbsp;</p>" ) );
 					} else {
-						// do not remove the <p> and <br /> tags in the Text editor, if such option is enabled in TinyMCE Advanced Plugin
-						if ( typeof tinymce_advanced_noautop !== 'undefined' && tinymce_advanced_noautop === true ) {
-							return;
-						}
-
 						// do not remove <br /> tags on initial page load
 						if ( ! _.isUndefined( load ) && load === 'initial_load' ) {
 							return;
@@ -14783,7 +14829,7 @@ window.et_builder_product_name = 'Divi';
 						var et_pb_shortcodes_tags = ET_PageBuilder_App.getShortCodeParentTags(),
 							reg_exp = window.wp.shortcode.regexp( et_pb_shortcodes_tags ),
 							inner_reg_exp = ET_PageBuilder_App.wp_regexp_not_global( et_pb_shortcodes_tags ),
-							matches = data.shortcode.match( reg_exp ),
+							matches = et_pb_fix_shortcodes( data.shortcode ).match( reg_exp ),
 							selective_sync_method = data.sync_status,
 							unsynced_options = 'updated' === selective_sync_method ? JSON.parse( data.excluded_options ) : [];
 						if ( 'updated' === selective_sync_method ) {
@@ -14909,7 +14955,7 @@ window.et_builder_product_name = 'Divi';
 						}
 					} else {
 						var processed_content = current_content.replace( / global_parent="\S+"/g, '' );
-						var processed_shortcode = data.shortcode.replace( /template_type="\S+"/, 'global_module="' + post_id + '"' );
+						var processed_shortcode = et_pb_fix_shortcodes( data.shortcode.replace( /template_type="\S+"/, 'global_module="' + post_id + '"' ) );
 
 						// remove all the unwanted spaces and line-breaks to make sure shortcode comparison performed correctly.
 						processed_shortcode = processed_shortcode.replace( /]\s?\n\s?\n\s?/g, '] ' ).replace( /\s?\n\s?\n\s?\[/g, ' [' );
@@ -14917,7 +14963,7 @@ window.et_builder_product_name = 'Divi';
 						processed_content = processed_content.replace( /]\s+/g, ']' ).replace( /\s+\[/g, '[' );
 
 						// remove line-breaks from the shortcode before comparison if editor is in Visual mode
-						if ( et_pb_is_editor_in_visual_mode() ) {
+						if ( et_pb_is_editor_in_visual_mode( 'content' ) ) {
 							processed_shortcode = processed_shortcode.replace( /\r?\n|\r/g, '' );
 						}
 

@@ -1,7 +1,9 @@
-//
-//	jQuery hash persistance - v1.0 - 09/25/2014
-//	Element options/state storage in location hash
-//
+/*!
+ * jQuery hash persistance - v1.0 - 09/25/2014
+ * Element options/state storage in location hash
+ * Copyright (c) Elegant Themes
+ */
+
 //	Dependency:
 //	jQuery hashchange event - v1.3 - 7/21/2010
 //	http://benalman.com/projects/jquery-hashchange-plugin/

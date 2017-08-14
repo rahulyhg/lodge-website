@@ -35,9 +35,8 @@ function et_extra_get_framework_directory_uri() {
 function et_load_scripts_styles(){
 	$theme_version = et_get_theme_version();
 	$framework_template_dir = et_extra_get_framework_directory_uri();
-	$suffix = SCRIPT_DEBUG ? '.js' : '.min.js';
+	$suffix = et_load_unminified_scripts() ? '.js' : '.min.js';
 
-	wp_register_script( 'hashchange', $framework_template_dir . '/scripts/ext/jquery.hashchange' . $suffix, array( 'jquery' ), $theme_version, true );
 	wp_register_script( 'hash-persistance', $framework_template_dir . '/scripts/jquery.hash-persistance' . $suffix, array( 'jquery', 'hashchange' ), $theme_version, true );
 }
 

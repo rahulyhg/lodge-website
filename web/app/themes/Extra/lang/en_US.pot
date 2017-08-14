@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra 2.0.63\n"
+"Project-Id-Version: Extra 2.0.68\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/style\n"
-"POT-Creation-Date: 2017-07-19 15:28:18+00:00\n"
+"POT-Creation-Date: 2017-08-12 10:39:58+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "1 Comment"
 msgstr ""
 
-#: comments.php:13 epanel/core_functions.php:594
+#: comments.php:13 epanel/core_functions.php:605
 msgid "Comments"
 msgstr ""
 
@@ -84,11 +84,11 @@ msgstr ""
 msgid "settings reset."
 msgstr ""
 
-#: epanel/core_functions.php:208 epanel/core_functions.php:542
+#: epanel/core_functions.php:208 epanel/core_functions.php:553
 msgid "Save Changes"
 msgstr ""
 
-#: epanel/core_functions.php:217 epanel/core_functions.php:871
+#: epanel/core_functions.php:217 epanel/core_functions.php:882
 msgid "%s Theme Options"
 msgstr ""
 
@@ -96,20 +96,20 @@ msgstr ""
 msgid "Reset to Defaults"
 msgstr ""
 
-#: epanel/core_functions.php:337 epanel/core_functions.php:551
+#: epanel/core_functions.php:342 epanel/core_functions.php:562
 #: framework/admin/admin.php:196
 msgid "Reset"
 msgstr ""
 
-#: epanel/core_functions.php:338 framework/admin/admin.php:197
+#: epanel/core_functions.php:343 framework/admin/admin.php:197
 msgid "Upload"
 msgstr ""
 
-#: epanel/core_functions.php:365
+#: epanel/core_functions.php:370
 msgid "You don't have pages"
 msgstr ""
 
-#: epanel/core_functions.php:556 includes/admin/admin.php:970
+#: epanel/core_functions.php:567 includes/admin/admin.php:970
 #: includes/admin/admin.php:996 includes/choices.php:96 includes/layouts.php:95
 #: includes/modules.php:298 includes/modules.php:310 includes/modules.php:384
 #: includes/modules.php:396 includes/modules.php:408 includes/modules.php:420
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: epanel/core_functions.php:559 includes/admin/admin.php:969
+#: epanel/core_functions.php:570 includes/admin/admin.php:969
 #: includes/admin/admin.php:995 includes/choices.php:97 includes/layouts.php:94
 #: includes/modules.php:297 includes/modules.php:309 includes/modules.php:385
 #: includes/modules.php:397 includes/modules.php:409 includes/modules.php:421
@@ -145,71 +145,71 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: epanel/core_functions.php:573
+#: epanel/core_functions.php:584
 msgid "Enabled"
 msgstr ""
 
-#: epanel/core_functions.php:575
+#: epanel/core_functions.php:586
 msgid "Disabled"
 msgstr ""
 
-#: epanel/core_functions.php:582
+#: epanel/core_functions.php:593
 msgid "Author"
 msgstr ""
 
-#: epanel/core_functions.php:586
+#: epanel/core_functions.php:597
 msgid "Date"
 msgstr ""
 
-#: epanel/core_functions.php:590 includes/admin/admin.php:778
+#: epanel/core_functions.php:601 includes/admin/admin.php:778
 #: includes/admin/admin.php:1013 includes/modules.php:282
-#: includes/template-tags.php:1130 options_extra.php:523
+#: includes/template-tags.php:1130 options_extra.php:547
 msgid "Categories"
 msgstr ""
 
-#: epanel/core_functions.php:598
+#: epanel/core_functions.php:609
 msgid "Ratings"
 msgstr ""
 
-#: epanel/core_functions.php:829 includes/modules.php:3224
+#: epanel/core_functions.php:840 includes/modules.php:3224
 msgid "Choose an Image"
 msgstr ""
 
-#: epanel/custom_functions.php:343 framework/functions.php:195
-#: framework/functions.php:1136
+#: epanel/custom_functions.php:351 framework/functions.php:194
+#: framework/functions.php:1135
 msgid "&hellip;"
 msgstr ""
 
-#: epanel/custom_functions.php:682 header.php:192
+#: epanel/custom_functions.php:690 header.php:197
 msgid "Home"
 msgstr ""
 
-#: epanel/custom_functions.php:979 includes/admin/admin.php:1016
+#: epanel/custom_functions.php:987 includes/admin/admin.php:1016
 #: includes/template-tags.php:1133
 msgid "Archives"
 msgstr ""
 
-#: epanel/custom_functions.php:981
+#: epanel/custom_functions.php:989
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: epanel/custom_functions.php:983
+#: epanel/custom_functions.php:991
 msgid "404 Not Found"
 msgstr ""
 
-#: epanel/custom_functions.php:1053
+#: epanel/custom_functions.php:1061
 msgid "Currently viewing archives from %1$s"
 msgstr ""
 
-#: epanel/custom_functions.php:1066 index.php:8
+#: epanel/custom_functions.php:1074 index.php:8
 msgid "Search Results for: %s"
 msgstr ""
 
-#: epanel/custom_functions.php:1307
+#: epanel/custom_functions.php:1315
 msgid "Image doesn't exist"
 msgstr ""
 
-#: epanel/custom_functions.php:1472
+#: epanel/custom_functions.php:1480
 msgid ""
 "<div class=\"updated\"><p>This is a fresh installation of %1$s theme. Don't "
 "forget to go to <a href=\"%2$s\">ePanel</a> to set it up. This message will "
@@ -217,219 +217,219 @@ msgid ""
 "href=\"%2$s\">theme's options page</a>.</p></div>"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:15 epanel/shortcodes/shortcodes.php:518
+#: epanel/shortcodes/shortcodes.php:18 epanel/shortcodes/shortcodes.php:523
 msgid "Previous"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:15 epanel/shortcodes/shortcodes.php:519
+#: epanel/shortcodes/shortcodes.php:19 epanel/shortcodes/shortcodes.php:524
 msgid "Next"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:273
+#: epanel/shortcodes/shortcodes.php:278
 msgid "Tweet"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:292
+#: epanel/shortcodes/shortcodes.php:297
 msgid "Username: "
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:293
+#: epanel/shortcodes/shortcodes.php:298
 msgid "Password: "
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:294 includes/customizer.php:4325
+#: epanel/shortcodes/shortcodes.php:299 includes/customizer.php:4325
 #: includes/widgets.php:509 includes/widgets.php:520
 #: page-template-member.php:32
 msgid "Login"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:330
+#: epanel/shortcodes/shortcodes.php:335
 msgid "Add a Tooltip Text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:352
+#: epanel/shortcodes/shortcodes.php:357
 msgid "Click here to learn more"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:732
+#: epanel/shortcodes/shortcodes.php:737
 msgid "Join Now"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:967
+#: epanel/shortcodes/shortcodes.php:972
 msgid "Add ET Learn more block"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:968
+#: epanel/shortcodes/shortcodes.php:973
 msgid "Add ET Box"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:969
+#: epanel/shortcodes/shortcodes.php:974
 msgid "Add ET Button"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:970
+#: epanel/shortcodes/shortcodes.php:975
 msgid "Add ET Tabs"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:971
+#: epanel/shortcodes/shortcodes.php:976
 msgid "Add Author Bio"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:972
+#: epanel/shortcodes/shortcodes.php:977
 msgid "Shortcodes"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:977 includes/modules.php:1972
+#: epanel/shortcodes/shortcodes.php:982 includes/modules.php:1972
 msgid "Caption"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:978
+#: epanel/shortcodes/shortcodes.php:983
 msgid "Caption goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:979
+#: epanel/shortcodes/shortcodes.php:984
 msgid "Caption title goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:983
+#: epanel/shortcodes/shortcodes.php:988
 msgid "State"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:985
+#: epanel/shortcodes/shortcodes.php:990
 msgid "Select between expanded and closed state"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:990 epanel/shortcodes/shortcodes.php:1006
-#: epanel/shortcodes/shortcodes.php:1035 epanel/shortcodes/shortcodes.php:1115
+#: epanel/shortcodes/shortcodes.php:995 epanel/shortcodes/shortcodes.php:1011
+#: epanel/shortcodes/shortcodes.php:1040 epanel/shortcodes/shortcodes.php:1120
 #: includes/admin/admin.php:854 includes/modules.php:2393
 msgid "Content"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:991 epanel/shortcodes/shortcodes.php:1007
-#: epanel/shortcodes/shortcodes.php:1093 epanel/shortcodes/shortcodes.php:1116
+#: epanel/shortcodes/shortcodes.php:996 epanel/shortcodes/shortcodes.php:1012
+#: epanel/shortcodes/shortcodes.php:1098 epanel/shortcodes/shortcodes.php:1121
 msgid "Content goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:992 epanel/shortcodes/shortcodes.php:1008
-#: epanel/shortcodes/shortcodes.php:1037
+#: epanel/shortcodes/shortcodes.php:997 epanel/shortcodes/shortcodes.php:1013
+#: epanel/shortcodes/shortcodes.php:1042
 msgid "Content text or html"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:999 epanel/shortcodes/shortcodes.php:1021
+#: epanel/shortcodes/shortcodes.php:1004 epanel/shortcodes/shortcodes.php:1026
 msgid "Type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1001
+#: epanel/shortcodes/shortcodes.php:1006
 msgid "Type of the box"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1015 framework/post-formats.php:95
+#: epanel/shortcodes/shortcodes.php:1020 framework/post-formats.php:95
 #: includes/modules.php:3187
 msgid "Link"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1017
+#: epanel/shortcodes/shortcodes.php:1022
 msgid "URL"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1023
+#: epanel/shortcodes/shortcodes.php:1028
 msgid "Choose button type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1028 includes/admin/admin.php:1947
+#: epanel/shortcodes/shortcodes.php:1033 includes/admin/admin.php:1947
 #: includes/admin/category.php:154
 msgid "Color"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1030
+#: epanel/shortcodes/shortcodes.php:1035
 msgid "Choose button color"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1036
+#: epanel/shortcodes/shortcodes.php:1041
 msgid "Link text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1041
+#: epanel/shortcodes/shortcodes.php:1046
 msgid "Icon"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1043
+#: epanel/shortcodes/shortcodes.php:1048
 msgid "Used for icon button type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1048
+#: epanel/shortcodes/shortcodes.php:1053
 msgid "Open link in new window"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1050
+#: epanel/shortcodes/shortcodes.php:1055
 msgid "Select yes if the link should be opened in a new window"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1058
+#: epanel/shortcodes/shortcodes.php:1063
 msgid "Slider Type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1060
+#: epanel/shortcodes/shortcodes.php:1065
 msgid "Select Slider Type here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1065
+#: epanel/shortcodes/shortcodes.php:1070
 msgid "Effect"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1067
+#: epanel/shortcodes/shortcodes.php:1072
 msgid "Select Animation Effect"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1072
+#: epanel/shortcodes/shortcodes.php:1077
 msgid "Auto"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1074
+#: epanel/shortcodes/shortcodes.php:1079
 msgid "Choose yes if you want for automatic slider animation"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1079
+#: epanel/shortcodes/shortcodes.php:1084
 msgid "Auto Speed"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1081
+#: epanel/shortcodes/shortcodes.php:1086
 msgid "Automattic slider speed (works only if Auto is set to yes)"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1085
+#: epanel/shortcodes/shortcodes.php:1090
 msgid "Tab Text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1092
+#: epanel/shortcodes/shortcodes.php:1097
 msgid "Tab Content"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1094
+#: epanel/shortcodes/shortcodes.php:1099
 msgid "Paste image url here, if you chose \"images\" slider type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1102
+#: epanel/shortcodes/shortcodes.php:1107
 msgid "Image Url"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1104
+#: epanel/shortcodes/shortcodes.php:1109
 msgid "Author Image URL"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1108
+#: epanel/shortcodes/shortcodes.php:1113
 msgid "Use resizing"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1185
+#: epanel/shortcodes/shortcodes.php:1190
 msgid "+ Add One More Tab"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1335 includes/customizer.php:2895
+#: epanel/shortcodes/shortcodes.php:1340 includes/customizer.php:2895
 msgid "Image Height"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1336 includes/customizer.php:2873
+#: epanel/shortcodes/shortcodes.php:1341 includes/customizer.php:2873
 msgid "Image Width"
 msgstr ""
 
@@ -445,38 +445,38 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
-#: framework/functions.php:78 includes/template-tags.php:652
+#: framework/functions.php:77 includes/template-tags.php:652
 msgid "Posts by %s"
 msgstr ""
 
-#: framework/functions.php:101
+#: framework/functions.php:100
 msgid "by"
 msgstr ""
 
-#: framework/functions.php:1001 includes/admin/admin.php:1569
+#: framework/functions.php:1000 includes/admin/admin.php:1569
 msgid "Default"
 msgstr ""
 
-#: framework/functions.php:1040 includes/admin/admin.php:470
+#: framework/functions.php:1039 includes/admin/admin.php:470
 #: includes/admin/admin.php:1951 includes/admin/category.php:155
 msgid "Hex Value"
 msgstr ""
 
-#: framework/functions.php:1068
+#: framework/functions.php:1067
 msgid "&laquo; Previous"
 msgstr ""
 
-#: framework/functions.php:1069
+#: framework/functions.php:1068
 msgid "Next &raquo;"
 msgstr ""
 
-#: framework/functions.php:1193 includes/core.php:325
+#: framework/functions.php:1192 includes/core.php:342
 msgid "%d Item in Cart"
 msgid_plural "%d Items in Cart"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/functions.php:1194 includes/core.php:327
+#: framework/functions.php:1193 includes/core.php:344
 msgid "%d Item"
 msgid_plural "%d Items"
 msgstr[0] ""
@@ -487,7 +487,7 @@ msgid "Invalid post"
 msgstr ""
 
 #: framework/post-formats.php:91 includes/admin/admin.php:772
-#: options_extra.php:868
+#: options_extra.php:892
 msgid "Standard"
 msgstr ""
 
@@ -532,19 +532,19 @@ msgstr ""
 msgid "Default Post Format"
 msgstr ""
 
-#: header.php:62
+#: header.php:67
 msgid "TRENDING:"
 msgstr ""
 
-#: header.php:87
+#: header.php:92
 msgid "Sample Post Title"
 msgstr ""
 
-#: includes/admin/admin.php:26 includes/core.php:1331
+#: includes/admin/admin.php:26 includes/core.php:1402
 msgid "Theme Customizer"
 msgstr ""
 
-#: includes/admin/admin.php:30 includes/core.php:1344
+#: includes/admin/admin.php:30 includes/core.php:1415
 msgid "Module Customizer"
 msgstr ""
 
@@ -709,7 +709,7 @@ msgid "Address"
 msgstr ""
 
 #: includes/admin/admin.php:631 includes/admin/admin.php:1245
-#: options_extra.php:177
+#: options_extra.php:181
 msgid "Google API Key"
 msgstr ""
 
@@ -754,7 +754,7 @@ msgid "Display Style"
 msgstr ""
 
 #: includes/admin/admin.php:773 includes/customizer.php:4416
-#: options_extra.php:869
+#: options_extra.php:893
 msgid "Masonry"
 msgstr ""
 
@@ -958,7 +958,7 @@ msgid "Amount of recent posts to display."
 msgstr ""
 
 #: includes/admin/admin.php:1012 includes/template-tags.php:1129
-#: options_extra.php:517
+#: options_extra.php:541
 msgid "Pages"
 msgstr ""
 
@@ -1105,17 +1105,17 @@ msgstr ""
 msgid "Default (%s)"
 msgstr ""
 
-#: includes/admin/admin.php:1543 includes/choices.php:111 options_extra.php:122
-#: options_extra.php:135
+#: includes/admin/admin.php:1543 includes/choices.php:111 options_extra.php:126
+#: options_extra.php:139
 msgid "Right"
 msgstr ""
 
-#: includes/admin/admin.php:1544 includes/choices.php:112 options_extra.php:123
-#: options_extra.php:136
+#: includes/admin/admin.php:1544 includes/choices.php:112 options_extra.php:127
+#: options_extra.php:140
 msgid "Left"
 msgstr ""
 
-#: includes/admin/admin.php:1545 options_extra.php:124 options_extra.php:137
+#: includes/admin/admin.php:1545 options_extra.php:128 options_extra.php:141
 msgid "No Sidebar"
 msgstr ""
 
@@ -1247,11 +1247,11 @@ msgstr ""
 msgid "Search Projects"
 msgstr ""
 
-#: includes/builder-integrations.php:33 includes/core.php:207
+#: includes/builder-integrations.php:33 includes/core.php:226
 msgid "Nothing found"
 msgstr ""
 
-#: includes/builder-integrations.php:34 includes/core.php:208
+#: includes/builder-integrations.php:34 includes/core.php:227
 msgid "Nothing found in Trash"
 msgstr ""
 
@@ -1547,207 +1547,207 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/core.php:201
+#: includes/core.php:220
 msgid "Add New Category Layout"
 msgstr ""
 
-#: includes/core.php:202
+#: includes/core.php:221
 msgid "Edit Category Layout"
 msgstr ""
 
-#: includes/core.php:203
+#: includes/core.php:222
 msgid "New Category Layout"
 msgstr ""
 
-#: includes/core.php:204
+#: includes/core.php:223
 msgid "All Category Layouts"
 msgstr ""
 
-#: includes/core.php:205
+#: includes/core.php:224
 msgid "View Category Layout"
 msgstr ""
 
-#: includes/core.php:206
+#: includes/core.php:225
 msgid "Search Layouts"
 msgstr ""
 
-#: includes/core.php:324 includes/template-tags.php:314
+#: includes/core.php:341 includes/template-tags.php:314
 msgid "Your Rating:"
 msgstr ""
 
-#: includes/core.php:326
+#: includes/core.php:343
 msgid "%d Items in Cart"
 msgstr ""
 
-#: includes/core.php:328
+#: includes/core.php:345
 msgid "%d Items"
 msgstr ""
 
-#: includes/core.php:332 includes/template-tags.php:1333
+#: includes/core.php:349 includes/template-tags.php:1333
 msgid "There was a problem, please try again."
 msgstr ""
 
-#: includes/core.php:333 includes/template-tags.php:1276
+#: includes/core.php:350 includes/template-tags.php:1276
 msgid "Name field cannot be empty."
 msgstr ""
 
-#: includes/core.php:334 includes/template-tags.php:1284
+#: includes/core.php:351 includes/template-tags.php:1284
 msgid "Email field cannot be empty."
 msgstr ""
 
-#: includes/core.php:335 includes/template-tags.php:1292
+#: includes/core.php:352 includes/template-tags.php:1292
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/core.php:507 includes/core.php:534
+#: includes/core.php:578 includes/core.php:605
 msgid "Callback function: \"%s\" doesnt exist"
 msgstr ""
 
-#: includes/core.php:871 includes/core.php:883 includes/core.php:901
+#: includes/core.php:942 includes/core.php:954 includes/core.php:972
 #: includes/customizer.php:387 includes/customizer.php:393
 #: includes/customizer.php:399
 msgid "Footer Sidebar Left"
 msgstr ""
 
-#: includes/core.php:872 includes/customizer.php:400
+#: includes/core.php:943 includes/customizer.php:400
 msgid "Footer Sidebar Middle Left"
 msgstr ""
 
-#: includes/core.php:873 includes/customizer.php:401
+#: includes/core.php:944 includes/customizer.php:401
 msgid "Footer Sidebar Middle Right"
 msgstr ""
 
-#: includes/core.php:874 includes/core.php:886 includes/core.php:904
+#: includes/core.php:945 includes/core.php:957 includes/core.php:975
 #: includes/customizer.php:390 includes/customizer.php:396
 #: includes/customizer.php:402
 msgid "Footer Sidebar Right"
 msgstr ""
 
-#: includes/core.php:884 includes/customizer.php:394
+#: includes/core.php:955 includes/customizer.php:394
 msgid "Footer Sidebar Middle"
 msgstr ""
 
-#: includes/core.php:885 includes/core.php:893 includes/core.php:894
-#: includes/core.php:895 includes/core.php:902 includes/core.php:903
+#: includes/core.php:956 includes/core.php:964 includes/core.php:965
+#: includes/core.php:966 includes/core.php:973 includes/core.php:974
 #: includes/customizer.php:382 includes/customizer.php:383
 #: includes/customizer.php:384 includes/customizer.php:388
 #: includes/customizer.php:389 includes/customizer.php:395
 msgid "Inactive Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:892 includes/customizer.php:381
+#: includes/core.php:963 includes/customizer.php:381
 msgid "Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:911
+#: includes/core.php:982
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/core.php:914
+#: includes/core.php:985
 msgid "Project Sidebar"
 msgstr ""
 
-#: includes/core.php:1006 includes/et-social-followers.php:213
+#: includes/core.php:1077 includes/et-social-followers.php:213
 #: includes/et-social-share.php:56
 msgid "Facebook"
 msgstr ""
 
-#: includes/core.php:1007 includes/et-social-followers.php:509
+#: includes/core.php:1078 includes/et-social-followers.php:509
 #: includes/et-social-share.php:67
 msgid "Twitter"
 msgstr ""
 
-#: includes/core.php:1008 includes/et-social-followers.php:321
+#: includes/core.php:1079 includes/et-social-followers.php:321
 msgid "Google+"
 msgstr ""
 
-#: includes/core.php:1009 includes/et-social-followers.php:567
+#: includes/core.php:1080 includes/et-social-followers.php:567
 #: includes/et-social-share.php:100
 msgid "Pinterest"
 msgstr ""
 
-#: includes/core.php:1010 includes/et-social-followers.php:447
+#: includes/core.php:1081 includes/et-social-followers.php:447
 #: includes/et-social-share.php:89
 msgid "Tumblr"
 msgstr ""
 
-#: includes/core.php:1011 includes/et-social-share.php:133
+#: includes/core.php:1082 includes/et-social-share.php:133
 msgid "Stumbleupon"
 msgstr ""
 
-#: includes/core.php:1012
+#: includes/core.php:1083
 msgid "WordPress"
 msgstr ""
 
-#: includes/core.php:1013 includes/et-social-followers.php:597
+#: includes/core.php:1084 includes/et-social-followers.php:597
 msgid "Instagram"
 msgstr ""
 
-#: includes/core.php:1014
+#: includes/core.php:1085
 msgid "Dribbble"
 msgstr ""
 
-#: includes/core.php:1015 includes/et-social-followers.php:410
+#: includes/core.php:1086 includes/et-social-followers.php:410
 msgid "Vimeo"
 msgstr ""
 
-#: includes/core.php:1016 includes/et-social-share.php:111
+#: includes/core.php:1087 includes/et-social-share.php:111
 msgid "LinkedIn"
 msgstr ""
 
-#: includes/core.php:1017
+#: includes/core.php:1088
 msgid "RSS"
 msgstr ""
 
-#: includes/core.php:1018
+#: includes/core.php:1089
 msgid "Deviantart"
 msgstr ""
 
-#: includes/core.php:1019
+#: includes/core.php:1090
 msgid "MySpace"
 msgstr ""
 
-#: includes/core.php:1020
+#: includes/core.php:1091
 msgid "Skype"
 msgstr ""
 
-#: includes/core.php:1021 includes/et-social-followers.php:366
+#: includes/core.php:1092 includes/et-social-followers.php:366
 msgid "Youtube"
 msgstr ""
 
-#: includes/core.php:1022
+#: includes/core.php:1093
 msgid "Picassa"
 msgstr ""
 
-#: includes/core.php:1023
+#: includes/core.php:1094
 msgid "Flickr"
 msgstr ""
 
-#: includes/core.php:1024
+#: includes/core.php:1095
 msgid "Blogger"
 msgstr ""
 
-#: includes/core.php:1025
+#: includes/core.php:1096
 msgid "Spotify"
 msgstr ""
 
-#: includes/core.php:1026
+#: includes/core.php:1097
 msgid "Delicious"
 msgstr ""
 
-#: includes/core.php:1106 includes/core.php:1187
+#: includes/core.php:1177 includes/core.php:1258
 msgid "Featured"
 msgstr ""
 
-#: includes/core.php:1118
+#: includes/core.php:1189
 msgid "Recent"
 msgstr ""
 
-#: includes/core.php:1244
+#: includes/core.php:1315
 msgid "Select Page"
 msgstr ""
 
-#: includes/core.php:1298
+#: includes/core.php:1369
 msgid ""
 "Welcome to Extra! Before diving in to your new theme, please visit the <a "
 "style=\"color: #fff; font-weight: bold;\" href=\"%1$s\" "
@@ -1755,7 +1755,7 @@ msgid ""
 "in-depth tutorials."
 msgstr ""
 
-#: includes/core.php:1382
+#: includes/core.php:1453
 msgid "Extra Customizer Settings"
 msgstr ""
 
@@ -2317,7 +2317,7 @@ msgstr ""
 msgid "Button Font Style"
 msgstr ""
 
-#: includes/customizer.php:4175 options_extra.php:529 options_extra.php:738
+#: includes/customizer.php:4175 options_extra.php:553 options_extra.php:762
 msgid "General Settings"
 msgstr ""
 
@@ -2557,7 +2557,7 @@ msgid ""
 msgstr ""
 
 #: includes/et-social-followers.php:334 includes/et-social-followers.php:378
-#: options_extra.php:1295
+#: options_extra.php:1319
 msgid "API Key"
 msgstr ""
 
@@ -2759,7 +2759,7 @@ msgstr ""
 msgid "Posts List Thumbnail"
 msgstr ""
 
-#: includes/modules.php:192 includes/modules.php:2870 options_extra.php:1328
+#: includes/modules.php:192 includes/modules.php:2870 options_extra.php:1352
 msgid "Header"
 msgstr ""
 
@@ -3658,120 +3658,120 @@ msgstr ""
 msgid "Next Tab"
 msgstr ""
 
-#: options_extra.php:69 options_extra.php:1270
+#: options_extra.php:73 options_extra.php:1294
 msgid "General"
 msgstr ""
 
-#: options_extra.php:80
+#: options_extra.php:84
 msgid "Logo"
 msgstr ""
 
-#: options_extra.php:84
+#: options_extra.php:88
 msgid ""
 "If you would like to use your own custom logo image click the Upload Image "
 "button."
 msgstr ""
 
-#: options_extra.php:88
+#: options_extra.php:92
 msgid "Favicon"
 msgstr ""
 
-#: options_extra.php:92
+#: options_extra.php:96
 msgid ""
 "If you would like to use your own custom favicon image click the Upload "
 "Image button."
 msgstr ""
 
-#: options_extra.php:98
+#: options_extra.php:102
 msgid "Global Accent Color"
 msgstr ""
 
-#: options_extra.php:102
+#: options_extra.php:106
 msgid ""
 "Here you can change Global Accent Color that is used on all pages of your "
 "site."
 msgstr ""
 
-#: options_extra.php:106
+#: options_extra.php:110
 msgid "Fixed Navigation Bar"
 msgstr ""
 
-#: options_extra.php:110
+#: options_extra.php:114
 msgid ""
 "By default the navigation bar stays on top of the screen at all times. We "
 "suggest to disable this option, if you need to use a logo taller than the "
 "default one."
 msgstr ""
 
-#: options_extra.php:118
+#: options_extra.php:122
 msgid "Sidebar Location"
 msgstr ""
 
-#: options_extra.php:127
+#: options_extra.php:131
 msgid "Here you can choose the default location of the Sidebar."
 msgstr ""
 
-#: options_extra.php:131
+#: options_extra.php:135
 msgid "WooCommerce Sidebar Location"
 msgstr ""
 
-#: options_extra.php:140
+#: options_extra.php:144
 msgid ""
 "Here you can choose the default location of the Sidebar for WooCommerce "
 "pages."
 msgstr ""
 
-#: options_extra.php:144
+#: options_extra.php:148
 msgid "Sidebar/Widget Area"
 msgstr ""
 
-#: options_extra.php:148
+#: options_extra.php:152
 msgid "Here you can choose the default Sidebar/Widget Area."
 msgstr ""
 
-#: options_extra.php:152
+#: options_extra.php:156
 msgid "WooCommerce Sidebar/Widget Area"
 msgstr ""
 
-#: options_extra.php:156
+#: options_extra.php:160
 msgid "Here you can choose the default Sidebar/Widget Area for WooCommerce pages."
 msgstr ""
 
-#: options_extra.php:160
+#: options_extra.php:164
 msgid "Social Network Follower Count Refresh"
 msgstr ""
 
-#: options_extra.php:164
+#: options_extra.php:168
 msgid "Every Hour"
 msgstr ""
 
-#: options_extra.php:165
+#: options_extra.php:169
 msgid "Every 3 Hours"
 msgstr ""
 
-#: options_extra.php:166
+#: options_extra.php:170
 msgid "Every 12 Hours"
 msgstr ""
 
-#: options_extra.php:167
+#: options_extra.php:171
 msgid "Every 1 Day"
 msgstr ""
 
-#: options_extra.php:168
+#: options_extra.php:172
 msgid "Every 3 Days"
 msgstr ""
 
-#: options_extra.php:169
+#: options_extra.php:173
 msgid "Every 7 Days"
 msgstr ""
 
-#: options_extra.php:172
+#: options_extra.php:176
 msgid ""
 "Here you can choose the refresh period used for the social network follower "
 "counts widget."
 msgstr ""
 
-#: options_extra.php:185
+#: options_extra.php:189
 msgid ""
 "The Maps module uses the Google Maps API and requires a valid Google API "
 "Key to function. Before using the map module, please make sure you have "
@@ -3779,11 +3779,11 @@ msgid ""
 "<a target=\"_blank\" href=\"%1$s\">here</a>."
 msgstr ""
 
-#: options_extra.php:189
+#: options_extra.php:193
 msgid "Enqueue Google Maps Script"
 msgstr ""
 
-#: options_extra.php:196
+#: options_extra.php:200
 msgid ""
 "Disable this option to remove Google Maps API script from your page. Note: "
 "Modules which relies to Google Maps API script such as Maps and Fullwidth "
@@ -3791,226 +3791,226 @@ msgid ""
 "Maps API script."
 msgstr ""
 
-#: options_extra.php:202
+#: options_extra.php:206
 msgid "Show Facebook Icon"
 msgstr ""
 
-#: options_extra.php:206
+#: options_extra.php:210
 msgid "Here you can choose to display the Facebook Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:210
+#: options_extra.php:214
 msgid "Show Twitter Icon"
 msgstr ""
 
-#: options_extra.php:214
+#: options_extra.php:218
 msgid "Here you can choose to display the Twitter Icon."
 msgstr ""
 
-#: options_extra.php:220
+#: options_extra.php:224
 msgid "Show Google+ Icon"
 msgstr ""
 
-#: options_extra.php:224
+#: options_extra.php:228
 msgid "Here you can choose to display the Google+ Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:228
+#: options_extra.php:232
 msgid "Show Pinterest Icon"
 msgstr ""
 
-#: options_extra.php:232
+#: options_extra.php:236
 msgid "Here you can choose to display the Pinterest Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:239
+#: options_extra.php:243
 msgid "Show Tumblr Icon"
 msgstr ""
 
-#: options_extra.php:243
+#: options_extra.php:247
 msgid "Here you can choose to display the Tumblr Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:247
+#: options_extra.php:251
 msgid "Show Stumbleupon Icon"
 msgstr ""
 
-#: options_extra.php:251
+#: options_extra.php:255
 msgid "Here you can choose to display the Stumbleupon Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:258
+#: options_extra.php:262
 msgid "Show Instagram Icon"
 msgstr ""
 
-#: options_extra.php:262
+#: options_extra.php:266
 msgid "Here you can choose to display the Instagram Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:266
+#: options_extra.php:270
 msgid "Show Youtube Icon"
 msgstr ""
 
-#: options_extra.php:270
+#: options_extra.php:274
 msgid "Here you can choose to display the Youtube Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:277
+#: options_extra.php:281
 msgid "Show Dribbble Icon"
 msgstr ""
 
-#: options_extra.php:281
+#: options_extra.php:285
 msgid "Here you can choose to display the Dribbble Icon on your homepage."
 msgstr ""
 
-#: options_extra.php:285
+#: options_extra.php:289
 msgid "Show RSS Icon"
 msgstr ""
 
-#: options_extra.php:289
+#: options_extra.php:293
 msgid "Here you can choose to display the RSS Icon."
 msgstr ""
 
-#: options_extra.php:297
+#: options_extra.php:301
 msgid "Facebook Profile Url"
 msgstr ""
 
-#: options_extra.php:302
+#: options_extra.php:306
 msgid "Enter the URL of your Facebook Profile."
 msgstr ""
 
-#: options_extra.php:306
+#: options_extra.php:310
 msgid "Twitter Profile Url"
 msgstr ""
 
-#: options_extra.php:311
+#: options_extra.php:315
 msgid "Enter the URL of your Twitter Profile."
 msgstr ""
 
-#: options_extra.php:315
+#: options_extra.php:319
 msgid "Google+ Profile Url"
 msgstr ""
 
-#: options_extra.php:320
+#: options_extra.php:324
 msgid "Enter the URL of your Google+ Profile."
 msgstr ""
 
-#: options_extra.php:324
+#: options_extra.php:328
 msgid "Pinterest Profile Url"
 msgstr ""
 
-#: options_extra.php:329
+#: options_extra.php:333
 msgid "Enter the URL of your Pinterest Profile."
 msgstr ""
 
-#: options_extra.php:333
+#: options_extra.php:337
 msgid "Tumblr Profile Url"
 msgstr ""
 
-#: options_extra.php:338
+#: options_extra.php:342
 msgid "Enter the URL of your Tumblr Profile."
 msgstr ""
 
-#: options_extra.php:342
+#: options_extra.php:346
 msgid "Stumbleupon Profile Url"
 msgstr ""
 
-#: options_extra.php:347
+#: options_extra.php:351
 msgid "Enter the URL of your Stumbleupon Profile."
 msgstr ""
 
-#: options_extra.php:351
+#: options_extra.php:355
 msgid "Instagram Profile Url"
 msgstr ""
 
-#: options_extra.php:356
+#: options_extra.php:360
 msgid "Enter the URL of your Instagram Profile."
 msgstr ""
 
-#: options_extra.php:360
+#: options_extra.php:364
 msgid "Youtube Profile Url"
 msgstr ""
 
-#: options_extra.php:365
+#: options_extra.php:369
 msgid "Enter the URL of your Youtube Profile."
 msgstr ""
 
-#: options_extra.php:369
+#: options_extra.php:373
 msgid "Dribbble Profile Url"
 msgstr ""
 
-#: options_extra.php:374
+#: options_extra.php:378
 msgid "Enter the URL of your Dribbble Profile."
 msgstr ""
 
-#: options_extra.php:378
+#: options_extra.php:382
 msgid "RSS Icon Url"
 msgstr ""
 
-#: options_extra.php:383
+#: options_extra.php:387
 msgid "Enter the URL of your RSS feed."
 msgstr ""
 
-#: options_extra.php:387
+#: options_extra.php:391
 msgid "Number of Posts displayed on Archive pages"
 msgstr ""
 
-#: options_extra.php:391
+#: options_extra.php:395
 msgid ""
 "Here you can designate how many recent articles are displayed on the "
 "Archive pages. This option works independently from the Settings > Reading "
 "options in wp-admin."
 msgstr ""
 
-#: options_extra.php:396
+#: options_extra.php:400
 msgid "Number of Products displayed on WooCommerce archive pages"
 msgstr ""
 
-#: options_extra.php:401
+#: options_extra.php:405
 msgid ""
 "Here you can designate how many WooCommerce products are displayed on the "
 "archive page. This option works independently from the Settings > Reading "
 "options in wp-admin."
 msgstr ""
 
-#: options_extra.php:405
+#: options_extra.php:409
 msgid "Number of Posts displayed on Category page"
 msgstr ""
 
-#: options_extra.php:410
+#: options_extra.php:414
 msgid ""
 "Here you can designate how many recent articles are displayed on the "
 "Category page. This option works independently from the Settings > Reading "
 "options in wp-admin."
 msgstr ""
 
-#: options_extra.php:414
+#: options_extra.php:418
 msgid "Number of Posts displayed on Search pages"
 msgstr ""
 
-#: options_extra.php:418
+#: options_extra.php:422
 msgid ""
 "Here you can designate how many recent articles are displayed on the Search "
 "results pages. This option works independently from the Settings > Reading "
 "options in wp-admin."
 msgstr ""
 
-#: options_extra.php:423
+#: options_extra.php:427
 msgid "Number of Posts displayed on Tag pages"
 msgstr ""
 
-#: options_extra.php:427
+#: options_extra.php:431
 msgid ""
 "Here you can designate how many recent articles are displayed on the Tag "
 "pages. This option works independently from the Settings > Reading options "
 "in wp-admin."
 msgstr ""
 
-#: options_extra.php:432
+#: options_extra.php:436
 msgid "Date format"
 msgstr ""
 
-#: options_extra.php:436
+#: options_extra.php:440
 msgid ""
 "This option allows you to change how your dates are displayed. For more "
 "information please refer to the WordPress codex here:<a "
@@ -4018,79 +4018,111 @@ msgid ""
 "target='_blank'>Formatting Date and Time</a>"
 msgstr ""
 
-#: options_extra.php:443
+#: options_extra.php:447
 msgid "Use excerpts when defined"
 msgstr ""
 
-#: options_extra.php:447
+#: options_extra.php:451
 msgid "This will enable the use of excerpts in posts or pages."
 msgstr ""
 
-#: options_extra.php:451
+#: options_extra.php:455
 msgid "Responsive shortcodes"
 msgstr ""
 
-#: options_extra.php:455
+#: options_extra.php:459
 msgid "Enable this option to make shortcodes respond to various screen sizes"
 msgstr ""
 
-#: options_extra.php:461
+#: options_extra.php:465
 msgid "Google Fonts subsets"
 msgstr ""
 
-#: options_extra.php:465
+#: options_extra.php:469
 msgid "This will enable Google Fonts for Non-English languages."
 msgstr ""
 
-#: options_extra.php:469
+#: options_extra.php:473
 msgid "Back To Top Button"
 msgstr ""
 
-#: options_extra.php:473
+#: options_extra.php:477
 msgid "Enable this option to display Back To Top Button while scrolling"
 msgstr ""
 
-#: options_extra.php:477
+#: options_extra.php:481
 msgid "Smooth Scrolling"
 msgstr ""
 
-#: options_extra.php:481
+#: options_extra.php:485
 msgid "Enable this option to get the smooth scrolling effect with mouse wheel"
 msgstr ""
 
-#: options_extra.php:487
+#: options_extra.php:489
+msgid "Minify And Combine Javascript Files"
+msgstr ""
+
+#: options_extra.php:493
+msgid "Use combined and minified javascript file to speed up your site's page load."
+msgstr ""
+
+#: options_extra.php:495
+msgid ""
+"Extra uses uncombined and unminified javascript files because "
+"\"SCRIPT_DEBUG\" constant on wp-config.php has been set to \"true\". Other "
+"plugin can enforce Extra to use uncombined and unminified javascript files "
+"by filtering \"et_load_unminified_scripts\" filter as well."
+msgstr ""
+
+#: options_extra.php:499
+msgid "Minify And Combine CSS Files"
+msgstr ""
+
+#: options_extra.php:503
+msgid "Use combined and minified CSS file to speed up your site's page load."
+msgstr ""
+
+#: options_extra.php:505
+msgid ""
+"Extra uses uncombined and unminified CSS files because \"SCRIPT_DEBUG\" "
+"constant on wp-config.php has been set to \"true\". Other plugin can "
+"enforce Extra to use uncombined and unminified CSS files by filtering "
+"\"et_load_unminified_styles\" filter as well."
+msgstr ""
+
+#: options_extra.php:511
 msgid "Custom CSS"
 msgstr ""
 
-#: options_extra.php:491
+#: options_extra.php:515
 msgid "Here you can add custom css to override or extend default styles."
 msgstr ""
 
-#: options_extra.php:540
+#: options_extra.php:564
 msgid "Exclude pages from the navigation bar"
 msgstr ""
 
-#: options_extra.php:544
+#: options_extra.php:568
 msgid ""
 "Here you can choose to remove certain pages from the navigation menu. All "
 "pages marked with an X will not appear in your navigation bar."
 msgstr ""
 
-#: options_extra.php:550 options_extra.php:629
+#: options_extra.php:574 options_extra.php:653
 msgid "Show dropdown menus"
 msgstr ""
 
-#: options_extra.php:554
+#: options_extra.php:578
 msgid ""
 "If you would like to remove the dropdown menus from the pages navigation "
 "bar disable this feature."
 msgstr ""
 
-#: options_extra.php:558
+#: options_extra.php:582
 msgid "Display Home link"
 msgstr ""
 
-#: options_extra.php:562
+#: options_extra.php:586
 msgid ""
 "By default the theme creates a Home link in the default created menu, that "
 "when clicked leads back to your blog's homepage. If however, you are using "
@@ -4099,29 +4131,29 @@ msgid ""
 "feature to remove the link."
 msgstr ""
 
-#: options_extra.php:568
+#: options_extra.php:592
 msgid "Sort Pages Links"
 msgstr ""
 
-#: options_extra.php:572
+#: options_extra.php:596
 msgid "Here you can choose to sort your pages links."
 msgstr ""
 
-#: options_extra.php:585
+#: options_extra.php:609
 msgid "Order Pages Links by Ascending/Descending"
 msgstr ""
 
-#: options_extra.php:589
+#: options_extra.php:613
 msgid ""
 "Here you can choose to reverse the order that your pages links are "
 "displayed. You can choose between ascending and descending."
 msgstr ""
 
-#: options_extra.php:597 options_extra.php:647
+#: options_extra.php:621 options_extra.php:671
 msgid "Number of dropdown tiers shown"
 msgstr ""
 
-#: options_extra.php:601
+#: options_extra.php:625
 msgid ""
 "This option allows you to control how many tiers your pages dropdown menu "
 "has in the default theme created main menu. Increasing the number allows "
@@ -4129,64 +4161,64 @@ msgid ""
 "you are using a custom menu and not the default theme created main menu."
 msgstr ""
 
-#: options_extra.php:619
+#: options_extra.php:643
 msgid "Exclude categories from the navigation bar"
 msgstr ""
 
-#: options_extra.php:623
+#: options_extra.php:647
 msgid ""
 "Here you can choose to remove certain categories from the navigation menu. "
 "All categories marked with an X will not appear in your navigation bar."
 msgstr ""
 
-#: options_extra.php:633
+#: options_extra.php:657
 msgid ""
 "If you would like to remove the dropdown menus from the categories "
 "navigation bar disable this feature."
 msgstr ""
 
-#: options_extra.php:637
+#: options_extra.php:661
 msgid "Hide empty categories"
 msgstr ""
 
-#: options_extra.php:641
+#: options_extra.php:665
 msgid ""
 "If you would like categories to be displayed in your navigationbar that "
 "don't have any posts in them then disable this option. By default empty "
 "categories are hidden"
 msgstr ""
 
-#: options_extra.php:651
+#: options_extra.php:675
 msgid ""
 "This options allows you to control how many teirs your pages dropdown menu "
 "has. Increasing the number allows for additional menu items to be shown."
 msgstr ""
 
-#: options_extra.php:658
+#: options_extra.php:682
 msgid "Sort Categories Links by Name/ID/Slug/Count/Term Group"
 msgstr ""
 
-#: options_extra.php:662
+#: options_extra.php:686
 msgid ""
 "By default pages are sorted by name. However if you would rather have them "
 "sorted by ID you can adjust this setting."
 msgstr ""
 
-#: options_extra.php:673
+#: options_extra.php:697
 msgid "Order Category Links by Ascending/Descending"
 msgstr ""
 
-#: options_extra.php:677
+#: options_extra.php:701
 msgid ""
 "Here you can choose to reverse the order that your categories links are "
 "displayed. You can choose between ascending and descending."
 msgstr ""
 
-#: options_extra.php:695
+#: options_extra.php:719
 msgid "Disable top tier dropdown menu links"
 msgstr ""
 
-#: options_extra.php:699
+#: options_extra.php:723
 msgid ""
 "In some cases users will want to create parent categories or links as "
 "placeholders to hold a list of child links or categories. In this case it "
@@ -4196,19 +4228,19 @@ msgid ""
 "when clicked."
 msgstr ""
 
-#: options_extra.php:726
+#: options_extra.php:750
 msgid "Single Post Layout"
 msgstr ""
 
-#: options_extra.php:732
+#: options_extra.php:756
 msgid "Single Page Layout"
 msgstr ""
 
-#: options_extra.php:749
+#: options_extra.php:773
 msgid "Choose which items to display in the postinfo section"
 msgstr ""
 
-#: options_extra.php:759
+#: options_extra.php:783
 msgid ""
 "Here you can choose which items appear in the postinfo section on single "
 "post pages. This is the area, usually below the post title, which displays "
@@ -4216,94 +4248,94 @@ msgid ""
 "appear."
 msgstr ""
 
-#: options_extra.php:770
+#: options_extra.php:794
 msgid "Show comments on posts"
 msgstr ""
 
-#: options_extra.php:774
+#: options_extra.php:798
 msgid ""
 "You can disable this option if you want to remove the comments and comment "
 "form from single post pages."
 msgstr ""
 
-#: options_extra.php:778
+#: options_extra.php:802
 msgid "Show author box"
 msgstr ""
 
-#: options_extra.php:782
+#: options_extra.php:806
 msgid ""
 "You can disable this option if you want to remove the author box from "
 "single post pages."
 msgstr ""
 
-#: options_extra.php:786
+#: options_extra.php:810
 msgid "Show related posts"
 msgstr ""
 
-#: options_extra.php:790
+#: options_extra.php:814
 msgid ""
 "You can disable this option if you want to remove the related posts from "
 "single post pages."
 msgstr ""
 
-#: options_extra.php:796
+#: options_extra.php:820
 msgid "Sharing Icons to Display"
 msgstr ""
 
-#: options_extra.php:801
+#: options_extra.php:825
 msgid ""
 "Here you can choose which sharing icons/options to display. All options "
 "marked with an X will not appear."
 msgstr ""
 
-#: options_extra.php:820
+#: options_extra.php:844
 msgid "Show comments on pages"
 msgstr ""
 
-#: options_extra.php:824
+#: options_extra.php:848
 msgid ""
 "By default comments are not placed on pages, however, if you would like to "
 "allow people to comment on your pages simply enable this option."
 msgstr ""
 
-#: options_extra.php:840
+#: options_extra.php:864
 msgid "Post info section"
 msgstr ""
 
-#: options_extra.php:849
+#: options_extra.php:873
 msgid ""
 "Here you can choose which items appear in the postinfo section on archive "
 "pages. This is the area, usually below the post title, which displays basic "
 "information about your post. The highlighted itmes shown below will appear."
 msgstr ""
 
-#: options_extra.php:862
+#: options_extra.php:886
 msgid "Standard or Masonry Style for Archive Pages"
 msgstr ""
 
-#: options_extra.php:866
+#: options_extra.php:890
 msgid ""
 "Choose whether standard or masonry display style for archive pages for "
 "tags, author posts, search results."
 msgstr ""
 
-#: options_extra.php:896
+#: options_extra.php:920
 msgid "Homepage SEO"
 msgstr ""
 
-#: options_extra.php:902
+#: options_extra.php:926
 msgid "Single Post Page SEO"
 msgstr ""
 
-#: options_extra.php:908
+#: options_extra.php:932
 msgid "Index Page SEO"
 msgstr ""
 
-#: options_extra.php:919
+#: options_extra.php:943
 msgid "Enable custom title"
 msgstr ""
 
-#: options_extra.php:923
+#: options_extra.php:947
 msgid ""
 "By default the theme uses a combination of your blog name and your blog "
 "description, as defined when you created your blog, to create your homepage "
@@ -4311,11 +4343,11 @@ msgid ""
 "this option and fill in the custom title field below."
 msgstr ""
 
-#: options_extra.php:927
+#: options_extra.php:951
 msgid "Enable meta description"
 msgstr ""
 
-#: options_extra.php:931
+#: options_extra.php:955
 msgid ""
 "By default the theme uses your blog description, as defined when you "
 "created your blog, to fill in the meta description field. If you would like "
@@ -4323,11 +4355,11 @@ msgid ""
 "custom description field below."
 msgstr ""
 
-#: options_extra.php:935
+#: options_extra.php:959
 msgid "Enable meta keywords"
 msgstr ""
 
-#: options_extra.php:939
+#: options_extra.php:963
 msgid ""
 "By default the theme does not add keywords to your header. Most search "
 "engines don't use keywords to rank your site anymore, but some people "
@@ -4335,11 +4367,11 @@ msgid ""
 "header then enable this option and fill in the custom keywords field below."
 msgstr ""
 
-#: options_extra.php:943 options_extra.php:1038 options_extra.php:1107
+#: options_extra.php:967 options_extra.php:1062 options_extra.php:1131
 msgid "Enable canonical URL's"
 msgstr ""
 
-#: options_extra.php:947
+#: options_extra.php:971
 msgid ""
 "Canonicalization helps to prevent the indexing of duplicate content by "
 "search engines, and as a result, may help avoid duplicate content penalties "
@@ -4354,43 +4386,43 @@ msgid ""
 "wp-admin."
 msgstr ""
 
-#: options_extra.php:953
+#: options_extra.php:977
 msgid "Homepage custom title (if enabled)"
 msgstr ""
 
-#: options_extra.php:957
+#: options_extra.php:981
 msgid ""
 "If you have enabled custom titles you can add your custom title here. "
 "Whatever you type here will be placed between the < title >< /title > tags "
 "in header.php"
 msgstr ""
 
-#: options_extra.php:962
+#: options_extra.php:986
 msgid "Homepage meta description (if enabled)"
 msgstr ""
 
-#: options_extra.php:966
+#: options_extra.php:990
 msgid ""
 "If you have enabled meta descriptions you can add your custom description "
 "here."
 msgstr ""
 
-#: options_extra.php:971
+#: options_extra.php:995
 msgid "Homepage meta keywords (if enabled)"
 msgstr ""
 
-#: options_extra.php:975
+#: options_extra.php:999
 msgid ""
 "If you have enabled meta keywords you can add your custom keywords here. "
 "Keywords should be separated by comas. For example: "
 "wordpress,themes,templates,elegant"
 msgstr ""
 
-#: options_extra.php:980 options_extra.php:1075
+#: options_extra.php:1004 options_extra.php:1099
 msgid "If custom titles are disabled, choose autogeneration method"
 msgstr ""
 
-#: options_extra.php:989
+#: options_extra.php:1013
 msgid ""
 "If you are not using cutsom post titles you can still have control over how "
 "your titles are generated. Here you can choose which order you would like "
@@ -4398,21 +4430,21 @@ msgid ""
 "name from the title completely."
 msgstr ""
 
-#: options_extra.php:993 options_extra.php:1088 options_extra.php:1138
+#: options_extra.php:1017 options_extra.php:1112 options_extra.php:1162
 msgid "Define a character to separate BlogName and Post title"
 msgstr ""
 
-#: options_extra.php:997 options_extra.php:1092
+#: options_extra.php:1021 options_extra.php:1116
 msgid ""
 "Here you can change which character separates your blog title and post name "
 "when using autogenerated post titles. Common values are | or -"
 msgstr ""
 
-#: options_extra.php:1012
+#: options_extra.php:1036
 msgid "Enable custom titles"
 msgstr ""
 
-#: options_extra.php:1016
+#: options_extra.php:1040
 msgid ""
 "By default the theme creates post titles based on the title of your post "
 "and your blog name. If you would like to make your meta title different "
@@ -4421,11 +4453,11 @@ msgid ""
 "and you must choose a custom field name for your title below."
 msgstr ""
 
-#: options_extra.php:1020
+#: options_extra.php:1044
 msgid "Enable custom description"
 msgstr ""
 
-#: options_extra.php:1024
+#: options_extra.php:1048
 msgid ""
 "If you would like to add a meta description to your post you can do so "
 "using custom fields. This option must be enabled for descriptions to be "
@@ -4433,11 +4465,11 @@ msgid ""
 "fields based off the custom field name you define below."
 msgstr ""
 
-#: options_extra.php:1030
+#: options_extra.php:1054
 msgid "Enable custom keywords"
 msgstr ""
 
-#: options_extra.php:1034
+#: options_extra.php:1058
 msgid ""
 "If you would like to add meta keywords to your post you can do so using "
 "custom fields. This option must be enabled for keywords to be displayed on "
@@ -4445,7 +4477,7 @@ msgid ""
 "the custom field name you define below."
 msgstr ""
 
-#: options_extra.php:1042 options_extra.php:1111
+#: options_extra.php:1066 options_extra.php:1135
 msgid ""
 "Canonicalization helps to prevent the indexing of duplicate content by "
 "search engines, and as a result, may help avoid duplicate content penalties "
@@ -4460,40 +4492,40 @@ msgid ""
 "wp-admin."
 msgstr ""
 
-#: options_extra.php:1048
+#: options_extra.php:1072
 msgid "Custom field Name to be used for title"
 msgstr ""
 
-#: options_extra.php:1052
+#: options_extra.php:1076
 msgid ""
 "When you define your title using custom fields you should use this value "
 "for the custom field Name. The Value of your custom field should be the "
 "custom title you would like to use."
 msgstr ""
 
-#: options_extra.php:1057
+#: options_extra.php:1081
 msgid "Custom field Name to be used for description"
 msgstr ""
 
-#: options_extra.php:1061
+#: options_extra.php:1085
 msgid ""
 "When you define your meta description using custom fields you should use "
 "this value for the custom field Name. The Value of your custom field should "
 "be the custom description you would like to use."
 msgstr ""
 
-#: options_extra.php:1066
+#: options_extra.php:1090
 msgid "Custom field Name to be used for keywords"
 msgstr ""
 
-#: options_extra.php:1070
+#: options_extra.php:1094
 msgid ""
 "When you define your keywords using custom fields you should use this value "
 "for the custom field Name. The Value of your custom field should be the "
 "meta keywords you would like to use, separated by comas."
 msgstr ""
 
-#: options_extra.php:1084
+#: options_extra.php:1108
 msgid ""
 "If you are not using cutsom post titles you can still have control over hw "
 "your titles are generated. Here you can choose which order you would like "
@@ -4501,120 +4533,120 @@ msgid ""
 "name from the title completely."
 msgstr ""
 
-#: options_extra.php:1115
+#: options_extra.php:1139
 msgid "Enable meta descriptions"
 msgstr ""
 
-#: options_extra.php:1119
+#: options_extra.php:1143
 msgid ""
 "Check this box if you want to display meta descriptions on category/archive "
 "pages. The description is based off the category description you choose "
 "when creating/edit your category in wp-admin."
 msgstr ""
 
-#: options_extra.php:1125
+#: options_extra.php:1149
 msgid "Choose title autogeneration method"
 msgstr ""
 
-#: options_extra.php:1134
+#: options_extra.php:1158
 msgid ""
 "Here you can choose how your titles on index pages are generated. You can "
 "change which order your blog name and index title are displayed, or you can "
 "remove the blog name from the title completely."
 msgstr ""
 
-#: options_extra.php:1142
+#: options_extra.php:1166
 msgid ""
 "Here you can change which character separates your blog title and index "
 "page name when using autogenerated post titles. Common values are | or -"
 msgstr ""
 
-#: options_extra.php:1170
+#: options_extra.php:1194
 msgid "Code Integration"
 msgstr ""
 
-#: options_extra.php:1181
+#: options_extra.php:1205
 msgid "Enable header code"
 msgstr ""
 
-#: options_extra.php:1185
+#: options_extra.php:1209
 msgid ""
 "Disabling this option will remove the header code below from your blog. "
 "This allows you to remove the code while saving it for later use."
 msgstr ""
 
-#: options_extra.php:1189
+#: options_extra.php:1213
 msgid "Enable body code"
 msgstr ""
 
-#: options_extra.php:1193
+#: options_extra.php:1217
 msgid ""
 "Disabling this option will remove the body code below from your blog. This "
 "allows you to remove the code while saving it for later use."
 msgstr ""
 
-#: options_extra.php:1199
+#: options_extra.php:1223
 msgid "Enable single top code"
 msgstr ""
 
-#: options_extra.php:1203
+#: options_extra.php:1227
 msgid ""
 "Disabling this option will remove the single top code below from your blog. "
 "This allows you to remove the code while saving it for later use."
 msgstr ""
 
-#: options_extra.php:1207
+#: options_extra.php:1231
 msgid "Enable single bottom code"
 msgstr ""
 
-#: options_extra.php:1211
+#: options_extra.php:1235
 msgid ""
 "Disabling this option will remove the single bottom code below from your "
 "blog. This allows you to remove the code while saving it for later use."
 msgstr ""
 
-#: options_extra.php:1217
+#: options_extra.php:1241
 msgid "Add code to the < head > of your blog"
 msgstr ""
 
-#: options_extra.php:1221
+#: options_extra.php:1245
 msgid ""
 "Any code you place here will appear in the head section of every page of "
 "your blog. This is useful when you need to add javascript or css to all "
 "pages."
 msgstr ""
 
-#: options_extra.php:1225
+#: options_extra.php:1249
 msgid "Add code to the < body > (good for tracking codes such as google analytics)"
 msgstr ""
 
-#: options_extra.php:1229
+#: options_extra.php:1253
 msgid ""
 "Any code you place here will appear in body section of all pages of your "
 "blog. This is usefull if you need to input a tracking pixel for a state "
 "counter such as Google Analytics."
 msgstr ""
 
-#: options_extra.php:1233
+#: options_extra.php:1257
 msgid "Add code to the top of your posts"
 msgstr ""
 
-#: options_extra.php:1237 options_extra.php:1245
+#: options_extra.php:1261 options_extra.php:1269
 msgid ""
 "Any code you place here will be placed at the top of all single posts. This "
 "is useful if you are looking to integrating things such as social "
 "bookmarking links."
 msgstr ""
 
-#: options_extra.php:1241
+#: options_extra.php:1265
 msgid "Add code to the bottom of your posts, before the comments"
 msgstr ""
 
-#: options_extra.php:1283
+#: options_extra.php:1307
 msgid "Username"
 msgstr ""
 
-#: options_extra.php:1288
+#: options_extra.php:1312
 msgid ""
 "Before you can receive product updates, you must first authenticate your "
 "Elegant Themes subscription. To do this, you need to enter both your "
@@ -4623,7 +4655,7 @@ msgid ""
 "href=\"http://elegantthemes.com/\" target=\"_blank\">ElegantThemes.com</a>"
 msgstr ""
 
-#: options_extra.php:1300
+#: options_extra.php:1324
 msgid ""
 "Before you can receive product updates, you must first authenticate your "
 "Elegant Themes subscription. To do this, you need to enter both your "
@@ -4633,110 +4665,110 @@ msgid ""
 "the <strong>Account > API Key</strong> page."
 msgstr ""
 
-#: options_extra.php:1334
+#: options_extra.php:1358
 msgid "Below Header"
 msgstr ""
 
-#: options_extra.php:1340
+#: options_extra.php:1364
 msgid "Footer"
 msgstr ""
 
-#: options_extra.php:1346
+#: options_extra.php:1370
 msgid "Above Post"
 msgstr ""
 
-#: options_extra.php:1352
+#: options_extra.php:1376
 msgid "Below Post"
 msgstr ""
 
-#: options_extra.php:1363
+#: options_extra.php:1387
 msgid "Enable Header Ad"
 msgstr ""
 
-#: options_extra.php:1367
+#: options_extra.php:1391
 msgid ""
 "Enabling this option will display an ad in the header. If enabled you must "
 "fill in the banner image and destination url below."
 msgstr ""
 
-#: options_extra.php:1373 options_extra.php:1429 options_extra.php:1485
-#: options_extra.php:1541 options_extra.php:1597
+#: options_extra.php:1397 options_extra.php:1453 options_extra.php:1509
+#: options_extra.php:1565 options_extra.php:1621
 msgid "Input advertisement image"
 msgstr ""
 
-#: options_extra.php:1377 options_extra.php:1433 options_extra.php:1489
-#: options_extra.php:1545 options_extra.php:1601
+#: options_extra.php:1401 options_extra.php:1457 options_extra.php:1513
+#: options_extra.php:1569 options_extra.php:1625
 msgid "Here you can provide image url"
 msgstr ""
 
-#: options_extra.php:1382 options_extra.php:1438 options_extra.php:1494
-#: options_extra.php:1550 options_extra.php:1606
+#: options_extra.php:1406 options_extra.php:1462 options_extra.php:1518
+#: options_extra.php:1574 options_extra.php:1630
 msgid "Input advertisement destination url"
 msgstr ""
 
-#: options_extra.php:1386 options_extra.php:1442 options_extra.php:1498
-#: options_extra.php:1554 options_extra.php:1610
+#: options_extra.php:1410 options_extra.php:1466 options_extra.php:1522
+#: options_extra.php:1578 options_extra.php:1634
 msgid "Here you can provide destination url"
 msgstr ""
 
-#: options_extra.php:1391 options_extra.php:1447 options_extra.php:1503
-#: options_extra.php:1559 options_extra.php:1615
+#: options_extra.php:1415 options_extra.php:1471 options_extra.php:1527
+#: options_extra.php:1583 options_extra.php:1639
 msgid "Input adsense code"
 msgstr ""
 
-#: options_extra.php:1395 options_extra.php:1451 options_extra.php:1507
-#: options_extra.php:1563 options_extra.php:1619
+#: options_extra.php:1419 options_extra.php:1475 options_extra.php:1531
+#: options_extra.php:1587 options_extra.php:1643
 msgid "Place your adsense code here."
 msgstr ""
 
-#: options_extra.php:1399 options_extra.php:1455 options_extra.php:1511
-#: options_extra.php:1567 options_extra.php:1623
+#: options_extra.php:1423 options_extra.php:1479 options_extra.php:1535
+#: options_extra.php:1591 options_extra.php:1647
 msgid "Enable Responsive Adsense Ad"
 msgstr ""
 
-#: options_extra.php:1403 options_extra.php:1459 options_extra.php:1515
-#: options_extra.php:1571 options_extra.php:1627
+#: options_extra.php:1427 options_extra.php:1483 options_extra.php:1539
+#: options_extra.php:1595 options_extra.php:1651
 msgid ""
 "Adsense's responsive ad units require the ads' container to have a fixed "
 "width. Enabling this option applies a fixed width to this ad's container."
 msgstr ""
 
-#: options_extra.php:1419
+#: options_extra.php:1443
 msgid "Enable Below Header - Ad"
 msgstr ""
 
-#: options_extra.php:1423
+#: options_extra.php:1447
 msgid ""
 "Enabling this option will display an ad below the header. If enabled you "
 "must fill in the banner image and destination url below."
 msgstr ""
 
-#: options_extra.php:1475
+#: options_extra.php:1499
 msgid "Enable Above Footer - Ad"
 msgstr ""
 
-#: options_extra.php:1479
+#: options_extra.php:1503
 msgid ""
 "Enabling this option will display an ad above the footer. If enabled you "
 "must fill in the banner image and destination url below."
 msgstr ""
 
-#: options_extra.php:1531
+#: options_extra.php:1555
 msgid "Enable Single Post - Below Post - Ad"
 msgstr ""
 
-#: options_extra.php:1535
+#: options_extra.php:1559
 msgid ""
 "Enabling this option will display an ad on the bottom of your post pages "
 "below the single post content. If enabled you must fill in the banner image "
 "and destination url below."
 msgstr ""
 
-#: options_extra.php:1587
+#: options_extra.php:1611
 msgid "Enable Single Post - Above Post - Ad"
 msgstr ""
 
-#: options_extra.php:1591
+#: options_extra.php:1615
 msgid ""
 "Enabling this option will display an ad on the top of your post pages above "
 "the single post content. If enabled you must fill in the banner image and "
@@ -4745,15 +4777,15 @@ msgstr ""
 
 #: page-template-authors.php:24 page-template-contact.php:22
 #: page-template-member.php:22 page-template-sitemap.php:22 page.php:19
-#: single-post.php:73 single-project.php:81 single.php:42
+#: single-post.php:64 single-project.php:72 single.php:33
 msgid "Pages:"
 msgstr ""
 
 #: page-template-authors.php:81 page-template-blog-feed.php:101
 #: page-template-contact.php:75 page-template-member.php:44
 #: page-template-portfolio.php:86 page-template-sitemap.php:47
-#: page-template-timeline.php:59 page.php:31 single-post.php:211
-#: single-project.php:90 single.php:53
+#: page-template-timeline.php:59 page.php:31 single-post.php:202
+#: single-project.php:81 single.php:44
 msgid "Post not found"
 msgstr ""
 
@@ -4785,35 +4817,35 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: single-post.php:92 single-post.php:111
+#: single-post.php:83 single-post.php:102
 msgid "%d%%"
 msgstr ""
 
-#: single-post.php:123
+#: single-post.php:114
 msgid "Share:"
 msgstr ""
 
-#: single-post.php:150
+#: single-post.php:141
 msgid "<span class=\"button\">Previous</span><span class=\"title\">%title</span>"
 msgstr ""
 
-#: single-post.php:153
+#: single-post.php:144
 msgid "<span class=\"button\">Next</span><span class=\"title\">%title</span>"
 msgstr ""
 
-#: single-post.php:161
+#: single-post.php:152
 msgid "About The Author"
 msgstr ""
 
-#: single-post.php:168
+#: single-post.php:159
 msgid "View all posts by %s"
 msgstr ""
 
-#: single-post.php:186
+#: single-post.php:177
 msgid "Related Posts"
 msgstr ""
 
-#: single-project.php:98 single-project.php:101
+#: single-project.php:89 single-project.php:92
 msgid "<span class=\"button\" title=\"%title\"></span>"
 msgstr ""
 
@@ -4867,7 +4899,7 @@ msgctxt "theme updates"
 msgid "Updates"
 msgstr ""
 
-#: epanel/core_functions.php:494
+#: epanel/core_functions.php:505
 msgctxt "clear static resources"
 msgid "Clear"
 msgstr ""
@@ -4897,22 +4929,22 @@ msgctxt "Project skill singular name"
 msgid "Project Skill"
 msgstr ""
 
-#: includes/core.php:198
+#: includes/core.php:217
 msgctxt "layout type general name"
 msgid "Category Layouts"
 msgstr ""
 
-#: includes/core.php:199
+#: includes/core.php:218
 msgctxt "layout type singular name"
 msgid "Category Layout"
 msgstr ""
 
-#: includes/core.php:200
+#: includes/core.php:219
 msgctxt "layout item"
 msgid "Add New"
 msgstr ""
 
-#: includes/core.php:245
+#: includes/core.php:264
 #. Translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.

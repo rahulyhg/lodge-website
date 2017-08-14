@@ -11,15 +11,16 @@ function et_builder_should_load_framework() {
 	}
 
 	$is_admin = is_admin();
-	$required_admin_pages = array( 'edit.php', 'post.php', 'post-new.php', 'admin.php', 'customize.php', 'edit-tags.php', 'admin-ajax.php', 'export.php', 'options-permalink.php', 'themes.php' ); // list of admin pages where we need to load builder files
+	$required_admin_pages = array( 'edit.php', 'post.php', 'post-new.php', 'admin.php', 'customize.php', 'edit-tags.php', 'admin-ajax.php', 'export.php', 'options-permalink.php', 'themes.php', 'revision.php' ); // list of admin pages where we need to load builder files
 	$specific_filter_pages = array( 'edit.php', 'admin.php', 'edit-tags.php' ); // list of admin pages where we need more specific filtering
 
 	$is_edit_library_page = 'edit.php' === $pagenow && isset( $_GET['post_type'] ) && 'et_pb_layout' === $_GET['post_type'];
 	$is_role_editor_page = 'admin.php' === $pagenow && isset( $_GET['page'] ) && apply_filters( 'et_divi_role_editor_page', 'et_divi_role_editor' ) === $_GET['page'];
 	$is_import_page = 'admin.php' === $pagenow && isset( $_GET['import'] ) && 'wordpress' === $_GET['import']; // Page Builder files should be loaded on import page as well to register the et_pb_layout post type properly
+	$is_wpml_page = 'admin.php' === $pagenow && isset( $_GET['page'] ) && 'sitepress-multilingual-cms/menu/languages.php' === $_GET['page']; // Page Builder files should be loaded on WPML clone page as well to register the custom taxonomies properly
 	$is_edit_layout_category_page = 'edit-tags.php' === $pagenow && isset( $_GET['taxonomy'] ) && 'layout_category' === $_GET['taxonomy'];
 
-	if ( ! $is_admin || ( $is_admin && in_array( $pagenow, $required_admin_pages ) && ( ! in_array( $pagenow, $specific_filter_pages ) || $is_edit_library_page || $is_role_editor_page || $is_edit_layout_category_page || $is_import_page ) ) ) {
+	if ( ! $is_admin || ( $is_admin && in_array( $pagenow, $required_admin_pages ) && ( ! in_array( $pagenow, $specific_filter_pages ) || $is_edit_library_page || $is_role_editor_page || $is_edit_layout_category_page || $is_import_page || $is_wpml_page ) ) ) {
 		$should_load = true;
 	} else {
 		$should_load = false;
@@ -870,7 +871,7 @@ function et_pb_get_global_module() {
 		wp_reset_postdata();
 
 		if ( !empty( $query->post ) ) {
-			$global_shortcode['shortcode'] = $query->post->post_content;
+			$global_shortcode['shortcode'] = wpautop( $query->post->post_content );
 			$excluded_global_options = get_post_meta( $post_id, '_et_pb_excluded_global_options' );
 			$selective_sync_status = empty( $excluded_global_options ) ? '' : 'updated';
 
@@ -1473,11 +1474,44 @@ function et_fb_get_nonces() {
 		'moduleEmailOptinFetchLists'    => wp_create_nonce( 'et_builder_email_fetch_lists_nonce' ),
 		'moduleEmailOptinAddAccount'    => wp_create_nonce( 'et_builder_email_add_account_nonce' ),
 		'moduleEmailOptinRemoveAccount' => wp_create_nonce( 'et_builder_email_remove_account_nonce' ),
-		'productTourRequest'            => wp_create_nonce( 'et_fb_product_tour_nonce' ),
 	);
 
 	return array_merge( $nonces, $fb_nonces );
 }
+
+if ( ! function_exists( 'et_builder_is_product_tour_enabled' ) ):
+function et_builder_is_product_tour_enabled() {
+	static $product_tour_enabled = null;
+
+	if ( null !== $product_tour_enabled ) {
+		return $product_tour_enabled;
+	}
+
+	if ( ! ( function_exists( 'et_fb_is_enabled' ) && et_fb_is_enabled() ) ) {
+		return $product_tour_enabled = false;
+	}
+
+	/**
+	 * Filters the on/off status of the product tour for the current user.
+	 *
+	 * @since 3.0.64
+	 *
+	 * @param string $product_tour_status_override Accepts 'on', 'off'.
+	 */
+	$product_tour_status_override = apply_filters( 'et_builder_product_tour_status_override', false );
+
+	if ( false !== $product_tour_status_override ) {
+		$product_tour_enabled = 'on' === $product_tour_status_override;
+	} else {
+		$user_id                    = (int) get_current_user_id();
+		$product_tour_settings      = et_get_option( 'product_tour_status', array() );
+		$product_tour_status_global = 'on' === et_get_option( 'et_pb_product_tour_global', 'on' );
+		$product_tour_enabled       = $product_tour_status_global && ( ! isset( $product_tour_settings[ $user_id ] ) || 'on' === $product_tour_settings[ $user_id ] );
+	}
+
+	return $product_tour_enabled;
+}
+endif;
 
 function et_pb_get_backbone_template() {
 	if ( ! wp_verify_nonce( $_POST['et_admin_load_nonce'], 'et_admin_load_nonce' ) ) {
@@ -2478,10 +2512,14 @@ function et_pb_detect_cache_plugins() {
 	}
 
 	if ( '1' === get_option( 'wordfenceActivated' ) ) {
-		return array(
-			'name' => 'Wordfence',
-			'page' => 'admin.php?page=WordfenceSitePerf',
-		);
+		// Wordfence removed their support of Falcon cache in v6.2.8, so we'll
+		// just check against their `cacheType` setting (if it exists).
+		if ( class_exists( 'wfConfig' ) && 'falcon' == wfConfig::get( 'cacheType' ) ) {
+			return array(
+				'name' => 'Wordfence',
+				'page' => 'admin.php?page=WordfenceSitePerf',
+			);
+		}
 	}
 
 	if ( function_exists( 'cachify_autoload' ) ) {
@@ -3726,4 +3764,35 @@ function et_prevent_duplicate_item( $stringList, $delimiter ) {
 	$list = explode( $delimiter, $stringList );
 
 	return implode( $delimiter, array_unique( $list ) );
+}
+
+/**
+ * Determining whether unminified scripts should be loaded or not.
+ * @return bool
+ */
+function et_load_unminified_scripts() {
+	static $should_load = null;
+
+	if ( null === $should_load ) {
+		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+
+		$should_load = apply_filters( 'et_load_unminified_scripts', $is_script_debug );
+	}
+
+	return $should_load;
+}
+
+/**
+ * Determining whether unminified styles should be loaded or not
+ */
+function et_load_unminified_styles() {
+	static $should_load = null;
+
+	if ( null === $should_load ) {
+		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+
+		$should_load = apply_filters( 'et_load_unminified_styles', $is_script_debug );
+	}
+
+	return $should_load;
 }

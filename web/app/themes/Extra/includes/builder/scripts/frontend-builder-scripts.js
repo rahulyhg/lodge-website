@@ -1,3 +1,4 @@
+/*! ET frontend-builder-scripts.js */
 (function($){
 	var $et_window = $(window);
 
@@ -1428,7 +1429,7 @@
 						slide_duration = 700,
 						items = $portfolio_items.data('items'),
 						columns = $portfolio_items.data('portfolio-columns'),
-						item_width = $active_carousel_group.innerWidth() / columns, //$active_carousel_group.children().first().innerWidth(),
+						item_width = $active_carousel_group.innerWidth() / columns,
 						original_item_width = ( 100 / columns ) + '%';
 
 					if ( 'undefined' == typeof items ) {
@@ -1442,7 +1443,7 @@
 					$the_portfolio.data('carouseling', true);
 
 					$active_carousel_group.children().each(function(){
-						$(this).css({'width': $(this).innerWidth() + 1, 'position':'absolute', 'left': ( $(this).innerWidth() * ( $(this).data('position') - 1 ) ) });
+						$(this).css({'width': item_width + 1, 'max-width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('position') - 1 ) ) });
 					});
 
 					if ( $arrow.hasClass('et-pb-arrow-next') ) {
@@ -1452,10 +1453,11 @@
 							active_items_start = items.indexOf( $active_carousel_group.children().first()[0] ),
 							active_items_end = active_items_start + columns,
 							next_items_start = active_items_end,
-							next_items_end = next_items_start + columns;
+							next_items_end = next_items_start + columns,
+							active_carousel_width = $active_carousel_group.innerWidth();
 
 						$next_carousel_group = $('<div class="et_pb_carousel_group next" style="display: none;left: 100%;position: absolute;top: 0;">').insertAfter( $active_carousel_group );
-						$next_carousel_group.css({ 'width': $active_carousel_group.innerWidth() }).show();
+						$next_carousel_group.css({ 'width': active_carousel_width, 'max-width': active_carousel_width }).show();
 
 						// this is an endless loop, so it can decide internally when to break out, so that next_position
 						// can get filled up, even to the extent of an element having both and current_ and next_ position
@@ -1498,7 +1500,7 @@
 						$( sorted ).show().appendTo( $next_carousel_group );
 
 						$next_carousel_group.children().each(function(){
-							$(this).css({'width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('next_position') - 1 ) ) });
+							$(this).css({'width': item_width, 'max-width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('next_position') - 1 ) ) });
 						});
 
 						$active_carousel_group.animate({
@@ -1507,7 +1509,7 @@
 							duration: slide_duration,
 							complete: function() {
 								$portfolio_items.find('.delayed_container_append').each(function(){
-									$(this).css({'width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('next_position') - 1 ) ) });
+									$(this).css({'width': item_width, 'max-width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('next_position') - 1 ) ) });
 									$(this).appendTo( $next_carousel_group );
 								});
 
@@ -1519,7 +1521,7 @@
 									$(this).data('position', '');
 									$(this).data('current_position', '');
 									$(this).hide();
-									$(this).css({'position': '', 'width': '', 'left': ''});
+									$(this).css({'position': '', 'width': '', 'max-width': '', 'left': ''});
 									$(this).appendTo( $portfolio_items );
 								});
 
@@ -1537,7 +1539,7 @@
 							duration: slide_duration,
 							complete: function(){
 								setTimeout(function(){
-									$next_carousel_group.removeClass('next').addClass('active').css({'position':'', 'width':'', 'top':'', 'left': ''});
+									$next_carousel_group.removeClass('next').addClass('active').css({'position':'', 'width':'', 'max-width':'', 'top':'', 'left': ''});
 
 									$next_carousel_group.find('.delayed_container_append_dup').remove();
 
@@ -1551,7 +1553,7 @@
 										$(this).data('position', ( index + 1 ) );
 									});
 
-									$next_carousel_group.children().css({'position': '', 'width': original_item_width, 'left': ''});
+									$next_carousel_group.children().css({'position': '', 'width': original_item_width, 'max-width': original_item_width, 'left': ''});
 
 									$the_portfolio.data('carouseling', false);
 								}, 100 );
@@ -1566,10 +1568,11 @@
 							active_items_start = items.indexOf( $active_carousel_group.children().last()[0] ),
 							active_items_end = active_items_start - columns_span,
 							prev_items_start = active_items_end - 1,
-							prev_items_end = prev_items_start - columns_span;
+							prev_items_end = prev_items_start - columns_span,
+							active_carousel_width = $active_carousel_group.innerWidth();
 
 						$prev_carousel_group = $('<div class="et_pb_carousel_group prev" style="display: none;left: 100%;position: absolute;top: 0;">').insertBefore( $active_carousel_group );
-						$prev_carousel_group.css({ 'left': '-' + $active_carousel_group.innerWidth(), 'width': $active_carousel_group.innerWidth() }).show();
+						$prev_carousel_group.css({ 'left': '-' + active_carousel_width, 'width': active_carousel_width, 'max-width': active_carousel_width }).show();
 
 						// this is an endless loop, so it can decide internally when to break out, so that next_position
 						// can get filled up, even to the extent of an element having both and current_ and next_ position
@@ -1613,7 +1616,7 @@
 						$( sorted ).show().appendTo( $prev_carousel_group );
 
 						$prev_carousel_group.children().each(function(){
-							$(this).css({'width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('prev_position') - 1 ) ) });
+							$(this).css({'width': item_width, 'max-width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('prev_position') - 1 ) ) });
 						});
 
 						$active_carousel_group.animate({
@@ -1622,7 +1625,7 @@
 							duration: slide_duration,
 							complete: function() {
 								$portfolio_items.find('.delayed_container_append').reverse().each(function(){
-									$(this).css({'width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('prev_position') - 1 ) ) });
+									$(this).css({'width': item_width, 'max-width': item_width, 'position':'absolute', 'left': ( item_width * ( $(this).data('prev_position') - 1 ) ) });
 									$(this).prependTo( $prev_carousel_group );
 								});
 
@@ -1634,7 +1637,7 @@
 									$(this).data('position', '');
 									$(this).data('current_position', '');
 									$(this).hide();
-									$(this).css({'position': '', 'width': '', 'left': ''});
+									$(this).css({'position': '', 'width': '', 'max-width': '', 'left': ''});
 									$(this).appendTo( $portfolio_items );
 								});
 
@@ -1649,7 +1652,7 @@
 							duration: slide_duration,
 							complete: function(){
 								setTimeout(function(){
-									$prev_carousel_group.removeClass('prev').addClass('active').css({'position':'', 'width':'', 'top':'', 'left': ''});
+									$prev_carousel_group.removeClass('prev').addClass('active').css({'position':'', 'width':'', 'max-width':'', 'top':'', 'left': ''});
 
 									$prev_carousel_group.find('.delayed_container_append_dup').remove();
 
@@ -1665,7 +1668,7 @@
 										$(this).addClass('position_' + position );
 									});
 
-									$prev_carousel_group.children().css({'position': '', 'width': original_item_width, 'left': ''});
+									$prev_carousel_group.children().css({'position': '', 'width': original_item_width, 'max-width': original_item_width, 'left': ''});
 									$the_portfolio.data('carouseling', false);
 								}, 100 );
 							}
@@ -1718,7 +1721,7 @@
 					$the_portfolio.data('columns_setting_up', true );
 
 					var portfolio_item_width_percentage = ( 100 / columns ) + '%';
-					$the_portfolio_items.css({ 'width' : portfolio_item_width_percentage });
+					$the_portfolio_items.css({ 'width' : portfolio_item_width_percentage, 'max-width' : portfolio_item_width_percentage });
 
 					// store last setup column
 					$portfolio_items.removeClass('columns-' + $portfolio_items.data('portfolio-columns') );
@@ -1847,7 +1850,8 @@
 					$the_portfolio.on('click', '.et_pb_portfolio_filter a', function(e){
 						e.preventDefault();
 						var category_slug = $(this).data('category-slug');
-						$the_portfolio_items = $(this).parents('.et_pb_filterable_portfolio').find('.et_pb_portfolio_items');
+						var $the_portfolio = $(this).parents('.et_pb_filterable_portfolio');
+						var $the_portfolio_items = $the_portfolio.find('.et_pb_portfolio_items');
 
 						if ( 'all' == category_slug ) {
 							$the_portfolio.find('.et_pb_portfolio_filter a').removeClass('active');
@@ -1884,9 +1888,9 @@
 					$the_portfolio.on('click', '.et_pb_portofolio_pagination a', function(e){
 						e.preventDefault();
 
-						var to_page = $(this).data('page'),
-							$the_portfolio = $(this).parents('.et_pb_filterable_portfolio'),
-							$the_portfolio_items = $the_portfolio.find('.et_pb_portfolio_items');
+						var to_page = $(this).data('page');
+						var $the_portfolio = $(this).parents('.et_pb_filterable_portfolio');
+						var $the_portfolio_items = $the_portfolio.find('.et_pb_portfolio_items');
 
 						et_pb_smooth_scroll( $the_portfolio, false, 800 );
 
@@ -2707,8 +2711,8 @@
 					var $this_contact_container = $( this ),
 						$et_contact_form = $this_contact_container.find( 'form' ),
 						$et_contact_submit = $this_contact_container.find( 'input.et_pb_contact_submit' ),
-						$et_inputs = $et_contact_form.find( 'input[type=text], input[type=radio]:checked, textarea, .et_pb_contact_select' ),
-						et_email_reg = /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/,
+						$et_inputs = $et_contact_form.find( 'input[type=text], .et_pb_checkbox_handle, input[type=radio]:checked, textarea, .et_pb_contact_select' ),
+						et_email_reg = /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/,
 						redirect_url = typeof $this_contact_container.data( 'redirect_url' ) !== 'undefined' ? $this_contact_container.data( 'redirect_url' ) : '';
 
 					$et_contact_form.find( 'input[type=checkbox]' ).on( 'change', function() {
@@ -2721,7 +2725,7 @@
 
 					$et_contact_form.on( 'submit', function( event ) {
 						var $this_contact_form = $( this ),
-							$this_inputs = $this_contact_form.find( 'input[type=text], .et_pb_contact_field[data-type="checkbox"], .et_pb_contact_field[data-type="radio"], textarea, select' ),
+							$this_inputs = $this_contact_form.find( 'input[type=text], .et_pb_checkbox_handle, .et_pb_contact_field[data-type="radio"], textarea, select' ),
 							this_et_contact_error = false,
 							$et_contact_message = $this_contact_form.closest( '.et_pb_contact_form_container' ).find( '.et-pb-contact-message' ),
 							et_message = '',
@@ -2734,22 +2738,19 @@
 
 						$this_inputs.removeClass( 'et_contact_error' );
 
+						var hidden_fields = [];
+
 						$this_inputs.each( function(){
-							var $this_el      = $( this );
-							var $this_wrapper = false;
+							var $this_el        = $( this );
+							var $this_wrapper   = false;
 
-							// Prevent field processing if that field is not visible (conditional logic)
-							if ( ! $this_el.is(':visible') ) {
-								return;
-							}
-
-							if ( 'checkbox' === $this_el.data('type') ) {
-								$this_el      = $this_el.find('input[type="checkbox"]');
+							if ( 'checkbox' === $this_el.data('field_type') ) {
 								$this_wrapper = $this_el.parents('.et_pb_contact_field');
+								$this_wrapper.removeClass( 'et_contact_error' );
 							}
 
 							if ( 'radio' === $this_el.data('type') ) {
-								$this_el = $this_el.find('input[type="radio"]');
+								$this_el      = $this_el.find('input[type="radio"]');
 								$this_wrapper = $this_el.parents('.et_pb_contact_field');
 							}
 
@@ -2773,7 +2774,6 @@
 									var $firstRadio = $this_wrapper.find('input[type="radio"]:first');
 
 									required_mark = typeof $firstRadio.data( 'required_mark' ) !== 'undefined' ? $firstRadio.data( 'required_mark' ) : 'not_required';
-									original_id   = typeof $firstRadio.data( 'original_id' ) !== 'undefined' ? $firstRadio.data( 'original_id' ) : '';
 
 									this_val = '';
 									if ( $this_wrapper.find('input[type="radio"]:checked') ) {
@@ -2781,24 +2781,57 @@
 									}
 								}
 
-								this_label = $this_wrapper.find('.et_pb_contact_form_label').text();
-								this_id = $this_wrapper.find('input[type="radio"]:first').attr('name');
+								this_label  = $this_wrapper.find('.et_pb_contact_form_label').text();
+								this_id     = $this_wrapper.find('input[type="radio"]:first').attr('name');
+								original_id = $this_wrapper.attr('data-id');
 
 								if ( 0 === $this_wrapper.find('input[type="radio"]:checked').length ) {
 									unchecked = true;
 								}
 							}
 
-							// checkbox field value adjustment
+							// radio field properties adjustment
 							if ( 'checkbox' === field_type ) {
-								var $checkbox = $this_el;
-								var $handle   = $checkbox.siblings('[data-checked][data-unchecked]');
+								this_val = '';
 
-								this_id       = $handle.attr('id');
-								this_val      = $checkbox.prop('checked') ? $handle.data('checked') : $handle.data('unchecked');
-								unchecked     = ! $checkbox.prop('checked');
+								if ( 0 !== $this_wrapper.find( 'input[type="checkbox"]').length ) {
+									field_type = 'checkbox';
 
-								$handle.val( this_val );
+									var $checkboxHandle = $this_wrapper.find('.et_pb_checkbox_handle');
+
+									required_mark = typeof $checkboxHandle.data( 'required_mark' ) !== 'undefined' ? $checkboxHandle.data( 'required_mark' ) : 'not_required';
+
+									if ( $this_wrapper.find('input[type="checked"]:checked') ) {
+										this_val = [];
+										$this_wrapper.find('input[type="checkbox"]:checked').each(function() {
+											this_val.push( $(this).val() );
+										});
+
+										this_val = this_val.join(', ');
+									}
+								}
+
+								$this_wrapper.find('.et_pb_checkbox_handle').val(this_val);
+
+								this_label  = $this_wrapper.find('.et_pb_contact_form_label').text();
+								this_id     = $this_wrapper.find('.et_pb_checkbox_handle').attr('name');
+								original_id = $this_wrapper.attr('data-id');
+
+								if ( 0 === $this_wrapper.find('input[type="checkbox"]:checked').length ) {
+									unchecked = true;
+								}
+							}
+
+							// Store the labels of the conditionally hidden fields so that they can be
+							// removed later if a custom message pattern is enabled
+							if ( ! $this_el.is(':visible') && 'hidden' !== $this_el.attr('type') && 'radio' !== $this_el.attr('type') ) {
+								hidden_fields.push( this_label );
+								return;
+							}
+
+							if ( ( 'hidden' === $this_el.attr('type') || 'radio' === $this_el.attr('type') ) && ! $this_el.parents('.et_pb_contact_field').is(':visible') ) {
+								hidden_fields.push( this_label );
+								return;
 							}
 
 							// add current field data into array of inputs
@@ -2808,6 +2841,7 @@
 
 							// add error message for the field if it is required and empty
 							if ( 'required' === required_mark && ( '' === this_val || true === unchecked ) ) {
+
 								if ( false === $this_wrapper ) {
 									$this_el.addClass( 'et_contact_error' );
 								} else {
@@ -2870,7 +2904,17 @@
 							var $href = $( this ).attr( 'action' ),
 								form_data = $( this ).serializeArray();
 
-							form_data.push( { 'name': 'et_pb_contact_email_fields_' + form_unique_id, 'value' : JSON.stringify( inputs_list ) } );
+							form_data.push( {
+								'name': 'et_pb_contact_email_fields_' + form_unique_id,
+								'value' : JSON.stringify( inputs_list )
+							} );
+
+							if ( hidden_fields.length > 0 ) {
+								form_data.push( {
+									'name': 'et_pb_contact_email_hidden_fields_' + form_unique_id,
+									'value' : JSON.stringify( hidden_fields )
+								} );
+							}
 
 							$this_contact_container.fadeTo( 'fast', 0.2 ).load( $href + ' #' + $this_contact_form.closest( '.et_pb_contact_form_container' ).attr( 'id' ), form_data, function( responseText ) {
 								if ( ! $( responseText ).find( '.et_pb_contact_error_text').length ) {
@@ -4224,6 +4268,16 @@
 							var field_type  = $wrapper.data('type');
 							var field_value;
 
+							/*
+								Check if the field wrapper is actually visible when including it in the rules check.
+								This avoids the scenario with a parent, child and grandchild field where the parent
+								field is changed but the grandchild remains visible, because the child one has the
+								right value, even though it is not visible
+							*/
+							if ( ! $wrapper.is(':visible') ) {
+								continue;
+							}
+
 							/* Get the proper compare value based on the field type */
 							switch( field_type ) {
 								case 'input':
@@ -4237,10 +4291,26 @@
 									field_value = $wrapper.find('input:checked').val() || '';
 									break;
 								case 'checkbox':
-									var $checkbox      = $wrapper.find(':checkbox');
-									var $checkbox_data = $wrapper.find('[data-checked][data-unchecked]');
+									/*
+										Conditional logic for checkboxes is a bit trickier since we have multiple values.
+										To address that we first check if a checked checkbox with the desired value
+										exists, which is represented by setting `field_value` to true or false.
+										Next we always set `check_value` to true so we can compare against the
+										result of the value check.
+									*/
 
-									field_value = true === $checkbox.prop('checked') ? $checkbox_data.data('checked') : $checkbox_data.data('unchecked');
+									var $checkbox   = $wrapper.find(':checkbox:checked');
+									var field_value = false;
+
+									$checkbox.each(function() {
+										if ( check_value === $(this).val() ) {
+											field_value = true;
+
+											return false;
+										}
+									});
+
+									check_value = true;
 									break;
 								case 'select':
 									field_value = $wrapper.find('select').val();
@@ -4254,6 +4324,16 @@
 							if ( 'is empty' === check_type || 'is not empty' === check_type ) {
 								check_type  = 'is empty' === check_type ? 'is' : 'is not';
 								check_value = '';
+
+								/*
+									`field_value` will always be `false` if all the checkboxes are unchecked
+									since it only changes when a checked checkbox matches the `check_value`
+									Because of `check_value` being reset to empty string we do the same
+									to `field_value` (if it is `false`) to cover the 'is empty' case
+								*/
+								if ( 'checkbox' === field_type && false === field_value ) {
+									field_value = '';
+								}
 							}
 
 							/* Check if the value IS matching (if it has to) */
