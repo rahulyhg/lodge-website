@@ -115,6 +115,7 @@ class Cuboree_Registration {
 				'Pioneer Trails',
 				'Timberline',
 				'Valley',
+				'Out of council',
 			]
         ], $checkout->get_value( 'district' ));
 
