@@ -188,6 +188,26 @@
         }
     }
 
+    .product-type-variable {
+
+        .variations {
+            width: 50%;
+
+            @include bp(phone) {
+                width: 100%;
+            }
+        }
+
+        .woocommerce-variation {
+            line-height: 62px;
+            margin-right: 2em;
+        }
+
+        .woocommerce-variation-add-to-cart {
+            padding-top: 11px;
+        }
+    }
+
 } // .woocommerce
 
 #add_payment_method table.cart td.actions .coupon .input-text,
