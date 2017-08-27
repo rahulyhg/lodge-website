@@ -191,10 +191,10 @@
     .product-type-variable {
 
         .variations {
-            width: 50%;
+            width: 50% !important;
 
             @include bp(phone) {
-                width: 100%;
+                width: 100% !important;
             }
         }
 
