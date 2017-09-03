@@ -39,8 +39,7 @@ class Tahosa_Event_Registration {
 				wp_dequeue_script( 'wc-password-strength-meter' );
 			}
 		});
-
-
+		add_action( 'rest_api_init', [ $this, 'register_api_hooks' ] );
 	}
 
 	static public function is_ticket( $id = null ) {
@@ -93,5 +92,54 @@ class Tahosa_Event_Registration {
 		unset( $fields['billing']['billing_company'] );
 		unset( $fields['shipping']['billing_company'] );
 		return $fields;
+	}
+
+	public function register_api_hooks() {
+		register_rest_route( 'tahosa-events/v1', '/tickets/', array(
+			'methods'  => 'GET',
+			'callback' => [ $this, 'ticket_endpoint' ],
+		));
+	}
+
+	public function ticket_endpoint() {
+		$args = [
+			'post_type'      => 'event_ticket',
+			'posts_per_page' => 1000,
+		];
+		$query = new WP_Query($args);
+		$data = [
+			'cuboree' => [
+				'name' => 'Cuboree',
+				'total' => 0,
+			],
+			'fall-fellowship' => [
+				'name' => 'Fall Fellowship',
+				'total' => 0,
+			],
+		];
+		foreach ( $query->posts as $ticket ) {
+			$post_title = sanitize_title( $ticket->post_title );
+			if ( false !== strpos( $post_title, 'cuboree-' ) ) {
+				$data['cuboree']['total']++;
+				$post_title = str_replace( 'cuboree-', '', $post_title );
+				$event = 'cuboree';
+			} elseif ( false !== strpos( $post_title, 'fall-fellowship-' ) ) {
+				$data['fall-fellowship']['total']++;
+				$post_title = str_replace( 'fall-fellowship-', '', $post_title );
+				$event = 'fall-fellowship';
+			}
+			if ( isset( $data[$event][ $post_title ] ) ) {
+				$data[$event][ $post_title ]++;
+			} else {
+				$data[$event][ $post_title ] = 1;
+			}
+		}
+		$finaldata = [];
+		foreach ($data as $key => $value) {
+			$finaldata[] = $value;
+		}
+		$response = new WP_REST_Response( $finaldata );
+		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
+		return $response;
 	}
 }
