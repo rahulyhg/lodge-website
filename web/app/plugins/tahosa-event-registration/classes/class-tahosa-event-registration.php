@@ -101,41 +101,86 @@ class Tahosa_Event_Registration {
 		));
 	}
 
+	static function js_friendly_array($array) {
+		foreach ( $array as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$newarray = [];
+				foreach ($value as $key2 => $value2) {
+					$newarray[] = [
+						'label' => $key2,
+						'value' => $value2,
+					];
+				}
+				$array[$key] = $newarray;
+			}
+		}
+		return $array;
+	}
+
 	public function ticket_endpoint() {
 		$args = [
 			'post_type'      => 'event_ticket',
 			'posts_per_page' => 1000,
 		];
 		$query = new WP_Query($args);
-		$data = [
+		$events = [
 			'cuboree' => [
 				'name' => 'Cuboree',
 				'total' => 0,
+				'by-reg-type' => [],
 			],
 			'fall-fellowship' => [
 				'name' => 'Fall Fellowship',
 				'total' => 0,
+				'by-chapter' => [
+					'kodiak' => 0,
+					'medicine-bear' => 0,
+					'medicine-pipe' => 0,
+					'running-antelope' => 0,
+					'spirit-eagle' => 0,
+					'white-buffalo' => 0,
+					'white-eagle' => 0,
+				],
+				'by-age' => [
+					'youth' => 0,
+					'adult' => 0,
+				],
+				'by-level' => [
+					'ordeal' => 0,
+					'brotherhood' => 0,
+					'vigil' => 0,
+				],
+				'by-reg-type' => [],
 			],
 		];
 		foreach ( $query->posts as $ticket ) {
 			$post_title = sanitize_title( $ticket->post_title );
-			if ( false !== strpos( $post_title, 'cuboree-' ) ) {
-				$data['cuboree']['total']++;
-				$post_title = str_replace( 'cuboree-', '', $post_title );
-				$event = 'cuboree';
-			} elseif ( false !== strpos( $post_title, 'fall-fellowship-' ) ) {
-				$data['fall-fellowship']['total']++;
-				$post_title = str_replace( 'fall-fellowship-', '', $post_title );
-				$event = 'fall-fellowship';
+			foreach ( $events as $key => $value ) {
+				if ( false !== strpos( $post_title, $key ) ) {
+					$events[$key]['total']++;
+					$post_title = str_replace( $key . '-', '', $post_title );
+					$event = $key;
+				}
 			}
-			if ( isset( $data[$event][ $post_title ] ) ) {
-				$data[$event][ $post_title ]++;
+			if ( isset( $events[$event]['by-reg-type'][ $post_title ] ) ) {
+				$events[$event]['by-reg-type'][ $post_title ]++;
 			} else {
-				$data[$event][ $post_title ] = 1;
+				$events[$event]['by-reg-type'][ $post_title ] = 1;
+			}
+
+			if ( 'fall-fellowship' === $event ) {
+				$chapter = sanitize_title( get_post_meta( $ticket->ID, 'b0d31d24234398f1bb20d045ce19501c', true ) );
+				$level = sanitize_title( get_post_meta( $ticket->ID, 'ef4e5bbc80fc1d0acdfb84f27f591657', true ) );
+				$age = sanitize_title( get_post_meta( $ticket->ID, '47c172cd25856ce5759c249a929c276e', true ) );
+				$events[$event]['by-chapter'][$chapter]++;
+				$events[$event]['by-age'][$age]++;
+				$events[$event]['by-level'][$level]++;
 			}
 		}
+
 		$finaldata = [];
-		foreach ($data as $key => $value) {
+		foreach ($events as $key => $value) {
+			$value = $this->js_friendly_array($value);
 			$finaldata[] = $value;
 		}
 		$response = new WP_REST_Response( $finaldata );
