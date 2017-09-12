@@ -109,7 +109,8 @@
     "wpackagist-plugin/google-sitemap-generator": "^4.0",
     "wpackagist-plugin/woocommerce": "^3.0",
     "wpackagist-plugin/woocommerce-gateway-stripe": "^3.1",
-    "rarst/laps": "*"
+    "rarst/laps": "*",
+    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
