@@ -125,4 +125,12 @@ class Cuboree_Registration {
 	public function breadcrumbs() {
 		include( plugin_dir_path( __DIR__ ) . '/templates/breadcrumbs.php' );
 	}
+
+	static function unit_from_order_id($id) {
+		return get_post_meta($id, 'unit_number', true);
+	}
+
+	static function district_from_order_id($id) {
+		return get_post_meta($id, 'district', true);
+	}
 }
