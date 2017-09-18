@@ -129,6 +129,11 @@ class Tahosa_Event_Registration {
 		];
 		$query = new WP_Query($args);
 		$events = [
+			'cuboree-staff' => [
+				'name' => 'Cuboree Staff',
+				'total' => 0,
+				'by-reg-type' => [],
+			],
 			'cuboree' => [
 				'name' => 'Cuboree',
 				'total' => 0,
@@ -165,6 +170,7 @@ class Tahosa_Event_Registration {
 					$events[$key]['total']++;
 					$post_title = str_replace( $key . '-', '', $post_title );
 					$event = $key;
+					break;
 				}
 			}
 			if ( isset( $events[$event]['by-reg-type'][ $post_title ] ) ) {
