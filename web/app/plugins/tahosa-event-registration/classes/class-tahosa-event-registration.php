@@ -99,6 +99,11 @@ class Tahosa_Event_Registration {
 			'methods'  => 'GET',
 			'callback' => [ $this, 'ticket_endpoint' ],
 		));
+
+		register_rest_route( 'tahosa-events/v1', '/event-details/', array(
+			'methods'  => 'GET',
+			'callback' => [ $this, 'details_endpoint' ],
+		));
 	}
 
 	static function js_friendly_array($array) {
@@ -184,6 +189,21 @@ class Tahosa_Event_Registration {
 			$finaldata[] = $value;
 		}
 		$response = new WP_REST_Response( $finaldata );
+		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
+		return $response;
+	}
+
+	public function details_endpoint() {
+		if ( current_user_can('administrator')) {
+			$response = new WP_REST_Response( 'logged in!' );
+		} else {
+			$response = new WP_REST_Response( 'unauthorized' );
+		}
+		// $args = [
+		// 	'post_type'      => 'event_ticket',
+		// 	'posts_per_page' => 1000,
+		// ];
+		// $query = new WP_Query($args);
 		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
 		return $response;
 	}
