@@ -94,19 +94,19 @@ class Cuboree_Registration {
 			return;
 		}
 
-	    echo '<div id="cuboree_registration_details" class="custom-registration-fields"><h2>' . __('Registration Details') . '</h2>';
+		echo '<div id="cuboree_registration_details" class="custom-registration-fields"><h2>' . esc_html( 'Registration Details' ) . '</h2>';
 
-	    woocommerce_form_field( 'unit_number', [
-	        'type'          => 'number',
-	        'class'         => array('my-field-class form-row-wide'),
-	        'label'         => __('Unit Number'),
+		woocommerce_form_field( 'unit_number', [
+			'type'          => 'number',
+			'class'         => array( 'my-field-class form-row-wide' ),
+			'label'         => esc_html( 'Unit Number' ),
 			'required' => true,
-        ], $checkout->get_value( 'unit_number' ));
+		], $checkout->get_value( 'unit_number' ));
 
 		woocommerce_form_field( 'district', [
-	        'type'  		=> 'select',
-	        'class' 		=> array('my-field-class form-row-wide'),
-	        'label' 		=> 'District <em>(Not sure? <a href="http://www.denverboyscouts.org/geography/49937" target="_blank">Click here</a>)</em>',
+			'type'  		=> 'select',
+			'class' 		=> array( 'my-field-class form-row-wide' ),
+			'label' 		=> 'District <em>(Not sure? <a href="http://www.denverboyscouts.org/geography/49937" target="_blank">Click here</a>)</em>',
 			'required'    	=> true,
 			'options'     	=> [
 				'' => '---',
@@ -118,31 +118,31 @@ class Cuboree_Registration {
 				'Timberline',
 				'Valley',
 				'Out of council',
-			]
-        ], $checkout->get_value( 'district' ));
+			],
+		], $checkout->get_value( 'district' ));
 
-	    echo '</div>';
+		echo '</div>';
 	}
 
 	public function custom_checkout_field_processing( $order_id ) {
-    if ( ! empty( $_POST['unit_number'] ) ) {
-        update_post_meta( $order_id, 'unit_number', sanitize_text_field( $_POST['unit_number'] ) );
-    }
+		if ( ! empty( $_POST['unit_number'] ) ) {
+			update_post_meta( $order_id, 'unit_number', sanitize_text_field( $_POST['unit_number'] ) );
+		}
 
-	if ( ! empty( $_POST['district'] ) ) {
-		update_post_meta( $order_id, 'district', sanitize_text_field( $_POST['district'] ) );
+		if ( ! empty( $_POST['district'] ) ) {
+			update_post_meta( $order_id, 'district', sanitize_text_field( $_POST['district'] ) );
+		}
 	}
-}
 
 	public function breadcrumbs() {
 		include( plugin_dir_path( __DIR__ ) . '/templates/breadcrumbs.php' );
 	}
 
-	static function unit_from_order_id($id) {
-		return get_post_meta($id, 'unit_number', true);
+	static function unit_from_order_id( $id ) {
+		return get_post_meta( $id, 'unit_number', true );
 	}
 
-	static function district_from_order_id($id) {
-		return get_post_meta($id, 'district', true);
+	static function district_from_order_id( $id ) {
+		return get_post_meta( $id, 'district', true );
 	}
 }
