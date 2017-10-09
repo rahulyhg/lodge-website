@@ -40,6 +40,7 @@ class Tahosa_Event_Registration {
 			}
 		});
 		add_action( 'rest_api_init', [ $this, 'register_api_hooks' ] );
+		add_filter( 'product_type_options', [ $this, 'ticket_type_option'], 20 );
 	}
 
 	static public function is_ticket( $id = null ) {
@@ -48,7 +49,7 @@ class Tahosa_Event_Registration {
 		}
 		$ticket = false;
 		$ticket_meta = get_post_meta( $id, '_ticket', true );
-		if ( $ticket_meta ) {
+		if ( 'yes' === $ticket_meta ) {
 			$ticket = true;
 		}
 		return $ticket;
@@ -56,6 +57,10 @@ class Tahosa_Event_Registration {
 
 	public function ticket_body_class( $classes ) {
 		global $post;
+		$data = [
+			'id' => $post->ID,
+			'is_ticket' => $this->is_ticket( $post->ID ),
+		];
 		if ( $this->is_ticket( $post->ID ) ) {
 			$classes[] = 'woocommerce-ticket';
 		}
@@ -212,5 +217,23 @@ class Tahosa_Event_Registration {
 		// $query = new WP_Query($args);
 		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
 		return $response;
+	}
+
+	/**
+	 * Add 'Ticket' option to products.
+	 *
+	 * @param  array  $options Default options
+	 * @return array           Modified options
+	 */
+	public function ticket_type_option( $options = array() ) {
+		$options['ticket'] = array(
+			'id'            => '_ticket',
+			'wrapper_class' => 'show_if_simple show_if_variable hide_if_deposit',
+			'label'         => __( 'Ticket', 'woocommerce-box-office' ),
+			'description'   => __( 'Each ticket purchased will have attendee details added to it.', 'woocommerce-box-office' ),
+			'default'       => 'no',
+		);
+
+		return $options;
 	}
 }
