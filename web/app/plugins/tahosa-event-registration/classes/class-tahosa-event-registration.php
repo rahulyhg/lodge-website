@@ -178,7 +178,7 @@ class Tahosa_Event_Registration {
 					break;
 				}
 			}
-			if ( isset( $events[$event]['by-reg-type'][ $post_title ] ) ) {
+			if ( isset( $events[$event]['by-reg-type'][ $post_title ] ) && '' !== $event ) {
 				$events[$event]['by-reg-type'][ $post_title ]++;
 			} else {
 				$events[$event]['by-reg-type'][ $post_title ] = 1;
