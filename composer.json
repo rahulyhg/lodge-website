@@ -2,7 +2,8 @@
   "name": "roots/bedrock",
   "type": "project",
   "license": "MIT",
-  "description": "WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure",
+  "description":
+    "WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure",
   "homepage": "https://roots.io/bedrock/",
   "authors": [
     {
@@ -17,7 +18,13 @@
     }
   ],
   "keywords": [
-    "bedrock", "roots", "wordpress", "stack", "composer", "vagrant", "wp"
+    "bedrock",
+    "roots",
+    "wordpress",
+    "stack",
+    "composer",
+    "vagrant",
+    "wp"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -32,49 +39,52 @@
       "url": "https://wpackagist.org"
     },
     {
-    "type": "package",
-    "package": {
+      "type": "package",
+      "package": {
         "name": "deliciousbrains/wp-migrate-db-pro",
         "type": "wordpress-plugin",
         "version": "1.4.6",
         "dist": {
-            "type": "zip",
-            "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+          "type": "zip",
+          "url":
+            "https://deliciousbrains.com/dl/wp-migrate-db-pro-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
         },
         "require": {
-            "composer/installers": "*"
+          "composer/installers": "*"
         }
-    }
+      }
     },
     {
-        "type": "package",
-        "package": {
-            "name": "deliciousbrains/wp-migrate-db-pro-media-files",
-            "type": "wordpress-plugin",
-            "version": "1.3.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-media-files-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
-            },
-            "require": {
-                "composer/installers": "*"
-            }
+      "type": "package",
+      "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro-media-files",
+        "type": "wordpress-plugin",
+        "version": "1.3.1",
+        "dist": {
+          "type": "zip",
+          "url":
+            "https://deliciousbrains.com/dl/wp-migrate-db-pro-media-files-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+        },
+        "require": {
+          "composer/installers": "*"
         }
+      }
     },
     {
-        "type": "package",
-        "package": {
-            "name": "deliciousbrains/wp-migrate-db-pro-cli",
-            "type": "wordpress-plugin",
-            "version": "1.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://deliciousbrains.com/dl/wp-migrate-db-pro-cli-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
-            },
-            "require": {
-                "composer/installers": "*"
-            }
+      "type": "package",
+      "package": {
+        "name": "deliciousbrains/wp-migrate-db-pro-cli",
+        "type": "wordpress-plugin",
+        "version": "1.1",
+        "dist": {
+          "type": "zip",
+          "url":
+            "https://deliciousbrains.com/dl/wp-migrate-db-pro-cli-latest.zip?licence_key=d9b72361-972b-45e9-80b5-71c3c397af61&site_url=tahosalodge.dev"
+        },
+        "require": {
+          "composer/installers": "*"
         }
+      }
     }
   ],
   "require": {
@@ -110,7 +120,8 @@
     "wpackagist-plugin/woocommerce": "^3.0",
     "wpackagist-plugin/woocommerce-gateway-stripe": "^3.1",
     "rarst/laps": "*",
-    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2"
+    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
+    "wpackagist-plugin/woocommerce-add-to-cart-custom-redirect": "1.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
@@ -124,11 +135,7 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "post-root-package-install": [
-      "php -r \"copy('.env.example', '.env');\""
-    ],
-    "test": [
-      "vendor/bin/phpcs"
-    ]
+    "post-root-package-install": ["php -r \"copy('.env.example', '.env');\""],
+    "test": ["vendor/bin/phpcs"]
   }
 }
