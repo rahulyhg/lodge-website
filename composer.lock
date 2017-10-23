@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b023a0b32fa19eeb0c8425b195be549",
+    "content-hash": "b9fc8eacf0c51c0eea5e565f29b91d6b",
     "packages": [
         {
             "name": "composer/installers",
@@ -652,16 +652,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.27",
+            "version": "v2.8.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "e02577b841394a78306d7b547701bb7bb705bad5"
+                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/e02577b841394a78306d7b547701bb7bb705bad5",
-                "reference": "e02577b841394a78306d7b547701bb7bb705bad5",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/28ee62ea4736431ca817cdaebcb005663e9cd1cb",
+                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb",
                 "shasum": ""
             },
             "require": {
@@ -697,7 +697,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12T14:07:15+00:00"
+            "time": "2017-10-01T21:00:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -991,15 +991,15 @@
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
-            "version": "2.5.20",
+            "version": "2.5.22",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/really-simple-ssl/",
-                "reference": "tags/2.5.20"
+                "reference": "tags/2.5.22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.20.zip",
+                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.22.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1051,15 +1051,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.6",
+            "version": "4.6.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.6"
+                "reference": "tags/4.6.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1071,15 +1071,15 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.36",
+            "version": "4.36.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.36"
+                "reference": "tags/4.36.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.36.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.36.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1091,15 +1091,15 @@
         },
         {
             "name": "wpackagist-plugin/user-switching",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.1.0"
+                "reference": "tags/1.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.1.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.2.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1111,15 +1111,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.1.2",
+            "version": "3.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.1.2"
+                "reference": "tags/3.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.1.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.2.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1128,6 +1128,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/woocommerce/"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce-add-to-cart-custom-redirect",
+            "version": "1.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce-add-to-cart-custom-redirect/",
+                "reference": "tags/1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-add-to-cart-custom-redirect.1.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce-add-to-cart-custom-redirect/"
         },
         {
             "name": "wpackagist-plugin/woocommerce-gateway-stripe",
