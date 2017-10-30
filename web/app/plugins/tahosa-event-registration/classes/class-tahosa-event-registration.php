@@ -105,7 +105,7 @@ class Tahosa_Event_Registration {
 			'callback' => [ $this, 'ticket_endpoint' ],
 		));
 
-		register_rest_route( 'tahosa-events/v1', '/event-details/', array(
+		register_rest_route( 'tahosa-events/v1', '/details/(?P<id>\d+)', array(
 			'methods'  => 'GET',
 			'callback' => [ $this, 'details_endpoint' ],
 		));
@@ -167,6 +167,23 @@ class Tahosa_Event_Registration {
 				],
 				'by-reg-type' => [],
 			],
+			'lld' => [
+				'name' => 'LLD',
+				'total' => 0,
+				'by-chapter' => [
+					'kodiak' => 0,
+					'medicine-bear' => 0,
+					'medicine-pipe' => 0,
+					'running-antelope' => 0,
+					'spirit-eagle' => 0,
+					'white-buffalo' => 0,
+					'white-eagle' => 0,
+				],
+				'by-age' => [
+					'youth' => 0,
+					'adult' => 0,
+				],
+			]
 		];
 		foreach ( $query->posts as $ticket ) {
 			$post_title = sanitize_title( $ticket->post_title );
@@ -204,17 +221,40 @@ class Tahosa_Event_Registration {
 		return $response;
 	}
 
-	public function details_endpoint() {
-		if ( current_user_can('administrator')) {
-			$response = new WP_REST_Response( 'logged in!' );
-		} else {
+	public function details_endpoint($data) {
+		if ( ! is_user_logged_in()) {
 			$response = new WP_REST_Response( 'unauthorized' );
+			return $response;
 		}
-		// $args = [
-		// 	'post_type'      => 'event_ticket',
-		// 	'posts_per_page' => 1000,
-		// ];
-		// $query = new WP_Query($args);
+		$args = [
+			'post_type'      => 'event_ticket',
+			'posts_per_page' => 200,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'cache_results'  => false,
+			'meta_query' => array(
+				array(
+					'key' => '_product',
+					'value' => $data['id'],
+					'compare' => 'IN',
+				),
+			),
+		];
+		$tickets = get_posts($args);
+		$output = [];
+		foreach ( $tickets as $ticket ) {
+			$output[] = [
+				'ticket_id'     => $ticket->ID,
+				'ticket_status' => get_post_status( $ticket_id ),
+				'ticket_name'   => $ticket->post_title,
+				'ticket_url'    => $ticket_url,
+				'purchase_date' => $purchase_time,
+				'order_id'      => $order_id,
+				'order_status'  => wc_get_order_status_name( get_post_status( $order_id ) ),
+				'user_id'       => $user_id,
+			];
+		}
+		$response = new WP_REST_Response( $query->posts );
 		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
 		return $response;
 	}

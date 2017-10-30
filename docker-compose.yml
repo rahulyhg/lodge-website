@@ -41,35 +41,12 @@ services:
   redis:
     image: wodby/redis:3.2-2.1.1
 
-  pma:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mariadb
-      PMA_USER: wordpress
-      PMA_PASSWORD: wordpress
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
-    labels:
-      - 'traefik.backend=pma'
-      - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:pma.tahosalodge.dev'
-
   mailhog:
     image: mailhog/mailhog
     labels:
       - 'traefik.backend=mailhog'
       - 'traefik.port=8025'
       - 'traefik.frontend.rule=Host:mailhog.tahosalodge.dev'
-
-  portainer:
-    image: portainer/portainer
-    command: --no-auth
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - 'traefik.backend=portainer'
-      - 'traefik.port=9000'
-      - 'traefik.frontend.rule=Host:portainer.tahosalodge.dev'
 
   traefik:
     image: traefik
