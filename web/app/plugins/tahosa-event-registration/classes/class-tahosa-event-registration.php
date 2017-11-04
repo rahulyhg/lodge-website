@@ -170,32 +170,10 @@ class Tahosa_Event_Registration {
 			'lld' => [
 				'name' => 'LLD',
 				'total' => 0,
-				'by-chapter' => [
-					'kodiak' => 0,
-					'medicine-bear' => 0,
-					'medicine-pipe' => 0,
-					'running-antelope' => 0,
-					'spirit-eagle' => 0,
-					'white-buffalo' => 0,
-					'white-eagle' => 0,
-				],
-				'by-age' => [
-					'youth' => 0,
-					'adult' => 0,
-				],
 			],
 			'noac' => [
 				'name' => 'NOAC',
 				'total' => 0,
-				'by-chapter' => [
-					'kodiak' => 0,
-					'medicine-bear' => 0,
-					'medicine-pipe' => 0,
-					'running-antelope' => 0,
-					'spirit-eagle' => 0,
-					'white-buffalo' => 0,
-					'white-eagle' => 0,
-				],
 			]
 		];
 		foreach ( $query->posts as $ticket ) {
