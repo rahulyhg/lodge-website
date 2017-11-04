@@ -183,6 +183,10 @@ class Tahosa_Event_Registration {
 					'youth' => 0,
 					'adult' => 0,
 				],
+			],
+			'noac' => [
+				'name' => 'NOAC',
+				'total' => 0,
 			]
 		];
 		foreach ( $query->posts as $ticket ) {
