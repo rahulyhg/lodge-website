@@ -2,7 +2,7 @@ version: "2"
 
 services:
   mariadb:
-    image: wodby/mariadb:10.1-2.3.3
+    image: wodby/mariadb:10.2-3.0.2
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
@@ -12,7 +12,7 @@ services:
      - "3306:3306"
 
   php:
-    image: wodby/wordpress-php:7.1-2.2.0
+    image: wodby/wordpress-php:7.2-3.3.1
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       # PHP_XDEBUG: 1
@@ -20,17 +20,17 @@ services:
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
       # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html:cached
 
   nginx:
-    image: wodby/wordpress-nginx:4-1.13-2.2.0
+    image: wodby/wordpress-nginx:4-1.13-3.0.2
     environment:
       NGINX_STATIC_CONTENT_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/web
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html:cached
     depends_on:
       - php
     labels:
@@ -39,7 +39,7 @@ services:
       - 'traefik.frontend.rule=Host:tahosalodge.dev'
 
   redis:
-    image: wodby/redis:3.2-2.1.1
+    image: wodby/redis:4.0-2.1.4
 
   mailhog:
     image: mailhog/mailhog
@@ -50,8 +50,11 @@ services:
 
   traefik:
     image: traefik
-    # command: -c /dev/null --web --docker --logLevel=INFO
-    command: -c /dev/null --web --docker --logLevel=INFO --defaultEntryPoints='https' --entryPoints="Name:https Address::443 TLS:/certs/tahosalodge.dev.crt,/certs/tahosalodge.dev.key" --entryPoints="Name:http Address::80 Redirect.EntryPoint:https"
+    command: >
+      -c /dev/null --web --docker --logLevel=INFO
+      --defaultEntryPoints='http,https'
+      --entryPoints="Name:http Address::80 Redirect.EntryPoint:https"
+      --entryPoints="Name:https Address::443 TLS:/certs/tahosalodge.dev.crt,/certs/tahosalodge.dev.key"
     ports:
       - '80:80'
       - '443:443'
@@ -63,5 +66,5 @@ services:
 volumes:
   codebase:
 ## Docker-sync for macOS users
-#  docker-sync:
-#    external: true
+  # docker-sync:
+  #   external: true

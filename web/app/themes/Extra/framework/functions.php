@@ -193,6 +193,8 @@ if ( ! function_exists( 'et_wp_trim_words' ) ):
 		if ( null === $more )
 		$more = esc_html__( '&hellip;' );
 		$original_text = $text;
+		// Completely remove icons so that unicode hex entities representing the icons do not get included in words.
+		$text = preg_replace( '/<span class="et-pb-icon .*<\/span>/', '', $text );
 		$text = wp_strip_all_tags( $text );
 
 		$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
@@ -742,7 +744,12 @@ if ( !function_exists( 'et_dropdown_google_font_choices' ) ) {
 		if ( is_null( $et_dropdown_google_font_choices ) ) {
 			$site_domain = get_locale();
 
+			$user_fonts = et_builder_get_custom_fonts();
+			
 			$google_fonts = et_builder_get_google_fonts();
+
+			// combine google fonts with custom user fonts
+ 			$google_fonts = array_merge( $user_fonts, $google_fonts );
 
 			$et_domain_fonts = array(
 				'ru_RU' => 'cyrillic',
@@ -757,17 +764,27 @@ if ( !function_exists( 'et_dropdown_google_font_choices' ) ) {
 				'label' => 'Default Theme Font',
 			);
 
+			$removed_fonts_mapping = et_builder_old_fonts_mapping();
+
 			foreach ( $google_fonts as $google_font_name => $google_font_properties ) {
+				$use_parent_font = false;
+
+				if ( isset( $removed_fonts_mapping[ $google_font_name ] ) ) {
+					$parent_font = $removed_fonts_mapping[ $google_font_name ]['parent_font'];
+					$google_font_properties['character_set'] = $google_fonts[ $parent_font ]['character_set'];
+					$use_parent_font = true;
+				}
+
 				if ( '' !== $site_domain && isset( $et_domain_fonts[$site_domain] ) && false === strpos( $google_font_properties['character_set'], $et_domain_fonts[$site_domain] ) ) {
 					continue;
 				}
 				$font_choices[ $google_font_name ] = array(
 					'label' => $google_font_name,
 					'data'  => array(
-						'parent_font'    => isset( $google_font_properties['parent_font'] ) ? $google_font_properties['parent_font'] : '',
-						'parent_styles'  => isset( $google_font_properties['parent_font'] ) && isset( $google_fonts[$google_font_properties['parent_font']]['styles'] ) ? $google_fonts[$google_font_properties['parent_font']]['styles'] : $google_font_properties['styles'],
-						'current_styles' => isset( $google_font_properties['parent_font'] ) && isset( $google_fonts[$google_font_properties['parent_font']]['styles'] ) && isset( $google_font_properties['styles'] ) ? $google_font_properties['styles'] : '',
-						'parent_subset'  => isset( $google_font_properties['parent_font'] ) && isset( $google_fonts[$google_font_properties['parent_font']]['character_set'] ) ? $google_fonts[$google_font_properties['parent_font']]['character_set'] : '',
+						'parent_font'    => $use_parent_font ? $google_font_properties['parent_font'] : '',
+						'parent_styles'  => $use_parent_font ? $google_fonts[$parent_font]['styles'] : $google_font_properties['styles'],
+						'current_styles' => $use_parent_font && isset( $google_fonts[$parent_font]['styles'] ) && isset( $google_font_properties['styles'] ) ? $google_font_properties['styles'] : '',
+						'parent_subset'  => $use_parent_font && isset( $google_fonts[$parent_font]['character_set'] ) ? $google_fonts[$parent_font]['character_set'] : '',
 					),
 				);
 			}

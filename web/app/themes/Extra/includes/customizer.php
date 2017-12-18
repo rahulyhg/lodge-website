@@ -402,6 +402,7 @@ function extra_customize_controls_enqueue_scripts() {
 				esc_html__( 'Footer Sidebar Right', 'extra' ),
 			),
 		),
+		'user_fonts' => et_builder_get_custom_fonts(),
 	) );
 }
 
@@ -4454,11 +4455,24 @@ function extra_customizer_settings( $set = 'theme' ) {
 	return isset( $customizer_settings[ $set ] ) ? $customizer_settings[ $set ] : array();
 }
 
-function extra_customize_register( $wp_customize ) {
+function extra_customize_register( $wp_customize ) {	
+	global $wp_version;
+
+	// Get WP major version
+	$wp_major_version = substr( $wp_version, 0, 3 );
+
 	$wp_customize->remove_section( 'colors' );
 	$wp_customize->register_control_type( 'ET_Color_Alpha_Control' );
 
-	wp_register_script( 'wp-color-picker-alpha', get_template_directory_uri() . '/includes/builder/scripts/ext/wp-color-picker-alpha.min.js', array( 'jquery', 'wp-color-picker' ) );
+	if ( version_compare( $wp_major_version, '4.9', '>=' ) ) {
+		wp_register_script( 'wp-color-picker-alpha', get_template_directory_uri() . '/includes/builder/scripts/ext/wp-color-picker-alpha.min.js', array( 'jquery', 'wp-color-picker' ) );
+		wp_localize_script( 'wp-color-picker-alpha', 'et_pb_color_picker_strings', apply_filters( 'et_pb_color_picker_strings_builder', array(
+			'legacy_pick'    => esc_html__( 'Select', 'et_builder' ),
+			'legacy_current' => esc_html__( 'Current Color', 'et_builder' ),
+		) ) );
+	} else {
+		wp_register_script( 'wp-color-picker-alpha', get_template_directory_uri() . '/includes/builder/scripts/ext/wp-color-picker-alpha-48.min.js', array( 'jquery', 'wp-color-picker' ) );
+	}
 
 	$option_set_name           = 'et_customizer_option_set';
 	$option_set_allowed_values = apply_filters( 'et_customizer_option_set_allowed_values', array( 'module', 'theme' ) );

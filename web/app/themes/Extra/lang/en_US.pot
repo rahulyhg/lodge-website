@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra 2.0.68\n"
+"Project-Id-Version: Extra 2.0.91\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/style\n"
-"POT-Creation-Date: 2017-08-12 10:39:58+00:00\n"
+"POT-Creation-Date: 2017-12-16 19:59:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "1 Comment"
 msgstr ""
 
-#: comments.php:13 epanel/core_functions.php:605
+#: comments.php:13 epanel/core_functions.php:609
 msgid "Comments"
 msgstr ""
 
@@ -68,48 +68,48 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: epanel/core_functions.php:122
+#: epanel/core_functions.php:127
 msgid "Options"
 msgstr ""
 
-#: epanel/core_functions.php:122 includes/admin/admin.php:22
+#: epanel/core_functions.php:127 includes/admin/admin.php:22
 msgid "Theme Options"
 msgstr ""
 
-#: epanel/core_functions.php:196
+#: epanel/core_functions.php:201
 msgid "settings saved."
 msgstr ""
 
-#: epanel/core_functions.php:199
+#: epanel/core_functions.php:204
 msgid "settings reset."
 msgstr ""
 
-#: epanel/core_functions.php:208 epanel/core_functions.php:553
+#: epanel/core_functions.php:213 epanel/core_functions.php:557
 msgid "Save Changes"
 msgstr ""
 
-#: epanel/core_functions.php:217 epanel/core_functions.php:882
+#: epanel/core_functions.php:222 epanel/core_functions.php:886
 msgid "%s Theme Options"
 msgstr ""
 
-#: epanel/core_functions.php:218
+#: epanel/core_functions.php:223
 msgid "Reset to Defaults"
 msgstr ""
 
-#: epanel/core_functions.php:342 epanel/core_functions.php:562
+#: epanel/core_functions.php:346 epanel/core_functions.php:566
 #: framework/admin/admin.php:196
 msgid "Reset"
 msgstr ""
 
-#: epanel/core_functions.php:343 framework/admin/admin.php:197
+#: epanel/core_functions.php:347 framework/admin/admin.php:197
 msgid "Upload"
 msgstr ""
 
-#: epanel/core_functions.php:370
+#: epanel/core_functions.php:374
 msgid "You don't have pages"
 msgstr ""
 
-#: epanel/core_functions.php:567 includes/admin/admin.php:970
+#: epanel/core_functions.php:571 includes/admin/admin.php:970
 #: includes/admin/admin.php:996 includes/choices.php:96 includes/layouts.php:95
 #: includes/modules.php:298 includes/modules.php:310 includes/modules.php:384
 #: includes/modules.php:396 includes/modules.php:408 includes/modules.php:420
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: epanel/core_functions.php:570 includes/admin/admin.php:969
+#: epanel/core_functions.php:574 includes/admin/admin.php:969
 #: includes/admin/admin.php:995 includes/choices.php:97 includes/layouts.php:94
 #: includes/modules.php:297 includes/modules.php:309 includes/modules.php:385
 #: includes/modules.php:397 includes/modules.php:409 includes/modules.php:421
@@ -145,71 +145,71 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: epanel/core_functions.php:584
+#: epanel/core_functions.php:588
 msgid "Enabled"
 msgstr ""
 
-#: epanel/core_functions.php:586
+#: epanel/core_functions.php:590
 msgid "Disabled"
 msgstr ""
 
-#: epanel/core_functions.php:593
+#: epanel/core_functions.php:597
 msgid "Author"
 msgstr ""
 
-#: epanel/core_functions.php:597
+#: epanel/core_functions.php:601
 msgid "Date"
 msgstr ""
 
-#: epanel/core_functions.php:601 includes/admin/admin.php:778
+#: epanel/core_functions.php:605 includes/admin/admin.php:778
 #: includes/admin/admin.php:1013 includes/modules.php:282
 #: includes/template-tags.php:1130 options_extra.php:547
 msgid "Categories"
 msgstr ""
 
-#: epanel/core_functions.php:609
+#: epanel/core_functions.php:613
 msgid "Ratings"
 msgstr ""
 
-#: epanel/core_functions.php:840 includes/modules.php:3224
+#: epanel/core_functions.php:844 includes/modules.php:3224
 msgid "Choose an Image"
 msgstr ""
 
-#: epanel/custom_functions.php:351 framework/functions.php:194
-#: framework/functions.php:1135
+#: epanel/custom_functions.php:360 framework/functions.php:194
+#: framework/functions.php:1152
 msgid "&hellip;"
 msgstr ""
 
-#: epanel/custom_functions.php:690 header.php:197
+#: epanel/custom_functions.php:700 header.php:197
 msgid "Home"
 msgstr ""
 
-#: epanel/custom_functions.php:987 includes/admin/admin.php:1016
+#: epanel/custom_functions.php:997 includes/admin/admin.php:1016
 #: includes/template-tags.php:1133
 msgid "Archives"
 msgstr ""
 
-#: epanel/custom_functions.php:989
+#: epanel/custom_functions.php:999
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: epanel/custom_functions.php:991
+#: epanel/custom_functions.php:1001
 msgid "404 Not Found"
 msgstr ""
 
-#: epanel/custom_functions.php:1061
+#: epanel/custom_functions.php:1071
 msgid "Currently viewing archives from %1$s"
 msgstr ""
 
-#: epanel/custom_functions.php:1074 index.php:8
+#: epanel/custom_functions.php:1084 index.php:8
 msgid "Search Results for: %s"
 msgstr ""
 
-#: epanel/custom_functions.php:1315
+#: epanel/custom_functions.php:1325
 msgid "Image doesn't exist"
 msgstr ""
 
-#: epanel/custom_functions.php:1480
+#: epanel/custom_functions.php:1490
 msgid ""
 "<div class=\"updated\"><p>This is a fresh installation of %1$s theme. Don't "
 "forget to go to <a href=\"%2$s\">ePanel</a> to set it up. This message will "
@@ -217,219 +217,219 @@ msgid ""
 "href=\"%2$s\">theme's options page</a>.</p></div>"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:18 epanel/shortcodes/shortcodes.php:523
+#: epanel/shortcodes/shortcodes.php:17 epanel/shortcodes/shortcodes.php:522
 msgid "Previous"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:19 epanel/shortcodes/shortcodes.php:524
+#: epanel/shortcodes/shortcodes.php:18 epanel/shortcodes/shortcodes.php:523
 msgid "Next"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:278
+#: epanel/shortcodes/shortcodes.php:277
 msgid "Tweet"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:297
+#: epanel/shortcodes/shortcodes.php:296
 msgid "Username: "
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:298
+#: epanel/shortcodes/shortcodes.php:297
 msgid "Password: "
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:299 includes/customizer.php:4325
+#: epanel/shortcodes/shortcodes.php:298 includes/customizer.php:4326
 #: includes/widgets.php:509 includes/widgets.php:520
 #: page-template-member.php:32
 msgid "Login"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:335
+#: epanel/shortcodes/shortcodes.php:334
 msgid "Add a Tooltip Text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:357
+#: epanel/shortcodes/shortcodes.php:356
 msgid "Click here to learn more"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:737
+#: epanel/shortcodes/shortcodes.php:736
 msgid "Join Now"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:972
+#: epanel/shortcodes/shortcodes.php:971
 msgid "Add ET Learn more block"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:973
+#: epanel/shortcodes/shortcodes.php:972
 msgid "Add ET Box"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:974
+#: epanel/shortcodes/shortcodes.php:973
 msgid "Add ET Button"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:975
+#: epanel/shortcodes/shortcodes.php:974
 msgid "Add ET Tabs"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:976
+#: epanel/shortcodes/shortcodes.php:975
 msgid "Add Author Bio"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:977
+#: epanel/shortcodes/shortcodes.php:976
 msgid "Shortcodes"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:982 includes/modules.php:1972
+#: epanel/shortcodes/shortcodes.php:981 includes/modules.php:1972
 msgid "Caption"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:983
+#: epanel/shortcodes/shortcodes.php:982
 msgid "Caption goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:984
+#: epanel/shortcodes/shortcodes.php:983
 msgid "Caption title goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:988
+#: epanel/shortcodes/shortcodes.php:987
 msgid "State"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:990
+#: epanel/shortcodes/shortcodes.php:989
 msgid "Select between expanded and closed state"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:995 epanel/shortcodes/shortcodes.php:1011
-#: epanel/shortcodes/shortcodes.php:1040 epanel/shortcodes/shortcodes.php:1120
+#: epanel/shortcodes/shortcodes.php:994 epanel/shortcodes/shortcodes.php:1010
+#: epanel/shortcodes/shortcodes.php:1039 epanel/shortcodes/shortcodes.php:1119
 #: includes/admin/admin.php:854 includes/modules.php:2393
 msgid "Content"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:996 epanel/shortcodes/shortcodes.php:1012
-#: epanel/shortcodes/shortcodes.php:1098 epanel/shortcodes/shortcodes.php:1121
+#: epanel/shortcodes/shortcodes.php:995 epanel/shortcodes/shortcodes.php:1011
+#: epanel/shortcodes/shortcodes.php:1097 epanel/shortcodes/shortcodes.php:1120
 msgid "Content goes here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:997 epanel/shortcodes/shortcodes.php:1013
-#: epanel/shortcodes/shortcodes.php:1042
+#: epanel/shortcodes/shortcodes.php:996 epanel/shortcodes/shortcodes.php:1012
+#: epanel/shortcodes/shortcodes.php:1041
 msgid "Content text or html"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1004 epanel/shortcodes/shortcodes.php:1026
+#: epanel/shortcodes/shortcodes.php:1003 epanel/shortcodes/shortcodes.php:1025
 msgid "Type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1006
+#: epanel/shortcodes/shortcodes.php:1005
 msgid "Type of the box"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1020 framework/post-formats.php:95
+#: epanel/shortcodes/shortcodes.php:1019 framework/post-formats.php:95
 #: includes/modules.php:3187
 msgid "Link"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1022
+#: epanel/shortcodes/shortcodes.php:1021
 msgid "URL"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1028
+#: epanel/shortcodes/shortcodes.php:1027
 msgid "Choose button type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1033 includes/admin/admin.php:1947
+#: epanel/shortcodes/shortcodes.php:1032 includes/admin/admin.php:1947
 #: includes/admin/category.php:154
 msgid "Color"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1035
+#: epanel/shortcodes/shortcodes.php:1034
 msgid "Choose button color"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1041
+#: epanel/shortcodes/shortcodes.php:1040
 msgid "Link text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1046
+#: epanel/shortcodes/shortcodes.php:1045
 msgid "Icon"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1048
+#: epanel/shortcodes/shortcodes.php:1047
 msgid "Used for icon button type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1053
+#: epanel/shortcodes/shortcodes.php:1052
 msgid "Open link in new window"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1055
+#: epanel/shortcodes/shortcodes.php:1054
 msgid "Select yes if the link should be opened in a new window"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1063
+#: epanel/shortcodes/shortcodes.php:1062
 msgid "Slider Type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1065
+#: epanel/shortcodes/shortcodes.php:1064
 msgid "Select Slider Type here"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1070
+#: epanel/shortcodes/shortcodes.php:1069
 msgid "Effect"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1072
+#: epanel/shortcodes/shortcodes.php:1071
 msgid "Select Animation Effect"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1077
+#: epanel/shortcodes/shortcodes.php:1076
 msgid "Auto"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1079
+#: epanel/shortcodes/shortcodes.php:1078
 msgid "Choose yes if you want for automatic slider animation"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1084
+#: epanel/shortcodes/shortcodes.php:1083
 msgid "Auto Speed"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1086
+#: epanel/shortcodes/shortcodes.php:1085
 msgid "Automattic slider speed (works only if Auto is set to yes)"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1090
+#: epanel/shortcodes/shortcodes.php:1089
 msgid "Tab Text"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1097
+#: epanel/shortcodes/shortcodes.php:1096
 msgid "Tab Content"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1099
+#: epanel/shortcodes/shortcodes.php:1098
 msgid "Paste image url here, if you chose \"images\" slider type"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1107
+#: epanel/shortcodes/shortcodes.php:1106
 msgid "Image Url"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1109
+#: epanel/shortcodes/shortcodes.php:1108
 msgid "Author Image URL"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1113
+#: epanel/shortcodes/shortcodes.php:1112
 msgid "Use resizing"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1190
+#: epanel/shortcodes/shortcodes.php:1189
 msgid "+ Add One More Tab"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1340 includes/customizer.php:2895
+#: epanel/shortcodes/shortcodes.php:1339 includes/customizer.php:2896
 msgid "Image Height"
 msgstr ""
 
-#: epanel/shortcodes/shortcodes.php:1341 includes/customizer.php:2873
+#: epanel/shortcodes/shortcodes.php:1340 includes/customizer.php:2874
 msgid "Image Width"
 msgstr ""
 
@@ -453,30 +453,30 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: framework/functions.php:1000 includes/admin/admin.php:1569
+#: framework/functions.php:1017 includes/admin/admin.php:1569
 msgid "Default"
 msgstr ""
 
-#: framework/functions.php:1039 includes/admin/admin.php:470
+#: framework/functions.php:1056 includes/admin/admin.php:470
 #: includes/admin/admin.php:1951 includes/admin/category.php:155
 msgid "Hex Value"
 msgstr ""
 
-#: framework/functions.php:1067
+#: framework/functions.php:1084
 msgid "&laquo; Previous"
 msgstr ""
 
-#: framework/functions.php:1068
+#: framework/functions.php:1085
 msgid "Next &raquo;"
 msgstr ""
 
-#: framework/functions.php:1192 includes/core.php:342
+#: framework/functions.php:1209 includes/core.php:342
 msgid "%d Item in Cart"
 msgid_plural "%d Items in Cart"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/functions.php:1193 includes/core.php:344
+#: framework/functions.php:1210 includes/core.php:344
 msgid "%d Item"
 msgid_plural "%d Items"
 msgstr[0] ""
@@ -499,11 +499,11 @@ msgstr ""
 msgid "Chat"
 msgstr ""
 
-#: framework/post-formats.php:94 includes/customizer.php:4262
+#: framework/post-formats.php:94 includes/customizer.php:4263
 msgid "Gallery"
 msgstr ""
 
-#: framework/post-formats.php:96 includes/customizer.php:4255
+#: framework/post-formats.php:96 includes/customizer.php:4256
 #: includes/modules.php:3186
 msgid "Image"
 msgstr ""
@@ -520,7 +520,7 @@ msgstr ""
 msgid "Video"
 msgstr ""
 
-#: framework/post-formats.php:100 includes/customizer.php:4311
+#: framework/post-formats.php:100 includes/customizer.php:4312
 msgid "Audio"
 msgstr ""
 
@@ -540,11 +540,11 @@ msgstr ""
 msgid "Sample Post Title"
 msgstr ""
 
-#: includes/admin/admin.php:26 includes/core.php:1402
+#: includes/admin/admin.php:26 includes/core.php:1448
 msgid "Theme Customizer"
 msgstr ""
 
-#: includes/admin/admin.php:30 includes/core.php:1415
+#: includes/admin/admin.php:30 includes/core.php:1461
 msgid "Module Customizer"
 msgstr ""
 
@@ -635,9 +635,9 @@ msgstr ""
 msgid "Audio File URL"
 msgstr ""
 
-#: includes/admin/admin.php:421 includes/customizer.php:919
-#: includes/customizer.php:1145 includes/customizer.php:1348
-#: includes/customizer.php:1761 includes/customizer.php:2021
+#: includes/admin/admin.php:421 includes/customizer.php:920
+#: includes/customizer.php:1146 includes/customizer.php:1349
+#: includes/customizer.php:1762 includes/customizer.php:2022
 msgid "Background Color"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Display Style"
 msgstr ""
 
-#: includes/admin/admin.php:773 includes/customizer.php:4416
+#: includes/admin/admin.php:773 includes/customizer.php:4417
 #: options_extra.php:893
 msgid "Masonry"
 msgstr ""
@@ -1603,151 +1603,151 @@ msgstr ""
 msgid "Callback function: \"%s\" doesnt exist"
 msgstr ""
 
-#: includes/core.php:942 includes/core.php:954 includes/core.php:972
+#: includes/core.php:988 includes/core.php:1000 includes/core.php:1018
 #: includes/customizer.php:387 includes/customizer.php:393
 #: includes/customizer.php:399
 msgid "Footer Sidebar Left"
 msgstr ""
 
-#: includes/core.php:943 includes/customizer.php:400
+#: includes/core.php:989 includes/customizer.php:400
 msgid "Footer Sidebar Middle Left"
 msgstr ""
 
-#: includes/core.php:944 includes/customizer.php:401
+#: includes/core.php:990 includes/customizer.php:401
 msgid "Footer Sidebar Middle Right"
 msgstr ""
 
-#: includes/core.php:945 includes/core.php:957 includes/core.php:975
+#: includes/core.php:991 includes/core.php:1003 includes/core.php:1021
 #: includes/customizer.php:390 includes/customizer.php:396
 #: includes/customizer.php:402
 msgid "Footer Sidebar Right"
 msgstr ""
 
-#: includes/core.php:955 includes/customizer.php:394
+#: includes/core.php:1001 includes/customizer.php:394
 msgid "Footer Sidebar Middle"
 msgstr ""
 
-#: includes/core.php:956 includes/core.php:964 includes/core.php:965
-#: includes/core.php:966 includes/core.php:973 includes/core.php:974
+#: includes/core.php:1002 includes/core.php:1010 includes/core.php:1011
+#: includes/core.php:1012 includes/core.php:1019 includes/core.php:1020
 #: includes/customizer.php:382 includes/customizer.php:383
 #: includes/customizer.php:384 includes/customizer.php:388
 #: includes/customizer.php:389 includes/customizer.php:395
 msgid "Inactive Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:963 includes/customizer.php:381
+#: includes/core.php:1009 includes/customizer.php:381
 msgid "Footer Sidebar"
 msgstr ""
 
-#: includes/core.php:982
+#: includes/core.php:1028
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/core.php:985
+#: includes/core.php:1031
 msgid "Project Sidebar"
 msgstr ""
 
-#: includes/core.php:1077 includes/et-social-followers.php:213
+#: includes/core.php:1123 includes/et-social-followers.php:213
 #: includes/et-social-share.php:56
 msgid "Facebook"
 msgstr ""
 
-#: includes/core.php:1078 includes/et-social-followers.php:509
+#: includes/core.php:1124 includes/et-social-followers.php:509
 #: includes/et-social-share.php:67
 msgid "Twitter"
 msgstr ""
 
-#: includes/core.php:1079 includes/et-social-followers.php:321
+#: includes/core.php:1125 includes/et-social-followers.php:321
 msgid "Google+"
 msgstr ""
 
-#: includes/core.php:1080 includes/et-social-followers.php:567
+#: includes/core.php:1126 includes/et-social-followers.php:567
 #: includes/et-social-share.php:100
 msgid "Pinterest"
 msgstr ""
 
-#: includes/core.php:1081 includes/et-social-followers.php:447
+#: includes/core.php:1127 includes/et-social-followers.php:447
 #: includes/et-social-share.php:89
 msgid "Tumblr"
 msgstr ""
 
-#: includes/core.php:1082 includes/et-social-share.php:133
+#: includes/core.php:1128 includes/et-social-share.php:133
 msgid "Stumbleupon"
 msgstr ""
 
-#: includes/core.php:1083
+#: includes/core.php:1129
 msgid "WordPress"
 msgstr ""
 
-#: includes/core.php:1084 includes/et-social-followers.php:597
+#: includes/core.php:1130 includes/et-social-followers.php:597
 msgid "Instagram"
 msgstr ""
 
-#: includes/core.php:1085
+#: includes/core.php:1131
 msgid "Dribbble"
 msgstr ""
 
-#: includes/core.php:1086 includes/et-social-followers.php:410
+#: includes/core.php:1132 includes/et-social-followers.php:410
 msgid "Vimeo"
 msgstr ""
 
-#: includes/core.php:1087 includes/et-social-share.php:111
+#: includes/core.php:1133 includes/et-social-share.php:111
 msgid "LinkedIn"
 msgstr ""
 
-#: includes/core.php:1088
+#: includes/core.php:1134
 msgid "RSS"
 msgstr ""
 
-#: includes/core.php:1089
+#: includes/core.php:1135
 msgid "Deviantart"
 msgstr ""
 
-#: includes/core.php:1090
+#: includes/core.php:1136
 msgid "MySpace"
 msgstr ""
 
-#: includes/core.php:1091
+#: includes/core.php:1137
 msgid "Skype"
 msgstr ""
 
-#: includes/core.php:1092 includes/et-social-followers.php:366
+#: includes/core.php:1138 includes/et-social-followers.php:366
 msgid "Youtube"
 msgstr ""
 
-#: includes/core.php:1093
+#: includes/core.php:1139
 msgid "Picassa"
 msgstr ""
 
-#: includes/core.php:1094
+#: includes/core.php:1140
 msgid "Flickr"
 msgstr ""
 
-#: includes/core.php:1095
+#: includes/core.php:1141
 msgid "Blogger"
 msgstr ""
 
-#: includes/core.php:1096
+#: includes/core.php:1142
 msgid "Spotify"
 msgstr ""
 
-#: includes/core.php:1097
+#: includes/core.php:1143
 msgid "Delicious"
 msgstr ""
 
-#: includes/core.php:1177 includes/core.php:1258
+#: includes/core.php:1223 includes/core.php:1304
 msgid "Featured"
 msgstr ""
 
-#: includes/core.php:1189
+#: includes/core.php:1235
 msgid "Recent"
 msgstr ""
 
-#: includes/core.php:1315
+#: includes/core.php:1361
 msgid "Select Page"
 msgstr ""
 
-#: includes/core.php:1369
+#: includes/core.php:1415
 msgid ""
 "Welcome to Extra! Before diving in to your new theme, please visit the <a "
 "style=\"color: #fff; font-weight: bold;\" href=\"%1$s\" "
@@ -1755,754 +1755,762 @@ msgid ""
 "in-depth tutorials."
 msgstr ""
 
-#: includes/core.php:1453
+#: includes/core.php:1499
 msgid "Extra Customizer Settings"
 msgstr ""
 
-#: includes/customizer.php:627
+#: includes/customizer.php:628
 msgid "Enable Boxed Layout"
 msgstr ""
 
-#: includes/customizer.php:635
+#: includes/customizer.php:636
 msgid "Website Content Width"
 msgstr ""
 
-#: includes/customizer.php:660
+#: includes/customizer.php:661
 msgid "Website Gutter Width"
 msgstr ""
 
-#: includes/customizer.php:676
+#: includes/customizer.php:677
 msgid "Sidebar Width"
 msgstr ""
 
-#: includes/customizer.php:694
+#: includes/customizer.php:695
 msgid "Accent color"
 msgstr ""
 
-#: includes/customizer.php:714 includes/customizer.php:1864
+#: includes/customizer.php:715 includes/customizer.php:1865
 msgid "Heading Text Size"
 msgstr ""
 
-#: includes/customizer.php:734
+#: includes/customizer.php:735
 msgid "Body Text Size"
 msgstr ""
 
-#: includes/customizer.php:756
+#: includes/customizer.php:757
 msgid "Heading Line Height"
 msgstr ""
 
-#: includes/customizer.php:776
+#: includes/customizer.php:777
 msgid "Body Line Height"
 msgstr ""
 
-#: includes/customizer.php:799 includes/customizer.php:1884
+#: includes/customizer.php:800 includes/customizer.php:1885
 msgid "Heading Font Style"
 msgstr ""
 
-#: includes/customizer.php:812
+#: includes/customizer.php:813
 msgid "Heading Font"
 msgstr ""
 
-#: includes/customizer.php:824
+#: includes/customizer.php:825
 msgid "Body Font"
 msgstr ""
 
-#: includes/customizer.php:838
+#: includes/customizer.php:839
 msgid "Body Link Color"
 msgstr ""
 
-#: includes/customizer.php:864
+#: includes/customizer.php:865
 msgid "Body Text Color"
 msgstr ""
 
-#: includes/customizer.php:877
+#: includes/customizer.php:878
 msgid "Heading Text Color"
 msgstr ""
 
-#: includes/customizer.php:888
+#: includes/customizer.php:889
 msgid "Archive Heading Text Color"
 msgstr ""
 
-#: includes/customizer.php:906
+#: includes/customizer.php:907
 msgid "Boxed Layout - Background color"
 msgstr ""
 
-#: includes/customizer.php:940
+#: includes/customizer.php:941
 msgid "Left/Right or Centered?"
 msgstr ""
 
-#: includes/customizer.php:957
+#: includes/customizer.php:958
 msgid "Hide Navigation Until Scroll"
 msgstr ""
 
-#: includes/customizer.php:973 includes/customizer.php:1266
+#: includes/customizer.php:974 includes/customizer.php:1267
 msgid "Make Fullwidth"
 msgstr ""
 
-#: includes/customizer.php:982 includes/customizer.php:1659
+#: includes/customizer.php:983 includes/customizer.php:1660
 msgid "Hide Logo Image"
 msgstr ""
 
-#: includes/customizer.php:995 includes/customizer.php:1668
+#: includes/customizer.php:996 includes/customizer.php:1669
 msgid "Menu Height"
 msgstr ""
 
-#: includes/customizer.php:1012 includes/customizer.php:1685
+#: includes/customizer.php:1013 includes/customizer.php:1686
 msgid "Logo Height"
 msgstr ""
 
-#: includes/customizer.php:1029 includes/customizer.php:1275
-#: includes/customizer.php:1702 includes/customizer.php:2232
-#: includes/customizer.php:2378
+#: includes/customizer.php:1030 includes/customizer.php:1276
+#: includes/customizer.php:1703 includes/customizer.php:2233
+#: includes/customizer.php:2379
 msgid "Text Size"
 msgstr ""
 
-#: includes/customizer.php:1051 includes/customizer.php:1297
-#: includes/customizer.php:2325 includes/customizer.php:2471
+#: includes/customizer.php:1052 includes/customizer.php:1298
+#: includes/customizer.php:2326 includes/customizer.php:2472
 msgid "Letter Spacing"
 msgstr ""
 
-#: includes/customizer.php:1073 includes/customizer.php:1319
+#: includes/customizer.php:1074 includes/customizer.php:1320
 msgid "Font"
 msgstr ""
 
-#: includes/customizer.php:1087 includes/customizer.php:1333
-#: includes/customizer.php:2345 includes/customizer.php:2491
+#: includes/customizer.php:1088 includes/customizer.php:1334
+#: includes/customizer.php:2346 includes/customizer.php:2492
 msgid "Font Style"
 msgstr ""
 
-#: includes/customizer.php:1105 includes/customizer.php:1361
-#: includes/customizer.php:1724 includes/customizer.php:2252
-#: includes/customizer.php:2398
+#: includes/customizer.php:1106 includes/customizer.php:1362
+#: includes/customizer.php:1725 includes/customizer.php:2253
+#: includes/customizer.php:2399
 msgid "Text Color"
 msgstr ""
 
-#: includes/customizer.php:1121 includes/customizer.php:1375
-#: includes/customizer.php:1740
+#: includes/customizer.php:1122 includes/customizer.php:1376
+#: includes/customizer.php:1741
 msgid "Hover/Active Link Color"
 msgstr ""
 
-#: includes/customizer.php:1158 includes/customizer.php:1402
+#: includes/customizer.php:1159 includes/customizer.php:1403
 msgid "Dropdown Menu Background Color"
 msgstr ""
 
-#: includes/customizer.php:1175
+#: includes/customizer.php:1176
 msgid "Dropdown Menu Line Color"
 msgstr ""
 
-#: includes/customizer.php:1192 includes/customizer.php:1415
+#: includes/customizer.php:1193 includes/customizer.php:1416
 msgid "Dropdown Menu Text Color"
 msgstr ""
 
-#: includes/customizer.php:1220 includes/customizer.php:1429
+#: includes/customizer.php:1221 includes/customizer.php:1430
 msgid "Dropdown Menu Hover/Active Link Color"
 msgstr ""
 
-#: includes/customizer.php:1246 includes/customizer.php:1445
+#: includes/customizer.php:1247 includes/customizer.php:1446
 msgid "Dropdown Menu Animation"
 msgstr ""
 
-#: includes/customizer.php:1458
+#: includes/customizer.php:1459
 msgid "Trending Text Size"
 msgstr ""
 
-#: includes/customizer.php:1476
+#: includes/customizer.php:1477
 msgid "Trending Font"
 msgstr ""
 
-#: includes/customizer.php:1491
+#: includes/customizer.php:1492
 msgid "Trending Font Style"
 msgstr ""
 
-#: includes/customizer.php:1506
+#: includes/customizer.php:1507
 msgid "Trending Label Text Color"
 msgstr ""
 
-#: includes/customizer.php:1523
+#: includes/customizer.php:1524
 msgid "Trending Title Text Color"
 msgstr ""
 
-#: includes/customizer.php:1537
+#: includes/customizer.php:1538
 msgid "Search, Cart, & Icon Text Size"
 msgstr ""
 
-#: includes/customizer.php:1555
+#: includes/customizer.php:1556
 msgid "Search, Cart, & Icon Letter Spacing"
 msgstr ""
 
-#: includes/customizer.php:1578
+#: includes/customizer.php:1579
 msgid "Search & Cart Font"
 msgstr ""
 
-#: includes/customizer.php:1593
+#: includes/customizer.php:1594
 msgid "Search & Cart Font Style"
 msgstr ""
 
-#: includes/customizer.php:1620
+#: includes/customizer.php:1621
 msgid "Search, Cart, & Icon Background Color"
 msgstr ""
 
-#: includes/customizer.php:1635
+#: includes/customizer.php:1636
 msgid "Search, Cart, & Icon Text Color"
 msgstr ""
 
-#: includes/customizer.php:1781 includes/customizer.php:2005
+#: includes/customizer.php:1782 includes/customizer.php:2006
 msgid "Show Social Icons"
 msgstr ""
 
-#: includes/customizer.php:1790
+#: includes/customizer.php:1791
 msgid "Show Search Bar"
 msgstr ""
 
-#: includes/customizer.php:1799
+#: includes/customizer.php:1800
 msgid "Show Trending Bar"
 msgstr ""
 
-#: includes/customizer.php:1809
+#: includes/customizer.php:1810
 msgid "Show WooCommerce Cart"
 msgstr ""
 
-#: includes/customizer.php:1832
+#: includes/customizer.php:1833
 msgid "%s URL"
 msgstr ""
 
-#: includes/customizer.php:1844
+#: includes/customizer.php:1845
 msgid "Column Layout"
 msgstr ""
 
-#: includes/customizer.php:1898
+#: includes/customizer.php:1899
 msgid "Body/Link Text Size"
 msgstr ""
 
-#: includes/customizer.php:1918
+#: includes/customizer.php:1919
 msgid "Body/Link Line Height"
 msgstr ""
 
-#: includes/customizer.php:1938
+#: includes/customizer.php:1939
 msgid "Body/Link Font Style"
 msgstr ""
 
-#: includes/customizer.php:1950
+#: includes/customizer.php:1951
 msgid "Widget Text Color"
 msgstr ""
 
-#: includes/customizer.php:1961
+#: includes/customizer.php:1962
 msgid "Widget Link Color"
 msgstr ""
 
-#: includes/customizer.php:1972
+#: includes/customizer.php:1973
 msgid "Widget Heading Color"
 msgstr ""
 
-#: includes/customizer.php:1983
+#: includes/customizer.php:1984
 msgid "Widget Bullet Color"
 msgstr ""
 
-#: includes/customizer.php:2034
+#: includes/customizer.php:2035
 msgid "Footer Credit Text Color"
 msgstr ""
 
-#: includes/customizer.php:2048
+#: includes/customizer.php:2049
 msgid "Footer Credit Font Style"
 msgstr ""
 
-#: includes/customizer.php:2062
+#: includes/customizer.php:2063
 msgid "Footer Credit Text Size"
 msgstr ""
 
-#: includes/customizer.php:2084
+#: includes/customizer.php:2085
 msgid "Footer Menu Link Color"
 msgstr ""
 
-#: includes/customizer.php:2097
+#: includes/customizer.php:2098
 msgid "Footer Menu Active Link Color"
 msgstr ""
 
-#: includes/customizer.php:2111
+#: includes/customizer.php:2112
 msgid "Footer Menu Letter Spacing"
 msgstr ""
 
-#: includes/customizer.php:2133
+#: includes/customizer.php:2134
 msgid "Footer Menu Text Size"
 msgstr ""
 
-#: includes/customizer.php:2155
+#: includes/customizer.php:2156
 msgid "Footer Menu Font Style"
 msgstr ""
 
-#: includes/customizer.php:2169
+#: includes/customizer.php:2170
 msgid "Social Icons Size"
 msgstr ""
 
-#: includes/customizer.php:2212
+#: includes/customizer.php:2213
 msgid "Social Icons Color"
 msgstr ""
 
-#: includes/customizer.php:2263 includes/customizer.php:2409
+#: includes/customizer.php:2264 includes/customizer.php:2410
 msgid "Background color"
 msgstr ""
 
-#: includes/customizer.php:2274 includes/customizer.php:2420
+#: includes/customizer.php:2275 includes/customizer.php:2421
 msgid "Border Width"
 msgstr ""
 
-#: includes/customizer.php:2294 includes/customizer.php:2440
+#: includes/customizer.php:2295 includes/customizer.php:2441
 #: includes/modules.php:3028
 msgid "Border Color"
 msgstr ""
 
-#: includes/customizer.php:2305 includes/customizer.php:2451
+#: includes/customizer.php:2306 includes/customizer.php:2452
 #: includes/modules.php:542 includes/modules.php:1328 includes/modules.php:3073
 msgid "Border Radius"
 msgstr ""
 
-#: includes/customizer.php:2359
+#: includes/customizer.php:2360
 msgid "Buttons Font"
 msgstr ""
 
-#: includes/customizer.php:2512
+#: includes/customizer.php:2513
 msgid "Animation"
 msgstr ""
 
-#: includes/customizer.php:2516
+#: includes/customizer.php:2517
 msgid "This controls default direction of the lazy-loading animation."
 msgstr ""
 
-#: includes/customizer.php:2532 includes/customizer.php:3173
-#: includes/customizer.php:3254
+#: includes/customizer.php:2533 includes/customizer.php:3174
+#: includes/customizer.php:3255
 msgid "Zoom Icon Color"
 msgstr ""
 
-#: includes/customizer.php:2545 includes/customizer.php:3188
-#: includes/customizer.php:3267 includes/modules.php:462
+#: includes/customizer.php:2546 includes/customizer.php:3189
+#: includes/customizer.php:3268 includes/modules.php:462
 #: includes/modules.php:1281
 msgid "Hover Overlay Color"
 msgstr ""
 
-#: includes/customizer.php:2558 includes/customizer.php:2668
-#: includes/customizer.php:3204 includes/customizer.php:3281
-#: includes/customizer.php:3339 includes/customizer.php:3443
-#: includes/customizer.php:3485 includes/customizer.php:3511
-#: includes/customizer.php:3577 includes/customizer.php:3939
+#: includes/customizer.php:2559 includes/customizer.php:2669
+#: includes/customizer.php:3205 includes/customizer.php:3282
+#: includes/customizer.php:3340 includes/customizer.php:3444
+#: includes/customizer.php:3486 includes/customizer.php:3512
+#: includes/customizer.php:3578 includes/customizer.php:3940
 msgid "Title Font Size"
 msgstr ""
 
-#: includes/customizer.php:2580 includes/customizer.php:2690
-#: includes/customizer.php:3215 includes/customizer.php:3290
-#: includes/customizer.php:3348 includes/customizer.php:3452
-#: includes/customizer.php:3494 includes/customizer.php:3520
-#: includes/customizer.php:3586 includes/customizer.php:3948
+#: includes/customizer.php:2581 includes/customizer.php:2691
+#: includes/customizer.php:3216 includes/customizer.php:3291
+#: includes/customizer.php:3349 includes/customizer.php:3453
+#: includes/customizer.php:3495 includes/customizer.php:3521
+#: includes/customizer.php:3587 includes/customizer.php:3949
 msgid "Title Font Style"
 msgstr ""
 
-#: includes/customizer.php:2595 includes/customizer.php:3224
-#: includes/customizer.php:3297
+#: includes/customizer.php:2596 includes/customizer.php:3225
+#: includes/customizer.php:3298
 msgid "Caption Font Size"
 msgstr ""
 
-#: includes/customizer.php:2617 includes/customizer.php:3235
-#: includes/customizer.php:3306
+#: includes/customizer.php:2618 includes/customizer.php:3236
+#: includes/customizer.php:3307
 msgid "Caption Font Style"
 msgstr ""
 
-#: includes/customizer.php:2639 includes/customizer.php:2753
-#: includes/customizer.php:2928 includes/customizer.php:2986
-#: includes/customizer.php:3031 includes/customizer.php:3075
-#: includes/customizer.php:3124 includes/customizer.php:3642
-#: includes/customizer.php:3846 includes/customizer.php:4063
-#: includes/customizer.php:4149
+#: includes/customizer.php:2640 includes/customizer.php:2754
+#: includes/customizer.php:2929 includes/customizer.php:2987
+#: includes/customizer.php:3032 includes/customizer.php:3076
+#: includes/customizer.php:3125 includes/customizer.php:3643
+#: includes/customizer.php:3847 includes/customizer.php:4064
+#: includes/customizer.php:4150
 msgid "Header Font Size"
 msgstr ""
 
-#: includes/customizer.php:2705 includes/customizer.php:3002
-#: includes/customizer.php:3091 includes/customizer.php:3140
+#: includes/customizer.php:2706 includes/customizer.php:3003
+#: includes/customizer.php:3092 includes/customizer.php:3141
 msgid "Padding"
 msgstr ""
 
-#: includes/customizer.php:2730 includes/customizer.php:4123
+#: includes/customizer.php:2731 includes/customizer.php:4124
 msgid "Top & Bottom Padding"
 msgstr ""
 
-#: includes/customizer.php:2775 includes/customizer.php:2937
-#: includes/customizer.php:2995 includes/customizer.php:3040
-#: includes/customizer.php:3084 includes/customizer.php:3133
-#: includes/customizer.php:3651 includes/customizer.php:3855
-#: includes/customizer.php:4072 includes/customizer.php:4158
+#: includes/customizer.php:2776 includes/customizer.php:2938
+#: includes/customizer.php:2996 includes/customizer.php:3041
+#: includes/customizer.php:3085 includes/customizer.php:3134
+#: includes/customizer.php:3652 includes/customizer.php:3856
+#: includes/customizer.php:4073 includes/customizer.php:4159
 msgid "Header Font Style"
 msgstr ""
 
-#: includes/customizer.php:2790
+#: includes/customizer.php:2791
 msgid "Content Font Size"
 msgstr ""
 
-#: includes/customizer.php:2812
+#: includes/customizer.php:2813
 msgid "Content Font Style"
 msgstr ""
 
-#: includes/customizer.php:2836
+#: includes/customizer.php:2837
 msgid "Name Font Style"
 msgstr ""
 
-#: includes/customizer.php:2843
+#: includes/customizer.php:2844
 msgid "Details Font Style"
 msgstr ""
 
-#: includes/customizer.php:2850
+#: includes/customizer.php:2851
 msgid "Portrait Border Radius"
 msgstr ""
 
-#: includes/customizer.php:2944 includes/customizer.php:3047
-#: includes/customizer.php:3862
+#: includes/customizer.php:2945 includes/customizer.php:3048
+#: includes/customizer.php:3863
 msgid "Subheader Font Size"
 msgstr ""
 
-#: includes/customizer.php:2953 includes/customizer.php:3056
-#: includes/customizer.php:3871
+#: includes/customizer.php:2954 includes/customizer.php:3057
+#: includes/customizer.php:3872
 msgid "Subheader Font Style"
 msgstr ""
 
-#: includes/customizer.php:2960 includes/customizer.php:4017
+#: includes/customizer.php:2961 includes/customizer.php:4018
 msgid "Price Font Size"
 msgstr ""
 
-#: includes/customizer.php:2969 includes/customizer.php:4027
+#: includes/customizer.php:2970 includes/customizer.php:4028
 msgid "Price Font Style"
 msgstr ""
 
-#: includes/customizer.php:3313
+#: includes/customizer.php:3314
 msgid "Filter Font Size"
 msgstr ""
 
-#: includes/customizer.php:3322
+#: includes/customizer.php:3323
 msgid "Filter Font Style"
 msgstr ""
 
-#: includes/customizer.php:3355
+#: includes/customizer.php:3356
 msgid "Percent Font Size"
 msgstr ""
 
-#: includes/customizer.php:3364
+#: includes/customizer.php:3365
 msgid "Percent Font Style"
 msgstr ""
 
-#: includes/customizer.php:3371
+#: includes/customizer.php:3372
 msgid "Bar Padding"
 msgstr ""
 
-#: includes/customizer.php:3393
+#: includes/customizer.php:3394
 msgid "Bar Border Radius"
 msgstr ""
 
-#: includes/customizer.php:3427 includes/customizer.php:3469
+#: includes/customizer.php:3428 includes/customizer.php:3470
 msgid "Number Font Size"
 msgstr ""
 
-#: includes/customizer.php:3436 includes/customizer.php:3478
+#: includes/customizer.php:3437 includes/customizer.php:3479
 msgid "Number Font Style"
 msgstr ""
 
-#: includes/customizer.php:3527 includes/customizer.php:3593
+#: includes/customizer.php:3528 includes/customizer.php:3594
 msgid "Closed Title Font Style"
 msgstr ""
 
-#: includes/customizer.php:3534 includes/customizer.php:3600
+#: includes/customizer.php:3535 includes/customizer.php:3601
 msgid "Toggle Icon Size"
 msgstr ""
 
-#: includes/customizer.php:3543 includes/customizer.php:3609
+#: includes/customizer.php:3544 includes/customizer.php:3610
 msgid "Toggle Padding"
 msgstr ""
 
-#: includes/customizer.php:3658
+#: includes/customizer.php:3659
 msgid "Input Font Size"
 msgstr ""
 
-#: includes/customizer.php:3668
+#: includes/customizer.php:3669
 msgid "Input Font Style"
 msgstr ""
 
-#: includes/customizer.php:3676
+#: includes/customizer.php:3677
 msgid "Input Field Padding"
 msgstr ""
 
-#: includes/customizer.php:3700
+#: includes/customizer.php:3701
 msgid "Captcha Font Size"
 msgstr ""
 
-#: includes/customizer.php:3709
+#: includes/customizer.php:3710
 msgid "Captcha Font Style"
 msgstr ""
 
-#: includes/customizer.php:3726
+#: includes/customizer.php:3727
 msgid "Widget Header Font Size"
 msgstr ""
 
-#: includes/customizer.php:3735
+#: includes/customizer.php:3736
 msgid "Widget Header Font Style"
 msgstr ""
 
-#: includes/customizer.php:3742
+#: includes/customizer.php:3743
 msgid "Remove Vertical Divider"
 msgstr ""
 
-#: includes/customizer.php:3760
+#: includes/customizer.php:3761
 msgid "Show Divider"
 msgstr ""
 
-#: includes/customizer.php:3764
+#: includes/customizer.php:3765
 msgid "Divider Style"
 msgstr ""
 
-#: includes/customizer.php:3779
+#: includes/customizer.php:3780
 msgid "Divider Weight"
 msgstr ""
 
-#: includes/customizer.php:3801
+#: includes/customizer.php:3802
 msgid "Divider Height"
 msgstr ""
 
-#: includes/customizer.php:3823
+#: includes/customizer.php:3824
 msgid "Divider Position"
 msgstr ""
 
-#: includes/customizer.php:3878
+#: includes/customizer.php:3879
 msgid "Social Network Icon Size"
 msgstr ""
 
-#: includes/customizer.php:3897
+#: includes/customizer.php:3898
 msgid "Post Title Font Size"
 msgstr ""
 
-#: includes/customizer.php:3906
+#: includes/customizer.php:3907
 msgid "Post Title Font Style"
 msgstr ""
 
-#: includes/customizer.php:3913 includes/customizer.php:3955
+#: includes/customizer.php:3914 includes/customizer.php:3956
 msgid "Meta Font Size"
 msgstr ""
 
-#: includes/customizer.php:3922 includes/customizer.php:3964
+#: includes/customizer.php:3923 includes/customizer.php:3965
 msgid "Meta Font Style"
 msgstr ""
 
-#: includes/customizer.php:3981
+#: includes/customizer.php:3982
 msgid "Product Name Font Size"
 msgstr ""
 
-#: includes/customizer.php:3991
+#: includes/customizer.php:3992
 msgid "Product Name Font Style"
 msgstr ""
 
-#: includes/customizer.php:3999
+#: includes/customizer.php:4000
 msgid "Sale Badge Font Size"
 msgstr ""
 
-#: includes/customizer.php:4009
+#: includes/customizer.php:4010
 msgid "Sale Badge Font Style"
 msgstr ""
 
-#: includes/customizer.php:4035
+#: includes/customizer.php:4036
 msgid "Sale Price Font Size"
 msgstr ""
 
-#: includes/customizer.php:4045
+#: includes/customizer.php:4046
 msgid "Sale Price Font Style"
 msgstr ""
 
-#: includes/customizer.php:4087
+#: includes/customizer.php:4088
 msgid "Follow Font & Icon Size"
 msgstr ""
 
-#: includes/customizer.php:4108
+#: includes/customizer.php:4109
 msgid "Button Font Style"
 msgstr ""
 
-#: includes/customizer.php:4175 options_extra.php:553 options_extra.php:762
+#: includes/customizer.php:4176 options_extra.php:553 options_extra.php:762
 msgid "General Settings"
 msgstr ""
 
-#: includes/customizer.php:4179
+#: includes/customizer.php:4180
 msgid "Layout Settings"
 msgstr ""
 
-#: includes/customizer.php:4182
+#: includes/customizer.php:4183
 msgid "Typography Settings"
 msgstr ""
 
-#: includes/customizer.php:4185
+#: includes/customizer.php:4186
 msgid "Background Settings"
 msgstr ""
 
-#: includes/customizer.php:4190
+#: includes/customizer.php:4191
 msgid "Header & Navigation Settings"
 msgstr ""
 
-#: includes/customizer.php:4194
+#: includes/customizer.php:4195
 msgid "Header Format Settings"
 msgstr ""
 
-#: includes/customizer.php:4197
+#: includes/customizer.php:4198
 msgid "Primary Menu Bar Settings"
 msgstr ""
 
-#: includes/customizer.php:4200
+#: includes/customizer.php:4201
 msgid "Secondary Menu Bar Settings"
 msgstr ""
 
-#: includes/customizer.php:4203
+#: includes/customizer.php:4204
 msgid "Fixed Navigation Settings"
 msgstr ""
 
-#: includes/customizer.php:4206
+#: includes/customizer.php:4207
 msgid "Header Elements Settings"
 msgstr ""
 
-#: includes/customizer.php:4211
+#: includes/customizer.php:4212
 msgid "Social Media Links"
 msgstr ""
 
-#: includes/customizer.php:4215
+#: includes/customizer.php:4216
 msgid "Social Media Networks"
 msgstr ""
 
-#: includes/customizer.php:4220
+#: includes/customizer.php:4221
 msgid "Footer Settings"
 msgstr ""
 
-#: includes/customizer.php:4224 includes/modules.php:257
+#: includes/customizer.php:4225 includes/modules.php:257
 #: includes/modules.php:943 includes/modules.php:2854
 msgid "Layout"
 msgstr ""
 
-#: includes/customizer.php:4227
+#: includes/customizer.php:4228
 msgid "Typography"
 msgstr ""
 
-#: includes/customizer.php:4230
+#: includes/customizer.php:4231
 msgid "Footer Elements"
 msgstr ""
 
-#: includes/customizer.php:4233
+#: includes/customizer.php:4234
 msgid "Bottom Bar"
 msgstr ""
 
-#: includes/customizer.php:4238
+#: includes/customizer.php:4239
 msgid "Buttons"
 msgstr ""
 
-#: includes/customizer.php:4242
+#: includes/customizer.php:4243
 msgid "Button Styles"
 msgstr ""
 
-#: includes/customizer.php:4245
+#: includes/customizer.php:4246
 msgid "Button Hover Styles"
 msgstr ""
 
-#: includes/customizer.php:4269
+#: includes/customizer.php:4270
 msgid "Blurb"
 msgstr ""
 
-#: includes/customizer.php:4276
+#: includes/customizer.php:4277
 msgid "Tabs"
 msgstr ""
 
-#: includes/customizer.php:4283
+#: includes/customizer.php:4284
 msgid "Slider"
 msgstr ""
 
-#: includes/customizer.php:4290
+#: includes/customizer.php:4291
 msgid "Testimonial"
 msgstr ""
 
-#: includes/customizer.php:4297
+#: includes/customizer.php:4298
 msgid "Pricing Table"
 msgstr ""
 
-#: includes/customizer.php:4304
+#: includes/customizer.php:4305
 msgid "Call To Action"
 msgstr ""
 
-#: includes/customizer.php:4318
+#: includes/customizer.php:4319
 msgid "Subscribe"
 msgstr ""
 
-#: includes/customizer.php:4339
+#: includes/customizer.php:4340
 msgid "Filterable Portfolio"
 msgstr ""
 
-#: includes/customizer.php:4346
+#: includes/customizer.php:4347
 msgid "Bar Counter"
 msgstr ""
 
-#: includes/customizer.php:4353
+#: includes/customizer.php:4354
 msgid "Circle Counter"
 msgstr ""
 
-#: includes/customizer.php:4360
+#: includes/customizer.php:4361
 msgid "Number Counter"
 msgstr ""
 
-#: includes/customizer.php:4367
+#: includes/customizer.php:4368
 msgid "Accordion"
 msgstr ""
 
-#: includes/customizer.php:4374
+#: includes/customizer.php:4375
 msgid "Toggle"
 msgstr ""
 
-#: includes/customizer.php:4381
+#: includes/customizer.php:4382
 msgid "Contact Form"
 msgstr ""
 
-#: includes/customizer.php:4388
+#: includes/customizer.php:4389
 msgid "Sidebar"
 msgstr ""
 
-#: includes/customizer.php:4395
+#: includes/customizer.php:4396
 msgid "Divider"
 msgstr ""
 
-#: includes/customizer.php:4402
+#: includes/customizer.php:4403
 msgid "Person"
 msgstr ""
 
-#: includes/customizer.php:4409
+#: includes/customizer.php:4410
 msgid "Blog"
 msgstr ""
 
-#: includes/customizer.php:4423
+#: includes/customizer.php:4424
 msgid "Shop"
 msgstr ""
 
-#: includes/customizer.php:4430
+#: includes/customizer.php:4431
 msgid "Countdown"
 msgstr ""
 
-#: includes/customizer.php:4437
+#: includes/customizer.php:4438
 msgid "Social Follow"
 msgstr ""
 
-#: includes/customizer.php:4444
+#: includes/customizer.php:4445
 msgid "Fullwidth Slider"
 msgstr ""
 
-#: includes/customizer.php:4538
+#: includes/customizer.php:4470
+msgid "Select"
+msgstr ""
+
+#: includes/customizer.php:4471
+msgid "Current Color"
+msgstr ""
+
+#: includes/customizer.php:4552
 msgid "Front page displays"
 msgstr ""
 
-#: includes/customizer.php:4543
+#: includes/customizer.php:4557
 msgid "Your latest posts"
 msgstr ""
 
-#: includes/customizer.php:4544
+#: includes/customizer.php:4558
 msgid "A static page"
 msgstr ""
 
-#: includes/customizer.php:4545
+#: includes/customizer.php:4559
 msgid "An Extra Category Layout"
 msgstr ""
 
-#: includes/customizer.php:4571
+#: includes/customizer.php:4585
 msgid "Extra Category Layout"
 msgstr ""
 
@@ -4854,52 +4862,52 @@ msgctxt "noun"
 msgid "COMMENT"
 msgstr ""
 
-#: epanel/core_functions.php:142
+#: epanel/core_functions.php:147
 msgctxt "site ads placement areas"
 msgid "Ads"
 msgstr ""
 
-#: epanel/core_functions.php:143
+#: epanel/core_functions.php:148
 msgctxt "site color scheme"
 msgid "Colorization"
 msgstr ""
 
-#: epanel/core_functions.php:144
+#: epanel/core_functions.php:149
 msgctxt "general options"
 msgid "General"
 msgstr ""
 
-#: epanel/core_functions.php:145
+#: epanel/core_functions.php:150
 msgctxt "integrate third-party code"
 msgid "Integration"
 msgstr ""
 
-#: epanel/core_functions.php:146
+#: epanel/core_functions.php:151
 msgctxt "page/post"
 msgid "Layout"
 msgstr ""
 
-#: epanel/core_functions.php:147
+#: epanel/core_functions.php:152
 msgctxt "navigation menu"
 msgid "Navigation"
 msgstr ""
 
-#: epanel/core_functions.php:148
+#: epanel/core_functions.php:153
 msgctxt "search engine optimization"
 msgid "SEO"
 msgstr ""
 
-#: epanel/core_functions.php:149
+#: epanel/core_functions.php:154
 msgctxt "documentation links"
 msgid "Support"
 msgstr ""
 
-#: epanel/core_functions.php:150
+#: epanel/core_functions.php:155
 msgctxt "theme updates"
 msgid "Updates"
 msgstr ""
 
-#: epanel/core_functions.php:505
+#: epanel/core_functions.php:509
 msgctxt "clear static resources"
 msgid "Clear"
 msgstr ""

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9fc8eacf0c51c0eea5e565f29b91d6b",
+    "content-hash": "f5f21b43a90cb39e1101ecd1c129cc6d",
     "packages": [
         {
             "name": "composer/installers",
@@ -202,20 +202,20 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.8.2",
+            "version": "4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "d500aae1793990e4874cf794b6cf88ce60a38918"
+                "reference": "988875c1ec9f0474d1f77038b7a52f91125fc5f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/d500aae1793990e4874cf794b6cf88ce60a38918",
-                "reference": "d500aae1793990e4874cf794b6cf88ce60a38918",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/988875c1ec9f0474d1f77038b7a52f91125fc5f4",
+                "reference": "988875c1ec9f0474d1f77038b7a52f91125fc5f4",
                 "shasum": ""
             },
             "require": {
-                "johnpbloch/wordpress-core": "4.8.2",
+                "johnpbloch/wordpress-core": "4.9.1",
                 "johnpbloch/wordpress-core-installer": "^1.0",
                 "php": ">=5.3.2"
             },
@@ -237,27 +237,27 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:16+00:00"
+            "time": "2017-11-29T21:57:18+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "4.8.2",
+            "version": "4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "706faa0d7b6b57a25d4acd18331dd71dfa6b01cf"
+                "reference": "e47f6652557c3160ee432c2fca5594ac1a8698f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/706faa0d7b6b57a25d4acd18331dd71dfa6b01cf",
-                "reference": "706faa0d7b6b57a25d4acd18331dd71dfa6b01cf",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/e47f6652557c3160ee432c2fca5594ac1a8698f5",
+                "reference": "e47f6652557c3160ee432c2fca5594ac1a8698f5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
             "provide": {
-                "wordpress/core-implementation": "4.8.2"
+                "wordpress/core-implementation": "4.9.1"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -277,7 +277,7 @@
                 "cms",
                 "wordpress"
             ],
-            "time": "2017-09-19T22:27:11+00:00"
+            "time": "2017-11-29T21:57:13+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -415,6 +415,54 @@
                 "templating"
             ],
             "time": "2017-07-11T12:54:05+00:00"
+        },
+        {
+            "name": "norcross/airplane-mode",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/norcross/airplane-mode.git",
+                "reference": "eb695e439fe26a6a3ac0aca83d0f7e07fb6669ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/norcross/airplane-mode/zipball/eb695e439fe26a6a3ac0aca83d0f7e07fb6669ad",
+                "reference": "eb695e439fe26a6a3ac0aca83d0f7e07fb6669ad",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Norcross",
+                    "email": "andrew@andrewnorcross.com",
+                    "homepage": "https://github.com/norcross"
+                },
+                {
+                    "name": "John Blackbourn",
+                    "homepage": "https://github.com/johnbillion"
+                },
+                {
+                    "name": "Andy Fragen",
+                    "homepage": "https://github.com/afragen"
+                },
+                {
+                    "name": "Mark Jaquith",
+                    "homepage": "https://github.com/markjaquith"
+                },
+                {
+                    "name": "Chris Christoff",
+                    "homepage": "https://github.com/chriscct7"
+                }
+            ],
+            "description": "Disables external data calls and loading for working on a purely local (i.e. no internet connection) WordPress site",
+            "time": "2017-12-13T23:44:18+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -652,16 +700,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.28",
+            "version": "v2.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb"
+                "reference": "533bb9d7c2da1c6d2da163ecf0f22043ea98f59b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/28ee62ea4736431ca817cdaebcb005663e9cd1cb",
-                "reference": "28ee62ea4736431ca817cdaebcb005663e9cd1cb",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/533bb9d7c2da1c6d2da163ecf0f22043ea98f59b",
+                "reference": "533bb9d7c2da1c6d2da163ecf0f22043ea98f59b",
                 "shasum": ""
             },
             "require": {
@@ -697,7 +745,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-01T21:00:16+00:00"
+            "time": "2017-11-10T18:59:36+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -828,6 +876,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/cache-enabler/"
+        },
+        {
+            "name": "wpackagist-plugin/cmb2",
+            "version": "2.2.6.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/cmb2/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/cmb2.zip?timestamp=1511815857",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/cmb2/"
         },
         {
             "name": "wpackagist-plugin/co-authors-plus",
@@ -991,15 +1059,15 @@
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
-            "version": "2.5.22",
+            "version": "2.5.24",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/really-simple-ssl/",
-                "reference": "tags/2.5.22"
+                "reference": "tags/2.5.24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.22.zip",
+                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.24.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1051,15 +1119,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.6.2",
+            "version": "4.6.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.6.2"
+                "reference": "tags/4.6.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1071,15 +1139,15 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.36.1",
+            "version": "4.38",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.36.1"
+                "reference": "tags/4.38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.36.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.38.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1091,15 +1159,15 @@
         },
         {
             "name": "wpackagist-plugin/user-switching",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.2.0"
+                "reference": "tags/1.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.2.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.3.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1111,15 +1179,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.2.1",
+            "version": "3.2.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.2.1"
+                "reference": "tags/3.2.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.2.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.2.6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1171,7 +1239,7 @@
         },
         {
             "name": "wpackagist-plugin/worker",
-            "version": "4.2.24",
+            "version": "4.2.25",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/worker/",
@@ -1179,7 +1247,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1505322483",
+                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1510770808",
                 "reference": null,
                 "shasum": null
             },

@@ -459,7 +459,7 @@ function extra_print_dynamic_styles() {
 	}
 
 	$post_id     = et_core_page_resource_get_the_ID();
-	$is_preview  = is_preview() || isset( $_GET['et_pb_preview_nonce'] );
+	$is_preview  = is_preview() || isset( $_GET['et_pb_preview_nonce'] ) || is_customize_preview();
 	$is_singular = et_core_page_resource_is_singular();
 
 	$disabled_global = 'off' === et_get_option( 'et_pb_static_css_file', 'on' );
@@ -900,6 +900,9 @@ function extra_body_classes( $classes ) {
 		$classes[] = 'et_pb_pagebuilder_fullwidth';
 	}
 
+	if ( 'on' === et_get_option( 'extra_smooth_scroll', false ) ) {
+		$classes[] = 'et_smooth_scroll';
+	}
 
 	$classes = array_merge( $classes, (array) extra_customizer_selector_classes( 'body' ) );
 
@@ -929,8 +932,51 @@ function extra_print_dynamic_styles_sidebar_width_css_output( $output, $option_p
 
 add_filter( 'extra_print_dynamic_styles-sidebar_width-width-css_output', 'extra_print_dynamic_styles_sidebar_width_css_output', 10, 3 );
 
+
+/**
+ * Extra Settings :: Enqueue Google Maps API
+ *
+ * Read and return the 'Enqueue Google Maps Script' setting in Extra's Theme Options.
+ *
+ * Possible values for `et_google_api_settings['enqueue_google_maps_script']` include:
+ *   'false' string - do not enqueue Google Maps script
+ *   'on'    string - enqueue Google Maps script on frontend and in WP Admin Post/Page editors
+ *
+ * @return bool
+ */
 function et_extra_enqueue_google_maps_api() {
-	wp_enqueue_script( 'google-maps-api', esc_url( add_query_arg( array( 'key' => et_pb_get_google_api_key(), 'callback' => 'initMap' ), is_ssl() ? 'https://maps.googleapis.com/maps/api/js' : 'http://maps.googleapis.com/maps/api/js' ) ), array(), '3', true );
+
+	$google_api_option = get_option( 'et_google_api_settings' );
+
+	// If for some reason the setting doesn't exist, then we probably shouldn't load the API
+	if ( ! isset( $google_api_option['enqueue_google_maps_script'] ) ) {
+		return false;
+	}
+
+	// If the setting has been disabled, then we shouldn't load the API
+	if ( 'false' === $google_api_option['enqueue_google_maps_script'] ) {
+		return false;
+	}
+
+	// If we've gotten this far, let's build the URL and load that API!
+
+	// Google Maps API address
+	$gmap_url_base = 'https://maps.googleapis.com/maps/api/js';
+
+	// If we're not using SSL, switch to the HTTP address for the Google Maps API
+	// TODO: Is this actually necessary? Security notices don't trigger in this direction
+	if ( ! is_ssl() ) {
+		$gmap_url_base = 'http://maps.googleapis.com/maps/api/js';
+	}
+
+	// Grab the value of `et_google_api_settings['api_key']` and append it to the API's address
+	$gmap_url_full = esc_url( add_query_arg( array(
+		'key'      => et_pb_get_google_api_key(),
+		'callback' => 'initMap'
+	), $gmap_url_base ) );
+
+	wp_enqueue_script( 'google-maps-api', $gmap_url_full, array(), '3', true );
+
 }
 
 function extra_register_sidebars() {
@@ -1468,7 +1514,7 @@ add_action( 'admin_init', 'extra_register_customizer_portability' );
  */
 function extra_customizer_link() {
 	if ( is_customize_preview() ) {
-		echo et_core_portability_link( 'et_extra_mods', array( 'class' => 'customize-controls-close' ) );
+		echo et_core_portability_link( 'et_extra_mods', array( 'class' => 'et-core-customize-controls-close' ) );
 	}
 }
 add_action( 'customize_controls_print_footer_scripts', 'extra_customizer_link' );
