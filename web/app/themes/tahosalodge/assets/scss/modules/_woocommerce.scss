@@ -25,7 +25,7 @@
 
                 div.quantity {
 
-                    &:before {
+                    &:not(.hidden):before {
                         content: "How many?";
                         margin-right: 1em;
                     }
@@ -99,6 +99,10 @@
                     display: none;
                 }
             }
+        }
+
+        .extra-woocommerce-details-accordion {
+          display: none !important;
         }
     }
 

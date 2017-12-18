@@ -23,6 +23,8 @@ class Tahosa_Event_Registration {
 		return self::$instance;
 	}
 
+	protected static $guest_checkout_option_changed;
+
 	/**
 	 * Initiate our hooks
 	 * @since 0.1.0
@@ -34,20 +36,25 @@ class Tahosa_Event_Registration {
 		add_filter( 'wocommerce_box_office_input_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
 		add_filter( 'wocommerce_box_office_option_field_template_vars', [ $this, 'class_to_ticket_fields' ] );
 		add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );
+		add_filter( 'product_type_options', [ $this, 'ticket_type_option' ], 20 );
+		add_filter( 'woocommerce_product_tabs', [ $this, 'woo_remove_product_tabs' ], 98 );
 		add_action( 'wp_print_scripts', function() {
 			if ( wp_script_is( 'wc-password-strength-meter', 'enqueued' ) ) {
 				wp_dequeue_script( 'wc-password-strength-meter' );
 			}
 		});
 		add_action( 'rest_api_init', [ $this, 'register_api_hooks' ] );
-		add_filter( 'product_type_options', [ $this, 'ticket_type_option'], 20 );
+		add_action( 'cmb2_admin_init', [ $this, 'product_metaboxes' ] );
+		add_action( 'woocommerce_before_calculate_totals', [ $this, 'active_arrowman_discount' ] );
+		add_action( 'woocommerce_checkout_fields', [ $this, 'make_checkout_account_fields_required' ] );
+		add_action( 'woocommerce_single_product_summary', [ $this, 'woocommerce_template_product_description' ], 20 );
 	}
 
-	static public function is_ticket( $id = null ) {
+	public static function is_ticket( $id = null ) {
 		if ( null === $id ) {
 			$id = get_id();
 		}
-		$ticket = false;
+		$ticket      = false;
 		$ticket_meta = get_post_meta( $id, '_ticket', true );
 		if ( 'yes' === $ticket_meta ) {
 			$ticket = true;
@@ -58,7 +65,7 @@ class Tahosa_Event_Registration {
 	public function ticket_body_class( $classes ) {
 		global $post;
 		$data = [
-			'id' => $post->ID,
+			'id'        => $post->ID,
 			'is_ticket' => $this->is_ticket( $post->ID ),
 		];
 		if ( $this->is_ticket( $post->ID ) ) {
@@ -72,11 +79,11 @@ class Tahosa_Event_Registration {
 	 */
 	public function custom_woocommerce_placeholder( $image_url ) {
 		global $product;
-		if ( is_object( $product ) &&  in_array( 107, $product->get_category_ids() ) ) {
+		if ( is_object( $product ) && in_array( 107, $product->get_category_ids() ) ) {
 			return 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/cuboree-product.png';
 		}
-	    $image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
-	    return $image_url;
+			$image_url = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
+			return $image_url;
 	}
 
 	public function custom_sale_text( $html ) {
@@ -88,7 +95,7 @@ class Tahosa_Event_Registration {
 	}
 
 	public function class_to_ticket_fields( $vars ) {
-		$slug = sanitize_title( $vars['label'] );
+		$slug                 = sanitize_title( $vars['label'] );
 		$vars['before_field'] = "<p class='form-row ${slug}'>";
 		return $vars;
 	}
@@ -111,37 +118,37 @@ class Tahosa_Event_Registration {
 		));
 	}
 
-	static function js_friendly_array($array) {
+	public function js_friendly_array( $array ) {
 		foreach ( $array as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$newarray = [];
-				foreach ($value as $key2 => $value2) {
+				foreach ( $value as $key2 => $value2 ) {
 					$newarray[] = [
 						'label' => $key2,
 						'value' => $value2,
 					];
 				}
-				$array[$key] = $newarray;
+				$array[ $key ] = $newarray;
 			}
 		}
 		return $array;
 	}
 
 	public function ticket_endpoint() {
-		$args = [
+		$args   = [
 			'post_type'      => 'event_ticket',
 			'posts_per_page' => 1000,
 		];
-		$query = new WP_Query($args);
+		$query  = new WP_Query( $args );
 		$events = [
-			'cuboree-staff' => [
-				'name' => 'Cuboree Staff',
-				'total' => 0,
+			'cuboree-staff'   => [
+				'name'        => 'Cuboree Staff',
+				'total'       => 0,
 				'by-reg-type' => [],
 			],
-			'cuboree' => [
-				'name' => 'Cuboree',
-				'total' => 0,
+			'cuboree'         => [
+				'name'        => 'Cuboree',
+				'total'       => 0,
 				'by-reg-type' => [],
 			],
 			'fall-fellowship' => [
@@ -212,7 +219,7 @@ class Tahosa_Event_Registration {
 		return $response;
 	}
 
-	public function details_endpoint($data) {
+	public function details_endpoint( $data ) {
 		if ( ! is_user_logged_in()) {
 			$response = new WP_REST_Response( 'unauthorized' );
 			return $response;
@@ -266,5 +273,101 @@ class Tahosa_Event_Registration {
 		);
 
 		return $options;
+	}
+
+	public function logged_in_required() {
+		$login_required = false;
+		if ( ! empty( WC()->cart->cart_contents ) ) {
+			foreach ( WC()->cart->cart_contents as $cart_item ) {
+				$login_meta = get_post_meta( $cart_item['product_id'], '_tahosareg_logged_in', true );
+				if ( $login_meta ) {
+					$login_required = true;
+					break;
+				}
+			}
+		}
+		return $login_required;
+	}
+
+	public function product_metaboxes() {
+		$cmb = new_cmb2_box([
+			'id'           => 'tahosa_product_fields',
+			'title'        => __( 'Product Customizations', 'tahosalodge' ),
+			'object_types' => [ 'product' ],
+			'context'      => 'normal',
+			'priority'     => 'core',
+			'show_names'   => true,
+		]);
+
+		$prefix = '_tahosareg_';
+
+		$cmb->add_field([
+			'name' => 'Force Logged In User',
+			'id'   => $prefix . 'logged_in',
+			'type' => 'checkbox',
+		]);
+
+		$cmb->add_field([
+			'name' => 'Active Arrowman Event',
+			'id'   => $prefix . 'active_arrowman',
+			'type' => 'checkbox',
+		]);
+	}
+
+	public function make_checkout_account_fields_required( $checkout_fields ) {
+
+		if ( $this->logged_in_required() && ! is_user_logged_in() ) {
+
+			$account_fields = array(
+				'account_username',
+				'account_password',
+				'account_password-2',
+			);
+
+			foreach ( $account_fields as $account_field ) {
+				if ( isset( $checkout_fields['account'][ $account_field ] ) ) {
+					$checkout_fields['account'][ $account_field ]['required'] = true;
+				}
+			}
+		}
+
+		return $checkout_fields;
+	}
+
+	public function active_arrowman_discount( $cart ) {
+		if ( ! empty( $cart->cart_contents ) ) {
+			$aa_count = 0;
+			$aa_eligible = [];
+
+			foreach ( $cart->cart_contents as $cart_item ) {
+				$product = wc_get_product( $cart_item['product_id']);
+				$is_aa = $product->get_slug() === 'active-arrowman-2018' ? true : false;
+				if ( $is_aa ) {
+					$aa_count++;
+				}
+				$aa_event = get_post_meta( $cart_item['product_id'], '_tahosareg_active_arrowman', true );
+				if ($aa_event) {
+					$aa_eligible[] = $cart_item['key'];
+				}
+			}
+
+			foreach ( $aa_eligible as $key ) {
+				if ($aa_count < 1) {
+					return;
+				}
+				$price_change = $cart->cart_contents[$key]['data']->set_price(0);
+				$aa_count--;
+			}
+		}
+	}
+
+	function woocommerce_template_product_description() {
+		wc_get_template( 'single-product/tabs/description.php' );
+	}
+
+	function woo_remove_product_tabs( $tabs ) {
+	  unset( $tabs['description'] );        // Remove the description tab
+	  unset( $tabs['reviews'] );            // Remove the reviews tab
+	  return $tabs;
 	}
 }
