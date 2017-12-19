@@ -38,6 +38,8 @@ class Tahosa_Event_Registration {
 		add_filter( 'woocommerce_checkout_fields', [ $this, 'checkout_fields' ] );
 		add_filter( 'product_type_options', [ $this, 'ticket_type_option' ], 20 );
 		add_filter( 'woocommerce_product_tabs', [ $this, 'woo_remove_product_tabs' ], 98 );
+		add_filter( 'woocommerce_add_cart_item_data', [ $this, 'force_individual_cart_items' ], 10, 2 );
+		add_filter( 'woocommerce_quantity_input_args', [ $this, 'woocommerce_quantity_input_args' ], 10, 2 );
 		add_action( 'wp_print_scripts', function() {
 			if ( wp_script_is( 'wc-password-strength-meter', 'enqueued' ) ) {
 				wp_dequeue_script( 'wc-password-strength-meter' );
@@ -335,6 +337,7 @@ class Tahosa_Event_Registration {
 	}
 
 	public function active_arrowman_discount( $cart ) {
+		error_log(wp_json_encode($cart));
 		if ( ! empty( $cart->cart_contents ) ) {
 			$aa_count = 0;
 			$aa_eligible = [];
@@ -369,5 +372,24 @@ class Tahosa_Event_Registration {
 	  unset( $tabs['description'] );        // Remove the description tab
 	  unset( $tabs['reviews'] );            // Remove the reviews tab
 	  return $tabs;
+	}
+
+	public function force_individual_cart_items( $cart_item_data, $product_id ) {
+	  $unique_cart_item_key = md5( microtime() . rand() );
+	  $cart_item_data['unique_key'] = $unique_cart_item_key;
+
+	  return $cart_item_data;
+	}
+
+	public function woocommerce_quantity_input_args( $args, $product ) {
+		$slug = $product->get_data()['slug'];
+		$aa_event = get_post_meta( $product->get_id(), '_tahosareg_active_arrowman', true );
+
+		if ( false !== strpos( 'active-arrowman', $slug ) || $aa_event ) {
+			$args['input_value'] 	= 1;	// Starting value (we only want to affect product pages, not cart)
+			$args['max_value'] 	= 1; 	// Maximum value
+			$args['min_value'] 	= 1;   	// Minimum value
+		}
+		return $args;
 	}
 }
