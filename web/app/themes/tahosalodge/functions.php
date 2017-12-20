@@ -10,6 +10,7 @@ class TahosaLodge {
 	public function hooks() {
 		add_action( 'send_headers', 		[ $this, 'custom_headers' ] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'scripts_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'dequeue_woocommerce_cart_fragments' ], 11);
 
 		add_filter( 'gettext', 				[ $this, 'replace_footer_text' ] );
 		add_filter( 'upload_mimes', 		[ $this, 'mime_types' ] );
@@ -127,6 +128,12 @@ class TahosaLodge {
 	public function wrap_gform_cdata_close( $content = '' ) {
 		$content = ' }, false );';
 		return $content;
+	}
+
+	public function dequeue_woocommerce_cart_fragments() {
+		if (is_front_page() || is_single() ) {
+			wp_dequeue_script('wc-cart-fragments');
+		}
 	}
 
 }
