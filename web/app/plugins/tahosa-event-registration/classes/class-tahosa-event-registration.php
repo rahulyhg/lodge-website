@@ -120,22 +120,6 @@ class Tahosa_Event_Registration {
 		));
 	}
 
-	public function js_friendly_array( $array ) {
-		foreach ( $array as $key => $value ) {
-			if ( is_array( $value ) ) {
-				$newarray = [];
-				foreach ( $value as $key2 => $value2 ) {
-					$newarray[] = [
-						'label' => $key2,
-						'value' => $value2,
-					];
-				}
-				$array[ $key ] = $newarray;
-			}
-		}
-		return $array;
-	}
-
 	public function ticket_endpoint() {
 		$args   = [
 			'post_type'      => 'event_ticket',
@@ -183,6 +167,18 @@ class Tahosa_Event_Registration {
 			'noac' => [
 				'name' => 'NOAC',
 				'total' => 0,
+			],
+			'banquet' => [
+				'name' => 'Lodge Banquet 2018',
+				'total' => 0,
+			],
+			'active-arrowman' => [
+				'name' => 'Active Arrowman 2018',
+				'total' => 0,
+			],
+			'2018-lodge-dues' => [
+				'name' => 'Active Arrowman 2018',
+				'total' => 0,
 			]
 		];
 		foreach ( $query->posts as $ticket ) {
@@ -210,13 +206,7 @@ class Tahosa_Event_Registration {
 				$events[$event]['by-level'][$level]++;
 			}
 		}
-
-		$finaldata = [];
-		foreach ($events as $key => $value) {
-			$value = $this->js_friendly_array($value);
-			$finaldata[] = $value;
-		}
-		$response = new WP_REST_Response( $finaldata );
+		$response = new WP_REST_Response( $events );
 		$response->header( 'Access-Control-Allow-Origin', apply_filters( 'spe_access_control_allow_origin', '*' ) );
 		return $response;
 	}
