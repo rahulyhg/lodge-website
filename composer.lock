@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c15dbecdd8f0b452721dd46bdd15953",
+    "content-hash": "cfa157fceaacaaf1a6a6e55f68026164",
     "packages": [
         {
             "name": "composer/installers",
@@ -1216,6 +1216,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/woocommerce-add-to-cart-custom-redirect/"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce-filter-orders-by-product",
+            "version": "2.0.7",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce-filter-orders-by-product/",
+                "reference": "tags/2.0.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-filter-orders-by-product.2.0.7.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce-filter-orders-by-product/"
         },
         {
             "name": "wpackagist-plugin/woocommerce-gateway-stripe",

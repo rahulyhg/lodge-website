@@ -40,6 +40,9 @@ class Tahosa_Event_Registration {
 		add_filter( 'woocommerce_product_tabs', [ $this, 'woo_remove_product_tabs' ], 98 );
 		add_filter( 'woocommerce_add_cart_item_data', [ $this, 'force_individual_cart_items' ], 10, 2 );
 		add_filter( 'woocommerce_quantity_input_args', [ $this, 'woocommerce_quantity_input_args' ], 10, 2 );
+		add_action( 'wfobp_product_status', function() {
+			return 'any';
+		});
 		add_action( 'wp_print_scripts', function() {
 			if ( wp_script_is( 'wc-password-strength-meter', 'enqueued' ) ) {
 				wp_dequeue_script( 'wc-password-strength-meter' );
