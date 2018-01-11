@@ -117,7 +117,7 @@
     "roots/wp-stage-switcher": "^2.0",
     "wpackagist-plugin/autodescription": "^2.9",
     "wpackagist-plugin/google-sitemap-generator": "^4.0",
-    "wpackagist-plugin/woocommerce": "^3.0",
+    "wpackagist-plugin/woocommerce": "^3.2",
     "wpackagist-plugin/woocommerce-gateway-stripe": "^3.1",
     "rarst/laps": "*",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
