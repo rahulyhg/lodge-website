@@ -54,7 +54,7 @@ class Tahosa_Event_Registration {
 
 	public static function is_ticket( $id = null ) {
 		if ( null === $id ) {
-			$id = get_id();
+			$id = get_the_id();
 		}
 		$ticket      = false;
 		$ticket_meta = get_post_meta( $id, '_ticket', true );
