@@ -700,16 +700,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.32",
+            "version": "v2.8.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "533bb9d7c2da1c6d2da163ecf0f22043ea98f59b"
+                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/533bb9d7c2da1c6d2da163ecf0f22043ea98f59b",
-                "reference": "533bb9d7c2da1c6d2da163ecf0f22043ea98f59b",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/57021208ad9830f8f8390c1a9d7bb390f32be89e",
+                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e",
                 "shasum": ""
             },
             "require": {
@@ -745,7 +745,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-10T18:59:36+00:00"
+            "time": "2018-01-03T07:36:31+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -839,15 +839,15 @@
         },
         {
             "name": "wpackagist-plugin/autoptimize",
-            "version": "2.2.2",
+            "version": "2.3.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/autoptimize/",
-                "reference": "tags/2.2.2"
+                "reference": "tags/2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.2.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.3.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1119,15 +1119,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.6.7",
+            "version": "4.6.9",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.6.7"
+                "reference": "tags/4.6.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.7.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.9.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1139,15 +1139,15 @@
         },
         {
             "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.38",
+            "version": "4.39",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.38"
+                "reference": "tags/4.39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.38.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.39.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1239,7 +1239,7 @@
         },
         {
             "name": "wpackagist-plugin/worker",
-            "version": "4.2.25",
+            "version": "4.3.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/worker/",
@@ -1247,7 +1247,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1510770808",
+                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1515174247",
                 "reference": null,
                 "shasum": null
             },
