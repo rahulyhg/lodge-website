@@ -327,7 +327,6 @@ class Tahosa_Event_Registration {
 	}
 
 	public function active_arrowman_discount( $cart ) {
-		error_log(wp_json_encode($cart));
 		if ( ! empty( $cart->cart_contents ) ) {
 			$aa_count = 0;
 			$aa_eligible = [];
