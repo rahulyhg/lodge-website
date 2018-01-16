@@ -30,6 +30,7 @@ vendor/*
 !web/app/plugins/wp-all-import-pro
 !web/app/plugins/wpai-woocommerce-add-on
 !web/app/plugins/wp-all-export-pro
+!web/app/plugins/woocommerce-advanced-notifications
 !web/app/plugins/woocommerce-box-office
 !web/app/plugins/woocommerce-subscriptions
 !web/app/plugins/cuboree-registration
