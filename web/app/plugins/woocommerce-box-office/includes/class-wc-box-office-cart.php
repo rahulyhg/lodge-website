@@ -31,6 +31,8 @@ class WC_Box_Office_Cart {
 		} else {
 			add_filter( 'wc_add_to_cart_message', array( $this, 'filter_cart_message' ), 10, 2 );
 		}
+
+		add_filter( 'woocommerce_add_to_cart_sold_individually_found_in_cart', array( $this, 'filter_sold_individually_found_in_cart' ), 10, 5 );
 	}
 
 	/**
@@ -77,6 +79,18 @@ class WC_Box_Office_Cart {
 	public function add_cart_item_data( $cart_item_meta, $product_id ) {
 		if ( ! wc_box_office_is_product_ticket( $product_id ) ) {
 			return $cart_item_meta;
+		}
+
+		if ( empty( $_POST['ticket_fields'] ) && ! empty( $_GET['force-ticket-creation'] ) ) {
+			$ticket_fields = array();
+
+			$fields = get_post_meta( $product_id, '_ticket_fields', true );
+
+			foreach ( $fields as $hash => $field_data ) {
+				$ticket_fields[0][ $field_data['type'] ] = '';
+			}
+
+			$_POST['ticket_fields'] = apply_filters( 'woocommerce_cart_item_data_ticket_fields', $ticket_fields, $fields );
 		}
 
 		if( empty( $_POST ) ){
@@ -268,5 +282,42 @@ class WC_Box_Office_Cart {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Filter sold individually product found in cart.
+	 *
+	 * The ticket product will always generate different cart item key (because
+	 * of ticket field hash) with the same ticket product.
+	 *
+	 * @see https://github.com/woocommerce/woocommerce-box-office/issues/208
+	 *
+	 * @since 1.1.6
+	 * @version 1.1.6
+	 *
+	 * @param bool   $found_in_cart  Whether an item found in the cart.
+	 * @param int    $product_id     Product ID.
+	 * @param int    $variation_id   Variation ID.
+	 * @param array  $cart_item_data Cart item data.
+	 * @param string $cart_id        Cart ID being evaluated.
+	 *
+	 * @return bool Whether an iten found in the cart.
+	 */
+	public function filter_sold_individually_found_in_cart( $found_in_cart, $product_id, $variation_id, $cart_item_data, $cart_id ) {
+		if ( ! wc_box_office_is_product_ticket( $product_id ) ) {
+			return $found_in_cart;
+		}
+
+		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			if ( $cart_id === $cart_item_key ) {
+				continue;
+			}
+			if ( wc_box_office_is_product_ticket( $cart_item['data'] ) && $cart_item['quantity'] > 0 ) {
+				$found_in_cart = true;
+				break;
+			}
+		}
+
+		return $found_in_cart;
 	}
 }

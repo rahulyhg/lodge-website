@@ -1,6 +1,7 @@
 <?php
 // Get order ID.
 $order_id = get_post_meta( $post->ID, '_order', true );
+$order    = wc_get_order( $order_id );
 
 // Get product ID.
 $product_id = get_post_meta( $post->ID, '_product', true );
@@ -27,11 +28,10 @@ $user_id = get_post_meta( $post->ID, '_user', true );
 	<?php endif; ?>
 
 	<?php // Link to order. ?>
-	<?php if ( $order_id ) : ?>
-	<?php $order_title = get_the_title( $order_id ); ?>
+	<?php if ( $order ) : ?>
 	<p class="form-field">
 		<label for="order_link"><?php _e( 'Order:', 'woocommerce-box-office' ); ?></label>
-		<a id="order_link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order_id . '&action=edit' ) ); ?>"><?php echo esc_html( $order_title ); ?></a>
+		<a id="order_link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order_id . '&action=edit' ) ); ?>"><?php echo esc_html( $order->get_order_number() ); ?></a>
 	</p>
 	<?php endif; ?>
 

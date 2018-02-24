@@ -23,7 +23,7 @@
 				: this.$el.parent().find( '[name="quantity"]:first' );
 
 			this.qty.on( 'change', $.proxy( this.updateQty, this ) );
-			this.addToCart = $( '.single_add_to_cart_button' );
+			this.addToCart = $( '.wc-box-office-ticket-form' ).parent().find( '.single_add_to_cart_button' );
 			this.tickets = [];
 			this.prevTicketEls = [];
 		},

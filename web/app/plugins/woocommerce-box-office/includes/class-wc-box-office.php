@@ -132,9 +132,6 @@ class WC_Box_Office {
 		// Check updates.
 		add_action( 'init', array( $this, 'check_updates' ) );
 
-		// Plugin activation.
-		register_activation_hook( $this->file, array( $this, 'install' ) );
-
 		$this->_initiated = true;
 	}
 
@@ -260,16 +257,5 @@ class WC_Box_Office {
 	 */
 	public function check_updates() {
 		$this->components->updater->update_check( $this->_version );
-	}
-
-	/**
-	 * Installation. Runs on activation.
-	 *
-	 * @access  public
-	 * @since   1.0.0
-	 * @return  void
-	 */
-	public function install() {
-		$this->components->updater->install();
 	}
 }

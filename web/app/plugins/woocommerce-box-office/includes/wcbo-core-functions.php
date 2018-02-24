@@ -481,11 +481,11 @@ function wc_box_office_get_parsed_ticket_content( $ticket_id, $content ) {
 	// would be ticket product.
 	$product_id = get_post_meta( $ticket_id, '_product', true );
 	if ( $product_id ) {
-		$description = is_callable( array( $ticket_product, 'get_description' ) )
+		$ticket_product = wc_get_product( $product_id );
+		$description    = is_callable( array( $ticket_product, 'get_description' ) )
 			? call_user_func( array( $ticket_product, 'get_description' ) )
 			: $ticket_product->post->post_content;
 
-		$ticket_product = wc_get_product( $product_id );
 		$post_vars = array(
 			'{post_title}'   => $ticket_product->get_title(),
 			'{post_content}' => $description,

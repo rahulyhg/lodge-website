@@ -250,6 +250,9 @@ class WC_Box_Office_Ticket_Create_Admin {
 	/**
 	 * Create order from given customer and total.
 	 *
+	 * @since 1.0.0
+	 * @version 1.1.7
+	 *
 	 * @param int    $customer_id Customer ID.
 	 * @param string $total       Total for the order.
 	 *
@@ -265,6 +268,32 @@ class WC_Box_Office_Ticket_Create_Admin {
 		$order->set_total( $total );
 		if ( ! $is_pre_wc_30 ) {
 			$order->save();
+		}
+
+		// Set order address.
+		if ( $customer_id ) {
+			$customer = new WC_Customer( $customer_id );
+
+			$keys = array(
+				'first_name',
+				'last_name',
+				'company',
+				'address_1',
+				'address_2',
+				'city',
+				'state',
+				'postcode',
+				'country',
+			);
+			foreach ( array( 'shipping', 'billing' ) as $type ) {
+				$address = array();
+				foreach ( $keys as $key ) {
+					$address[ $key ] = $is_pre_wc_30
+						? (string) get_user_meta( $customer_id, $type . '_' . $key, true )
+						: ( is_callable( array( $customer, 'get_' . $type . '_' . $key ) ) ? $customer->{'get_' . $type . '_' . $key}() : '' );
+				}
+				$order->set_address( $address, $type );
+			}
 		}
 
 		// Cache order.
@@ -300,7 +329,14 @@ class WC_Box_Office_Ticket_Create_Admin {
 			$tickets[] = $ticket;
 
 			if ( $item_id ) {
-				wc_add_order_item_meta( $item_id, sprintf( __( 'Ticket #%d', 'woocommerce-box-office' ), $index + 1 ), wc_box_office_get_ticket_description( $ticket->id ) );
+				wc_add_order_item_meta(
+					$item_id,
+					// wp_kses_post removed data attribute, so we use class to
+					// store ticket-id. This span will be turned into link to
+					// edit ticket in edit order.
+					sprintf( '<span class="order-item-meta-ticket ticket-id-%d">' . __( 'Ticket #%d', 'woocommerce-box-office' ) . '</span>', $ticket->id, $index + 1 ),
+					wc_box_office_get_ticket_description( $ticket->id, 'list' )
+				);
 			}
 		}
 
@@ -542,7 +578,7 @@ class WC_Box_Office_Ticket_Create_Admin {
 			}
 
 			if ( ! $product_check->has_enough_stock( $qty ) ) {
-				throw new Exception( sprintf(__( 'You cannot create that amount of ticket(s) because there is not enough stock (%s remaining).', 'woocommerce-box-office' ), $product_check->get_stock_quantity() ) );
+				throw new Exception( sprintf( __( 'You cannot create that amount of ticket(s) because there is not enough stock (%s remaining).', 'woocommerce-box-office' ), $product_check->get_stock_quantity() ) );
 			}
 		}
 
