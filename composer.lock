@@ -507,32 +507,135 @@
             "time": "2017-07-17T20:41:59+00:00"
         },
         {
-            "name": "rarst/laps",
-            "version": "1.4.4",
+            "name": "pimple/pimple",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Rarst/laps.git",
-                "reference": "03ff2b61ff01f4ecf757095c6aa165db9997351b"
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Rarst/laps/zipball/03ff2b61ff01f4ecf757095c6aa165db9997351b",
-                "reference": "03ff2b61ff01f4ecf757095c6aa165db9997351b",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple, a simple Dependency Injection Container",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2018-01-21T07:42:36+00:00"
+        },
+        {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "rarst/laps",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rarst/laps.git",
+                "reference": "c874c19c9183469101ee39d0b4471c33375d3381"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rarst/laps/zipball/c874c19c9183469101ee39d0b4471c33375d3381",
+                "reference": "c874c19c9183469101ee39d0b4471c33375d3381",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "~1.0",
                 "mustache/mustache": "~2.4",
-                "symfony/stopwatch": "~2.4"
+                "php": ">=5.6",
+                "pimple/pimple": "^3.2.3",
+                "symfony/stopwatch": "^3.4.4"
             },
             "require-dev": {
+                "brain/monkey": "^2.2",
+                "pds/skeleton": "^1.0",
                 "twbs/bootstrap": "~3.2"
             },
             "type": "wordpress-plugin",
             "autoload": {
-                "classmap": [
-                    "src/"
-                ]
+                "psr-4": {
+                    "Rarst\\Laps\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -541,7 +644,6 @@
             "authors": [
                 {
                     "name": "Andrey Savchenko",
-                    "email": "contact@rarst.net",
                     "homepage": "http://www.Rarst.net/"
                 }
             ],
@@ -551,7 +653,7 @@
                 "performance",
                 "wordpress"
             ],
-            "time": "2017-07-05T18:45:39+00:00"
+            "time": "2018-02-26T08:42:11+00:00"
         },
         {
             "name": "roots/soil",
@@ -700,25 +802,25 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.34",
+            "version": "v3.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e"
+                "reference": "eb17cfa072cab26537ac37e9c4ece6c0361369af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/57021208ad9830f8f8390c1a9d7bb390f32be89e",
-                "reference": "57021208ad9830f8f8390c1a9d7bb390f32be89e",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/eb17cfa072cab26537ac37e9c4ece6c0361369af",
+                "reference": "eb17cfa072cab26537ac37e9c4ece6c0361369af",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": "^5.5.9|>=7.0.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -745,7 +847,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:36:31+00:00"
+            "time": "2018-02-17T14:55:25+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -959,15 +1061,15 @@
         },
         {
             "name": "wpackagist-plugin/enable-media-replace",
-            "version": "3.1.1",
+            "version": "3.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-                "reference": "tags/3.1.1"
+                "reference": "tags/3.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.1.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.1.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1179,15 +1281,15 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "3.3.1",
+            "version": "3.3.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/3.3.1"
+                "reference": "tags/3.3.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.3.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.3.3.3.zip",
                 "reference": null,
                 "shasum": null
             },
