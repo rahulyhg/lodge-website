@@ -1,18 +1,9 @@
 <?php get_header(); ?>
 <div id="main-content">
 	<?php
-		// load fullwidth page in Product Tour mode
-		$product_tour_status = 'off';
+		if ( et_builder_is_product_tour_enabled() ):
 
-		if ( et_fb_is_enabled() ) {
-			$current_user = wp_get_current_user();
-			$product_tour_settings = et_get_option( 'product_tour_status', array() );
-			$product_tour_status = 'on' === et_get_option( 'et_pb_product_tour_global', 'on' ) && ( ! isset( $product_tour_settings[$current_user->ID] ) || 'off' !== $product_tour_settings[$current_user->ID] ) ? 'on' : 'off';
-		}
-
-		if ( 'on' === $product_tour_status ) :
-
-			while ( have_posts() ) : the_post(); ?>
+			while ( have_posts() ): the_post(); ?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content">
@@ -24,7 +15,7 @@
 				</article> <!-- .et_pb_post -->
 
 		<?php endwhile;
-		else :
+		else:
 	?>
 	<div class="container">
 		<div id="content-area" class="clearfix">

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Section Element class
+ *
+ * @since [version]
+ */
 class ET_Builder_Section extends ET_Builder_Structure_Element {
 	function init() {
 		$this->name = esc_html__( 'Section', 'et_builder' );
@@ -7,8 +11,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$this->fb_support = true;
 
 		$this->whitelisted_fields = array(
-			'transparent_background',
-			'transparent_background_fb',
 			'background_color',
 			'inner_shadow',
 			'parallax_1',
@@ -17,11 +19,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'parallax_method_1',
 			'parallax_method_2',
 			'parallax_method_3',
-			'custom_padding',
-			'custom_padding_tablet',
-			'custom_padding_phone',
-			'custom_padding_last_edited',
-			'padding_mobile',
 			'module_id',
 			'module_class',
 			'make_fullwidth',
@@ -90,6 +87,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_1',
 			'background_color_gradient_start_position_1',
 			'background_color_gradient_end_position_1',
+			'background_color_gradient_overlays_image_1',
 			'background_size_2',
 			'background_position_2',
 			'background_repeat_2',
@@ -102,6 +100,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_2',
 			'background_color_gradient_start_position_2',
 			'background_color_gradient_end_position_2',
+			'background_color_gradient_overlays_image_2',
 			'background_size_3',
 			'background_position_3',
 			'background_repeat_3',
@@ -114,24 +113,30 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_3',
 			'background_color_gradient_start_position_3',
 			'background_color_gradient_end_position_3',
+			'background_color_gradient_overlays_image_3',
 			'background_video_mp4_1',
 			'background_video_webm_1',
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
+			'prev_background_color',
+			'next_background_color',
 		);
 
 		$this->options_toggles = array(
@@ -141,9 +146,9 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 						'title'       => esc_html__( 'Background', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
 						),
 					),
 				),
@@ -155,13 +160,13 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 						'title'    => esc_html__( 'Sizing', 'et_builder' ),
 						'priority' => 65,
 					),
-					'margin_padding'  => array(
+					'custom_margin_padding'  => array(
 						'title'       => esc_html__( 'Spacing', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
 						),
 						'priority'   => 70,
 					),
@@ -173,18 +178,18 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 						'title'  => esc_html__( 'CSS ID & Classes', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
 						),
 					),
 					'custom_css' => array(
 						'title'  => esc_html__( 'Custom CSS', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
 						),
 					),
 				),
@@ -202,15 +207,34 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'main'      => 'div.et_pb_section%%order_class%%',
 				),
 			),
+			'custom_margin_padding' => array(),
+			'max_width' => array(
+				'css' => array(
+					'module_alignment' => '%%order_class%%',
+				),
+				'options' => array(
+					'module_alignment' => array(
+						'label' => esc_html__( 'Section Alignment', 'et_builder' ),
+					),
+				),
+			),
+			'border' => array(),
+			'filters' => array(),
 		);
 
 		$this->fields_defaults = array(
-			'transparent_background' => array( 'default' ),
 			'background_color'       => array( '', 'only_default_setting' ),
 			'allow_player_pause'     => array( 'off' ),
+			'background_video_pause_outside_viewport' => array( 'on' ),
 			'inner_shadow'           => array( 'off' ),
 			'parallax'               => array( 'off' ),
 			'parallax_method'        => array( 'on' ),
+			'parallax_1'             => array( 'off' ),
+			'parallax_method_1'      => array( 'on' ),
+			'parallax_2'             => array( 'off' ),
+			'parallax_method_2'      => array( 'on' ),
+			'parallax_3'             => array( 'off' ),
+			'parallax_method_3'      => array( 'on' ),
 			'padding_mobile'         => array( '' ),
 			'make_fullwidth'         => array( 'off' ),
 			'use_custom_width'       => array( 'off' ),
@@ -238,24 +262,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'additional_code' => '<span class="et-pb-reset-setting reset-default-color" style="display: none;"></span>',
 				'toggle_slug'     => 'background',
 			),
-			'transparent_background' => array(
-				'label'             => esc_html__( 'Transparent Background Color', 'et_builder' ),
-				'type'              => 'yes_no_button',
-				'option_category'   => 'color_option',
-				'options'           => array(
-					'off' => esc_html__( 'No', 'et_builder' ),
-					'on'  => esc_html__( 'Yes', 'et_builder' ),
-				),
-				'default'           => 'off',
-				'affects'           => array(
-					'background_color',
-				),
-				'description'       => esc_html__( 'Enabling this option will remove the background color of this section, allowing the website background color or background image to show through.', 'et_builder' ),
-				'toggle_slug'       => 'background',
-			),
-			'transparent_background_fb' => array(
-				'type' => 'skip',
-			),
 			'inner_shadow' => array(
 				'label'           => esc_html__( 'Show Inner Shadow', 'et_builder' ),
 				'type'            => 'yes_no_button',
@@ -268,31 +274,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'description'     => esc_html__( 'Here you can select whether or not your section has an inner shadow. This can look great when you have colored backgrounds or background images.', 'et_builder' ),
 				'tab_slug'        => 'advanced',
 				'toggle_slug'     => 'layout',
-			),
-			'custom_padding' => array(
-				'label'           => esc_html__( 'Custom Padding', 'et_builder' ),
-				'type'            => 'custom_padding',
-				'mobile_options'  => true,
-				'option_category' => 'layout',
-				'description'     => esc_html__( 'Adjust padding to specific values, or leave blank to use the default padding.', 'et_builder' ),
-				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
-			),
-			'custom_padding_tablet' => array(
-				'type'        => 'skip',
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
-			),
-			'custom_padding_phone' => array(
-				'type'        => 'skip',
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
-			),
-			'padding_mobile' => array(
-				'label' => esc_html__( 'Keep Custom Padding on Mobile', 'et_builder' ),
-				'type'        => 'skip', // Remaining attribute for backward compatibility
-				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
 			),
 			'make_fullwidth' => array(
 				'label'             => esc_html__( 'Make This Section Fullwidth', 'et_builder' ),
@@ -434,7 +415,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'type'            => 'column_settings_padding',
 				'option_category' => 'configuration',
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 				'specialty_only'  => 'yes',
 			),
 			'fullwidth' => array(
@@ -695,6 +676,15 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'background_color_gradient_end_position_3' => array(
 				'type' => 'skip',
 			),
+			'background_color_gradient_overlays_image_1' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_2' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_3' => array(
+				'type' => 'skip',
+			),
 			'background_video_mp4_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
@@ -720,6 +710,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
+			'background_video_pause_outside_viewport_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_1',
@@ -769,6 +765,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'__video_background_2',
 				),
 			),
+			'background_video_pause_outside_viewport_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
 			'__video_background_2' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -808,6 +810,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
+			'background_video_pause_outside_viewport_3' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_3',
@@ -876,7 +884,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				'tab_slug'        => 'custom_css',
 				'toggle_slug'     => 'classes',
 			),
-			'custom_padding_last_edited' =>array(
+			'custom_padding_last_edited' => array(
 				'type'           => 'skip',
 				'tab_slug'       => 'advanced',
 				'specialty_only' => 'yes',
@@ -895,6 +903,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_webm',
 				),
 			),
+			'prev_background_color' => array(
+				'type' => 'skip',
+			),
+			'next_background_color' => array(
+				'type' => 'skip',
+			),
 		);
 
 		return $fields;
@@ -912,11 +926,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$parallax_method         = $this->shortcode_atts['parallax_method'];
 		$fullwidth               = $this->shortcode_atts['fullwidth'];
 		$specialty               = $this->shortcode_atts['specialty'];
-		$transparent_background  = $this->shortcode_atts['transparent_background'];
-		$custom_padding          = $this->shortcode_atts['custom_padding'];
-		$custom_padding_tablet   = $this->shortcode_atts['custom_padding_tablet'];
-		$custom_padding_phone    = $this->shortcode_atts['custom_padding_phone'];
-		$custom_padding_last_edited = $this->shortcode_atts['custom_padding_last_edited'];
 		$background_color_1      = $this->shortcode_atts['background_color_1'];
 		$background_color_2      = $this->shortcode_atts['background_color_2'];
 		$background_color_3      = $this->shortcode_atts['background_color_3'];
@@ -962,7 +971,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$padding_1_last_edited   = $this->shortcode_atts['padding_1_last_edited'];
 		$padding_2_last_edited   = $this->shortcode_atts['padding_2_last_edited'];
 		$padding_3_last_edited   = $this->shortcode_atts['padding_3_last_edited'];
-		$padding_mobile          = $this->shortcode_atts['padding_mobile'];
 		$gutter_width            = $this->shortcode_atts['gutter_width'];
 		$use_custom_width        = $this->shortcode_atts['use_custom_width'];
 		$custom_width_px         = $this->shortcode_atts['custom_width_px'];
@@ -1011,6 +1019,9 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$background_color_gradient_end_position_1     = $this->shortcode_atts['background_color_gradient_end_position_1'];
 		$background_color_gradient_end_position_2     = $this->shortcode_atts['background_color_gradient_end_position_2'];
 		$background_color_gradient_end_position_3     = $this->shortcode_atts['background_color_gradient_end_position_3'];
+		$background_color_gradient_overlays_image_1   = $this->shortcode_atts['background_color_gradient_overlays_image_1'];
+		$background_color_gradient_overlays_image_2   = $this->shortcode_atts['background_color_gradient_overlays_image_2'];
+		$background_color_gradient_overlays_image_3   = $this->shortcode_atts['background_color_gradient_overlays_image_3'];
 		$background_video_mp4_1     = $this->shortcode_atts['background_video_mp4_1'];
 		$background_video_mp4_2     = $this->shortcode_atts['background_video_mp4_2'];
 		$background_video_mp4_3     = $this->shortcode_atts['background_video_mp4_3'];
@@ -1026,6 +1037,9 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$allow_player_pause_1       = $this->shortcode_atts['allow_player_pause_1'];
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
 
 		if ( '' !== $global_module ) {
 			$global_content = et_pb_load_global_module( $global_module );
@@ -1037,16 +1051,6 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 
 		$module_class = ET_Builder_Element::add_module_order_class( $module_class, $function_name );
 		$gutter_class = '';
-
-		$custom_padding_responsive_active = et_pb_get_responsive_status( $custom_padding_last_edited );
-
-		$padding_mobile_values = $custom_padding_responsive_active ? array(
-			'tablet' => explode( '|', $custom_padding_tablet ),
-			'phone'  => explode( '|', $custom_padding_phone ),
-		) : array(
-			'tablet' => false,
-			'phone' => false,
-		);
 
 		if ( 'on' === $specialty ) {
 			global $et_pb_all_column_settings, $et_pb_rendering_column_content, $et_pb_rendering_column_content_row;
@@ -1100,6 +1104,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'color_end'        => $background_color_gradient_end_1,
 					'start_position'   => $background_color_gradient_start_position_1,
 					'end_position'     => $background_color_gradient_end_position_1,
+					'overlays_image'   => $background_color_gradient_overlays_image_1,
 				),
 				array(
 					'active'           => $use_background_color_gradient_2,
@@ -1110,6 +1115,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'color_end'        => $background_color_gradient_end_2,
 					'start_position'   => $background_color_gradient_start_position_2,
 					'end_position'     => $background_color_gradient_end_position_2,
+					'overlays_image'   => $background_color_gradient_overlays_image_2,
 				),
 				array(
 					'active'           => $use_background_color_gradient_3,
@@ -1120,6 +1126,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'color_end'        => $background_color_gradient_end_3,
 					'start_position'   => $background_color_gradient_start_position_3,
 					'end_position'     => $background_color_gradient_end_position_3,
+					'overlays_image'   => $background_color_gradient_overlays_image_3,
 				),
 			);
 
@@ -1130,6 +1137,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_1,
 					'background_video_height'      => $background_video_height_1,
 					'background_video_allow_pause' => $allow_player_pause_1,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 				),
 				array(
 					'background_video_mp4'         => $background_video_mp4_2,
@@ -1137,6 +1145,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_2,
 					'background_video_height'      => $background_video_height_2,
 					'background_video_allow_pause' => $allow_player_pause_2,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 				),
 				array(
 					'background_video_mp4'         => $background_video_mp4_3,
@@ -1144,6 +1153,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_3,
 					'background_video_height'      => $background_video_height_3,
 					'background_video_allow_pause' => $allow_player_pause_3,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 				),
 			);
 
@@ -1152,19 +1162,19 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'padding-top'    => $padding_top_1,
 					'padding-right'  => $padding_right_1,
 					'padding-bottom' => $padding_bottom_1,
-					'padding-left'   => $padding_left_1
+					'padding-left'   => $padding_left_1,
 				),
 				array(
 					'padding-top'    => $padding_top_2,
 					'padding-right'  => $padding_right_2,
 					'padding-bottom' => $padding_bottom_2,
-					'padding-left'   => $padding_left_2
+					'padding-left'   => $padding_left_2,
 				),
 				array(
 					'padding-top'    => $padding_top_3,
 					'padding-right'  => $padding_right_3,
 					'padding-bottom' => $padding_bottom_3,
-					'padding-left'   => $padding_left_3
+					'padding-left'   => $padding_left_3,
 				),
 			);
 
@@ -1200,8 +1210,10 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				ET_Builder_Element::set_style( $function_name, array(
 					'selector'    => '%%order_class%% > .et_pb_row',
 					'declaration' => sprintf(
-						'max-width:%1$s !important;',
-						'on' === $width_unit ? esc_attr( sprintf( '%1$spx', intval( $custom_width_px ) ) ) : esc_attr( sprintf( '%1$s%%', intval( $custom_width_percent ) ) )
+						'max-width:%1$s !important;
+						%2$s',
+						'on' === $width_unit ? esc_attr( sprintf( '%1$spx', intval( $custom_width_px ) ) ) : esc_attr( sprintf( '%1$s%%', intval( $custom_width_percent ) ) ),
+						'on' !== $width_unit ? esc_attr( sprintf( 'width: %1$s%%;', intval( $custom_width_percent ) ) ) : ''
 					),
 				) );
 			}
@@ -1241,14 +1253,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			$background_video = $this->video_background();
 		}
 
-		// set the correct default value for $transparent_background option if plugin activated.
-		if ( et_is_builder_plugin_active() && 'default' === $transparent_background ) {
-			$transparent_background = '' !== $background_color ? 'off' : 'on';
-		} elseif ( 'default' === $transparent_background ) {
-			$transparent_background = 'off';
-		}
-
-		if ( '' !== $background_color && 'off' === $transparent_background ) {
+		if ( '' !== $background_color && 'rgba(255,255,255,0)' !== $background_color ) {
 			ET_Builder_Element::set_style( $function_name, array(
 				'selector'    => '%%order_class%%.et_pb_section',
 				'declaration' => sprintf(
@@ -1258,92 +1263,126 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			) );
 		}
 
-		$padding_values = explode( '|', $custom_padding );
+		$is_transparent_background = 'rgba(255,255,255,0)' === $background_color || ( et_is_builder_plugin_active() && '' === $background_color );
 
-		if ( ! empty( $padding_values ) ) {
-			// old version of sections supports only top and bottom padding, so we need to handle it along with the full padding in the recent version
-			if ( 2 === count( $padding_values ) ) {
-				$padding_settings = array(
-					'top' => isset( $padding_values[0] ) ? $padding_values[0] : '',
-					'bottom' => isset( $padding_values[1] ) ? $padding_values[1] : '',
-				);
-			} else {
-				$padding_settings = array(
-					'top' => isset( $padding_values[0] ) ? $padding_values[0] : '',
-					'right' => isset( $padding_values[1] ) ? $padding_values[1] : '',
-					'bottom' => isset( $padding_values[2] ) ? $padding_values[2] : '',
-					'left' => isset( $padding_values[3] ) ? $padding_values[3] : '',
-				);
-			}
-
-			foreach( $padding_settings as $padding_side => $value ) {
-				if ( '' !== $value ) {
-					$element_style = array(
-						'selector'    => '%%order_class%%.et_pb_section',
-						'declaration' => sprintf(
-							'padding-%1$s: %2$s;',
-							esc_html( $padding_side ),
-							esc_html( $value )
-						),
-					);
-
-					// Backward compatibility. Keep Padding on Mobile is deprecated in favour of responsive inputs mechanism for custom padding
-					// To ensure that it is compatibility with previous version of Divi, this option is now only used as last resort if no
-					// responsive padding value is found,  and padding_mobile value is saved (which is set to off by default)
-					if ( in_array( $padding_mobile, array( 'on', 'off' ) ) && 'on' !== $padding_mobile && ! $custom_padding_responsive_active ) {
-						$element_style['media_query'] = ET_Builder_Element::get_media_query( 'min_width_981' );
-					}
-
-					ET_Builder_Element::set_style( $function_name, $element_style );
-				}
-			}
-		}
-
-		if ( ! empty( $padding_mobile_values['tablet'] ) || ! empty( $padding_values['phone'] ) ) {
-			$padding_mobile_values_processed = array();
-
-			foreach( array( 'tablet', 'phone' ) as $device ) {
-				if ( empty( $padding_mobile_values[$device] ) ) {
-					continue;
-				}
-
-				$padding_mobile_values_processed[ $device ] = array(
-					'padding-top'    => isset( $padding_mobile_values[$device][0] ) ? $padding_mobile_values[$device][0] : '',
-					'padding-right'  => isset( $padding_mobile_values[$device][1] ) ? $padding_mobile_values[$device][1] : '',
-					'padding-bottom' => isset( $padding_mobile_values[$device][2] ) ? $padding_mobile_values[$device][2] : '',
-					'padding-left'   => isset( $padding_mobile_values[$device][3] ) ? $padding_mobile_values[$device][3] : '',
-				);
-			}
-
-			if ( ! empty( $padding_mobile_values_processed ) ) {
-				et_pb_generate_responsive_css( $padding_mobile_values_processed, '%%order_class%%.et_pb_section', '', $function_name );
-			}
-		}
-
-		if ( '' !== $background_video_mp4 || '' !== $background_video_webm || ( '' !== $background_color && 'off' === $transparent_background ) || '' !== $background_image ) {
+		if ( '' !== $background_video_mp4 || '' !== $background_video_webm || ( '' !== $background_color && ! $is_transparent_background ) || '' !== $background_image ) {
 			$module_class .= ' et_pb_with_background';
 		}
 
+		// CSS Filters
+		$module_class .= $this->generate_css_filters( $function_name );
+
+		// build up the classes used.
+		$classes = array( 'et_pb_section' );
+
+		if ( '' !== $module_class ) {
+			// previously was a single string with spaces.
+			$classes = array_merge( $classes, explode( ' ', trim( $module_class ) ) );
+		}
+
+		if ( '' !== $background_video ) {
+			$classes[] = 'et_pb_section_video';
+			$classes[] = 'et_pb_preload';
+		}
+
+		if ( 'off' !== $inner_shadow && ! ( '' !== $background_image && 'on' === $parallax && 'off' === $parallax_method ) ) {
+			$classes[] = 'et_pb_inner_shadow';
+		}
+
+		if ( 'on' === $parallax ) {
+			$classes[] = 'et_pb_section_parallax';
+		}
+
+		if ( 'off' !== $fullwidth ) {
+			$classes[] = 'et_pb_fullwidth_section';
+		}
+
+		if ( 'on' === $specialty ) {
+			$classes[] = 'et_section_specialty';
+		} else {
+			$classes[] = 'et_section_regular';
+		}
+
+		if ( $is_transparent_background ) {
+			$classes[] = 'et_section_transparent';
+		}
+
+		// Setup for SVG.
+		$bottom  = '';
+		$top     = '';
+		$divider = ET_Builder_Module_Fields_Factory::get( 'Divider' );
+		// pass section number for background color usage.
+		$divider->count = $this->shortcode_callback_num();
+
+		// Check if style is not default.
+		if ( '' !== $this->shortcode_atts['bottom_divider_style'] ) {
+			// get an svg for using in ::before
+			$divider->process_svg( 'bottom', $this->shortcode_atts );
+
+			// apply responsive styling
+			$bottom_divider_responsive = et_pb_get_responsive_status( $this->shortcode_atts['bottom_divider_height_last_edited'] ) || et_pb_get_responsive_status( $this->shortcode_atts['bottom_divider_repeat_last_edited'] );
+
+			if ( $bottom_divider_responsive ) {
+				$divider->process_svg( 'bottom', $this->shortcode_atts, 'tablet' );
+				$divider->process_svg( 'bottom', $this->shortcode_atts, 'phone' );
+			}
+
+			// get the placeholder for the bottom
+			$bottom = $divider->get_svg( 'bottom' );
+
+			// add a corresponding class
+			$classes = array_merge( $classes, $divider->classes );
+		}
+
+		// Check if style is not default.
+		if ( '' !== $this->shortcode_atts['top_divider_style'] ) {
+			// process the top section divider.
+			$divider->process_svg( 'top', $this->shortcode_atts );
+
+			// apply responsive styling
+			$top_divider_responsive = et_pb_get_responsive_status( $this->shortcode_atts['top_divider_height_last_edited'] ) || et_pb_get_responsive_status( $this->shortcode_atts['top_divider_repeat_last_edited'] );
+
+			if ( $top_divider_responsive ) {
+				$divider->process_svg( 'top', $this->shortcode_atts, 'tablet' );
+				$divider->process_svg( 'top', $this->shortcode_atts, 'phone' );
+			}
+
+			// get the placeholder for the top
+			$top = $divider->get_svg( 'top' );
+
+			// add a corresponding class
+			$classes = array_merge( $classes, $divider->classes );
+		}
+
+		// Make sure no duplicate classes.
+		$classes = array_unique( $classes );
+
+		/**
+		 * List of CSS classes for the section
+		 *
+		 * @param $classes 	                        List of CSS classes to be filtered.
+		 * @param $this->shortcode_callback_num()	The instance number, or rather the section number.
+		 */
+		$classes = array_map( 'esc_attr', (array) apply_filters( 'et_builder_section_classes', $classes, $this->shortcode_callback_num() ) );
+
 		$output = sprintf(
-			'<div%7$s class="et_pb_section%3$s%4$s%5$s%6$s%8$s%12$s%13$s"%14$s>
-				%11$s
+			'<div%4$s class="%3$s"%8$s>
 				%9$s
-					%2$s
+				%7$s
+				%2$s
+				%5$s
 					%1$s
+				%6$s
 				%10$s
 			</div> <!-- .et_pb_section -->',
-			do_shortcode( et_pb_fix_shortcodes( $content ) ),
-			$background_video,
-			( '' !== $background_video ? ' et_pb_section_video et_pb_preload' : '' ),
-			( ( 'off' !== $inner_shadow && ! ( '' !== $background_image && 'on' === $parallax && 'off' === $parallax_method ) ) ? ' et_pb_inner_shadow' : '' ),
-			( 'on' === $parallax ? ' et_pb_section_parallax' : '' ),
-			( 'off' !== $fullwidth ? ' et_pb_fullwidth_section' : '' ),
-			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			do_shortcode( et_pb_fix_shortcodes( $content ) ), // 1
+			$background_video, // 2
+			implode( ' ', $classes ), // 3
+			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), // 4
 			( 'on' === $specialty ?
 				sprintf( '<div class="et_pb_row%1$s">', $gutter_class )
-				: '' ),
-			( 'on' === $specialty ? '</div> <!-- .et_pb_row -->' : '' ),
+				: '' ), // 5
+			( 'on' === $specialty ? '</div> <!-- .et_pb_row -->' : '' ), // 6
 			( '' !== $background_image && 'on' === $parallax
 				? sprintf(
 					'<div class="et_parallax_bg%2$s%3$s" style="background-image: url(%1$s);"></div>',
@@ -1352,10 +1391,10 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					( ( 'off' !== $inner_shadow && 'off' === $parallax_method ) ? ' et_pb_inner_shadow' : '' )
 				)
 				: ''
-			),
-			( 'on' === $specialty ? ' et_section_specialty' : ' et_section_regular' ),
-			( 'on' === $transparent_background ? ' et_section_transparent' : '' ),
-			$this->get_module_data_attributes()
+			), // 7
+			$this->get_module_data_attributes(), // 8
+			et_esc_previously( $top ), // 9
+			et_esc_previously( $bottom ) // 10
 		);
 
 		if ( 'on' === $specialty ) {
@@ -1371,6 +1410,52 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 
 	}
 
+	public function process_box_shadow( $function_name ) {
+		parent::process_box_shadow( $function_name );
+
+		/**
+		 * @var ET_Builder_Module_Field_BoxShadow $boxShadow
+		 */
+		$boxShadow = ET_Builder_Module_Fields_Factory::get( 'BoxShadow' );
+		$style = $boxShadow->get_value( $this->shortcode_atts );
+
+		if ( ! empty( $style ) && 'none' !== $style && false === strpos( $style, 'inset' ) ) {
+			// Make section z-index higher if it has outer box shadow #4762
+			self::set_style( $function_name, array(
+				'selector'    => '%%order_class%%',
+				'declaration' => 'z-index: 10;'
+			) );
+		}
+	}
+
+	private function _keep_box_shadow_compatibility( $function_name ) {
+		/**
+		 * @var ET_Builder_Module_Field_BoxShadow $box_shadow
+		 */
+		$box_shadow = ET_Builder_Module_Fields_Factory::get( 'BoxShadow' );
+		$utils      = ET_Core_Data_Utils::instance();
+		$atts       = $this->shortcode_atts;
+		$style      = $box_shadow->get_value( $atts );
+
+		if (
+			! empty( $style )
+			&&
+			! is_admin()
+			&&
+			version_compare( $utils->array_get( $atts, '_builder_version', '3.0.93' ), '3.0.94', 'lt' )
+			&&
+			! $box_shadow->is_inset( $box_shadow->get_value( $atts ) )
+		) {
+			$class = '.' . self::get_module_order_class( $function_name );
+
+			return sprintf(
+				'<style type="text/css">%1$s</style>',
+				sprintf( '%1$s { z-index: 11; %2$s }', esc_html( $class ), esc_html( $style ) )
+			);
+		}
+
+		return '';
+	}
 }
 new ET_Builder_Section;
 
@@ -1387,6 +1472,20 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'use_background_color_gradient' => true,
 				'use_background_video' => true,
 			),
+			'max_width' => array(
+				'use_max_width' => false,
+				'css'           => array(
+					'module_alignment' => '%%order_class%%.et_pb_row',
+				),
+				'options' => array(
+					'module_alignment' => array(
+						'label' => esc_html__( 'Row Alignment', 'et_builder' ),
+					),
+				),
+				'toggle_slug'     => 'alignment',
+				'toggle_title'    => esc_html__( 'Alignment', 'et_builder' ),
+				'toggle_priority' => 50,
+			),
 			'custom_margin_padding' => array(
 				'use_padding'       => false,
 				'custom_margin'     => array(
@@ -1396,8 +1495,9 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 					'main' => '%%order_class%%.et_pb_row',
 					'important' => 'all',
 				),
-				'toggle_slug' => 'margin_padding',
 			),
+			'border' => array(),
+			'filters' => array(),
 		);
 
 		$this->options_toggles = array(
@@ -1407,10 +1507,10 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 						'title'       => esc_html__( 'Background', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
-							'column_4' => esc_html__( 'Column 4', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
+							'column_4' => array( 'name' => esc_html__( 'Column 4', 'et_builder' ) ),
 						),
 					),
 				),
@@ -1421,14 +1521,14 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 						'title'    => esc_html__( 'Sizing', 'et_builder' ),
 						'priority' => 65,
 					),
-					'margin_padding' => array(
+					'custom_margin_padding' => array(
 						'title'       => esc_html__( 'Spacing', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
-							'column_4' => esc_html__( 'Column 4', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
+							'column_4' => array( 'name' => esc_html__( 'Column 4', 'et_builder' ) ),
 						),
 						'priority' => 70,
 					),
@@ -1440,20 +1540,20 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 						'title'  => esc_html__( 'CSS ID & Classes', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
-							'column_4' => esc_html__( 'Column 4', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
+							'column_4' => array( 'name' => esc_html__( 'Column 4', 'et_builder' ) ),
 						),
 					),
 					'custom_css' => array(
 						'title'  => esc_html__( 'Custom CSS', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
-							'column_1' => esc_html__( 'Column 1', 'et_builder' ),
-							'column_2' => esc_html__( 'Column 2', 'et_builder' ),
-							'column_3' => esc_html__( 'Column 3', 'et_builder' ),
-							'column_4' => esc_html__( 'Column 4', 'et_builder' ),
+							'column_1' => array( 'name' => esc_html__( 'Column 1', 'et_builder' ) ),
+							'column_2' => array( 'name' => esc_html__( 'Column 2', 'et_builder' ) ),
+							'column_3' => array( 'name' => esc_html__( 'Column 3', 'et_builder' ) ),
+							'column_4' => array( 'name' => esc_html__( 'Column 4', 'et_builder' ) ),
 						),
 					),
 				),
@@ -1555,6 +1655,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_1',
 			'background_color_gradient_start_position_1',
 			'background_color_gradient_end_position_1',
+			'background_color_gradient_overlays_image_1',
 			'background_size_2',
 			'background_position_2',
 			'background_repeat_2',
@@ -1567,6 +1668,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_2',
 			'background_color_gradient_start_position_2',
 			'background_color_gradient_end_position_2',
+			'background_color_gradient_overlays_image_2',
 			'background_size_3',
 			'background_position_3',
 			'background_repeat_3',
@@ -1579,6 +1681,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_3',
 			'background_color_gradient_start_position_3',
 			'background_color_gradient_end_position_3',
+			'background_color_gradient_overlays_image_3',
 			'background_size_4',
 			'background_position_4',
 			'background_repeat_4',
@@ -1591,29 +1694,34 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_4',
 			'background_color_gradient_start_position_4',
 			'background_color_gradient_end_position_4',
+			'background_color_gradient_overlays_image_4',
 			'background_video_mp4_1',
 			'background_video_webm_1',
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
 			'background_video_mp4_4',
 			'background_video_webm_4',
 			'background_video_width_4',
 			'background_video_height_4',
 			'allow_player_pause_4',
+			'background_video_pause_outside_viewport_4',
 			'__video_background_4',
 		);
 
@@ -1770,30 +1878,30 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'option_category' => 'layout',
 				'description'     => esc_html__( 'Adjust padding to specific values, or leave blank to use the default padding.', 'et_builder' ),
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 			),
 			'custom_padding_tablet' => array(
 				'type'        => 'skip',
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'custom_padding_phone' => array(
 				'type'        => 'skip',
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'padding_mobile' => array(
 				'label' => esc_html__( 'Keep Custom Padding on Mobile', 'et_builder' ),
 				'type'        => 'skip', // Remaining attribute for backward compatibility
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'custom_margin' => array(
 				'label'           => esc_html__( 'Custom Margin', 'et_builder' ),
 				'type'            => 'custom_margin',
 				'option_category' => 'layout',
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 			),
 			'make_equal' => array(
 				'label'             => esc_html__( 'Equalize Column Heights', 'et_builder' ),
@@ -1822,7 +1930,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'type'            => 'column_settings_padding',
 				'option_category' => 'configuration',
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 			),
 			'column_padding_mobile' => array(
 				'label' => esc_html__( 'Keep Column Padding on Mobile', 'et_builder' ),
@@ -2068,6 +2176,18 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_color_gradient_end_position_4' => array(
 				'type' => 'skip',
 			),
+			'background_color_gradient_overlays_image_1' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_2' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_3' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_4' => array(
+				'type' => 'skip',
+			),
 			'background_video_mp4_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
@@ -2093,6 +2213,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
+			'background_video_pause_outside_viewport_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_1',
@@ -2142,6 +2268,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 					'__video_background_2',
 				),
 			),
+			'background_video_pause_outside_viewport_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
 			'__video_background_2' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -2186,6 +2318,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 					'__video_background_3',
 				),
 			),
+			'background_video_pause_outside_viewport_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
 			'__video_background_3' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -2225,6 +2363,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_4' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_4',
+				),
+			),
+			'background_video_pause_outside_viewport_4' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_4',
@@ -2542,6 +2686,10 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 		$background_color_gradient_end_position_2     = $this->shortcode_atts['background_color_gradient_end_position_2'];
 		$background_color_gradient_end_position_3     = $this->shortcode_atts['background_color_gradient_end_position_3'];
 		$background_color_gradient_end_position_4     = $this->shortcode_atts['background_color_gradient_end_position_4'];
+		$background_color_gradient_overlays_image_1   = $this->shortcode_atts['background_color_gradient_overlays_image_1'];
+		$background_color_gradient_overlays_image_2   = $this->shortcode_atts['background_color_gradient_overlays_image_2'];
+		$background_color_gradient_overlays_image_3   = $this->shortcode_atts['background_color_gradient_overlays_image_3'];
+		$background_color_gradient_overlays_image_4   = $this->shortcode_atts['background_color_gradient_overlays_image_4'];
 		$background_video_mp4_1     = $this->shortcode_atts['background_video_mp4_1'];
 		$background_video_mp4_2     = $this->shortcode_atts['background_video_mp4_2'];
 		$background_video_mp4_3     = $this->shortcode_atts['background_video_mp4_3'];
@@ -2562,6 +2710,10 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
 		$allow_player_pause_4       = $this->shortcode_atts['allow_player_pause_4'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
+		$background_video_pause_outside_viewport_4 = $this->shortcode_atts['background_video_pause_outside_viewport_4'];
 
 		global $et_pb_all_column_settings, $et_pb_rendering_column_content, $et_pb_rendering_column_content_row;
 
@@ -2636,6 +2788,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_1,
 				'start_position'   => $background_color_gradient_start_position_1,
 				'end_position'     => $background_color_gradient_end_position_1,
+				'overlays_image'   => $background_color_gradient_overlays_image_1,
 			),
 			array(
 				'active'           => $use_background_color_gradient_2,
@@ -2646,6 +2799,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_2,
 				'start_position'   => $background_color_gradient_start_position_2,
 				'end_position'     => $background_color_gradient_end_position_2,
+				'overlays_image'   => $background_color_gradient_overlays_image_2,
 			),
 			array(
 				'active'           => $use_background_color_gradient_3,
@@ -2656,6 +2810,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_3,
 				'start_position'   => $background_color_gradient_start_position_3,
 				'end_position'     => $background_color_gradient_end_position_3,
+				'overlays_image'   => $background_color_gradient_overlays_image_3,
 			),
 			array(
 				'active'           => $use_background_color_gradient_4,
@@ -2666,6 +2821,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_4,
 				'start_position'   => $background_color_gradient_start_position_4,
 				'end_position'     => $background_color_gradient_end_position_4,
+				'overlays_image'   => $background_color_gradient_overlays_image_4,
 			),
 		);
 
@@ -2676,6 +2832,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_1,
 				'background_video_height'      => $background_video_height_1,
 				'background_video_allow_pause' => $allow_player_pause_1,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_2,
@@ -2683,6 +2840,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_2,
 				'background_video_height'      => $background_video_height_2,
 				'background_video_allow_pause' => $allow_player_pause_2,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_3,
@@ -2690,6 +2848,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_3,
 				'background_video_height'      => $background_video_height_3,
 				'background_video_allow_pause' => $allow_player_pause_3,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_4,
@@ -2697,6 +2856,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_4,
 				'background_video_height'      => $background_video_height_4,
 				'background_video_allow_pause' => $allow_player_pause_4,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_4,
 			),
 		);
 
@@ -2705,25 +2865,25 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'padding-top'    => $padding_top_1,
 				'padding-right'  => $padding_right_1,
 				'padding-bottom' => $padding_bottom_1,
-				'padding-left'   => $padding_left_1
+				'padding-left'   => $padding_left_1,
 			),
 			array(
 				'padding-top'    => $padding_top_2,
 				'padding-right'  => $padding_right_2,
 				'padding-bottom' => $padding_bottom_2,
-				'padding-left'   => $padding_left_2
+				'padding-left'   => $padding_left_2,
 			),
 			array(
 				'padding-top'    => $padding_top_3,
 				'padding-right'  => $padding_right_3,
 				'padding-bottom' => $padding_bottom_3,
-				'padding-left'   => $padding_left_3
+				'padding-left'   => $padding_left_3,
 			),
 			array(
 				'padding-top'    => $padding_top_4,
 				'padding-right'  => $padding_right_4,
 				'padding-bottom' => $padding_bottom_4,
-				'padding-left'   => $padding_left_4
+				'padding-left'   => $padding_left_4,
 			),
 		);
 
@@ -2776,6 +2936,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'et_pb_column_parallax' => $et_pb_column_parallax,
 			'et_pb_column_css' => $et_pb_column_css,
 		);
+
 
 		$current_row_position = $et_pb_rendering_column_content ? 'internal_row' : 'regular_row';
 
@@ -2867,8 +3028,10 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			ET_Builder_Element::set_style( $function_name, array(
 				'selector'    => '%%order_class%%',
 				'declaration' => sprintf(
-					'max-width:%1$s !important;',
-					'on' === $width_unit ? esc_attr( $custom_width_px ) : esc_attr( $custom_width_percent )
+					'max-width:%1$s !important;
+					%2$s',
+					'on' === $width_unit ? esc_attr( sprintf( '%1$spx', intval( $custom_width_px ) ) ) : esc_attr( sprintf( '%1$s%%', intval( $custom_width_percent ) ) ),
+					'on' !== $width_unit ? esc_attr( sprintf( 'width: %1$s%%;', intval( $custom_width_percent ) ) ) : ''
 				),
 			) );
 		}
@@ -2886,11 +3049,14 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 		// reset the global column settings to make sure they are not affected by internal content
 		$et_pb_all_column_settings = $et_pb_all_column_settings_backup;
 
+		// CSS Filters
+		$module_class .= $this->generate_css_filters( $function_name );
+
 		$output = sprintf(
 			'<div%4$s class="%2$s%6$s%7$s">
+				%1$s
 				%8$s
 				%5$s
-				%1$s
 			</div> <!-- .%3$s -->',
 			$inner_content,
 			esc_attr( $module_class ),
@@ -2929,8 +3095,15 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'custom_margin'     => array(
 					'priority' => 1,
 				),
-				'toggle_slug'       => 'margin_padding',
 			),
+			'max_width' => array(
+				'options' => array(
+					'module_alignment' => array(
+						'label' => esc_html__( 'Row Alignment', 'et_builder' ),
+					),
+				),
+			),
+			'filters' => array(),
 		);
 
 		$this->options_toggles = array(
@@ -2949,11 +3122,11 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			),
 			'advanced' => array(
 				'toggles' => array(
-					'height'         => array(
+					'width'         => array(
 						'title'    => esc_html__( 'Sizing', 'et_builder' ),
 						'priority' => 65,
 					),
-					'margin_padding' => array(
+					'custom_margin_padding' => array(
 						'title'       => esc_html__( 'Spacing', 'et_builder' ),
 						'sub_toggles' => array(
 							'main'     => '',
@@ -3071,6 +3244,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_1',
 			'background_color_gradient_start_position_1',
 			'background_color_gradient_end_position_1',
+			'background_color_gradient_overlays_image_1',
 			'use_background_color_gradient_2',
 			'background_color_gradient_start_2',
 			'background_color_gradient_end_2',
@@ -3079,6 +3253,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_2',
 			'background_color_gradient_start_position_2',
 			'background_color_gradient_end_position_2',
+			'background_color_gradient_overlays_image_2',
 			'use_background_color_gradient_3',
 			'background_color_gradient_start_3',
 			'background_color_gradient_end_3',
@@ -3087,23 +3262,27 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial_3',
 			'background_color_gradient_start_position_3',
 			'background_color_gradient_end_position_3',
+			'background_color_gradient_overlays_image_3',
 			'background_video_mp4_1',
 			'background_video_webm_1',
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
 		);
 
@@ -3151,23 +3330,23 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'option_category' => 'layout',
 				'description'     => esc_html__( 'Adjust padding to specific values, or leave blank to use the default padding.', 'et_builder' ),
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 			),
 			'custom_padding_tablet' => array(
 				'type'        => 'skip',
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'custom_padding_phone' => array(
 				'type'        => 'skip',
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'padding_mobile' => array(
 				'label' => esc_html__( 'Keep Custom Padding on Mobile', 'et_builder' ),
 				'type'        => 'skip', // Remaining attribute for backward compatibility
 				'tab_slug'    => 'advanced',
-				'toggle_slug' => 'margin_padding',
+				'toggle_slug' => 'custom_margin_padding',
 			),
 			'use_custom_gutter' => array(
 				'label'             => esc_html__( 'Use Custom Gutter Width', 'et_builder' ),
@@ -3183,7 +3362,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				),
 				'description'       => esc_html__( 'Enable this option to define custom gutter width for this row.', 'et_builder' ),
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'height',
+				'toggle_slug'     => 'width',
 			),
 			'gutter_width' => array(
 				'label'           => esc_html__( 'Gutter Width', 'et_builder' ),
@@ -3199,7 +3378,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'validate_unit'   => false,
 				'fixed_range'     => true,
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'height',
+				'toggle_slug'     => 'width',
 			),
 			'make_equal' => array(
 				'label'             => esc_html__( 'Equalize Column Heights', 'et_builder' ),
@@ -3211,7 +3390,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				),
 				'default'           => 'off',
 				'tab_slug'          => 'advanced',
-				'toggle_slug'       => 'height',
+				'toggle_slug'       => 'width',
 			),
 			'background_color' => array(
 				'label'        => esc_html__( 'Background Color', 'et_builder' ),
@@ -3228,7 +3407,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'type'            => 'column_settings_padding',
 				'option_category' => 'configuration',
 				'tab_slug'        => 'advanced',
-				'toggle_slug'     => 'margin_padding',
+				'toggle_slug'     => 'custom_margin_padding',
 			),
 			'column_padding_mobile' => array(
 				'label' => esc_html__( 'Keep Column Padding on Mobile', 'et_builder' ),
@@ -3539,6 +3718,15 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			'background_color_gradient_end_position_3' => array(
 				'type' => 'skip',
 			),
+			'background_color_gradient_overlays_image_1' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_2' => array(
+				'type' => 'skip',
+			),
+			'background_color_gradient_overlays_image_3' => array(
+				'type' => 'skip',
+			),
 			'background_video_mp4_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
@@ -3564,6 +3752,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
+			'background_video_pause_outside_viewport_1' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_1',
@@ -3613,6 +3807,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 					'__video_background_2',
 				),
 			),
+			'background_video_pause_outside_viewport_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
 			'__video_background_2' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -3652,6 +3852,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
+			'background_video_pause_outside_viewport_3' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_3',
@@ -3773,6 +3979,9 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 		$background_color_gradient_end_position_1     = $this->shortcode_atts['background_color_gradient_end_position_1'];
 		$background_color_gradient_end_position_2     = $this->shortcode_atts['background_color_gradient_end_position_2'];
 		$background_color_gradient_end_position_3     = $this->shortcode_atts['background_color_gradient_end_position_3'];
+		$background_color_gradient_overlays_image_1   = $this->shortcode_atts['background_color_gradient_overlays_image_1'];
+		$background_color_gradient_overlays_image_2   = $this->shortcode_atts['background_color_gradient_overlays_image_2'];
+		$background_color_gradient_overlays_image_3   = $this->shortcode_atts['background_color_gradient_overlays_image_3'];
 		$background_video_mp4_1     = $this->shortcode_atts['background_video_mp4_1'];
 		$background_video_mp4_2     = $this->shortcode_atts['background_video_mp4_2'];
 		$background_video_mp4_3     = $this->shortcode_atts['background_video_mp4_3'];
@@ -3788,6 +3997,9 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 		$allow_player_pause_1       = $this->shortcode_atts['allow_player_pause_1'];
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
 
 		global $et_pb_all_column_settings_inner, $et_pb_rendering_column_content, $et_pb_rendering_column_content_row;
 
@@ -3853,6 +4065,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_1,
 				'start_position'   => $background_color_gradient_start_position_1,
 				'end_position'     => $background_color_gradient_end_position_1,
+				'overlays_image'   => $background_color_gradient_overlays_image_1,
 			),
 			array(
 				'active'           => $use_background_color_gradient_2,
@@ -3863,6 +4076,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_2,
 				'start_position'   => $background_color_gradient_start_position_2,
 				'end_position'     => $background_color_gradient_end_position_2,
+				'overlays_image'   => $background_color_gradient_overlays_image_2,
 			),
 			array(
 				'active'           => $use_background_color_gradient_3,
@@ -3873,6 +4087,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'color_end'        => $background_color_gradient_end_3,
 				'start_position'   => $background_color_gradient_start_position_3,
 				'end_position'     => $background_color_gradient_end_position_3,
+				'overlays_image'   => $background_color_gradient_overlays_image_3,
 			),
 		);
 
@@ -3883,6 +4098,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_1,
 				'background_video_height'      => $background_video_height_1,
 				'background_video_allow_pause' => $allow_player_pause_1,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_2,
@@ -3890,6 +4106,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_2,
 				'background_video_height'      => $background_video_height_2,
 				'background_video_allow_pause' => $allow_player_pause_2,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_3,
@@ -3897,6 +4114,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_3,
 				'background_video_height'      => $background_video_height_3,
 				'background_video_allow_pause' => $allow_player_pause_3,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 			),
 		);
 
@@ -3905,19 +4123,19 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'padding-top'    => $padding_top_1,
 				'padding-right'  => $padding_right_1,
 				'padding-bottom' => $padding_bottom_1,
-				'padding-left'   => $padding_left_1
+				'padding-left'   => $padding_left_1,
 			),
 			array(
 				'padding-top'    => $padding_top_2,
 				'padding-right'  => $padding_right_2,
 				'padding-bottom' => $padding_bottom_2,
-				'padding-left'   => $padding_left_2
+				'padding-left'   => $padding_left_2,
 			),
 			array(
 				'padding-top'    => $padding_top_3,
 				'padding-right'  => $padding_right_3,
 				'padding-bottom' => $padding_bottom_3,
-				'padding-left'   => $padding_left_3
+				'padding-left'   => $padding_left_3,
 			),
 		);
 
@@ -4045,17 +4263,29 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			$module_class .= ' et_pb_gutters' . $gutter_width;
 		}
 
+		$parallax_image = $this->get_parallax_image_background();
+		$background_video = $this->video_background();
+
 		// reset the global column settings to make sure they are not affected by internal content
 		$et_pb_all_column_settings_inner = $et_pb_all_column_settings_backup;
 
+		// CSS Filters
+		$module_class .= $this->generate_css_filters( $function_name );
+
 		$output = sprintf(
-			'<div%4$s class="%2$s">
+			'<div%4$s class="%2$s%7$s%8$s">
 				%1$s
+				%5$s
+				%6$s
 			</div> <!-- .%3$s -->',
 			$inner_content,
 			esc_attr( $module_class ),
 			esc_html( $function_name ),
-			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' )
+			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
+			$parallax_image,
+			$background_video,
+			( '' !== $background_video ? ' et_pb_section_video et_pb_preload' : '' ),
+			( '' !== $parallax_image ? ' et_pb_section_parallax' : '' )
 		);
 
 		return $output;
@@ -4082,11 +4312,13 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			'background_color_gradient_direction_radial',
 			'background_color_gradient_start_position',
 			'background_color_gradient_end_position',
+			'background_color_gradient_overlays_image',
 			'background_video_mp4',
 			'background_video_webm',
 			'background_video_width',
 			'background_video_height',
 			'allow_player_pause',
+			'background_video_pause_outside_viewport',
 			'__video_background',
 		);
 
@@ -4122,7 +4354,8 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			$et_pb_all_column_settings_inner,
 			$et_specialty_column_type,
 			$et_pb_rendering_column_content,
-			$et_pb_rendering_column_content_row;
+			$et_pb_rendering_column_content_row,
+			$et_pb_column_completion;
 
 		$is_specialty_column = 'et_pb_column_inner' !== $function_name && '' !== $specialty_columns;
 
@@ -4132,8 +4365,8 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			$et_specialty_column_type = $type;
 			$array_index = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_columns_counter'] : 0;
 			$backgrounds_array = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds'] : array();
-			$background_gradient = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_gradient'][ $array_index ] : '';
-			$background_video = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_video'][ $array_index ] : '';
+			$background_gradient = isset( $et_pb_all_column_settings[ $current_row_position ], $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_gradient'][ $array_index ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_gradient'][ $array_index ] : '';
+			$background_video = isset( $et_pb_all_column_settings[ $current_row_position ], $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_video'][ $array_index ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_backgrounds_video'][ $array_index ] : '';
 			$paddings_array = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_paddings'] : array();
 			$paddings_mobile_array = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_paddings_mobile'] : array();
 			$column_css_array = isset( $et_pb_all_column_settings[ $current_row_position ] ) ? $et_pb_all_column_settings[ $current_row_position ]['et_pb_column_css'] : array();
@@ -4155,12 +4388,32 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			$column_parallax = isset( $et_pb_all_column_settings_inner[ $current_row_position ] ) && isset( $et_pb_all_column_settings_inner[ $current_row_position ]['et_pb_column_parallax'] ) ? $et_pb_all_column_settings_inner[ $current_row_position ]['et_pb_column_parallax'] : '';
 		}
 
+		// Get column type value in array
+		$column_type = explode( '_', $type );
+
+		// Just in case for some reason column shortcode has no `type` attribute and causes unexpected $column_type values
+		if ( isset( $column_type[0] ) && isset( $column_type[1] ) ) {
+			// Get column progress.
+			$column_progress = intval( $column_type[0] ) / intval( $column_type[1] );
+
+			if ( 0 === $array_index ) {
+				$et_pb_column_completion = $column_progress;
+			} else {
+				$et_pb_column_completion = $et_pb_column_completion + $column_progress;
+			}
+		}
+
+		// Last column is when sum of column type value equals to 1
+		$is_last_column = 1 == $et_pb_column_completion;
+
 		$background_color = isset( $backgrounds_array[$array_index]['color'] ) ? $backgrounds_array[$array_index]['color'] : '';
 		$background_img = isset( $backgrounds_array[$array_index]['image'] ) ? $backgrounds_array[$array_index]['image'] : '';
 		$background_size = isset( $backgrounds_array[$array_index]['image_size'] ) ? $backgrounds_array[$array_index]['image_size'] : '';
 		$background_position = isset( $backgrounds_array[$array_index]['image_position'] ) ? $backgrounds_array[$array_index]['image_position'] : '';
 		$background_repeat = isset( $backgrounds_array[$array_index]['image_repeat'] ) ? $backgrounds_array[$array_index]['image_repeat'] : '';
 		$background_blend = isset( $backgrounds_array[$array_index]['image_blend'] ) ? $backgrounds_array[$array_index]['image_blend'] : '';
+		$background_gradient_overlays_image = isset( $background_gradient['overlays_image'] ) ? $background_gradient['overlays_image'] : '';
+
 		$padding_values = isset( $paddings_array[$array_index] ) ? $paddings_array[$array_index] : array();
 		$padding_mobile_values = isset( $paddings_mobile_array[$array_index] ) ? $paddings_mobile_array[$array_index] : array();
 		$padding_last_edited = isset( $padding_mobile_values['last_edited'] ) ? $padding_mobile_values['last_edited'] : 'off|desktop';
@@ -4177,13 +4430,13 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			$has_background_gradient = true;
 
 			$default_gradient = apply_filters( 'et_pb_default_gradient', array(
-				'type'             => 'linear',
-				'direction'        => '180deg',
-				'radial_direction' => 'center',
-				'color_start'      => '#2b87da',
-				'color_end'        => '#29c4a9',
-				'start_position'   => '0%',
-				'end_position'     => '100%',
+				'type'             => ET_Global_Settings::get_value( 'all_background_gradient_type' ),
+				'direction'        => ET_Global_Settings::get_value( 'all_background_gradient_direction' ),
+				'radial_direction' => ET_Global_Settings::get_value( 'all_background_gradient_direction_radial' ),
+				'color_start'      => ET_Global_Settings::get_value( 'all_background_gradient_start' ),
+				'color_end'        => ET_Global_Settings::get_value( 'all_background_gradient_end' ),
+				'start_position'   => ET_Global_Settings::get_value( 'all_background_gradient_start_position' ),
+				'end_position'     => ET_Global_Settings::get_value( 'all_background_gradient_end_position' ),
 			) );
 
 			$background_gradient = wp_parse_args( array_filter( $background_gradient ), $default_gradient );
@@ -4248,8 +4501,11 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 		}
 
 		if ( ! empty( $background_images ) ) {
-			// The browsers stack the images in the opposite order to what you'd expect.
-			$background_images = array_reverse( $background_images );
+			if ( 'on' !== $background_gradient_overlays_image ) {
+				// The browsers stack the images in the opposite order to what you'd expect.
+				$background_images = array_reverse( $background_images );
+			}
+
 			$backgorund_images_declaration = sprintf(
 				'background-image: %1$s;',
 				esc_html( implode( ', ', $background_images ) )
@@ -4388,8 +4644,11 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 
 		$class .= $is_specialty_column ? ' et_pb_specialty_column' : '';
 
+		// CSS Filters
+		$class .= $this->generate_css_filters( $function_name );
+
 		$output = sprintf(
-			'<div class="et_pb_column %1$s%3$s%6$s"%5$s>
+			'<div class="et_pb_column %1$s%3$s%6$s%8$s"%5$s>
 				%7$s
 				%4$s
 				%2$s
@@ -4407,7 +4666,8 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			),
 			'' !== $custom_css_id ? sprintf( ' id="%1$s"', esc_attr( $custom_css_id ) ) : '',
 			'' !== $video_background ? ' et_pb_section_video et_pb_preload' : '',
-			$video_background
+			$video_background,
+			$is_last_column ? ' et-last-child' : ''
 		);
 
 		return $output;

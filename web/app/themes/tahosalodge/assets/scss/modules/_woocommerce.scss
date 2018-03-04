@@ -25,8 +25,8 @@
 
                 div.quantity {
 
-                    &:before {
-                        content: "How many tickets?";
+                    &:not(.hidden):before {
+                        content: "How many?";
                         margin-right: 1em;
                     }
 
@@ -99,6 +99,10 @@
                     display: none;
                 }
             }
+        }
+
+        .extra-woocommerce-details-accordion {
+          display: none !important;
         }
     }
 
@@ -185,6 +189,26 @@
             @include bp(phone) {
                 width: 100%;
             }
+        }
+    }
+
+    .product-type-variable {
+
+        .variations {
+            width: 50% !important;
+
+            @include bp(phone) {
+                width: 100% !important;
+            }
+        }
+
+        .woocommerce-variation {
+            line-height: 62px;
+            margin-right: 2em;
+        }
+
+        .woocommerce-variation-add-to-cart {
+            padding-top: 11px;
         }
     }
 

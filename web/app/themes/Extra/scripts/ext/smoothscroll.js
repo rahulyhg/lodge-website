@@ -1,10 +1,15 @@
 /*!
  * SmoothScroll for websites v1.2.1
- * Licensed under the terms of the MIT license.
+ * @license Licensed under the terms of the MIT license.
  *
  * MIT License
- * ----
  *
+ * People involved
+ *  - Balazs Galambosi (maintainer)
+ *  - Michael Herf     (Pulse Algorithm)
+ */
+
+/*
  * Copyright (c) 2010-2015 Balazs Galambosi
  *
  * The only restriction is to not publish any extension for browsers or
@@ -27,10 +32,6 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- *
- * People involved
- *  - Balazs Galambosi (maintainer)
- *  - Michael Herf     (Pulse Algorithm)
  */
 
 (function(){
@@ -554,7 +555,9 @@ if ("onwheel" in document.createElement("div"))
 else if ("onmousewheel" in document.createElement("div"))
 	wheelEvent = "mousewheel";
 
-if (wheelEvent && isChrome) {
+var isSmoothScrollActive = document.body.className.split(' ').filter( function( className ) { return className === 'et_smooth_scroll' } ).length > 0;
+
+if (wheelEvent && isChrome && isSmoothScrollActive) {
 	addEvent(wheelEvent, wheel);
 	addEvent("mousedown", mousedown);
 	addEvent("load", init);

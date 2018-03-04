@@ -87,6 +87,9 @@ class WC_Box_Office_Cron {
 		$total     = $wpdb->get_var( 'SELECT FOUND_ROWS();' );
 		$processed = 0;
 
+		// Force send cron emails.
+		add_filter( 'woocommerce_box_office_send_ticket_email', '__return_true' );
+
 		foreach ( $tickets_raw as $meta ) {
 			$deleted = $wpdb->query(
 				$wpdb->prepare(
@@ -114,6 +117,8 @@ class WC_Box_Office_Cron {
 				$processed++;
 			}
 		}
+
+		remove_filter( 'woocommerce_box_office_send_ticket_email', '__return_true' );
 
 		if ( $total - $processed < 1 ) {
 			wp_update_post( array(

@@ -1,19 +1,19 @@
 /*!
- * imagesLoaded PACKAGED v3.1.8
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
+* imagesLoaded PACKAGED v3.1.8
+* JavaScript is all like "You images are done yet or what?"
+* @license MIT License
+*/
 
 
 /*!
- * EventEmitter v4.2.6 - git.io/ee
- * Oliver Caldwell
- * MIT license
- * @preserve
- */
+* EventEmitter v4.2.6 - git.io/ee
+* Oliver Caldwell
+* MIT license
+* @preserve
+*/
 
 (function () {
-	
+
 
 	/**
 	 * Class for managing events.
@@ -562,7 +562,7 @@ if ( typeof define === 'function' && define.amd ) {
  * MIT License
  */
 
-( function( window, factory ) { 
+( function( window, factory ) {
   // universal module definition
 
   /*global define: false, module: false, require: false */

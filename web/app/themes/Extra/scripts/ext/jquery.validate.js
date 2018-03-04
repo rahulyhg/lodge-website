@@ -4,7 +4,7 @@
  * http://jqueryvalidation.org/
  *
  * Copyright (c) 2014 Jörn Zaefferer
- * Released under the MIT license
+ * @license Released under the MIT license
  */
 (function($) {
 

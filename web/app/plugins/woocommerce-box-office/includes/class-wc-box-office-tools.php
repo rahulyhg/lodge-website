@@ -168,6 +168,9 @@ class WC_Box_Office_Tools {
 
 	/**
 	 * Export selected tickets.
+	 *
+	 * @since 1.0.0
+	 * @version 1.1.5
 	 */
 	public function export_tickets() {
 		if ( ! is_admin() || ! isset( $_GET['action'] ) || 'export_tickets' !== $_GET['action'] || ! isset( $_GET['tickets'] ) || ! is_array( $_GET['tickets'] ) ) {
@@ -188,6 +191,7 @@ class WC_Box_Office_Tools {
 		$columns = array(
 			'ticket_id'     => __( 'Ticket ID', 'woocommerce-box-office' ),
 			'ticket_status' => __( 'Ticket status', 'woocommerce-box-office' ),
+			'sku'           => __( 'SKU', 'woocommerce-box-office' ),
 			'ticket_name'   => __( 'Ticket', 'woocommerce-box-office' ),
 			'ticket_url'    => __( 'Ticket URL', 'woocommerce-box-office' ),
 			'purchase_date' => __( 'Purchase date', 'woocommerce-box-office' ),
@@ -236,6 +240,8 @@ class WC_Box_Office_Tools {
 				// Get product ID.
 				$product_id = get_post_meta( $ticket_id, '_product', true );
 
+				$product = wc_get_product( $product_id );
+
 				// Get customer user ID.
 				$user_id = get_post_meta( $ticket_id, '_user', true );
 
@@ -256,6 +262,7 @@ class WC_Box_Office_Tools {
 				$data = array(
 					'ticket_id'     => $ticket_id,
 					'ticket_status' => get_post_status( $ticket_id ),
+					'sku'           => $product->get_sku(),
 					'ticket_name'   => $ticket->post_title,
 					'ticket_url'    => $ticket_url,
 					'purchase_date' => $purchase_time,

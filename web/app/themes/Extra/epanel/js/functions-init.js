@@ -2,6 +2,49 @@
 	var clearpath = ePanelSettings.clearpath;
 
 	jQuery(document).ready(function($){
+		var editors = [];
+
+		function addEditorInstance(codeEditor, $element, config) {
+			if (!$element || $element.length === 0) {
+				return;
+			}
+			var instance = codeEditor.initialize( $element , {
+				codemirror: config,
+			} );
+			if (instance && instance.codemirror) {
+				editors.push(instance.codemirror);
+			}
+		}
+
+		// Use WP 4.9 CodeMirror Editor for Custom CSS
+		var codeEditor = window.wp && window.wp.codeEditor;
+		if (codeEditor && codeEditor.initialize && codeEditor.defaultSettings && codeEditor.defaultSettings.codemirror) {
+
+			// User ET CodeMirror theme
+			var configCSS = $.extend({}, codeEditor.defaultSettings.codemirror, {
+				theme: 'et',
+			});
+			var configHTML = $.extend({}, configCSS, {
+				mode: 'htmlmixed',
+			});
+
+			if ($('#divi_custom_css').length > 0) {
+				// Divi Theme
+				addEditorInstance(codeEditor, $('#divi_custom_css'), configCSS);
+				addEditorInstance(codeEditor, $('#divi_integration_head'), configHTML);
+				addEditorInstance(codeEditor, $('#divi_integration_body'), configHTML);
+				addEditorInstance(codeEditor, $('#divi_integration_single_top'), configHTML);
+				addEditorInstance(codeEditor, $('#divi_integration_single_bottom'), configHTML);
+			} else if ($('#extra_custom_css').length > 0) {
+				// Extra Theme
+				addEditorInstance(codeEditor, $('#extra_custom_css'), configCSS);
+				addEditorInstance(codeEditor, $('#extra_integration_head'), configHTML);
+				addEditorInstance(codeEditor, $('#extra_integration_body'), configHTML);
+				addEditorInstance(codeEditor, $('#extra_integration_single_top'), configHTML);
+				addEditorInstance(codeEditor, $('#extra_integration_single_bottom'), configHTML);
+			}
+		}
+
 		var $palette_inputs = $( '.et_color_palette_main_input' );
 
 		$('#epanel-content,#epanel-content > div').tabs({
@@ -19,20 +62,20 @@
 			}
 		});
 
-		$(".box-description").click(function(){
-			var descheading = $(this).parent('.epanel-box').find(".box-title h3").html();
-			var desctext = $(this).parent('.epanel-box').find(".box-title .box-descr").html();
+		$(".et-box-description").click(function(){
+			var descheading = $(this).parent('.et-epanel-box').find(".et-box-title h3").html();
+			var desctext = $(this).parent('.et-epanel-box').find(".et-box-title .et-box-descr").html();
 
-			$('body').append("<div id='custom-lbox'><div class='box-desc'><div class='box-desc-top'>"+ ePanelSettings.help_label +"</div><div class='box-desc-content'><h3>"+descheading+"</h3>"+desctext+"<div class='lightboxclose'></div> </div> <div class='box-desc-bottom'></div>	</div></div>");
+			$('body').append("<div id='custom-lbox'><div class='et-box-desc'><div class='et-box-desc-top'>"+ ePanelSettings.help_label +"</div><div class='et-box-desc-content'><h3>"+descheading+"</h3>"+desctext+"<div class='et-lightbox-close'></div> </div> <div class='et-box-desc-bottom'></div>	</div></div>");
 
-			et_pb_center_modal( $( '.box-desc' ) );
+			et_pb_center_modal( $( '.et-box-desc' ) );
 
-			$( '.lightboxclose' ).click( function() {
+			$( '.et-lightbox-close' ).click( function() {
 				et_pb_close_modal( $( '#custom-lbox' ) );
 			});
 		});
 
-		$(".defaults-button.epanel-reset").click(function(e) {
+		$(".et-defaults-button.epanel-reset").click(function(e) {
 			e.preventDefault();
 			$(".reset-popup-overlay, .defaults-hover").addClass('active');
 
@@ -74,16 +117,16 @@
 					});
 
 				if ( ! value ) {
-					$checkbox.parents('.epanel-box').next().hide();
+					$checkbox.parents('.et-epanel-box').next().hide();
 				}
 			}
 		});
 
-		$('.box-content').on( 'click', '.et_pb_yes_no_button', function(e){
+		$('.et-box-content').on( 'click', '.et_pb_yes_no_button', function(e){
 			e.preventDefault();
 
 			var $click_area = $(this),
-				$box_content = $click_area.parents('.box-content'),
+				$box_content = $click_area.parents('.et-box-content'),
 				$checkbox    = $box_content.find('input[type="checkbox"]'),
 				$state       = $box_content.find('.et_pb_yes_no_button');
 
@@ -121,6 +164,17 @@
 		});
 
 		function epanel_save( callback, message ) {
+
+			// If CodeMirror is used
+			if (editors.length > 0) {
+				$.each(editors, function(i, editor) {
+					if (editor.save) {
+						// Make sure we store changes into original textarea
+						editor.save();
+					}
+				})
+			}
+
 			var options_fromform = $('#main_options_form').formSerialize(),
 				add_nonce = '&_ajax_nonce='+ePanelSettings.epanel_nonce;
 
@@ -201,7 +255,7 @@
 		if ( $palette_inputs.length ) {
 			$palette_inputs.each( function() {
 				var	$this_input                    = $( this ),
-					$palette_wrapper               = $this_input.closest( '.box-content' ),
+					$palette_wrapper               = $this_input.closest( '.et-box-content' ),
 					$colorpalette_colorpickers     = $palette_wrapper.find( '.input-colorpalette-colorpicker' ),
 					colorpalette_colorpicker_index = 0,
 					saved_palette                  = $this_input.val().split('|');
@@ -265,5 +319,6 @@
 				marginTop : modal_height_adjustment
 			});
 		}
+
 	});
 /* ]]> */

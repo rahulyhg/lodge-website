@@ -70,9 +70,28 @@ function et_setup_theme() {
 	add_theme_support( 'et_widget_areas' );
 
 	add_theme_support( 'html5', array( 'search-form' ) );
+
+	// Load unminified script & styles based on selected theme options field
+	add_filter( 'et_load_unminified_scripts', 'et_extra_load_unminified_scripts' );
+	add_filter( 'et_load_unminified_styles', 'et_extra_load_unminified_styles' );
+}
+add_action( 'after_setup_theme', 'et_setup_theme' );
+
+function et_extra_load_unminified_scripts( $load ) {
+	if ( 'false' === et_get_option( 'extra_minify_combine_scripts' ) ) {
+		return true;
+	}
+
+	return $load;
 }
 
-add_action( 'after_setup_theme', 'et_setup_theme' );
+function et_extra_load_unminified_styles( $load ) {
+	if ( 'false' === et_get_option( 'extra_minify_combine_styles' ) ) {
+		return true;
+	}
+
+	return $load;
+}
 
 function extra_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'extra_content_width', 1080 );
@@ -291,7 +310,8 @@ add_action( 'wp_enqueue_scripts', 'et_extra_load_fonts' );
 function extra_load_scripts_styles(){
 	$theme_version = SCRIPT_DEBUG ? time() : et_get_theme_version();
 	$template_dir = get_template_directory_uri();
-	$suffix = SCRIPT_DEBUG ? '.js' : '.min.js';
+	$script_suffix = et_load_unminified_scripts() ? '' : '.min';
+	$style_suffix = et_load_unminified_styles() && ! is_child_theme() ? '.dev' : '';
 	$extra_scripts_dependencies = apply_filters( 'extra_scripts_dependencies', array( 'jquery', 'imagesloaded' ) );
 
 	// Load dependencies conditionally
@@ -302,22 +322,19 @@ function extra_load_scripts_styles(){
 	/*
 	 * Loads the main stylesheet.
 	 */
-	wp_enqueue_style( 'extra-style', get_stylesheet_uri(), array(), $theme_version );
+	wp_enqueue_style( 'extra-style', get_stylesheet_directory_uri() . '/style' . $style_suffix . '.css', array(), $theme_version );
 
-	wp_register_script( 'validation', $template_dir . '/scripts/ext/jquery.validate' . $suffix, array( 'jquery' ), $theme_version, true );
-	wp_register_script( 'raty', $template_dir . '/scripts/ext/jquery.raty' . $suffix, array( 'jquery' ), $theme_version, true );
+	wp_register_script( 'validation', $template_dir . '/scripts/ext/jquery.validate.js', array( 'jquery' ), $theme_version, true );
+	wp_register_script( 'raty', $template_dir . '/scripts/ext/jquery.raty.js', array( 'jquery' ), $theme_version, true );
 
-	wp_enqueue_script( 'imagesloaded', $template_dir . '/scripts/ext/imagesloaded' . $suffix, array( 'jquery' ), $theme_version, true );// todo, load only when needed?
-
-	wp_enqueue_script( 'waypoints', $template_dir . '/scripts/ext/jquery.waypoints' . $suffix, array( 'jquery' ), $theme_version, true );// todo, load only when needed?
-	wp_enqueue_script( 'fitvids', $template_dir . '/scripts/ext/jquery.fitvids' . $suffix, array( 'jquery' ), $theme_version, true );// todo, load only when needed?
+	wp_enqueue_script( 'imagesloaded', $template_dir . '/scripts/ext/imagesloaded.js', array( 'jquery' ), $theme_version, true );
 
 	if ( 'on' === et_get_option( 'extra_smooth_scroll', false ) ) {
-		wp_enqueue_script( 'smooth-scroll', $template_dir . '/scripts/ext/smoothscroll' . $suffix, array( 'jquery' ), $theme_version, true );
+		wp_enqueue_script( 'smooth-scroll', $template_dir . '/scripts/ext/smoothscroll.js', array( 'jquery' ), $theme_version, true );
 	}
 
 	wp_enqueue_script( 'masonry' );// todo, load only when needed?
-	wp_enqueue_script( 'extra-scripts', $template_dir . '/scripts/scripts' . $suffix, $extra_scripts_dependencies, $theme_version, true );
+	wp_enqueue_script( 'extra-scripts', $template_dir . '/scripts/scripts' . $script_suffix . '.js', $extra_scripts_dependencies, $theme_version, true );
 	wp_localize_script( 'extra-scripts', 'EXTRA', array(
 		'images_uri'                   => $template_dir . '/images/',
 		'ajaxurl'                      => set_url_scheme( admin_url( 'admin-ajax.php' ) ),
@@ -358,6 +375,7 @@ function extra_load_scripts_styles(){
 
 			if ( is_page_template( 'page-template-contact.php' ) ) {
 				wp_enqueue_script( 'validation' );
+
 				wp_enqueue_script( 'jquery-effects-highlight' );
 				et_extra_enqueue_google_maps_api();
 			}
@@ -372,6 +390,59 @@ function extra_load_scripts_styles(){
 
 add_action( 'wp_enqueue_scripts', 'extra_load_scripts_styles' );
 
+/**
+ * Modified localization script handle for ET's shortcode localization script (et_shortcodes_strings)
+ * @param string  handle name
+ * @return string modified handle name
+ */
+function et_extra_shortcodes_strings_handle( $handle ) {
+	return et_load_unminified_scripts() ? $handle : 'extra-scripts';
+}
+
+add_filter( 'et_shortcodes_strings_handle', 'et_extra_shortcodes_strings_handle' );
+
+/**
+ * Modified localization script handle for builder's frontend localization script (et_pb_custom)
+ * @param string  handle name
+ * @return string modified handle name
+ */
+function et_extra_builder_modules_script_handle( $handle ) {
+	return et_load_unminified_scripts() ? $handle : 'extra-scripts';
+}
+
+add_filter( 'et_builder_modules_script_handle', 'et_extra_builder_modules_script_handle' );
+
+/**
+ * Modified builder's optimized style handle
+ * @param string  handle name
+ * @return string modified handle name
+ */
+function et_extra_builder_optimized_style_handle( $handle ) {
+	return et_load_unminified_styles() ? $handle : 'extra-style';
+}
+add_filter( 'et_builder_optimized_style_handle', 'et_extra_builder_optimized_style_handle' );
+
+
+/**
+ * Added theme specific scripts that are being minified
+ * @param array  of scripts
+ * @return array of modified scripts
+ */
+function et_extra_builder_get_minified_scripts( $scripts ) {
+	return array_merge( $scripts, array(
+		'hash-persistance', // Internally made by ET
+		'imagesloaded',
+		'jquery-imagesloaded', // Possible alternative name
+		'raty',
+		'jquery-raty', // Possible alternative name
+		'validation',
+		'jquery-validation', // Possible alternative name
+		'smooth-scroll',
+	) );
+}
+
+add_filter( 'et_builder_get_minified_scripts', 'et_extra_builder_get_minified_scripts' );
+
 function extra_dynamic_styles( $option = "" ) {
 	$selectors = extra_get_customizer_dynamic_selectors_settings();
 
@@ -383,12 +454,12 @@ function extra_dynamic_styles( $option = "" ) {
 function extra_print_dynamic_styles() {
 	$shared_paramless_callbacks = array();
 
-	if ( is_admin() && ! is_customize_preview() ) {
+	if ( wp_doing_ajax() || wp_doing_cron() || ( is_admin() && ! is_customize_preview() ) ) {
 		return;
 	}
 
 	$post_id     = et_core_page_resource_get_the_ID();
-	$is_preview  = is_preview() || isset( $_GET['et_pb_preview_nonce'] );
+	$is_preview  = is_preview() || isset( $_GET['et_pb_preview_nonce'] ) || is_customize_preview();
 	$is_singular = et_core_page_resource_is_singular();
 
 	$disabled_global = 'off' === et_get_option( 'et_pb_static_css_file', 'on' );
@@ -829,6 +900,9 @@ function extra_body_classes( $classes ) {
 		$classes[] = 'et_pb_pagebuilder_fullwidth';
 	}
 
+	if ( 'on' === et_get_option( 'extra_smooth_scroll', false ) ) {
+		$classes[] = 'et_smooth_scroll';
+	}
 
 	$classes = array_merge( $classes, (array) extra_customizer_selector_classes( 'body' ) );
 
@@ -858,8 +932,51 @@ function extra_print_dynamic_styles_sidebar_width_css_output( $output, $option_p
 
 add_filter( 'extra_print_dynamic_styles-sidebar_width-width-css_output', 'extra_print_dynamic_styles_sidebar_width_css_output', 10, 3 );
 
+
+/**
+ * Extra Settings :: Enqueue Google Maps API
+ *
+ * Read and return the 'Enqueue Google Maps Script' setting in Extra's Theme Options.
+ *
+ * Possible values for `et_google_api_settings['enqueue_google_maps_script']` include:
+ *   'false' string - do not enqueue Google Maps script
+ *   'on'    string - enqueue Google Maps script on frontend and in WP Admin Post/Page editors
+ *
+ * @return bool
+ */
 function et_extra_enqueue_google_maps_api() {
-	wp_enqueue_script( 'google-maps-api', esc_url( add_query_arg( array( 'key' => et_pb_get_google_api_key(), 'callback' => 'initMap' ), is_ssl() ? 'https://maps.googleapis.com/maps/api/js' : 'http://maps.googleapis.com/maps/api/js' ) ), array(), '3', true );
+
+	$google_api_option = get_option( 'et_google_api_settings' );
+
+	// If for some reason the setting doesn't exist, then we probably shouldn't load the API
+	if ( ! isset( $google_api_option['enqueue_google_maps_script'] ) ) {
+		return false;
+	}
+
+	// If the setting has been disabled, then we shouldn't load the API
+	if ( 'false' === $google_api_option['enqueue_google_maps_script'] ) {
+		return false;
+	}
+
+	// If we've gotten this far, let's build the URL and load that API!
+
+	// Google Maps API address
+	$gmap_url_base = 'https://maps.googleapis.com/maps/api/js';
+
+	// If we're not using SSL, switch to the HTTP address for the Google Maps API
+	// TODO: Is this actually necessary? Security notices don't trigger in this direction
+	if ( ! is_ssl() ) {
+		$gmap_url_base = 'http://maps.googleapis.com/maps/api/js';
+	}
+
+	// Grab the value of `et_google_api_settings['api_key']` and append it to the API's address
+	$gmap_url_full = esc_url( add_query_arg( array(
+		'key'      => et_pb_get_google_api_key(),
+		'callback' => 'initMap'
+	), $gmap_url_base ) );
+
+	wp_enqueue_script( 'google-maps-api', $gmap_url_full, array(), '3', true );
+
 }
 
 function extra_register_sidebars() {
@@ -1397,7 +1514,7 @@ add_action( 'admin_init', 'extra_register_customizer_portability' );
  */
 function extra_customizer_link() {
 	if ( is_customize_preview() ) {
-		echo et_core_portability_link( 'et_extra_mods', array( 'class' => 'customize-controls-close' ) );
+		echo et_core_portability_link( 'et_extra_mods', array( 'class' => 'et-core-customize-controls-close' ) );
 	}
 }
 add_action( 'customize_controls_print_footer_scripts', 'extra_customizer_link' );
@@ -1412,20 +1529,8 @@ add_action( 'admin_init', 'et_register_updates_component' );
  * Always load Fullwidth Page template for the Product Tour
  */
 function et_load_product_tour_template( $template ) {
-	if ( ! et_fb_is_enabled() ) {
-		return $template;
-	}
-
-	// load fullwidth page in Product Tour mode
-	$product_tour_status = 'off';
-
-	$current_user = wp_get_current_user();
-	$product_tour_settings = et_get_option( 'product_tour_status', array() );
-	$product_tour_status = 'on' === et_get_option( 'et_pb_product_tour_global', 'on' ) && ( ! isset( $product_tour_settings[$current_user->ID] ) || 'off' !== $product_tour_settings[$current_user->ID] ) ? 'on' : 'off';
-
-	if ( 'on' === $product_tour_status  ) {
-		$new_template = locate_template( array( 'page-template-fullwidth.php' ) );
-		if ( '' != $new_template ) {
+	if ( et_builder_is_product_tour_enabled() ) {
+		if ( $new_template = locate_template( array( 'page-template-fullwidth.php' ) ) ) {
 			return $new_template;
 		}
 	}

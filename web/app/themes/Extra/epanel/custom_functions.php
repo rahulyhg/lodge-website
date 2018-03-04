@@ -58,12 +58,6 @@ if ( ! function_exists( 'et_options_stored_in_one_row' ) ) {
 /* sync custom CSS from ePanel with WP custom CSS option introduced in WP 4.7 */
 if ( ! function_exists( 'et_sync_custom_css_options' ) ) {
 	function et_sync_custom_css_options() {
-		$css_synced = get_theme_mod( 'et_pb_css_synced', 'no' );
-
-		if ( 'yes' === $css_synced || ! function_exists( 'wp_get_custom_css' ) ) {
-			return;
-		}
-
 		global $shortname;
 
 		$legacy_custom_css = wp_unslash( et_get_option( "{$shortname}_custom_css" ) );
@@ -74,8 +68,20 @@ if ( ! function_exists( 'et_sync_custom_css_options' ) ) {
 			return;
 		}
 
+		// don't proceed with the sync logic if the custom CSS option does not exist
+		if ( ! function_exists( 'wp_get_custom_css' ) ) {
+			return;
+		}
+
+		$css_synced = get_theme_mod( 'et_pb_css_synced', 'no' );
+
 		// get custom css string from WP customizer
 		$wp_custom_css = wp_get_custom_css();
+
+		// force sync if the current custom CSS is empty
+		if ( 'yes' === $css_synced && '' !== $wp_custom_css ) {
+			return;
+		}
 
 		// ePanel is completely synced with Customizer
 		if ( $wp_custom_css === $legacy_custom_css || false !== strpos( $wp_custom_css, $legacy_custom_css ) ) {
@@ -133,7 +139,7 @@ function et_epanel_handle_custom_css_output( $css, $stylesheet ) {
 	}
 
 	$post_id        = et_core_page_resource_get_the_ID();
-	$is_preview     = is_preview() || isset( $_GET['et_pb_preview_nonce'] );
+	$is_preview     = is_preview() || isset( $_GET['et_pb_preview_nonce'] ) || is_customize_preview();
 	$is_singular    = et_core_page_resource_is_singular();
 
 	$disabled_global = 'off' === et_get_option( 'et_pb_static_css_file', 'on' );
@@ -187,6 +193,8 @@ if ( ! function_exists( 'et_get_option' ) ) {
 	function et_get_option( $option_name, $default_value = '', $used_for_object = '', $force_default_value = false, $is_global_setting = false, $global_setting_main_name = '', $global_setting_sub_name = '' ){
 		global $et_theme_options, $shortname;
 
+		$et_one_row_option_name = '';
+
 		if ( $is_global_setting ) {
 			$option_value = '';
 
@@ -198,10 +206,12 @@ if ( ! function_exists( 'et_get_option' ) ) {
 		} else if ( et_options_stored_in_one_row() ) {
 			$et_theme_options_name = 'et_' . $shortname;
 
-			if ( ! isset( $et_theme_options ) || isset( $_POST['wp_customize'] ) ) {
+			if ( ! isset( $et_theme_options ) || is_customize_preview() ) {
 				$et_theme_options = get_option( $et_theme_options_name );
 			}
 			$option_value = isset( $et_theme_options[$option_name] ) ? $et_theme_options[$option_name] : false;
+
+			$et_one_row_option_name = $et_theme_options_name . '_' . $option_name;
 		} else {
 			$option_value = get_option( $option_name );
 		}
@@ -214,6 +224,10 @@ if ( ! function_exists( 'et_get_option' ) ) {
 		if ( '' != $used_for_object && in_array( $used_for_object, array( 'page', 'category' ) ) && is_array( $option_value ) )
 			$option_value = et_generate_wpml_ids( $option_value, $used_for_object );
 
+		if ( ! empty( $et_one_row_option_name ) ) {
+			$option_value = apply_filters( 'et_get_option_' . $et_one_row_option_name, $option_value, $et_one_row_option_name );
+		}
+
 		return $option_value;
 	}
 
@@ -225,27 +239,25 @@ if ( ! function_exists( 'et_update_option' ) ) {
 		global $et_theme_options, $shortname;
 
 		if ( $is_new_global_setting && '' !== $global_setting_main_name && '' !== $global_setting_sub_name ) {
-			$global_setting = get_option( $global_setting_main_name );
-
-			if ( ! $global_setting ) {
-				$global_setting = array();
-			}
+			$global_setting = get_option( $global_setting_main_name, array() );
 
 			$global_setting[ $global_setting_sub_name ] = $new_value;
 
-			$option_name = $global_setting_main_name;
-			$new_value   = $global_setting;
+			update_option( $global_setting_main_name, $global_setting );
+
 		} else if ( et_options_stored_in_one_row() ) {
 			$et_theme_options_name = 'et_' . $shortname;
 
-			if ( ! isset( $et_theme_options ) ) $et_theme_options = get_option( $et_theme_options_name );
+			if ( ! isset( $et_theme_options ) || is_customize_preview() ) {
+				$et_theme_options = get_option( $et_theme_options_name );
+			}
 			$et_theme_options[$option_name] = $new_value;
 
-			$option_name = $et_theme_options_name;
-			$new_value = $et_theme_options;
-		}
+			update_option( $et_theme_options_name, $et_theme_options );
 
-		update_option( $option_name, $new_value );
+		} else {
+			update_option( $option_name, $new_value );
+		}
 	}
 
 }
@@ -277,7 +289,17 @@ if ( ! function_exists( 'truncate_post' ) ) {
 
 		if ( '' == $post ) global $post;
 
-		$post_excerpt = '';
+		if ( post_password_required( $post ) ) {
+			$post_excerpt = get_the_password_form();
+
+			if ( $echo ) {
+				echo $post_excerpt;
+				return;
+			}
+
+			return $post_excerpt;
+		}
+
 		$post_excerpt = apply_filters( 'the_excerpt', $post->post_excerpt );
 
 		if ( 'on' == et_get_option( $shortname . '_use_excerpt' ) && '' != $post_excerpt ) {
@@ -299,6 +321,9 @@ if ( ! function_exists( 'truncate_post' ) ) {
 
 			// Remove embed shortcode from post content
 			$truncate = preg_replace( '@\[embed[^\]]*?\].*?\[\/embed]@si', '', $truncate );
+
+			// Remove scripts from the post content
+			$truncate = preg_replace( '@\<script(.*?)>(.*?)</script>@si', '', html_entity_decode( $truncate ) );
 
 			if ( $strip_shortcodes ) {
 				$truncate = et_strip_shortcodes( $truncate );
@@ -341,7 +366,8 @@ if ( ! function_exists( 'et_wp_trim_words' ) ) {
 	function et_wp_trim_words( $text, $num_words = 55, $more = null ) {
 		if ( null === $more )
 			$more = esc_html__( '&hellip;' );
-		$original_text = $text;
+		// Completely remove icons so that unicode hex entities representing the icons do not get included in words.
+		$text = preg_replace( '/<span class="et-pb-icon .*<\/span>/', '', $text );
 		$text = wp_strip_all_tags( $text );
 
 		$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );

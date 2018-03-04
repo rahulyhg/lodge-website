@@ -1,17 +1,3 @@
-.button_shortcode,
-#tribe-events-content a.button_shortcode,
-.page-home .et_pb_bg_layout_light .et_pb_promo_button,
-.et_pb_promo_button,
-.entry-content a.button_shortcode {
-    color: white !important;
-    background: $red-secondary;
-    transition: 0.25s all ease-in-out;
-
-    &:hover {
-        background: $red-primary;
-    }
-}
-
 /* =Activation Page
 -------------------------------------------------------------- */
 body.gfur-activate #content {

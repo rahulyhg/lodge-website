@@ -74,6 +74,7 @@ define('NONCE_SALT', env('NONCE_SALT'));
 define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 define('DISALLOW_FILE_EDIT', true);
+define('JWT_AUTH_SECRET_KEY', env('JWT_AUTH_SECRET_KEY'));
 
 $envs = [
   'development' => 'https://tahosalodge.dev',
@@ -83,11 +84,8 @@ $envs = [
 define('ENVIRONMENTS', serialize($envs));
 
 // S3 Uploads
-define( 'S3_UPLOADS_BUCKET', env('S3_UPLOADS_BUCKET') ?: false );
-define( 'S3_UPLOADS_KEY', env('S3_UPLOADS_KEY') ?: false );
-define( 'S3_UPLOADS_SECRET', env('S3_UPLOADS_SECRET') ?: false );
-define( 'S3_UPLOADS_REGION', env('S3_UPLOADS_REGION') ?: false );
-define( 'S3_UPLOADS_HTTP_CACHE_CONTROL', 30 * 24 * 60 * 60 );
+define( 'AS3CF_AWS_ACCESS_KEY_ID', env('S3_KEY') ?: false );
+define( 'AS3CF_AWS_SECRET_ACCESS_KEY', env('S3_SECRET') ?: false );
 
 // Redis
 define( 'REDIS_HOST', env('REDIS_HOST') ?: false );

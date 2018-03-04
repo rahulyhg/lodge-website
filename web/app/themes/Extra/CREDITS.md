@@ -137,7 +137,7 @@ SOFTWARE.
 jQuery Waypoints
 ----------------
 
-/scripts/ext/jquery.waypoints.js
+/scripts/ext/jquery.waypoints.min.js
 
 ```text
 Copyright (c) 2011-2013 Caleb Troughton
@@ -409,6 +409,35 @@ WordPress - Web publishing software
 Copyright 2003-2010 by the contributors
 
 WordPress is released under the GPL
+```
+
+CodeMirror
+--------------------------------------------------------
+
+includes/builder/frontend-builder/bundle.js
+
+```text
+MIT License
+
+Copyright (C) 2017 by Marijn Haverbeke <marijnh@gmail.com> and others
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 
 Chart JS
@@ -1608,6 +1637,27 @@ WordPress - Web publishing software
 Copyright 2003-2010 by the contributors
 
 WordPress is released under the GPL
+```
+
+LZ-String
+---------
+
+includes/builder/scripts/lz-string.min.js
+
+```text
+DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+Version 2, December 2004
+
+Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+
+Everyone is permitted to copy and distribute verbatim or modified
+copies of this license document, and changing it is allowed as long
+as the name is changed.
+
+DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+0. You just DO WHAT THE FUCK YOU WANT TO.
 ```
 
 ET Theme Options

@@ -12,7 +12,7 @@ if ( ! $product->is_purchasable() ) {
 	return;
 }
 
-do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+?>
 
 <noscript><?php _e( 'Your browser must support JavaScript in order to purchase ticket(s).', 'woocommerce-box-office' ); ?></noscript>
 
@@ -35,5 +35,3 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	</div>
 
 </div>
-
-<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>

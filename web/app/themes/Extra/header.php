@@ -33,6 +33,11 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php
+	if ( et_builder_is_product_tour_enabled() ) {
+		return;
+	}
+?>
 	<div id="page-container" class="page-container">
 		<?php $header_vars = extra_get_header_vars(); ?>
 		<!-- Header -->

@@ -3,8 +3,14 @@
 class TahosaLodge {
 
 	function __construct() {
+		$this->roots_support();
+		$this->hooks();
+	}
+
+	public function hooks() {
 		add_action( 'send_headers', 		[ $this, 'custom_headers' ] );
 		add_action( 'wp_enqueue_scripts', 	[ $this, 'scripts_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'dequeue_woocommerce_cart_fragments' ], 11);
 
 		add_filter( 'gettext', 				[ $this, 'replace_footer_text' ] );
 		add_filter( 'upload_mimes', 		[ $this, 'mime_types' ] );
@@ -13,10 +19,11 @@ class TahosaLodge {
 		add_filter( 'gform_column_input_18_14_1', [ $this, 'vigil_position_type' ], 10, 6 );
 		add_filter( 'the_seo_framework_indicator', '__return_false' );
 		add_filter( 'the_seo_framework_og_image_args', [ $this, 'default_og_image' ] );
+		add_filter( 'gform_cdata_open', [ $this, 'wrap_gform_cdata_open'] );
+		add_filter( 'gform_cdata_close', [ $this, 'wrap_gform_cdata_close'] );
+		add_filter('gform_init_scripts_footer', '__return_true');
 
 		add_shortcode( 'tahosa_button', [ $this, 'shortcode_tahosa_button' ] );
-
-		$this->roots_support();
 	}
 
 	/**
@@ -112,6 +119,23 @@ class TahosaLodge {
 		$args['image'] = 'https://tahosawp.s3.amazonaws.com/uploads/2017/06/tahosa-og.png';
 		return $args;
 	}
+
+	public function wrap_gform_cdata_open( $content = '' ) {
+		$content = 'document.addEventListener( "DOMContentLoaded", function() { ';
+		return $content;
+	}
+
+	public function wrap_gform_cdata_close( $content = '' ) {
+		$content = ' }, false );';
+		return $content;
+	}
+
+	public function dequeue_woocommerce_cart_fragments() {
+		if (is_front_page() || is_single() ) {
+			wp_dequeue_script('wc-cart-fragments');
+		}
+	}
+
 }
 
 new TahosaLodge();

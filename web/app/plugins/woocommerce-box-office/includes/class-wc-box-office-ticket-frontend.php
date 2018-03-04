@@ -218,13 +218,13 @@ class WC_Box_Office_Ticket_Frontend {
 	 */
 	public function pdf_invoice_ticket_list( $pdflines = '', $order_id = 0 ) {
 		if ( ! $pdflines || ! $order_id ) {
-			return;
+			return $pdflines;
 		}
 
 		WCBO()->components->order->get_tickets_by_order( $order_id );
 
-		if ( 0 == count( $tickets ) ) {
-			return;
+		if ( 0 === count( $tickets ) ) {
+			return $pdflines;
 		}
 
 		$html = '';
