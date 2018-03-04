@@ -53,6 +53,8 @@ class Tahosa_Event_Registration {
 		add_action( 'woocommerce_before_calculate_totals', [ $this, 'active_arrowman_discount' ] );
 		add_action( 'woocommerce_checkout_fields', [ $this, 'make_checkout_account_fields_required' ] );
 		add_action( 'woocommerce_single_product_summary', [ $this, 'woocommerce_template_product_description' ], 20 );
+
+		add_shortcode( 'th_shop_messages', [ $this, 'messages_shortcode' ] );
 	}
 
 	public static function is_ticket( $id = null ) {
@@ -383,5 +385,12 @@ class Tahosa_Event_Registration {
 			$args['min_value'] 	= 1;   	// Minimum value
 		}
 		return $args;
+	}
+
+	public function messages_shortcode() {
+		if (is_admin) {
+			return 'Hi admin! This shortcode will display properly on the front end.';
+		}
+		return do_shortcode('[shop_messages]');
 	}
 }
