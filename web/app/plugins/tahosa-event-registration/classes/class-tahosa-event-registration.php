@@ -388,7 +388,7 @@ class Tahosa_Event_Registration {
 	}
 
 	public function messages_shortcode() {
-		if (is_admin) {
+		if (is_admin()) {
 			return 'Hi admin! This shortcode will display properly on the front end.';
 		}
 		return do_shortcode('[shop_messages]');
