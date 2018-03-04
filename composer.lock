@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "87cd4ce7ce0e0eccb2b0b2d3d2a68a36",
+    "content-hash": "42408b8ade002792caca1231c9ec26c6",
     "packages": [
         {
             "name": "composer/installers",
@@ -1152,26 +1152,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/mailgun/"
-        },
-        {
-            "name": "wpackagist-plugin/pj-page-cache-red",
-            "version": "0.8.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/pj-page-cache-red/",
-                "reference": "tags/0.8.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/pj-page-cache-red.0.8.2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/pj-page-cache-red/"
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
