@@ -98,6 +98,7 @@ if ( REDIS_HOST && REDIS_PORT ) {
     	'port' => REDIS_PORT,
     ];
 }
+define( 'WP_CACHE', env('WP_CACHE') ?: false )
 /**
  * Bootstrap WordPress
  */
