@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d633916eb9710fda684129e945c3e566",
+    "content-hash": "c997b2a652b5c33686008895c326f896",
     "packages": [
         {
             "name": "composer/installers",
@@ -112,6 +112,20 @@
                 "zikula"
             ],
             "time": "2016-08-13T20:53:52+00:00"
+        },
+        {
+            "name": "deliciousbrains-plugin/wp-offload-s3",
+            "version": "1.6.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.deliciousbrains.com/?wc-api=delicious-brains&request=composer_download&package=wp-offload-s3&version=1.6.2&composer_key=2E32F81F3DE2E079026D501FEF287836",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "humanmade/s3-uploads",
