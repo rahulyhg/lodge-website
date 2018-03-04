@@ -41,12 +41,18 @@ export default function($) {
     Cookie.set('cuboreeBar', 'hide');
   });
 
-  $('.product-cony-party-2018 .variations #type').on('change', event => {
-    if (event.target.value === 'Ordeal Candidate') {
+  const cpMemberLevel = value => {
+    if (value === 'Ordeal Candidate') {
       $('.member-level').hide();
       $('.member-level input[value="Ordeal"]').prop('checked', true);
     } else {
       $('.member-level').show();
     }
-  });
+  };
+
+  $('.product-cony-party-2018 .variations #type').on('change', event =>
+    cpMemberLevel(event.target.value)
+  );
+
+  $('.product-cony-party-2018 .variations #type').trigger('change');
 }
