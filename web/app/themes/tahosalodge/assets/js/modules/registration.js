@@ -40,4 +40,13 @@ export default function($) {
     $('.cuboree-guide').removeClass('show');
     Cookie.set('cuboreeBar', 'hide');
   });
+
+  $('.product-cony-party-2018 .variations #type').on('change', event => {
+    if (event.target.value === 'Ordeal Candidate') {
+      $('.member-level').hide();
+      $('.member-level input[value="Ordeal"]').prop('checked', true);
+    } else {
+      $('.member-level').show();
+    }
+  });
 }
