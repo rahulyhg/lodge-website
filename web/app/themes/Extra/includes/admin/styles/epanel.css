@@ -12,18 +12,18 @@ h1#epanel-title,
 }
 #epanel-mainmenu a:hover,
 #epanel-mainmenu li.ui-state-active a,
-#epanel-header .defaults-button:hover {
+#epanel-header .et-defaults-button:hover {
   background-color: #47D895;
 }
 #epanel-mainmenu,
-#epanel-header .defaults-button {
+#epanel-header .et-defaults-button {
   background-color: #4EE6A0;
 }
-.save-button,
+.et-save-button,
 #epanel-reset {
   background-color: #47D895;
 }
-.save-button:hover,
+.et-save-button:hover,
 #epanel-reset:hover {
   background-color: #41C387;
 }

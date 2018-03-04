@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Section Element class
+ *
+ * @since [version]
+ */
 class ET_Builder_Section extends ET_Builder_Structure_Element {
 	function init() {
 		$this->name = esc_html__( 'Section', 'et_builder' );
@@ -115,19 +119,24 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
+			'prev_background_color',
+			'next_background_color',
 		);
 
 		$this->options_toggles = array(
@@ -216,6 +225,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$this->fields_defaults = array(
 			'background_color'       => array( '', 'only_default_setting' ),
 			'allow_player_pause'     => array( 'off' ),
+			'background_video_pause_outside_viewport' => array( 'on' ),
 			'inner_shadow'           => array( 'off' ),
 			'parallax'               => array( 'off' ),
 			'parallax_method'        => array( 'on' ),
@@ -705,6 +715,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'__video_background_1',
 				),
 			),
+			'background_video_pause_outside_viewport_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
 			'__video_background_1' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -749,6 +765,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'__video_background_2',
 				),
 			),
+			'background_video_pause_outside_viewport_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
 			'__video_background_2' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -788,6 +810,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
+			'background_video_pause_outside_viewport_3' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_3',
@@ -874,6 +902,12 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_mp4',
 					'background_video_webm',
 				),
+			),
+			'prev_background_color' => array(
+				'type' => 'skip',
+			),
+			'next_background_color' => array(
+				'type' => 'skip',
 			),
 		);
 
@@ -1003,6 +1037,9 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		$allow_player_pause_1       = $this->shortcode_atts['allow_player_pause_1'];
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
 
 		if ( '' !== $global_module ) {
 			$global_content = et_pb_load_global_module( $global_module );
@@ -1100,6 +1137,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_1,
 					'background_video_height'      => $background_video_height_1,
 					'background_video_allow_pause' => $allow_player_pause_1,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 				),
 				array(
 					'background_video_mp4'         => $background_video_mp4_2,
@@ -1107,6 +1145,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_2,
 					'background_video_height'      => $background_video_height_2,
 					'background_video_allow_pause' => $allow_player_pause_2,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 				),
 				array(
 					'background_video_mp4'         => $background_video_mp4_3,
@@ -1114,6 +1153,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					'background_video_width'       => $background_video_width_3,
 					'background_video_height'      => $background_video_height_3,
 					'background_video_allow_pause' => $allow_player_pause_3,
+					'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 				),
 			);
 
@@ -1161,7 +1201,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 				array( $parallax_2, $parallax_method_2 ),
 				array( $parallax_3, $parallax_method_3 ),
 			);
-			
+
 			if ( 'on' === $make_fullwidth && 'off' === $use_custom_width ) {
 				$module_class .= ' et_pb_specialty_fullwidth';
 			}
@@ -1232,26 +1272,117 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 		// CSS Filters
 		$module_class .= $this->generate_css_filters( $function_name );
 
+		// build up the classes used.
+		$classes = array( 'et_pb_section' );
+
+		if ( '' !== $module_class ) {
+			// previously was a single string with spaces.
+			$classes = array_merge( $classes, explode( ' ', trim( $module_class ) ) );
+		}
+
+		if ( '' !== $background_video ) {
+			$classes[] = 'et_pb_section_video';
+			$classes[] = 'et_pb_preload';
+		}
+
+		if ( 'off' !== $inner_shadow && ! ( '' !== $background_image && 'on' === $parallax && 'off' === $parallax_method ) ) {
+			$classes[] = 'et_pb_inner_shadow';
+		}
+
+		if ( 'on' === $parallax ) {
+			$classes[] = 'et_pb_section_parallax';
+		}
+
+		if ( 'off' !== $fullwidth ) {
+			$classes[] = 'et_pb_fullwidth_section';
+		}
+
+		if ( 'on' === $specialty ) {
+			$classes[] = 'et_section_specialty';
+		} else {
+			$classes[] = 'et_section_regular';
+		}
+
+		if ( $is_transparent_background ) {
+			$classes[] = 'et_section_transparent';
+		}
+
+		// Setup for SVG.
+		$bottom  = '';
+		$top     = '';
+		$divider = ET_Builder_Module_Fields_Factory::get( 'Divider' );
+		// pass section number for background color usage.
+		$divider->count = $this->shortcode_callback_num();
+
+		// Check if style is not default.
+		if ( '' !== $this->shortcode_atts['bottom_divider_style'] ) {
+			// get an svg for using in ::before
+			$divider->process_svg( 'bottom', $this->shortcode_atts );
+
+			// apply responsive styling
+			$bottom_divider_responsive = et_pb_get_responsive_status( $this->shortcode_atts['bottom_divider_height_last_edited'] ) || et_pb_get_responsive_status( $this->shortcode_atts['bottom_divider_repeat_last_edited'] );
+
+			if ( $bottom_divider_responsive ) {
+				$divider->process_svg( 'bottom', $this->shortcode_atts, 'tablet' );
+				$divider->process_svg( 'bottom', $this->shortcode_atts, 'phone' );
+			}
+
+			// get the placeholder for the bottom
+			$bottom = $divider->get_svg( 'bottom' );
+
+			// add a corresponding class
+			$classes = array_merge( $classes, $divider->classes );
+		}
+
+		// Check if style is not default.
+		if ( '' !== $this->shortcode_atts['top_divider_style'] ) {
+			// process the top section divider.
+			$divider->process_svg( 'top', $this->shortcode_atts );
+
+			// apply responsive styling
+			$top_divider_responsive = et_pb_get_responsive_status( $this->shortcode_atts['top_divider_height_last_edited'] ) || et_pb_get_responsive_status( $this->shortcode_atts['top_divider_repeat_last_edited'] );
+
+			if ( $top_divider_responsive ) {
+				$divider->process_svg( 'top', $this->shortcode_atts, 'tablet' );
+				$divider->process_svg( 'top', $this->shortcode_atts, 'phone' );
+			}
+
+			// get the placeholder for the top
+			$top = $divider->get_svg( 'top' );
+
+			// add a corresponding class
+			$classes = array_merge( $classes, $divider->classes );
+		}
+
+		// Make sure no duplicate classes.
+		$classes = array_unique( $classes );
+
+		/**
+		 * List of CSS classes for the section
+		 *
+		 * @param $classes 	                        List of CSS classes to be filtered.
+		 * @param $this->shortcode_callback_num()	The instance number, or rather the section number.
+		 */
+		$classes = array_map( 'esc_attr', (array) apply_filters( 'et_builder_section_classes', $classes, $this->shortcode_callback_num() ) );
+
 		$output = sprintf(
-			'<div%7$s class="et_pb_section%3$s%4$s%5$s%6$s%8$s%12$s%13$s"%14$s>
-				%11$s
-				%2$s
+			'<div%4$s class="%3$s"%8$s>
 				%9$s
+				%7$s
+				%2$s
+				%5$s
 					%1$s
+				%6$s
 				%10$s
-			</div>%15$s <!-- .et_pb_section -->',
-			do_shortcode( et_pb_fix_shortcodes( $content ) ),
-			$background_video,
-			( '' !== $background_video ? ' et_pb_section_video et_pb_preload' : '' ),
-			( ( 'off' !== $inner_shadow && ! ( '' !== $background_image && 'on' === $parallax && 'off' === $parallax_method ) ) ? ' et_pb_inner_shadow' : '' ),
-			( 'on' === $parallax ? ' et_pb_section_parallax' : '' ),
-			( 'off' !== $fullwidth ? ' et_pb_fullwidth_section' : '' ),
-			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ),
-			( '' !== $module_class ? sprintf( ' %1$s', esc_attr( $module_class ) ) : '' ),
+			</div> <!-- .et_pb_section -->',
+			do_shortcode( et_pb_fix_shortcodes( $content ) ), // 1
+			$background_video, // 2
+			implode( ' ', $classes ), // 3
+			( '' !== $module_id ? sprintf( ' id="%1$s"', esc_attr( $module_id ) ) : '' ), // 4
 			( 'on' === $specialty ?
 				sprintf( '<div class="et_pb_row%1$s">', $gutter_class )
-				: '' ),
-			( 'on' === $specialty ? '</div> <!-- .et_pb_row -->' : '' ),
+				: '' ), // 5
+			( 'on' === $specialty ? '</div> <!-- .et_pb_row -->' : '' ), // 6
 			( '' !== $background_image && 'on' === $parallax
 				? sprintf(
 					'<div class="et_parallax_bg%2$s%3$s" style="background-image: url(%1$s);"></div>',
@@ -1260,11 +1391,10 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 					( ( 'off' !== $inner_shadow && 'off' === $parallax_method ) ? ' et_pb_inner_shadow' : '' )
 				)
 				: ''
-			),
-			( 'on' === $specialty ? ' et_section_specialty' : ' et_section_regular' ),
-			( $is_transparent_background ? ' et_section_transparent' : '' ),
-			$this->get_module_data_attributes(),
-			$this->_keep_box_shadow_compatibility( $function_name )
+			), // 7
+			$this->get_module_data_attributes(), // 8
+			et_esc_previously( $top ), // 9
+			et_esc_previously( $bottom ) // 10
 		);
 
 		if ( 'on' === $specialty ) {
@@ -1293,7 +1423,7 @@ class ET_Builder_Section extends ET_Builder_Structure_Element {
 			// Make section z-index higher if it has outer box shadow #4762
 			self::set_style( $function_name, array(
 				'selector'    => '%%order_class%%',
-				'declaration' => 'z-index: 10'
+				'declaration' => 'z-index: 10;'
 			) );
 		}
 	}
@@ -1570,24 +1700,28 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
 			'background_video_mp4_4',
 			'background_video_webm_4',
 			'background_video_width_4',
 			'background_video_height_4',
 			'allow_player_pause_4',
+			'background_video_pause_outside_viewport_4',
 			'__video_background_4',
 		);
 
@@ -2084,6 +2218,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 					'__video_background_1',
 				),
 			),
+			'background_video_pause_outside_viewport_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
 			'__video_background_1' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -2123,6 +2263,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
+			'background_video_pause_outside_viewport_2' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_2',
@@ -2172,6 +2318,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 					'__video_background_3',
 				),
 			),
+			'background_video_pause_outside_viewport_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
 			'__video_background_3' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -2211,6 +2363,12 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_4' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_4',
+				),
+			),
+			'background_video_pause_outside_viewport_4' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_4',
@@ -2552,6 +2710,10 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
 		$allow_player_pause_4       = $this->shortcode_atts['allow_player_pause_4'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
+		$background_video_pause_outside_viewport_4 = $this->shortcode_atts['background_video_pause_outside_viewport_4'];
 
 		global $et_pb_all_column_settings, $et_pb_rendering_column_content, $et_pb_rendering_column_content_row;
 
@@ -2670,6 +2832,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_1,
 				'background_video_height'      => $background_video_height_1,
 				'background_video_allow_pause' => $allow_player_pause_1,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_2,
@@ -2677,6 +2840,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_2,
 				'background_video_height'      => $background_video_height_2,
 				'background_video_allow_pause' => $allow_player_pause_2,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_3,
@@ -2684,6 +2848,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_3,
 				'background_video_height'      => $background_video_height_3,
 				'background_video_allow_pause' => $allow_player_pause_3,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_4,
@@ -2691,6 +2856,7 @@ class ET_Builder_Row extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_4,
 				'background_video_height'      => $background_video_height_4,
 				'background_video_allow_pause' => $allow_player_pause_4,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_4,
 			),
 		);
 
@@ -3102,18 +3268,21 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 			'background_video_width_1',
 			'background_video_height_1',
 			'allow_player_pause_1',
+			'background_video_pause_outside_viewport_1',
 			'__video_background_1',
 			'background_video_mp4_2',
 			'background_video_webm_2',
 			'background_video_width_2',
 			'background_video_height_2',
 			'allow_player_pause_2',
+			'background_video_pause_outside_viewport_2',
 			'__video_background_2',
 			'background_video_mp4_3',
 			'background_video_webm_3',
 			'background_video_width_3',
 			'background_video_height_3',
 			'allow_player_pause_3',
+			'background_video_pause_outside_viewport_3',
 			'__video_background_3',
 		);
 
@@ -3588,6 +3757,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 					'__video_background_1',
 				),
 			),
+			'background_video_pause_outside_viewport_1' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_1',
+				),
+			),
 			'__video_background_1' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -3632,6 +3807,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 					'__video_background_2',
 				),
 			),
+			'background_video_pause_outside_viewport_2' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_2',
+				),
+			),
 			'__video_background_2' => array(
 				'type' => 'computed',
 				'computed_callback' => array( 'ET_Builder_Column', 'get_column_video_background' ),
@@ -3671,6 +3852,12 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				),
 			),
 			'allow_player_pause_3' => array(
+				'type' => 'skip',
+				'computed_affects'   => array(
+					'__video_background_3',
+				),
+			),
+			'background_video_pause_outside_viewport_3' => array(
 				'type' => 'skip',
 				'computed_affects'   => array(
 					'__video_background_3',
@@ -3810,6 +3997,9 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 		$allow_player_pause_1       = $this->shortcode_atts['allow_player_pause_1'];
 		$allow_player_pause_2       = $this->shortcode_atts['allow_player_pause_2'];
 		$allow_player_pause_3       = $this->shortcode_atts['allow_player_pause_3'];
+		$background_video_pause_outside_viewport_1 = $this->shortcode_atts['background_video_pause_outside_viewport_1'];
+		$background_video_pause_outside_viewport_2 = $this->shortcode_atts['background_video_pause_outside_viewport_2'];
+		$background_video_pause_outside_viewport_3 = $this->shortcode_atts['background_video_pause_outside_viewport_3'];
 
 		global $et_pb_all_column_settings_inner, $et_pb_rendering_column_content, $et_pb_rendering_column_content_row;
 
@@ -3908,6 +4098,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_1,
 				'background_video_height'      => $background_video_height_1,
 				'background_video_allow_pause' => $allow_player_pause_1,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_1,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_2,
@@ -3915,6 +4106,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_2,
 				'background_video_height'      => $background_video_height_2,
 				'background_video_allow_pause' => $allow_player_pause_2,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_2,
 			),
 			array(
 				'background_video_mp4'         => $background_video_mp4_3,
@@ -3922,6 +4114,7 @@ class ET_Builder_Row_Inner extends ET_Builder_Structure_Element {
 				'background_video_width'       => $background_video_width_3,
 				'background_video_height'      => $background_video_height_3,
 				'background_video_allow_pause' => $allow_player_pause_3,
+				'background_video_pause_outside_viewport' => $background_video_pause_outside_viewport_3,
 			),
 		);
 
@@ -4125,6 +4318,7 @@ class ET_Builder_Column extends ET_Builder_Structure_Element {
 			'background_video_width',
 			'background_video_height',
 			'allow_player_pause',
+			'background_video_pause_outside_viewport',
 			'__video_background',
 		);
 

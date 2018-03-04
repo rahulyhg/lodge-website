@@ -1,7 +1,7 @@
 /*!
 Theme Name: Extra
 Theme URI: http://www.elegantthemes.com/gallery/extra/
-Version: 2.0.94
+Version: 2.0.104
 Description: Extra
 Author: Elegant Themes
 Author URI: http://www.elegantthemes.com
@@ -548,6 +548,36 @@ input[type="email"]::-webkit-search-results-decoration,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
+.single .post-password-required .post-password-form {
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.post-password-required .post-password-form p {
+  padding: 0 !important;
+}
+.post-password-required .post-password-form label {
+  display: inline-block;
+  color: transparent;
+  position: relative;
+  width: 75%;
+  line-height: 39px;
+  margin-right: 10px;
+}
+.rtl .post-password-required .post-password-form label {
+  margin-right: initial;
+  margin-left: 10px;
+}
+.post-password-required .post-password-form label input {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.rtl .post-password-required .post-password-form label input {
+  left: initial;
+  right: 0;
+}
 /* Buttons */
 .button,
 button,
@@ -693,6 +723,9 @@ input[type="button"]:visited,
 .read-more-button.et_pb_inline_icon:after {
   content: attr(data-icon);
   font-family: 'ETmodules' !important;
+}
+.post-password-required .post-password-form + .read-more-button {
+  display: none;
 }
 /* Back To Top Button */
 #back_to_top {
@@ -7958,6 +7991,9 @@ body.iphone .et_pb_contact_form select {
 .et_pb_blurb.et_pb_text_align_right .et_pb_blurb_content .et_pb_blurb_container {
   text-align: right;
 }
+.et_pb_blurb.et_pb_text_align_justified .et_pb_blurb_content .et_pb_blurb_container {
+  text-align: justify;
+}
 .et_pb_blurb_content p:last-of-type {
   padding-bottom: 0;
 }
@@ -8029,6 +8065,9 @@ body.iphone .et_pb_contact_form select {
   margin-left: 20px;
 }
 /* Pricing Tables Module*/
+.et_pb_pricing > .box-shadow-overlay {
+  z-index: 11;
+}
 .et_pb_pricing_table {
   float: left;
   width: 33.33%;
@@ -8440,6 +8479,17 @@ body.iphone .et_pb_contact_form select {
 .et_pb_section_parallax .pagination {
   position: relative;
 }
+.post-password-required .et_pb_section,
+.post-password-required .et_pb_row {
+  padding: 0;
+  width: 100%;
+}
+.post-password-required .et_password_protected_form {
+  min-height: initial;
+}
+.post-password-required .et_password_protected_form h1 {
+  display: none;
+}
 /* Blog Module Inner Modules */
 .et_pb_posts.et_pb_module article .et_pb_row {
   width: 100%;
@@ -8538,8 +8588,9 @@ body.iphone .et_pb_contact_form select {
   animation: gridFadeIn 1s 1 cubic-bezier(0.77, 0, 0.175, 1);
 }
 /* Video Format Overlay */
-.et_pb_post .et_main_video_container {
+.et_pb_post > .et_main_video_container {
   position: relative;
+  margin-bottom: 30px;
 }
 .et_pb_post .et_pb_video_overlay .et_pb_video_play {
   color: #FFF;
@@ -9013,7 +9064,7 @@ body.iphone .et_pb_contact_form select {
   padding: 0 !important;
 }
 /* Column Adjustments */
-.logged-in .et_pb_login .et_pb_newsletter_description,
+.logged-in:not(.et-fb) .et_pb_login .et_pb_newsletter_description,
 .et_pb_column_1_2 .et_pb_newsletter_form,
 .et_pb_column_1_2 .et_pb_newsletter_description,
 .et_pb_column_3_8.et_pb_column_inner .et_pb_newsletter_form,
@@ -9023,7 +9074,9 @@ body.iphone .et_pb_contact_form select {
 .et_pb_column_1_3.et_pb_column_inner .et_pb_newsletter_form,
 .et_pb_column_1_3.et_pb_column_inner .et_pb_newsletter_description,
 .et_pb_column_1_4 .et_pb_newsletter_form,
-.et_pb_column_1_4 .et_pb_newsletter_description {
+.et_pb_column_1_4 .et_pb_newsletter_description,
+.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_form,
+.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_description {
   width: 100%;
   padding: 0;
 }
@@ -10688,12 +10741,7 @@ a.et_pb_more_button:after,
   position: relative;
   width: 100%;
   text-align: center;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
   list-style: none !important;
-}
-.format-gallery .et_pb_slider .et_pb_slide,
-.et_pb_slider_no_shadow .et_pb_slide {
-  box-shadow: none;
 }
 .format-gallery .et_pb_slider.gallery-not-found .et_pb_slide {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
@@ -10711,8 +10759,8 @@ a.et_pb_more_button:after,
 .et_pb_slider .et_pb_slide:first-child {
   display: list-item;
 }
-.et_pb_post .et_pb_slider {
-  margin-bottom: 0;
+.et_pb_post > .et_pb_slider {
+  margin-bottom: 30px;
 }
 .et_pb_slider .et_pb_container {
   width: 80%;
@@ -11286,6 +11334,16 @@ ul.et_pb_social_media_follow {
 .et_pb_inner_shadow {
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.07);
 }
+/* Section Dividers */
+.et_pb_top_inside_divider,
+.et_pb_bottom_inside_divider {
+  display: block;
+  background-repeat-y: no-repeat;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+}
 /* Background Videos */
 .et_pb_section_video:not(.et_pb_fullwidth_menu) {
   overflow: hidden;
@@ -11301,6 +11359,7 @@ ul.et_pb_social_media_follow {
   background-color: #222;
   overflow: hidden;
   display: block;
+  pointer-events: none;
 }
 .et_pb_section_video_bg .mejs-controls,
 .et_pb_section_video_bg .mejs-overlay-play {
@@ -11415,6 +11474,7 @@ body.ie .et_pb_divider {
   margin-right: auto;
 }
 .et_pb_fullscreen .et_pb_fullwidth_header_container {
+  height: 10px;
   min-height: 100vh;
   width: 80%;
   max-width: none;
@@ -14587,10 +14647,6 @@ span.comment_date {
             order: 1;
   }
   /* Grid Layouts: Gallery, Portfolio, Filterable Portfolio, Shop */
-  .et_pb_filterable_portfolio_grid,
-  .et_pb_gallery_grid {
-    display: none;
-  }
   .et_pb_gallery_grid .et_pb_gallery_item,
   .et_pb_portfolio_grid .et_pb_portfolio_item,
   .et_pb_filterable_portfolio_grid .et_pb_portfolio_item {
@@ -14864,8 +14920,8 @@ span.comment_date {
   .et_pb_column_1_3 .et_pb_slide_description {
     padding-bottom: 26%;
   }
-  .et_pb_column_1_4 .et_pb_slide_description {
-    padding-bottom: 34% !important;
+  .et_pb_column_1_4 .et_pb_slide .et_pb_slide_description {
+    padding-bottom: 34%;
   }
   /* Comments Module */
   .et_pb_column_1_2 .et_pb_comments_module .comment_avatar img,
@@ -15307,13 +15363,23 @@ span.comment_date {
     padding: 0;
   }
   .et_pb_column .et_pb_newsletter_form,
-  .et_pb_column.et_pb_column_inner .et_pb_newsletter_form {
+  .et_pb_column.et_pb_column_inner .et_pb_newsletter_form,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_form,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_form {
     padding-left: 40px;
   }
   .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
   .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_description {
     width: 100%;
     padding: 0;
+  }
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_description,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_description {
+    width: 50%;
   }
   /* Pricing Tables Module */
   .et_pb_column .et_pb_pricing_table {
@@ -15731,7 +15797,14 @@ span.comment_date {
   .et_pb_column .et_pb_newsletter_form,
   .et_pb_column .et_pb_newsletter_description,
   .et_pb_column.et_pb_column_inner .et_pb_newsletter_form,
-  .et_pb_column.et_pb_column_inner .et_pb_newsletter_description {
+  .et_pb_column.et_pb_column_inner .et_pb_newsletter_description,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_description,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_form,
+  .et_pb_row_1-4_3-4 .et_pb_column.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_description,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_form,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4 .et_pb_newsletter_description,
+  .et_pb_row_3-4_1-4 .et_pb_column.et_pb_column_1_4.et_pb_column_inner .et_pb_newsletter_form {
     width: 100%;
     padding: 0;
   }

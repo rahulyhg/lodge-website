@@ -166,32 +166,34 @@ function extra_woocommerce_get_image_size_shop_thumbnail() {
 	);
 }
 
-function woocommerce_output_product_data_tabs() {
-	wp_enqueue_script( 'jquery-ui-accordion' );
+if ( ! function_exists( 'woocommerce_output_product_data_tabs' ) ) {
+	function woocommerce_output_product_data_tabs() {
+		wp_enqueue_script( 'jquery-ui-accordion' );
 
-	$tabs = apply_filters( 'woocommerce_product_tabs', array() );
+		$tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
-	if ( empty( $tabs ) ) {
-		return;
+		if ( empty( $tabs ) ) {
+			return;
+		}
+
+		global $post;
+
+		$data_desc_active = !$post->post_excerpt ? '1' : '';
+		?>
+		<div class="extra-woocommerce-details-accordion" data-desc-tab-active="<?php echo esc_attr( $data_desc_active ); ?>">
+			<?php foreach ($tabs as $key => $tab) { ?>
+				<div class="group" id="group-<?php echo $key ?>">
+					<div class="header">
+						<h3 class="title"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', $tab['title'], $key ) ?></h3>
+					</div>
+					<div class="content">
+						<?php call_user_func( $tab['callback'], $key, $tab ) ?>
+					</div>
+				</div>
+			<?php } ?>
+		</div>
+		<?php
 	}
-
-	global $post;
-
-	$data_desc_active = !$post->post_excerpt ? '1' : '';
-	?>
-	<div class="extra-woocommerce-details-accordion" data-desc-tab-active="<?php echo esc_attr( $data_desc_active ); ?>">
-		<?php foreach ($tabs as $key => $tab) { ?>
-			<div class="group" id="group-<?php echo $key ?>">
-				<div class="header">
-					<h3 class="title"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', $tab['title'], $key ) ?></h3>
-				</div>
-				<div class="content">
-					<?php call_user_func( $tab['callback'], $key, $tab ) ?>
-				</div>
-			</div>
-		<?php } ?>
-	</div>
-	<?php
 }
 
 function extra_dynamic_selectors_woocommerce_accent_color( $selectors ) {

@@ -132,7 +132,9 @@ function extra_home_layout() {
 	$et_builder_post_type = EXTRA_LAYOUT_POST_TYPE;
 
 	extra_processing_category_layout( true );
-	echo do_shortcode( et_pb_fix_shortcodes( extra_get_home_layout() ) );
+	$layout = extra_get_home_layout();
+	$layout = wpautop( $layout );
+	echo do_shortcode( et_pb_fix_shortcodes( $layout ) );
 	extra_processing_category_layout( false );
 }
 
@@ -234,6 +236,7 @@ function extra_tax_layout() {
 		// add filter to define the correct page id in Page Builder Settings
 		add_filter( 'et_pb_page_id_custom_css', 'et_pb_set_tax_page_id' );
 		extra_processing_category_layout( true );
+		$layout = wpautop( $layout );
 		echo do_shortcode( et_pb_fix_shortcodes( $layout ) );
 		extra_processing_category_layout( false );
 	} else {
@@ -248,8 +251,6 @@ function is_extra_tax_layout() {
 }
 
 function _et_extra_get_tax_layout() {
-	global $wp_query;
-
 	$args = array(
 		'posts_per_page' => 1,
 	);

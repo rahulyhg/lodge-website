@@ -127,6 +127,17 @@ if ( ! function_exists( 'et_truncate_post' ) ):
 
 		if ( '' == $post ) global $post;
 
+		if ( post_password_required( $post ) ) {
+			$post_excerpt = get_the_password_form();
+
+			if ( $echo ) {
+				echo $post_excerpt;
+				return;
+			}
+
+			return $post_excerpt;
+		}
+
 		$post_excerpt = $post && $post->post_excerpt ? $post->post_excerpt : '';
 
 		if ( $extra_processing_category_layout ) {
