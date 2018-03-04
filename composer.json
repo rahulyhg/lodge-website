@@ -82,7 +82,8 @@
     "norcross/airplane-mode": "^0.2.4",
     "wpackagist-plugin/cmb2": "^2.2.6.2",
     "wpackagist-plugin/woocommerce-filter-orders-by-product": "^2.0",
-    "deliciousbrains-plugin/wp-offload-s3": "^1.6"
+    "deliciousbrains-plugin/wp-offload-s3": "^1.6",
+    "wpackagist-plugin/duplicate-page": "^2.5"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
