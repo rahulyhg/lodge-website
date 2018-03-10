@@ -816,7 +816,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -1155,15 +1155,15 @@
         },
         {
             "name": "wpackagist-plugin/really-simple-ssl",
-            "version": "2.5.25",
+            "version": "2.5.26",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/really-simple-ssl/",
-                "reference": "tags/2.5.25"
+                "reference": "tags/2.5.26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.25.zip",
+                "url": "https://downloads.wordpress.org/plugin/really-simple-ssl.2.5.26.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1175,15 +1175,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-page-ordering",
-            "version": "2.2.4",
+            "version": "2.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-page-ordering/",
-                "reference": "tags/2.2.4"
+                "reference": "tags/2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-page-ordering.2.2.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-page-ordering.2.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1215,15 +1215,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "4.6.11.1",
+            "version": "4.6.12",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/4.6.11.1"
+                "reference": "tags/4.6.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.11.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.4.6.12.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1452,106 +1452,6 @@
                 "standards"
             ],
             "time": "2017-05-22T02:43:20+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/admin-post-navigation",
-            "version": "2.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/admin-post-navigation/",
-                "reference": "tags/2.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/admin-post-navigation.2.0.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/admin-post-navigation/"
-        },
-        {
-            "name": "wpackagist-plugin/autoptimize",
-            "version": "2.3.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/autoptimize/",
-                "reference": "tags/2.3.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autoptimize.2.3.2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/autoptimize/"
-        },
-        {
-            "name": "wpackagist-plugin/optimus",
-            "version": "1.4.9",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/optimus/",
-                "reference": "tags/1.4.9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/optimus.1.4.9.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/optimus/"
-        },
-        {
-            "name": "wpackagist-plugin/user-role-editor",
-            "version": "4.40",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/user-role-editor/",
-                "reference": "tags/4.40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.40.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/user-role-editor/"
-        },
-        {
-            "name": "wpackagist-plugin/worker",
-            "version": "4.4.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/worker/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/worker.zip?timestamp=1518608845",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/worker/"
         }
     ],
     "aliases": [],
