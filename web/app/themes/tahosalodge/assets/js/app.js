@@ -1,5 +1,5 @@
-import cuboree from './modules/cuboree';
+import registration from './modules/registration';
 
-jQuery(document).ready(($) => {
-  cuboree($);
+jQuery(document).ready($ => {
+  registration($);
 });
