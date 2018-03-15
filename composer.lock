@@ -1075,15 +1075,15 @@
         },
         {
             "name": "wpackagist-plugin/enable-media-replace",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enable-media-replace/",
-                "reference": "tags/3.2.1"
+                "reference": "tags/3.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/enable-media-replace.3.2.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1275,15 +1275,15 @@
         },
         {
             "name": "wpackagist-plugin/woo-custom-emails-per-product",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woo-custom-emails-per-product/",
-                "reference": "tags/2.1.1"
+                "reference": "tags/2.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woo-custom-emails-per-product.2.1.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/woo-custom-emails-per-product.2.1.2.zip",
                 "reference": null,
                 "shasum": null
             },
