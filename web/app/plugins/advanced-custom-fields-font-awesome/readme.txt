@@ -51,6 +51,12 @@ This ACF field type is compatible with:
 
 == Changelog ==
 
+= 2.1.2 =
+* Fixed bug where ACFFA_get_icons filter was not used in wp-admin area when retrieving icons.
+
+= 2.1.1 =
+* Fixed bug effecting any users who did not update to 2.1.0 before jsDelivr added FontAwesome 5.x to their CDN, where the 5.x icons would get loaded and break functionality
+
 = 2.1.0 =
 * Preventing any automatic updates to version 5.x of FontAwesome that could break plugin functionality and result in broken icons on sites currently using 4.x FontAwesome icons.
 
@@ -153,6 +159,12 @@ This ACF field type is compatible with:
 * Initial Release.
 
 == Upgrade Notice ==
+
+= 2.1.2 =
+* Fixed bug where ACFFA_get_icons filter was not used in wp-admin area when retrieving icons.
+
+= 2.1.1 =
+* Fixed bug effecting any users who did not update to 2.1.0 before jsDelivr added FontAwesome 5.x to their CDN, where the 5.x icons would get loaded and break functionality
 
 = 2.1.0 =
 * Preventing any automatic updates to version 5.x of FontAwesome that could break plugin functionality and result in broken icons on sites currently using 4.x FontAwesome icons.
