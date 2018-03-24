@@ -38,6 +38,7 @@ vendor/*
 !web/app/plugins/wp-migrate-db-pro
 !web/app/plugins/wp-migrate-db-pro-media-files
 !web/app/plugins/sugar-calendar
+!web/app/plugins/wp-rocket
 !web/app/themes/Extra
 !web/app/themes/tahosa2016
 
