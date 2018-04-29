@@ -33,7 +33,7 @@ class ACFFAL
 
 		if ( $this->override_version ) {
 			$this->current_version = $this->override_version;
-		} else if ( ! $this->current_version ) {
+		} else if ( ! $this->current_version || version_compare( $this->current_version, '5.0.0', '>=' )  ) {
 			$this->current_version = $this->check_latest_version();
 		}
 
@@ -75,7 +75,7 @@ class ACFFAL
 			$s = wp_unslash( $s );
 		}
 
-		$fa_icons = $this->get_icons();
+		$fa_icons = apply_filters( 'ACFFA_get_icons', array() );
 
 		if ( $fa_icons ) {
 			foreach( $fa_icons['list'] as $k => $v ) {
