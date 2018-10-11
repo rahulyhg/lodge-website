@@ -37,4 +37,4 @@ jobs:
           command: cd ./web/app/themes/tahosalodge/ && yarn prod
       - run:
           name: Deploy
-          command: ./.circleci/deploy.sh
+          command: ./scripts/deploy.sh
