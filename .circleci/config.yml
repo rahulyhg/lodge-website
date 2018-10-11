@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.2-node-browsers
+    branches:
+      only:
+        - master
+        - develop
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install lftp && sudo composer self-update
+      - restore_cache:
+          key: dependency-cache-{{checksum "composer.lock"}}
+      - run:
+          name: PHP Dependencies
+          command: composer install
+      - save_cache:
+          paths:
+            - ./vendor
+          key: dependency-cache-{{checksum "composer.lock"}}
+      - restore_cache:
+          key: dependency-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
+      - run:
+          name: JS Dependencies
+          command: cd ./web/app/themes/tahosalodge/ && yarn
+      - save_cache:
+          paths:
+            - ./web/app/themes/tahosalodge/node_modules
+          key: dependency-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
+      - run:
+          name: Build JS
+          command: cd ./web/app/themes/tahosalodge/ && yarn prod
+      # - run:
+      #     name: "Deploy to WPEngine"
+      #     command: ./scripts/deploy.sh
