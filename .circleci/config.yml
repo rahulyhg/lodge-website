@@ -18,6 +18,7 @@ jobs:
       - save_cache:
           paths:
             - ./vendor
+            - ~/.composer/cache
           key: dependency-cache-{{checksum "composer.lock"}}
       - restore_cache:
           key: dependency-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
