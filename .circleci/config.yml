@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: sudo apt-get update && sudo apt-get install lftp && sudo composer self-update
       - restore_cache:
-          key: dependency-cache-{{checksum "composer.lock"}}
+          key: composer-cache-{{checksum "composer.lock"}}
       - run:
           name: PHP Dependencies
           command: composer install
@@ -19,16 +19,16 @@ jobs:
           paths:
             - ./vendor
             - ~/.composer/cache
-          key: dependency-cache-{{checksum "composer.lock"}}
+          key: composer-cache-{{checksum "composer.lock"}}
       - restore_cache:
-          key: dependency-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
+          key: yarn-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
       - run:
           name: JS Dependencies
           command: cd ./web/app/themes/tahosalodge/ && yarn
       - save_cache:
           paths:
             - ./web/app/themes/tahosalodge/node_modules
-          key: dependency-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
+          key: yarn-cache-{{checksum "./web/app/themes/tahosalodge/yarn.lock"}}
       - run:
           name: Build JS
           command: cd ./web/app/themes/tahosalodge/ && yarn prod
