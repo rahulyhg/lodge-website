@@ -2,12 +2,12 @@
 if [ "$CIRCLE_BRANCH" = 'develop' ]
   then
     ENVIRONMENT="staging"
-    PATH="~/apps/tahosalodge"
+    PATH="~/apps/tahosalodge-staging"
 fi
 if [ "$CIRCLE_BRANCH" = 'master' ]
   then
     ENVIRONMENT="production"
-    PATH="~/apps/tahosalodge-staging"
+    PATH="~/apps/tahosalodge"
 fi
 
 lftp sftp://tahosalodge@tahosa.co -e '
@@ -18,7 +18,5 @@ quit
 
 if [ $? -eq 0 ]; then
     echo 'Site deployed.'
-else
-    echo 'Error deploying site.'
 fi
 
