@@ -8,6 +8,9 @@ jobs:
         - master
         - develop
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "e1:e9:00:a0:fc:99:cc:2e:1f:ac:0e:9e:46:4f:56:ba"
       - checkout
       - run: sudo apt-get update && sudo apt-get install lftp && sudo composer self-update
       - restore_cache:
@@ -32,3 +35,6 @@ jobs:
       - run:
           name: Build JS
           command: cd ./web/app/themes/tahosalodge/ && yarn prod
+      - run:
+          name: Deploy
+          command: ./.circleci/deploy.sh
