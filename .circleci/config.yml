@@ -31,6 +31,3 @@ jobs:
       - run:
           name: Build JS
           command: cd ./web/app/themes/tahosalodge/ && yarn prod
-      # - run:
-      #     name: "Deploy to WPEngine"
-      #     command: ./scripts/deploy.sh
