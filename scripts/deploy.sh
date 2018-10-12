@@ -10,11 +10,7 @@ if [ "$CIRCLE_BRANCH" = 'master' ]
     PATH="~/apps/tahosalodge"
 fi
 
-lftp sftp://tahosalodge@tahosa.co -e '
-set sftp:auto-confirm yes;
-mirror -v -R --parallel=4 ./ $PATH --exclude-glob node_modules/
-quit
-'
+rsync -avP --delete ./ tahosalodge@tahosa.co:$PATH
 
 if [ $? -eq 0 ]; then
     echo 'Site deployed.'
